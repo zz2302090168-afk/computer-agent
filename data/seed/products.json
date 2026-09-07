@@ -1,0 +1,3262 @@
+[
+  {
+    "id": "cpu-0",
+    "category": "cpu",
+    "categoryLabel": "CPU",
+    "brand": "星构 DEMO",
+    "name": "A1 处理器",
+    "color": "不适用",
+    "price": 342,
+    "specs": {
+      "socket": "DEMO-A",
+      "ddr": "DDR4",
+      "tier": 1,
+      "cores": 6,
+      "power": 57
+    },
+    "demo": true
+  },
+  {
+    "id": "gpu-0",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "星构 DEMO",
+    "name": "G1 8GB",
+    "color": "黑色",
+    "price": 600,
+    "specs": {
+      "tier": 1,
+      "vram": 8,
+      "power": 94,
+      "length": 229,
+      "slots": 2,
+      "connector": "PCIe 8pin",
+      "connectors": 1
+    },
+    "demo": true
+  },
+  {
+    "id": "motherboard-0",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "星构 DEMO",
+    "name": "A1 主板",
+    "color": "黑色",
+    "price": 330,
+    "specs": {
+      "socket": "DEMO-A",
+      "ddr": "DDR4",
+      "tier": 1,
+      "form": "mATX",
+      "ramSlots": 4,
+      "maxRam": 128,
+      "m2": true,
+      "supportedCpus": [
+        "cpu-0",
+        "cpu-2",
+        "cpu-4",
+        "cpu-6",
+        "cpu-8",
+        "cpu-10",
+        "cpu-12",
+        "cpu-14",
+        "cpu-16",
+        "cpu-18"
+      ],
+      "biosVerified": true
+    },
+    "demo": true
+  },
+  {
+    "id": "memory-0",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "星构 DEMO",
+    "name": "DDR4 16GB 双条套装",
+    "color": "黑色",
+    "price": 175,
+    "specs": {
+      "ddr": "DDR4",
+      "tier": 1,
+      "capacity": 16,
+      "sticks": 2,
+      "height": 35
+    },
+    "demo": true
+  },
+  {
+    "id": "psu-0",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "星构 DEMO",
+    "name": "P1 500W",
+    "color": "黑色",
+    "price": 225,
+    "specs": {
+      "tier": 1,
+      "watts": 500,
+      "connector": "PCIe 8pin",
+      "connectors": 4,
+      "form": "ATX",
+      "length": 150,
+      "eps": 2
+    },
+    "demo": true
+  },
+  {
+    "id": "case-0",
+    "category": "case",
+    "categoryLabel": "机箱",
+    "brand": "星构 DEMO",
+    "name": "C1 机箱",
+    "color": "黑色",
+    "price": 175,
+    "specs": {
+      "tier": 1,
+      "forms": [
+        "mATX",
+        "ATX"
+      ],
+      "gpuLength": 345,
+      "gpuSlots": 4,
+      "coolerHeight": 165,
+      "psuForm": "ATX",
+      "psuLength": 200,
+      "ramClearance": 45
+    },
+    "demo": true
+  },
+  {
+    "id": "storage-0",
+    "category": "storage",
+    "categoryLabel": "硬盘",
+    "brand": "星构 DEMO",
+    "name": "S1 512GB NVMe",
+    "color": "不适用",
+    "price": 200,
+    "specs": {
+      "tier": 1,
+      "capacity": 512,
+      "interface": "M.2 NVMe",
+      "length": 80
+    },
+    "demo": true
+  },
+  {
+    "id": "cooler-0",
+    "category": "cooler",
+    "categoryLabel": "散热",
+    "brand": "星构 DEMO",
+    "name": "T1 塔式散热",
+    "color": "黑色",
+    "price": 98,
+    "specs": {
+      "tier": 1,
+      "sockets": [
+        "DEMO-A",
+        "DEMO-B"
+      ],
+      "height": 150,
+      "capacity": 120,
+      "ramClearance": 40
+    },
+    "demo": true
+  },
+  {
+    "id": "cpu-1",
+    "category": "cpu",
+    "categoryLabel": "CPU",
+    "brand": "星构 DEMO",
+    "name": "B1 处理器",
+    "color": "不适用",
+    "price": 342,
+    "specs": {
+      "socket": "DEMO-B",
+      "ddr": "DDR5",
+      "tier": 1,
+      "cores": 6,
+      "power": 57
+    },
+    "demo": true
+  },
+  {
+    "id": "gpu-1",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "星构 DEMO",
+    "name": "G1 8GB",
+    "color": "白色",
+    "price": 600,
+    "specs": {
+      "tier": 1,
+      "vram": 8,
+      "power": 94,
+      "length": 229,
+      "slots": 2,
+      "connector": "PCIe 8pin",
+      "connectors": 1
+    },
+    "demo": true
+  },
+  {
+    "id": "motherboard-1",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "星构 DEMO",
+    "name": "B1 主板",
+    "color": "黑色",
+    "price": 330,
+    "specs": {
+      "socket": "DEMO-B",
+      "ddr": "DDR5",
+      "tier": 1,
+      "form": "mATX",
+      "ramSlots": 4,
+      "maxRam": 128,
+      "m2": true,
+      "supportedCpus": [
+        "cpu-1",
+        "cpu-3",
+        "cpu-5",
+        "cpu-7",
+        "cpu-9",
+        "cpu-11",
+        "cpu-13",
+        "cpu-15",
+        "cpu-17",
+        "cpu-19"
+      ],
+      "biosVerified": true
+    },
+    "demo": true
+  },
+  {
+    "id": "memory-1",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "星构 DEMO",
+    "name": "DDR5 16GB 双条套装",
+    "color": "白色",
+    "price": 175,
+    "specs": {
+      "ddr": "DDR5",
+      "tier": 1,
+      "capacity": 16,
+      "sticks": 2,
+      "height": 35
+    },
+    "demo": true
+  },
+  {
+    "id": "psu-1",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "星构 DEMO",
+    "name": "P1 500W",
+    "color": "白色",
+    "price": 225,
+    "specs": {
+      "tier": 1,
+      "watts": 500,
+      "connector": "PCIe 8pin",
+      "connectors": 4,
+      "form": "ATX",
+      "length": 150,
+      "eps": 2
+    },
+    "demo": true
+  },
+  {
+    "id": "case-1",
+    "category": "case",
+    "categoryLabel": "机箱",
+    "brand": "星构 DEMO",
+    "name": "C1 机箱",
+    "color": "白色",
+    "price": 175,
+    "specs": {
+      "tier": 1,
+      "forms": [
+        "mATX",
+        "ATX"
+      ],
+      "gpuLength": 345,
+      "gpuSlots": 4,
+      "coolerHeight": 165,
+      "psuForm": "ATX",
+      "psuLength": 200,
+      "ramClearance": 45
+    },
+    "demo": true
+  },
+  {
+    "id": "storage-1",
+    "category": "storage",
+    "categoryLabel": "硬盘",
+    "brand": "星构 DEMO",
+    "name": "S1 512GB NVMe",
+    "color": "不适用",
+    "price": 220,
+    "specs": {
+      "tier": 1,
+      "capacity": 512,
+      "interface": "M.2 NVMe",
+      "length": 80
+    },
+    "demo": true
+  },
+  {
+    "id": "cooler-1",
+    "category": "cooler",
+    "categoryLabel": "散热",
+    "brand": "星构 DEMO",
+    "name": "T1 塔式散热",
+    "color": "白色",
+    "price": 98,
+    "specs": {
+      "tier": 1,
+      "sockets": [
+        "DEMO-A",
+        "DEMO-B"
+      ],
+      "height": 150,
+      "capacity": 120,
+      "ramClearance": 40
+    },
+    "demo": true
+  },
+  {
+    "id": "cpu-2",
+    "category": "cpu",
+    "categoryLabel": "CPU",
+    "brand": "星构 DEMO",
+    "name": "A2 处理器",
+    "color": "不适用",
+    "price": 468,
+    "specs": {
+      "socket": "DEMO-A",
+      "ddr": "DDR4",
+      "tier": 2,
+      "cores": 8,
+      "power": 69
+    },
+    "demo": true
+  },
+  {
+    "id": "gpu-2",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "星构 DEMO",
+    "name": "G2 8GB",
+    "color": "黑色",
+    "price": 900,
+    "specs": {
+      "tier": 2,
+      "vram": 8,
+      "power": 118,
+      "length": 238,
+      "slots": 2,
+      "connector": "PCIe 8pin",
+      "connectors": 1
+    },
+    "demo": true
+  },
+  {
+    "id": "motherboard-2",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "星构 DEMO",
+    "name": "A2 主板",
+    "color": "黑色",
+    "price": 410,
+    "specs": {
+      "socket": "DEMO-A",
+      "ddr": "DDR4",
+      "tier": 2,
+      "form": "mATX",
+      "ramSlots": 4,
+      "maxRam": 128,
+      "m2": true,
+      "supportedCpus": [
+        "cpu-0",
+        "cpu-2",
+        "cpu-4",
+        "cpu-6",
+        "cpu-8",
+        "cpu-10",
+        "cpu-12",
+        "cpu-14",
+        "cpu-16",
+        "cpu-18"
+      ],
+      "biosVerified": true
+    },
+    "demo": true
+  },
+  {
+    "id": "memory-2",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "星构 DEMO",
+    "name": "DDR4 16GB 双条套装",
+    "color": "黑色",
+    "price": 240,
+    "specs": {
+      "ddr": "DDR4",
+      "tier": 2,
+      "capacity": 16,
+      "sticks": 2,
+      "height": 35
+    },
+    "demo": true
+  },
+  {
+    "id": "psu-2",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "星构 DEMO",
+    "name": "P2 600W",
+    "color": "黑色",
+    "price": 290,
+    "specs": {
+      "tier": 2,
+      "watts": 600,
+      "connector": "PCIe 8pin",
+      "connectors": 4,
+      "form": "ATX",
+      "length": 150,
+      "eps": 2
+    },
+    "demo": true
+  },
+  {
+    "id": "case-2",
+    "category": "case",
+    "categoryLabel": "机箱",
+    "brand": "星构 DEMO",
+    "name": "C2 机箱",
+    "color": "黑色",
+    "price": 240,
+    "specs": {
+      "tier": 2,
+      "forms": [
+        "mATX",
+        "ATX"
+      ],
+      "gpuLength": 350,
+      "gpuSlots": 4,
+      "coolerHeight": 165,
+      "psuForm": "ATX",
+      "psuLength": 200,
+      "ramClearance": 45
+    },
+    "demo": true
+  },
+  {
+    "id": "storage-2",
+    "category": "storage",
+    "categoryLabel": "硬盘",
+    "brand": "星构 DEMO",
+    "name": "S2 512GB NVMe",
+    "color": "不适用",
+    "price": 260,
+    "specs": {
+      "tier": 2,
+      "capacity": 512,
+      "interface": "M.2 NVMe",
+      "length": 80
+    },
+    "demo": true
+  },
+  {
+    "id": "cooler-2",
+    "category": "cooler",
+    "categoryLabel": "散热",
+    "brand": "星构 DEMO",
+    "name": "T2 塔式散热",
+    "color": "黑色",
+    "price": 136,
+    "specs": {
+      "tier": 2,
+      "sockets": [
+        "DEMO-A",
+        "DEMO-B"
+      ],
+      "height": 150,
+      "capacity": 140,
+      "ramClearance": 40
+    },
+    "demo": true
+  },
+  {
+    "id": "cpu-3",
+    "category": "cpu",
+    "categoryLabel": "CPU",
+    "brand": "星构 DEMO",
+    "name": "B2 处理器",
+    "color": "不适用",
+    "price": 468,
+    "specs": {
+      "socket": "DEMO-B",
+      "ddr": "DDR5",
+      "tier": 2,
+      "cores": 8,
+      "power": 69
+    },
+    "demo": true
+  },
+  {
+    "id": "gpu-3",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "星构 DEMO",
+    "name": "G2 8GB",
+    "color": "白色",
+    "price": 900,
+    "specs": {
+      "tier": 2,
+      "vram": 8,
+      "power": 118,
+      "length": 238,
+      "slots": 2,
+      "connector": "PCIe 8pin",
+      "connectors": 1
+    },
+    "demo": true
+  },
+  {
+    "id": "motherboard-3",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "星构 DEMO",
+    "name": "B2 主板",
+    "color": "黑色",
+    "price": 410,
+    "specs": {
+      "socket": "DEMO-B",
+      "ddr": "DDR5",
+      "tier": 2,
+      "form": "mATX",
+      "ramSlots": 4,
+      "maxRam": 128,
+      "m2": true,
+      "supportedCpus": [
+        "cpu-1",
+        "cpu-3",
+        "cpu-5",
+        "cpu-7",
+        "cpu-9",
+        "cpu-11",
+        "cpu-13",
+        "cpu-15",
+        "cpu-17",
+        "cpu-19"
+      ],
+      "biosVerified": true
+    },
+    "demo": true
+  },
+  {
+    "id": "memory-3",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "星构 DEMO",
+    "name": "DDR5 16GB 双条套装",
+    "color": "白色",
+    "price": 240,
+    "specs": {
+      "ddr": "DDR5",
+      "tier": 2,
+      "capacity": 16,
+      "sticks": 2,
+      "height": 35
+    },
+    "demo": true
+  },
+  {
+    "id": "psu-3",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "星构 DEMO",
+    "name": "P2 600W",
+    "color": "白色",
+    "price": 290,
+    "specs": {
+      "tier": 2,
+      "watts": 600,
+      "connector": "PCIe 8pin",
+      "connectors": 4,
+      "form": "ATX",
+      "length": 150,
+      "eps": 2
+    },
+    "demo": true
+  },
+  {
+    "id": "case-3",
+    "category": "case",
+    "categoryLabel": "机箱",
+    "brand": "星构 DEMO",
+    "name": "C2 机箱",
+    "color": "白色",
+    "price": 240,
+    "specs": {
+      "tier": 2,
+      "forms": [
+        "mATX",
+        "ATX"
+      ],
+      "gpuLength": 350,
+      "gpuSlots": 4,
+      "coolerHeight": 165,
+      "psuForm": "ATX",
+      "psuLength": 200,
+      "ramClearance": 45
+    },
+    "demo": true
+  },
+  {
+    "id": "storage-3",
+    "category": "storage",
+    "categoryLabel": "硬盘",
+    "brand": "星构 DEMO",
+    "name": "S2 512GB NVMe",
+    "color": "不适用",
+    "price": 280,
+    "specs": {
+      "tier": 2,
+      "capacity": 512,
+      "interface": "M.2 NVMe",
+      "length": 80
+    },
+    "demo": true
+  },
+  {
+    "id": "cooler-3",
+    "category": "cooler",
+    "categoryLabel": "散热",
+    "brand": "星构 DEMO",
+    "name": "T2 塔式散热",
+    "color": "白色",
+    "price": 136,
+    "specs": {
+      "tier": 2,
+      "sockets": [
+        "DEMO-A",
+        "DEMO-B"
+      ],
+      "height": 150,
+      "capacity": 140,
+      "ramClearance": 40
+    },
+    "demo": true
+  },
+  {
+    "id": "cpu-4",
+    "category": "cpu",
+    "categoryLabel": "CPU",
+    "brand": "星构 DEMO",
+    "name": "A3 处理器",
+    "color": "不适用",
+    "price": 678,
+    "specs": {
+      "socket": "DEMO-A",
+      "ddr": "DDR4",
+      "tier": 3,
+      "cores": 10,
+      "power": 81
+    },
+    "demo": true
+  },
+  {
+    "id": "gpu-4",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "星构 DEMO",
+    "name": "G3 8GB",
+    "color": "黑色",
+    "price": 1400,
+    "specs": {
+      "tier": 3,
+      "vram": 8,
+      "power": 142,
+      "length": 247,
+      "slots": 2,
+      "connector": "PCIe 8pin",
+      "connectors": 1
+    },
+    "demo": true
+  },
+  {
+    "id": "motherboard-4",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "星构 DEMO",
+    "name": "A3 主板",
+    "color": "黑色",
+    "price": 490,
+    "specs": {
+      "socket": "DEMO-A",
+      "ddr": "DDR4",
+      "tier": 3,
+      "form": "mATX",
+      "ramSlots": 4,
+      "maxRam": 128,
+      "m2": true,
+      "supportedCpus": [
+        "cpu-0",
+        "cpu-2",
+        "cpu-4",
+        "cpu-6",
+        "cpu-8",
+        "cpu-10",
+        "cpu-12",
+        "cpu-14",
+        "cpu-16",
+        "cpu-18"
+      ],
+      "biosVerified": true
+    },
+    "demo": true
+  },
+  {
+    "id": "memory-4",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "星构 DEMO",
+    "name": "DDR4 16GB 双条套装",
+    "color": "黑色",
+    "price": 305,
+    "specs": {
+      "ddr": "DDR4",
+      "tier": 3,
+      "capacity": 16,
+      "sticks": 2,
+      "height": 35
+    },
+    "demo": true
+  },
+  {
+    "id": "psu-4",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "星构 DEMO",
+    "name": "P3 700W",
+    "color": "黑色",
+    "price": 355,
+    "specs": {
+      "tier": 3,
+      "watts": 700,
+      "connector": "PCIe 8pin",
+      "connectors": 4,
+      "form": "ATX",
+      "length": 150,
+      "eps": 2
+    },
+    "demo": true
+  },
+  {
+    "id": "case-4",
+    "category": "case",
+    "categoryLabel": "机箱",
+    "brand": "星构 DEMO",
+    "name": "C3 机箱",
+    "color": "黑色",
+    "price": 305,
+    "specs": {
+      "tier": 3,
+      "forms": [
+        "mATX",
+        "ATX"
+      ],
+      "gpuLength": 355,
+      "gpuSlots": 4,
+      "coolerHeight": 165,
+      "psuForm": "ATX",
+      "psuLength": 200,
+      "ramClearance": 45
+    },
+    "demo": true
+  },
+  {
+    "id": "storage-4",
+    "category": "storage",
+    "categoryLabel": "硬盘",
+    "brand": "星构 DEMO",
+    "name": "S3 1024GB NVMe",
+    "color": "不适用",
+    "price": 320,
+    "specs": {
+      "tier": 3,
+      "capacity": 1024,
+      "interface": "M.2 NVMe",
+      "length": 80
+    },
+    "demo": true
+  },
+  {
+    "id": "cooler-4",
+    "category": "cooler",
+    "categoryLabel": "散热",
+    "brand": "星构 DEMO",
+    "name": "T3 塔式散热",
+    "color": "黑色",
+    "price": 174,
+    "specs": {
+      "tier": 3,
+      "sockets": [
+        "DEMO-A",
+        "DEMO-B"
+      ],
+      "height": 150,
+      "capacity": 160,
+      "ramClearance": 40
+    },
+    "demo": true
+  },
+  {
+    "id": "cpu-5",
+    "category": "cpu",
+    "categoryLabel": "CPU",
+    "brand": "星构 DEMO",
+    "name": "B3 处理器",
+    "color": "不适用",
+    "price": 678,
+    "specs": {
+      "socket": "DEMO-B",
+      "ddr": "DDR5",
+      "tier": 3,
+      "cores": 10,
+      "power": 81
+    },
+    "demo": true
+  },
+  {
+    "id": "gpu-5",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "星构 DEMO",
+    "name": "G3 8GB",
+    "color": "白色",
+    "price": 1400,
+    "specs": {
+      "tier": 3,
+      "vram": 8,
+      "power": 142,
+      "length": 247,
+      "slots": 2,
+      "connector": "PCIe 8pin",
+      "connectors": 1
+    },
+    "demo": true
+  },
+  {
+    "id": "motherboard-5",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "星构 DEMO",
+    "name": "B3 主板",
+    "color": "黑色",
+    "price": 490,
+    "specs": {
+      "socket": "DEMO-B",
+      "ddr": "DDR5",
+      "tier": 3,
+      "form": "mATX",
+      "ramSlots": 4,
+      "maxRam": 128,
+      "m2": true,
+      "supportedCpus": [
+        "cpu-1",
+        "cpu-3",
+        "cpu-5",
+        "cpu-7",
+        "cpu-9",
+        "cpu-11",
+        "cpu-13",
+        "cpu-15",
+        "cpu-17",
+        "cpu-19"
+      ],
+      "biosVerified": true
+    },
+    "demo": true
+  },
+  {
+    "id": "memory-5",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "星构 DEMO",
+    "name": "DDR5 16GB 双条套装",
+    "color": "白色",
+    "price": 305,
+    "specs": {
+      "ddr": "DDR5",
+      "tier": 3,
+      "capacity": 16,
+      "sticks": 2,
+      "height": 35
+    },
+    "demo": true
+  },
+  {
+    "id": "psu-5",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "星构 DEMO",
+    "name": "P3 700W",
+    "color": "白色",
+    "price": 355,
+    "specs": {
+      "tier": 3,
+      "watts": 700,
+      "connector": "PCIe 8pin",
+      "connectors": 4,
+      "form": "ATX",
+      "length": 150,
+      "eps": 2
+    },
+    "demo": true
+  },
+  {
+    "id": "case-5",
+    "category": "case",
+    "categoryLabel": "机箱",
+    "brand": "星构 DEMO",
+    "name": "C3 机箱",
+    "color": "白色",
+    "price": 305,
+    "specs": {
+      "tier": 3,
+      "forms": [
+        "mATX",
+        "ATX"
+      ],
+      "gpuLength": 355,
+      "gpuSlots": 4,
+      "coolerHeight": 165,
+      "psuForm": "ATX",
+      "psuLength": 200,
+      "ramClearance": 45
+    },
+    "demo": true
+  },
+  {
+    "id": "storage-5",
+    "category": "storage",
+    "categoryLabel": "硬盘",
+    "brand": "星构 DEMO",
+    "name": "S3 1024GB NVMe",
+    "color": "不适用",
+    "price": 340,
+    "specs": {
+      "tier": 3,
+      "capacity": 1024,
+      "interface": "M.2 NVMe",
+      "length": 80
+    },
+    "demo": true
+  },
+  {
+    "id": "cooler-5",
+    "category": "cooler",
+    "categoryLabel": "散热",
+    "brand": "星构 DEMO",
+    "name": "T3 塔式散热",
+    "color": "白色",
+    "price": 174,
+    "specs": {
+      "tier": 3,
+      "sockets": [
+        "DEMO-A",
+        "DEMO-B"
+      ],
+      "height": 150,
+      "capacity": 160,
+      "ramClearance": 40
+    },
+    "demo": true
+  },
+  {
+    "id": "cpu-6",
+    "category": "cpu",
+    "categoryLabel": "CPU",
+    "brand": "星构 DEMO",
+    "name": "A4 处理器",
+    "color": "不适用",
+    "price": 972,
+    "specs": {
+      "socket": "DEMO-A",
+      "ddr": "DDR4",
+      "tier": 4,
+      "cores": 12,
+      "power": 93
+    },
+    "demo": true
+  },
+  {
+    "id": "gpu-6",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "星构 DEMO",
+    "name": "G4 16GB",
+    "color": "黑色",
+    "price": 2100,
+    "specs": {
+      "tier": 4,
+      "vram": 16,
+      "power": 166,
+      "length": 256,
+      "slots": 2,
+      "connector": "PCIe 8pin",
+      "connectors": 1
+    },
+    "demo": true
+  },
+  {
+    "id": "motherboard-6",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "星构 DEMO",
+    "name": "A4 主板",
+    "color": "黑色",
+    "price": 570,
+    "specs": {
+      "socket": "DEMO-A",
+      "ddr": "DDR4",
+      "tier": 4,
+      "form": "mATX",
+      "ramSlots": 4,
+      "maxRam": 128,
+      "m2": true,
+      "supportedCpus": [
+        "cpu-0",
+        "cpu-2",
+        "cpu-4",
+        "cpu-6",
+        "cpu-8",
+        "cpu-10",
+        "cpu-12",
+        "cpu-14",
+        "cpu-16",
+        "cpu-18"
+      ],
+      "biosVerified": true
+    },
+    "demo": true
+  },
+  {
+    "id": "memory-6",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "星构 DEMO",
+    "name": "DDR4 32GB 双条套装",
+    "color": "黑色",
+    "price": 370,
+    "specs": {
+      "ddr": "DDR4",
+      "tier": 4,
+      "capacity": 32,
+      "sticks": 2,
+      "height": 35
+    },
+    "demo": true
+  },
+  {
+    "id": "psu-6",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "星构 DEMO",
+    "name": "P4 800W",
+    "color": "黑色",
+    "price": 420,
+    "specs": {
+      "tier": 4,
+      "watts": 800,
+      "connector": "PCIe 8pin",
+      "connectors": 4,
+      "form": "ATX",
+      "length": 150,
+      "eps": 2
+    },
+    "demo": true
+  },
+  {
+    "id": "case-6",
+    "category": "case",
+    "categoryLabel": "机箱",
+    "brand": "星构 DEMO",
+    "name": "C4 机箱",
+    "color": "黑色",
+    "price": 370,
+    "specs": {
+      "tier": 4,
+      "forms": [
+        "mATX",
+        "ATX"
+      ],
+      "gpuLength": 360,
+      "gpuSlots": 4,
+      "coolerHeight": 165,
+      "psuForm": "ATX",
+      "psuLength": 200,
+      "ramClearance": 45
+    },
+    "demo": true
+  },
+  {
+    "id": "storage-6",
+    "category": "storage",
+    "categoryLabel": "硬盘",
+    "brand": "星构 DEMO",
+    "name": "S4 1024GB NVMe",
+    "color": "不适用",
+    "price": 380,
+    "specs": {
+      "tier": 4,
+      "capacity": 1024,
+      "interface": "M.2 NVMe",
+      "length": 80
+    },
+    "demo": true
+  },
+  {
+    "id": "cooler-6",
+    "category": "cooler",
+    "categoryLabel": "散热",
+    "brand": "星构 DEMO",
+    "name": "T4 塔式散热",
+    "color": "黑色",
+    "price": 212,
+    "specs": {
+      "tier": 4,
+      "sockets": [
+        "DEMO-A",
+        "DEMO-B"
+      ],
+      "height": 150,
+      "capacity": 180,
+      "ramClearance": 40
+    },
+    "demo": true
+  },
+  {
+    "id": "cpu-7",
+    "category": "cpu",
+    "categoryLabel": "CPU",
+    "brand": "星构 DEMO",
+    "name": "B4 处理器",
+    "color": "不适用",
+    "price": 972,
+    "specs": {
+      "socket": "DEMO-B",
+      "ddr": "DDR5",
+      "tier": 4,
+      "cores": 12,
+      "power": 93
+    },
+    "demo": true
+  },
+  {
+    "id": "gpu-7",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "星构 DEMO",
+    "name": "G4 16GB",
+    "color": "白色",
+    "price": 2100,
+    "specs": {
+      "tier": 4,
+      "vram": 16,
+      "power": 166,
+      "length": 256,
+      "slots": 2,
+      "connector": "PCIe 8pin",
+      "connectors": 1
+    },
+    "demo": true
+  },
+  {
+    "id": "motherboard-7",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "星构 DEMO",
+    "name": "B4 主板",
+    "color": "黑色",
+    "price": 570,
+    "specs": {
+      "socket": "DEMO-B",
+      "ddr": "DDR5",
+      "tier": 4,
+      "form": "mATX",
+      "ramSlots": 4,
+      "maxRam": 128,
+      "m2": true,
+      "supportedCpus": [
+        "cpu-1",
+        "cpu-3",
+        "cpu-5",
+        "cpu-7",
+        "cpu-9",
+        "cpu-11",
+        "cpu-13",
+        "cpu-15",
+        "cpu-17",
+        "cpu-19"
+      ],
+      "biosVerified": true
+    },
+    "demo": true
+  },
+  {
+    "id": "memory-7",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "星构 DEMO",
+    "name": "DDR5 32GB 双条套装",
+    "color": "白色",
+    "price": 370,
+    "specs": {
+      "ddr": "DDR5",
+      "tier": 4,
+      "capacity": 32,
+      "sticks": 2,
+      "height": 35
+    },
+    "demo": true
+  },
+  {
+    "id": "psu-7",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "星构 DEMO",
+    "name": "P4 800W",
+    "color": "白色",
+    "price": 420,
+    "specs": {
+      "tier": 4,
+      "watts": 800,
+      "connector": "PCIe 8pin",
+      "connectors": 4,
+      "form": "ATX",
+      "length": 150,
+      "eps": 2
+    },
+    "demo": true
+  },
+  {
+    "id": "case-7",
+    "category": "case",
+    "categoryLabel": "机箱",
+    "brand": "星构 DEMO",
+    "name": "C4 机箱",
+    "color": "白色",
+    "price": 370,
+    "specs": {
+      "tier": 4,
+      "forms": [
+        "mATX",
+        "ATX"
+      ],
+      "gpuLength": 360,
+      "gpuSlots": 4,
+      "coolerHeight": 165,
+      "psuForm": "ATX",
+      "psuLength": 200,
+      "ramClearance": 45
+    },
+    "demo": true
+  },
+  {
+    "id": "storage-7",
+    "category": "storage",
+    "categoryLabel": "硬盘",
+    "brand": "星构 DEMO",
+    "name": "S4 1024GB NVMe",
+    "color": "不适用",
+    "price": 400,
+    "specs": {
+      "tier": 4,
+      "capacity": 1024,
+      "interface": "M.2 NVMe",
+      "length": 80
+    },
+    "demo": true
+  },
+  {
+    "id": "cooler-7",
+    "category": "cooler",
+    "categoryLabel": "散热",
+    "brand": "星构 DEMO",
+    "name": "T4 塔式散热",
+    "color": "白色",
+    "price": 212,
+    "specs": {
+      "tier": 4,
+      "sockets": [
+        "DEMO-A",
+        "DEMO-B"
+      ],
+      "height": 150,
+      "capacity": 180,
+      "ramClearance": 40
+    },
+    "demo": true
+  },
+  {
+    "id": "cpu-8",
+    "category": "cpu",
+    "categoryLabel": "CPU",
+    "brand": "星构 DEMO",
+    "name": "A5 处理器",
+    "color": "不适用",
+    "price": 1350,
+    "specs": {
+      "socket": "DEMO-A",
+      "ddr": "DDR4",
+      "tier": 5,
+      "cores": 14,
+      "power": 105
+    },
+    "demo": true
+  },
+  {
+    "id": "gpu-8",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "星构 DEMO",
+    "name": "G5 16GB",
+    "color": "黑色",
+    "price": 3000,
+    "specs": {
+      "tier": 5,
+      "vram": 16,
+      "power": 190,
+      "length": 265,
+      "slots": 2,
+      "connector": "PCIe 8pin",
+      "connectors": 1
+    },
+    "demo": true
+  },
+  {
+    "id": "motherboard-8",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "星构 DEMO",
+    "name": "A5 主板",
+    "color": "黑色",
+    "price": 650,
+    "specs": {
+      "socket": "DEMO-A",
+      "ddr": "DDR4",
+      "tier": 5,
+      "form": "mATX",
+      "ramSlots": 4,
+      "maxRam": 128,
+      "m2": true,
+      "supportedCpus": [
+        "cpu-0",
+        "cpu-2",
+        "cpu-4",
+        "cpu-6",
+        "cpu-8",
+        "cpu-10",
+        "cpu-12",
+        "cpu-14",
+        "cpu-16",
+        "cpu-18"
+      ],
+      "biosVerified": true
+    },
+    "demo": true
+  },
+  {
+    "id": "memory-8",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "星构 DEMO",
+    "name": "DDR4 32GB 双条套装",
+    "color": "黑色",
+    "price": 435,
+    "specs": {
+      "ddr": "DDR4",
+      "tier": 5,
+      "capacity": 32,
+      "sticks": 2,
+      "height": 35
+    },
+    "demo": true
+  },
+  {
+    "id": "psu-8",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "星构 DEMO",
+    "name": "P5 900W",
+    "color": "黑色",
+    "price": 485,
+    "specs": {
+      "tier": 5,
+      "watts": 900,
+      "connector": "PCIe 8pin",
+      "connectors": 4,
+      "form": "ATX",
+      "length": 150,
+      "eps": 2
+    },
+    "demo": true
+  },
+  {
+    "id": "case-8",
+    "category": "case",
+    "categoryLabel": "机箱",
+    "brand": "星构 DEMO",
+    "name": "C5 机箱",
+    "color": "黑色",
+    "price": 435,
+    "specs": {
+      "tier": 5,
+      "forms": [
+        "mATX",
+        "ATX"
+      ],
+      "gpuLength": 365,
+      "gpuSlots": 4,
+      "coolerHeight": 165,
+      "psuForm": "ATX",
+      "psuLength": 200,
+      "ramClearance": 45
+    },
+    "demo": true
+  },
+  {
+    "id": "storage-8",
+    "category": "storage",
+    "categoryLabel": "硬盘",
+    "brand": "星构 DEMO",
+    "name": "S5 1024GB NVMe",
+    "color": "不适用",
+    "price": 440,
+    "specs": {
+      "tier": 5,
+      "capacity": 1024,
+      "interface": "M.2 NVMe",
+      "length": 80
+    },
+    "demo": true
+  },
+  {
+    "id": "cooler-8",
+    "category": "cooler",
+    "categoryLabel": "散热",
+    "brand": "星构 DEMO",
+    "name": "T5 塔式散热",
+    "color": "黑色",
+    "price": 250,
+    "specs": {
+      "tier": 5,
+      "sockets": [
+        "DEMO-A",
+        "DEMO-B"
+      ],
+      "height": 150,
+      "capacity": 200,
+      "ramClearance": 40
+    },
+    "demo": true
+  },
+  {
+    "id": "cpu-9",
+    "category": "cpu",
+    "categoryLabel": "CPU",
+    "brand": "星构 DEMO",
+    "name": "B5 处理器",
+    "color": "不适用",
+    "price": 1350,
+    "specs": {
+      "socket": "DEMO-B",
+      "ddr": "DDR5",
+      "tier": 5,
+      "cores": 14,
+      "power": 105
+    },
+    "demo": true
+  },
+  {
+    "id": "gpu-9",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "星构 DEMO",
+    "name": "G5 16GB",
+    "color": "白色",
+    "price": 3000,
+    "specs": {
+      "tier": 5,
+      "vram": 16,
+      "power": 190,
+      "length": 265,
+      "slots": 2,
+      "connector": "PCIe 8pin",
+      "connectors": 1
+    },
+    "demo": true
+  },
+  {
+    "id": "motherboard-9",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "星构 DEMO",
+    "name": "B5 主板",
+    "color": "黑色",
+    "price": 650,
+    "specs": {
+      "socket": "DEMO-B",
+      "ddr": "DDR5",
+      "tier": 5,
+      "form": "mATX",
+      "ramSlots": 4,
+      "maxRam": 128,
+      "m2": true,
+      "supportedCpus": [
+        "cpu-1",
+        "cpu-3",
+        "cpu-5",
+        "cpu-7",
+        "cpu-9",
+        "cpu-11",
+        "cpu-13",
+        "cpu-15",
+        "cpu-17",
+        "cpu-19"
+      ],
+      "biosVerified": true
+    },
+    "demo": true
+  },
+  {
+    "id": "memory-9",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "星构 DEMO",
+    "name": "DDR5 32GB 双条套装",
+    "color": "白色",
+    "price": 435,
+    "specs": {
+      "ddr": "DDR5",
+      "tier": 5,
+      "capacity": 32,
+      "sticks": 2,
+      "height": 35
+    },
+    "demo": true
+  },
+  {
+    "id": "psu-9",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "星构 DEMO",
+    "name": "P5 900W",
+    "color": "白色",
+    "price": 485,
+    "specs": {
+      "tier": 5,
+      "watts": 900,
+      "connector": "PCIe 8pin",
+      "connectors": 4,
+      "form": "ATX",
+      "length": 150,
+      "eps": 2
+    },
+    "demo": true
+  },
+  {
+    "id": "case-9",
+    "category": "case",
+    "categoryLabel": "机箱",
+    "brand": "星构 DEMO",
+    "name": "C5 机箱",
+    "color": "白色",
+    "price": 435,
+    "specs": {
+      "tier": 5,
+      "forms": [
+        "mATX",
+        "ATX"
+      ],
+      "gpuLength": 365,
+      "gpuSlots": 4,
+      "coolerHeight": 165,
+      "psuForm": "ATX",
+      "psuLength": 200,
+      "ramClearance": 45
+    },
+    "demo": true
+  },
+  {
+    "id": "storage-9",
+    "category": "storage",
+    "categoryLabel": "硬盘",
+    "brand": "星构 DEMO",
+    "name": "S5 1024GB NVMe",
+    "color": "不适用",
+    "price": 460,
+    "specs": {
+      "tier": 5,
+      "capacity": 1024,
+      "interface": "M.2 NVMe",
+      "length": 80
+    },
+    "demo": true
+  },
+  {
+    "id": "cooler-9",
+    "category": "cooler",
+    "categoryLabel": "散热",
+    "brand": "星构 DEMO",
+    "name": "T5 塔式散热",
+    "color": "白色",
+    "price": 250,
+    "specs": {
+      "tier": 5,
+      "sockets": [
+        "DEMO-A",
+        "DEMO-B"
+      ],
+      "height": 150,
+      "capacity": 200,
+      "ramClearance": 40
+    },
+    "demo": true
+  },
+  {
+    "id": "cpu-10",
+    "category": "cpu",
+    "categoryLabel": "CPU",
+    "brand": "星构 DEMO",
+    "name": "A6 处理器",
+    "color": "不适用",
+    "price": 1812,
+    "specs": {
+      "socket": "DEMO-A",
+      "ddr": "DDR4",
+      "tier": 6,
+      "cores": 16,
+      "power": 117
+    },
+    "demo": true
+  },
+  {
+    "id": "gpu-10",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "星构 DEMO",
+    "name": "G6 16GB",
+    "color": "黑色",
+    "price": 4100,
+    "specs": {
+      "tier": 6,
+      "vram": 16,
+      "power": 214,
+      "length": 274,
+      "slots": 3,
+      "connector": "PCIe 8pin",
+      "connectors": 2
+    },
+    "demo": true
+  },
+  {
+    "id": "motherboard-10",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "星构 DEMO",
+    "name": "A6 主板",
+    "color": "黑色",
+    "price": 730,
+    "specs": {
+      "socket": "DEMO-A",
+      "ddr": "DDR4",
+      "tier": 6,
+      "form": "mATX",
+      "ramSlots": 4,
+      "maxRam": 128,
+      "m2": true,
+      "supportedCpus": [
+        "cpu-0",
+        "cpu-2",
+        "cpu-4",
+        "cpu-6",
+        "cpu-8",
+        "cpu-10",
+        "cpu-12",
+        "cpu-14",
+        "cpu-16",
+        "cpu-18"
+      ],
+      "biosVerified": true
+    },
+    "demo": true
+  },
+  {
+    "id": "memory-10",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "星构 DEMO",
+    "name": "DDR4 32GB 双条套装",
+    "color": "黑色",
+    "price": 500,
+    "specs": {
+      "ddr": "DDR4",
+      "tier": 6,
+      "capacity": 32,
+      "sticks": 2,
+      "height": 35
+    },
+    "demo": true
+  },
+  {
+    "id": "psu-10",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "星构 DEMO",
+    "name": "P6 1000W",
+    "color": "黑色",
+    "price": 550,
+    "specs": {
+      "tier": 6,
+      "watts": 1000,
+      "connector": "PCIe 8pin",
+      "connectors": 4,
+      "form": "ATX",
+      "length": 150,
+      "eps": 2
+    },
+    "demo": true
+  },
+  {
+    "id": "case-10",
+    "category": "case",
+    "categoryLabel": "机箱",
+    "brand": "星构 DEMO",
+    "name": "C6 机箱",
+    "color": "黑色",
+    "price": 500,
+    "specs": {
+      "tier": 6,
+      "forms": [
+        "mATX",
+        "ATX"
+      ],
+      "gpuLength": 370,
+      "gpuSlots": 4,
+      "coolerHeight": 165,
+      "psuForm": "ATX",
+      "psuLength": 200,
+      "ramClearance": 45
+    },
+    "demo": true
+  },
+  {
+    "id": "storage-10",
+    "category": "storage",
+    "categoryLabel": "硬盘",
+    "brand": "星构 DEMO",
+    "name": "S6 1024GB NVMe",
+    "color": "不适用",
+    "price": 500,
+    "specs": {
+      "tier": 6,
+      "capacity": 1024,
+      "interface": "M.2 NVMe",
+      "length": 80
+    },
+    "demo": true
+  },
+  {
+    "id": "cooler-10",
+    "category": "cooler",
+    "categoryLabel": "散热",
+    "brand": "星构 DEMO",
+    "name": "T6 塔式散热",
+    "color": "黑色",
+    "price": 288,
+    "specs": {
+      "tier": 6,
+      "sockets": [
+        "DEMO-A",
+        "DEMO-B"
+      ],
+      "height": 150,
+      "capacity": 220,
+      "ramClearance": 40
+    },
+    "demo": true
+  },
+  {
+    "id": "cpu-11",
+    "category": "cpu",
+    "categoryLabel": "CPU",
+    "brand": "星构 DEMO",
+    "name": "B6 处理器",
+    "color": "不适用",
+    "price": 1812,
+    "specs": {
+      "socket": "DEMO-B",
+      "ddr": "DDR5",
+      "tier": 6,
+      "cores": 16,
+      "power": 117
+    },
+    "demo": true
+  },
+  {
+    "id": "gpu-11",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "星构 DEMO",
+    "name": "G6 16GB",
+    "color": "白色",
+    "price": 4100,
+    "specs": {
+      "tier": 6,
+      "vram": 16,
+      "power": 214,
+      "length": 274,
+      "slots": 3,
+      "connector": "PCIe 8pin",
+      "connectors": 2
+    },
+    "demo": true
+  },
+  {
+    "id": "motherboard-11",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "星构 DEMO",
+    "name": "B6 主板",
+    "color": "黑色",
+    "price": 730,
+    "specs": {
+      "socket": "DEMO-B",
+      "ddr": "DDR5",
+      "tier": 6,
+      "form": "mATX",
+      "ramSlots": 4,
+      "maxRam": 128,
+      "m2": true,
+      "supportedCpus": [
+        "cpu-1",
+        "cpu-3",
+        "cpu-5",
+        "cpu-7",
+        "cpu-9",
+        "cpu-11",
+        "cpu-13",
+        "cpu-15",
+        "cpu-17",
+        "cpu-19"
+      ],
+      "biosVerified": true
+    },
+    "demo": true
+  },
+  {
+    "id": "memory-11",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "星构 DEMO",
+    "name": "DDR5 32GB 双条套装",
+    "color": "白色",
+    "price": 500,
+    "specs": {
+      "ddr": "DDR5",
+      "tier": 6,
+      "capacity": 32,
+      "sticks": 2,
+      "height": 35
+    },
+    "demo": true
+  },
+  {
+    "id": "psu-11",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "星构 DEMO",
+    "name": "P6 1000W",
+    "color": "白色",
+    "price": 550,
+    "specs": {
+      "tier": 6,
+      "watts": 1000,
+      "connector": "PCIe 8pin",
+      "connectors": 4,
+      "form": "ATX",
+      "length": 150,
+      "eps": 2
+    },
+    "demo": true
+  },
+  {
+    "id": "case-11",
+    "category": "case",
+    "categoryLabel": "机箱",
+    "brand": "星构 DEMO",
+    "name": "C6 机箱",
+    "color": "白色",
+    "price": 500,
+    "specs": {
+      "tier": 6,
+      "forms": [
+        "mATX",
+        "ATX"
+      ],
+      "gpuLength": 370,
+      "gpuSlots": 4,
+      "coolerHeight": 165,
+      "psuForm": "ATX",
+      "psuLength": 200,
+      "ramClearance": 45
+    },
+    "demo": true
+  },
+  {
+    "id": "storage-11",
+    "category": "storage",
+    "categoryLabel": "硬盘",
+    "brand": "星构 DEMO",
+    "name": "S6 1024GB NVMe",
+    "color": "不适用",
+    "price": 520,
+    "specs": {
+      "tier": 6,
+      "capacity": 1024,
+      "interface": "M.2 NVMe",
+      "length": 80
+    },
+    "demo": true
+  },
+  {
+    "id": "cooler-11",
+    "category": "cooler",
+    "categoryLabel": "散热",
+    "brand": "星构 DEMO",
+    "name": "T6 塔式散热",
+    "color": "白色",
+    "price": 288,
+    "specs": {
+      "tier": 6,
+      "sockets": [
+        "DEMO-A",
+        "DEMO-B"
+      ],
+      "height": 150,
+      "capacity": 220,
+      "ramClearance": 40
+    },
+    "demo": true
+  },
+  {
+    "id": "cpu-12",
+    "category": "cpu",
+    "categoryLabel": "CPU",
+    "brand": "星构 DEMO",
+    "name": "A7 处理器",
+    "color": "不适用",
+    "price": 2358,
+    "specs": {
+      "socket": "DEMO-A",
+      "ddr": "DDR4",
+      "tier": 7,
+      "cores": 18,
+      "power": 129
+    },
+    "demo": true
+  },
+  {
+    "id": "gpu-12",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "星构 DEMO",
+    "name": "G7 16GB",
+    "color": "黑色",
+    "price": 5400,
+    "specs": {
+      "tier": 7,
+      "vram": 16,
+      "power": 238,
+      "length": 283,
+      "slots": 3,
+      "connector": "PCIe 8pin",
+      "connectors": 2
+    },
+    "demo": true
+  },
+  {
+    "id": "motherboard-12",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "星构 DEMO",
+    "name": "A7 主板",
+    "color": "黑色",
+    "price": 810,
+    "specs": {
+      "socket": "DEMO-A",
+      "ddr": "DDR4",
+      "tier": 7,
+      "form": "mATX",
+      "ramSlots": 4,
+      "maxRam": 128,
+      "m2": true,
+      "supportedCpus": [
+        "cpu-0",
+        "cpu-2",
+        "cpu-4",
+        "cpu-6",
+        "cpu-8",
+        "cpu-10",
+        "cpu-12",
+        "cpu-14",
+        "cpu-16",
+        "cpu-18"
+      ],
+      "biosVerified": true
+    },
+    "demo": true
+  },
+  {
+    "id": "memory-12",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "星构 DEMO",
+    "name": "DDR4 32GB 双条套装",
+    "color": "黑色",
+    "price": 565,
+    "specs": {
+      "ddr": "DDR4",
+      "tier": 7,
+      "capacity": 32,
+      "sticks": 2,
+      "height": 35
+    },
+    "demo": true
+  },
+  {
+    "id": "psu-12",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "星构 DEMO",
+    "name": "P7 1100W",
+    "color": "黑色",
+    "price": 615,
+    "specs": {
+      "tier": 7,
+      "watts": 1100,
+      "connector": "PCIe 8pin",
+      "connectors": 4,
+      "form": "ATX",
+      "length": 150,
+      "eps": 2
+    },
+    "demo": true
+  },
+  {
+    "id": "case-12",
+    "category": "case",
+    "categoryLabel": "机箱",
+    "brand": "星构 DEMO",
+    "name": "C7 机箱",
+    "color": "黑色",
+    "price": 565,
+    "specs": {
+      "tier": 7,
+      "forms": [
+        "mATX",
+        "ATX"
+      ],
+      "gpuLength": 375,
+      "gpuSlots": 4,
+      "coolerHeight": 165,
+      "psuForm": "ATX",
+      "psuLength": 200,
+      "ramClearance": 45
+    },
+    "demo": true
+  },
+  {
+    "id": "storage-12",
+    "category": "storage",
+    "categoryLabel": "硬盘",
+    "brand": "星构 DEMO",
+    "name": "S7 2048GB NVMe",
+    "color": "不适用",
+    "price": 560,
+    "specs": {
+      "tier": 7,
+      "capacity": 2048,
+      "interface": "M.2 NVMe",
+      "length": 80
+    },
+    "demo": true
+  },
+  {
+    "id": "cooler-12",
+    "category": "cooler",
+    "categoryLabel": "散热",
+    "brand": "星构 DEMO",
+    "name": "T7 塔式散热",
+    "color": "黑色",
+    "price": 326,
+    "specs": {
+      "tier": 7,
+      "sockets": [
+        "DEMO-A",
+        "DEMO-B"
+      ],
+      "height": 150,
+      "capacity": 240,
+      "ramClearance": 40
+    },
+    "demo": true
+  },
+  {
+    "id": "cpu-13",
+    "category": "cpu",
+    "categoryLabel": "CPU",
+    "brand": "星构 DEMO",
+    "name": "B7 处理器",
+    "color": "不适用",
+    "price": 2358,
+    "specs": {
+      "socket": "DEMO-B",
+      "ddr": "DDR5",
+      "tier": 7,
+      "cores": 18,
+      "power": 129
+    },
+    "demo": true
+  },
+  {
+    "id": "gpu-13",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "星构 DEMO",
+    "name": "G7 16GB",
+    "color": "白色",
+    "price": 5400,
+    "specs": {
+      "tier": 7,
+      "vram": 16,
+      "power": 238,
+      "length": 283,
+      "slots": 3,
+      "connector": "PCIe 8pin",
+      "connectors": 2
+    },
+    "demo": true
+  },
+  {
+    "id": "motherboard-13",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "星构 DEMO",
+    "name": "B7 主板",
+    "color": "黑色",
+    "price": 810,
+    "specs": {
+      "socket": "DEMO-B",
+      "ddr": "DDR5",
+      "tier": 7,
+      "form": "mATX",
+      "ramSlots": 4,
+      "maxRam": 128,
+      "m2": true,
+      "supportedCpus": [
+        "cpu-1",
+        "cpu-3",
+        "cpu-5",
+        "cpu-7",
+        "cpu-9",
+        "cpu-11",
+        "cpu-13",
+        "cpu-15",
+        "cpu-17",
+        "cpu-19"
+      ],
+      "biosVerified": true
+    },
+    "demo": true
+  },
+  {
+    "id": "memory-13",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "星构 DEMO",
+    "name": "DDR5 32GB 双条套装",
+    "color": "白色",
+    "price": 565,
+    "specs": {
+      "ddr": "DDR5",
+      "tier": 7,
+      "capacity": 32,
+      "sticks": 2,
+      "height": 35
+    },
+    "demo": true
+  },
+  {
+    "id": "psu-13",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "星构 DEMO",
+    "name": "P7 1100W",
+    "color": "白色",
+    "price": 615,
+    "specs": {
+      "tier": 7,
+      "watts": 1100,
+      "connector": "PCIe 8pin",
+      "connectors": 4,
+      "form": "ATX",
+      "length": 150,
+      "eps": 2
+    },
+    "demo": true
+  },
+  {
+    "id": "case-13",
+    "category": "case",
+    "categoryLabel": "机箱",
+    "brand": "星构 DEMO",
+    "name": "C7 机箱",
+    "color": "白色",
+    "price": 565,
+    "specs": {
+      "tier": 7,
+      "forms": [
+        "mATX",
+        "ATX"
+      ],
+      "gpuLength": 375,
+      "gpuSlots": 4,
+      "coolerHeight": 165,
+      "psuForm": "ATX",
+      "psuLength": 200,
+      "ramClearance": 45
+    },
+    "demo": true
+  },
+  {
+    "id": "storage-13",
+    "category": "storage",
+    "categoryLabel": "硬盘",
+    "brand": "星构 DEMO",
+    "name": "S7 2048GB NVMe",
+    "color": "不适用",
+    "price": 580,
+    "specs": {
+      "tier": 7,
+      "capacity": 2048,
+      "interface": "M.2 NVMe",
+      "length": 80
+    },
+    "demo": true
+  },
+  {
+    "id": "cooler-13",
+    "category": "cooler",
+    "categoryLabel": "散热",
+    "brand": "星构 DEMO",
+    "name": "T7 塔式散热",
+    "color": "白色",
+    "price": 326,
+    "specs": {
+      "tier": 7,
+      "sockets": [
+        "DEMO-A",
+        "DEMO-B"
+      ],
+      "height": 150,
+      "capacity": 240,
+      "ramClearance": 40
+    },
+    "demo": true
+  },
+  {
+    "id": "cpu-14",
+    "category": "cpu",
+    "categoryLabel": "CPU",
+    "brand": "星构 DEMO",
+    "name": "A8 处理器",
+    "color": "不适用",
+    "price": 2988,
+    "specs": {
+      "socket": "DEMO-A",
+      "ddr": "DDR4",
+      "tier": 8,
+      "cores": 20,
+      "power": 141
+    },
+    "demo": true
+  },
+  {
+    "id": "gpu-14",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "星构 DEMO",
+    "name": "G8 24GB",
+    "color": "黑色",
+    "price": 6900,
+    "specs": {
+      "tier": 8,
+      "vram": 24,
+      "power": 262,
+      "length": 292,
+      "slots": 3,
+      "connector": "PCIe 8pin",
+      "connectors": 2
+    },
+    "demo": true
+  },
+  {
+    "id": "motherboard-14",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "星构 DEMO",
+    "name": "A8 主板",
+    "color": "黑色",
+    "price": 890,
+    "specs": {
+      "socket": "DEMO-A",
+      "ddr": "DDR4",
+      "tier": 8,
+      "form": "mATX",
+      "ramSlots": 4,
+      "maxRam": 128,
+      "m2": true,
+      "supportedCpus": [
+        "cpu-0",
+        "cpu-2",
+        "cpu-4",
+        "cpu-6",
+        "cpu-8",
+        "cpu-10",
+        "cpu-12",
+        "cpu-14",
+        "cpu-16",
+        "cpu-18"
+      ],
+      "biosVerified": true
+    },
+    "demo": true
+  },
+  {
+    "id": "memory-14",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "星构 DEMO",
+    "name": "DDR4 64GB 双条套装",
+    "color": "黑色",
+    "price": 630,
+    "specs": {
+      "ddr": "DDR4",
+      "tier": 8,
+      "capacity": 64,
+      "sticks": 2,
+      "height": 35
+    },
+    "demo": true
+  },
+  {
+    "id": "psu-14",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "星构 DEMO",
+    "name": "P8 1200W",
+    "color": "黑色",
+    "price": 680,
+    "specs": {
+      "tier": 8,
+      "watts": 1200,
+      "connector": "PCIe 8pin",
+      "connectors": 4,
+      "form": "ATX",
+      "length": 150,
+      "eps": 2
+    },
+    "demo": true
+  },
+  {
+    "id": "case-14",
+    "category": "case",
+    "categoryLabel": "机箱",
+    "brand": "星构 DEMO",
+    "name": "C8 机箱",
+    "color": "黑色",
+    "price": 630,
+    "specs": {
+      "tier": 8,
+      "forms": [
+        "mATX",
+        "ATX"
+      ],
+      "gpuLength": 380,
+      "gpuSlots": 4,
+      "coolerHeight": 165,
+      "psuForm": "ATX",
+      "psuLength": 200,
+      "ramClearance": 45
+    },
+    "demo": true
+  },
+  {
+    "id": "storage-14",
+    "category": "storage",
+    "categoryLabel": "硬盘",
+    "brand": "星构 DEMO",
+    "name": "S8 2048GB NVMe",
+    "color": "不适用",
+    "price": 620,
+    "specs": {
+      "tier": 8,
+      "capacity": 2048,
+      "interface": "M.2 NVMe",
+      "length": 80
+    },
+    "demo": true
+  },
+  {
+    "id": "cooler-14",
+    "category": "cooler",
+    "categoryLabel": "散热",
+    "brand": "星构 DEMO",
+    "name": "T8 塔式散热",
+    "color": "黑色",
+    "price": 364,
+    "specs": {
+      "tier": 8,
+      "sockets": [
+        "DEMO-A",
+        "DEMO-B"
+      ],
+      "height": 150,
+      "capacity": 260,
+      "ramClearance": 40
+    },
+    "demo": true
+  },
+  {
+    "id": "cpu-15",
+    "category": "cpu",
+    "categoryLabel": "CPU",
+    "brand": "星构 DEMO",
+    "name": "B8 处理器",
+    "color": "不适用",
+    "price": 2988,
+    "specs": {
+      "socket": "DEMO-B",
+      "ddr": "DDR5",
+      "tier": 8,
+      "cores": 20,
+      "power": 141
+    },
+    "demo": true
+  },
+  {
+    "id": "gpu-15",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "星构 DEMO",
+    "name": "G8 24GB",
+    "color": "白色",
+    "price": 6900,
+    "specs": {
+      "tier": 8,
+      "vram": 24,
+      "power": 262,
+      "length": 292,
+      "slots": 3,
+      "connector": "PCIe 8pin",
+      "connectors": 2
+    },
+    "demo": true
+  },
+  {
+    "id": "motherboard-15",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "星构 DEMO",
+    "name": "B8 主板",
+    "color": "黑色",
+    "price": 890,
+    "specs": {
+      "socket": "DEMO-B",
+      "ddr": "DDR5",
+      "tier": 8,
+      "form": "mATX",
+      "ramSlots": 4,
+      "maxRam": 128,
+      "m2": true,
+      "supportedCpus": [
+        "cpu-1",
+        "cpu-3",
+        "cpu-5",
+        "cpu-7",
+        "cpu-9",
+        "cpu-11",
+        "cpu-13",
+        "cpu-15",
+        "cpu-17",
+        "cpu-19"
+      ],
+      "biosVerified": true
+    },
+    "demo": true
+  },
+  {
+    "id": "memory-15",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "星构 DEMO",
+    "name": "DDR5 64GB 双条套装",
+    "color": "白色",
+    "price": 630,
+    "specs": {
+      "ddr": "DDR5",
+      "tier": 8,
+      "capacity": 64,
+      "sticks": 2,
+      "height": 35
+    },
+    "demo": true
+  },
+  {
+    "id": "psu-15",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "星构 DEMO",
+    "name": "P8 1200W",
+    "color": "白色",
+    "price": 680,
+    "specs": {
+      "tier": 8,
+      "watts": 1200,
+      "connector": "PCIe 8pin",
+      "connectors": 4,
+      "form": "ATX",
+      "length": 150,
+      "eps": 2
+    },
+    "demo": true
+  },
+  {
+    "id": "case-15",
+    "category": "case",
+    "categoryLabel": "机箱",
+    "brand": "星构 DEMO",
+    "name": "C8 机箱",
+    "color": "白色",
+    "price": 630,
+    "specs": {
+      "tier": 8,
+      "forms": [
+        "mATX",
+        "ATX"
+      ],
+      "gpuLength": 380,
+      "gpuSlots": 4,
+      "coolerHeight": 165,
+      "psuForm": "ATX",
+      "psuLength": 200,
+      "ramClearance": 45
+    },
+    "demo": true
+  },
+  {
+    "id": "storage-15",
+    "category": "storage",
+    "categoryLabel": "硬盘",
+    "brand": "星构 DEMO",
+    "name": "S8 2048GB NVMe",
+    "color": "不适用",
+    "price": 640,
+    "specs": {
+      "tier": 8,
+      "capacity": 2048,
+      "interface": "M.2 NVMe",
+      "length": 80
+    },
+    "demo": true
+  },
+  {
+    "id": "cooler-15",
+    "category": "cooler",
+    "categoryLabel": "散热",
+    "brand": "星构 DEMO",
+    "name": "T8 塔式散热",
+    "color": "白色",
+    "price": 364,
+    "specs": {
+      "tier": 8,
+      "sockets": [
+        "DEMO-A",
+        "DEMO-B"
+      ],
+      "height": 150,
+      "capacity": 260,
+      "ramClearance": 40
+    },
+    "demo": true
+  },
+  {
+    "id": "cpu-16",
+    "category": "cpu",
+    "categoryLabel": "CPU",
+    "brand": "星构 DEMO",
+    "name": "A9 处理器",
+    "color": "不适用",
+    "price": 3702,
+    "specs": {
+      "socket": "DEMO-A",
+      "ddr": "DDR4",
+      "tier": 9,
+      "cores": 22,
+      "power": 153
+    },
+    "demo": true
+  },
+  {
+    "id": "gpu-16",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "星构 DEMO",
+    "name": "G9 24GB",
+    "color": "黑色",
+    "price": 8600,
+    "specs": {
+      "tier": 9,
+      "vram": 24,
+      "power": 286,
+      "length": 301,
+      "slots": 3,
+      "connector": "PCIe 8pin",
+      "connectors": 2
+    },
+    "demo": true
+  },
+  {
+    "id": "motherboard-16",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "星构 DEMO",
+    "name": "A9 主板",
+    "color": "黑色",
+    "price": 970,
+    "specs": {
+      "socket": "DEMO-A",
+      "ddr": "DDR4",
+      "tier": 9,
+      "form": "mATX",
+      "ramSlots": 4,
+      "maxRam": 128,
+      "m2": true,
+      "supportedCpus": [
+        "cpu-0",
+        "cpu-2",
+        "cpu-4",
+        "cpu-6",
+        "cpu-8",
+        "cpu-10",
+        "cpu-12",
+        "cpu-14",
+        "cpu-16",
+        "cpu-18"
+      ],
+      "biosVerified": true
+    },
+    "demo": true
+  },
+  {
+    "id": "memory-16",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "星构 DEMO",
+    "name": "DDR4 64GB 双条套装",
+    "color": "黑色",
+    "price": 695,
+    "specs": {
+      "ddr": "DDR4",
+      "tier": 9,
+      "capacity": 64,
+      "sticks": 2,
+      "height": 35
+    },
+    "demo": true
+  },
+  {
+    "id": "psu-16",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "星构 DEMO",
+    "name": "P9 1300W",
+    "color": "黑色",
+    "price": 745,
+    "specs": {
+      "tier": 9,
+      "watts": 1300,
+      "connector": "PCIe 8pin",
+      "connectors": 4,
+      "form": "ATX",
+      "length": 150,
+      "eps": 2
+    },
+    "demo": true
+  },
+  {
+    "id": "case-16",
+    "category": "case",
+    "categoryLabel": "机箱",
+    "brand": "星构 DEMO",
+    "name": "C9 机箱",
+    "color": "黑色",
+    "price": 695,
+    "specs": {
+      "tier": 9,
+      "forms": [
+        "mATX",
+        "ATX"
+      ],
+      "gpuLength": 385,
+      "gpuSlots": 4,
+      "coolerHeight": 165,
+      "psuForm": "ATX",
+      "psuLength": 200,
+      "ramClearance": 45
+    },
+    "demo": true
+  },
+  {
+    "id": "storage-16",
+    "category": "storage",
+    "categoryLabel": "硬盘",
+    "brand": "星构 DEMO",
+    "name": "S9 2048GB NVMe",
+    "color": "不适用",
+    "price": 680,
+    "specs": {
+      "tier": 9,
+      "capacity": 2048,
+      "interface": "M.2 NVMe",
+      "length": 80
+    },
+    "demo": true
+  },
+  {
+    "id": "cooler-16",
+    "category": "cooler",
+    "categoryLabel": "散热",
+    "brand": "星构 DEMO",
+    "name": "T9 塔式散热",
+    "color": "黑色",
+    "price": 402,
+    "specs": {
+      "tier": 9,
+      "sockets": [
+        "DEMO-A",
+        "DEMO-B"
+      ],
+      "height": 150,
+      "capacity": 280,
+      "ramClearance": 40
+    },
+    "demo": true
+  },
+  {
+    "id": "cpu-17",
+    "category": "cpu",
+    "categoryLabel": "CPU",
+    "brand": "星构 DEMO",
+    "name": "B9 处理器",
+    "color": "不适用",
+    "price": 3702,
+    "specs": {
+      "socket": "DEMO-B",
+      "ddr": "DDR5",
+      "tier": 9,
+      "cores": 22,
+      "power": 153
+    },
+    "demo": true
+  },
+  {
+    "id": "gpu-17",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "星构 DEMO",
+    "name": "G9 24GB",
+    "color": "白色",
+    "price": 8600,
+    "specs": {
+      "tier": 9,
+      "vram": 24,
+      "power": 286,
+      "length": 301,
+      "slots": 3,
+      "connector": "PCIe 8pin",
+      "connectors": 2
+    },
+    "demo": true
+  },
+  {
+    "id": "motherboard-17",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "星构 DEMO",
+    "name": "B9 主板",
+    "color": "黑色",
+    "price": 970,
+    "specs": {
+      "socket": "DEMO-B",
+      "ddr": "DDR5",
+      "tier": 9,
+      "form": "mATX",
+      "ramSlots": 4,
+      "maxRam": 128,
+      "m2": true,
+      "supportedCpus": [
+        "cpu-1",
+        "cpu-3",
+        "cpu-5",
+        "cpu-7",
+        "cpu-9",
+        "cpu-11",
+        "cpu-13",
+        "cpu-15",
+        "cpu-17",
+        "cpu-19"
+      ],
+      "biosVerified": true
+    },
+    "demo": true
+  },
+  {
+    "id": "memory-17",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "星构 DEMO",
+    "name": "DDR5 64GB 双条套装",
+    "color": "白色",
+    "price": 695,
+    "specs": {
+      "ddr": "DDR5",
+      "tier": 9,
+      "capacity": 64,
+      "sticks": 2,
+      "height": 35
+    },
+    "demo": true
+  },
+  {
+    "id": "psu-17",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "星构 DEMO",
+    "name": "P9 1300W",
+    "color": "白色",
+    "price": 745,
+    "specs": {
+      "tier": 9,
+      "watts": 1300,
+      "connector": "PCIe 8pin",
+      "connectors": 4,
+      "form": "ATX",
+      "length": 150,
+      "eps": 2
+    },
+    "demo": true
+  },
+  {
+    "id": "case-17",
+    "category": "case",
+    "categoryLabel": "机箱",
+    "brand": "星构 DEMO",
+    "name": "C9 机箱",
+    "color": "白色",
+    "price": 695,
+    "specs": {
+      "tier": 9,
+      "forms": [
+        "mATX",
+        "ATX"
+      ],
+      "gpuLength": 385,
+      "gpuSlots": 4,
+      "coolerHeight": 165,
+      "psuForm": "ATX",
+      "psuLength": 200,
+      "ramClearance": 45
+    },
+    "demo": true
+  },
+  {
+    "id": "storage-17",
+    "category": "storage",
+    "categoryLabel": "硬盘",
+    "brand": "星构 DEMO",
+    "name": "S9 2048GB NVMe",
+    "color": "不适用",
+    "price": 700,
+    "specs": {
+      "tier": 9,
+      "capacity": 2048,
+      "interface": "M.2 NVMe",
+      "length": 80
+    },
+    "demo": true
+  },
+  {
+    "id": "cooler-17",
+    "category": "cooler",
+    "categoryLabel": "散热",
+    "brand": "星构 DEMO",
+    "name": "T9 塔式散热",
+    "color": "白色",
+    "price": 402,
+    "specs": {
+      "tier": 9,
+      "sockets": [
+        "DEMO-A",
+        "DEMO-B"
+      ],
+      "height": 150,
+      "capacity": 280,
+      "ramClearance": 40
+    },
+    "demo": true
+  },
+  {
+    "id": "cpu-18",
+    "category": "cpu",
+    "categoryLabel": "CPU",
+    "brand": "星构 DEMO",
+    "name": "A10 处理器",
+    "color": "不适用",
+    "price": 4500,
+    "specs": {
+      "socket": "DEMO-A",
+      "ddr": "DDR4",
+      "tier": 10,
+      "cores": 24,
+      "power": 165
+    },
+    "demo": true
+  },
+  {
+    "id": "gpu-18",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "星构 DEMO",
+    "name": "G10 24GB",
+    "color": "黑色",
+    "price": 10500,
+    "specs": {
+      "tier": 10,
+      "vram": 24,
+      "power": 310,
+      "length": 310,
+      "slots": 3,
+      "connector": "PCIe 8pin",
+      "connectors": 2
+    },
+    "demo": true
+  },
+  {
+    "id": "motherboard-18",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "星构 DEMO",
+    "name": "A10 主板",
+    "color": "黑色",
+    "price": 1050,
+    "specs": {
+      "socket": "DEMO-A",
+      "ddr": "DDR4",
+      "tier": 10,
+      "form": "mATX",
+      "ramSlots": 4,
+      "maxRam": 128,
+      "m2": true,
+      "supportedCpus": [
+        "cpu-0",
+        "cpu-2",
+        "cpu-4",
+        "cpu-6",
+        "cpu-8",
+        "cpu-10",
+        "cpu-12",
+        "cpu-14",
+        "cpu-16",
+        "cpu-18"
+      ],
+      "biosVerified": true
+    },
+    "demo": true
+  },
+  {
+    "id": "memory-18",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "星构 DEMO",
+    "name": "DDR4 64GB 双条套装",
+    "color": "黑色",
+    "price": 760,
+    "specs": {
+      "ddr": "DDR4",
+      "tier": 10,
+      "capacity": 64,
+      "sticks": 2,
+      "height": 35
+    },
+    "demo": true
+  },
+  {
+    "id": "psu-18",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "星构 DEMO",
+    "name": "P10 1400W",
+    "color": "黑色",
+    "price": 810,
+    "specs": {
+      "tier": 10,
+      "watts": 1400,
+      "connector": "PCIe 8pin",
+      "connectors": 4,
+      "form": "ATX",
+      "length": 150,
+      "eps": 2
+    },
+    "demo": true
+  },
+  {
+    "id": "case-18",
+    "category": "case",
+    "categoryLabel": "机箱",
+    "brand": "星构 DEMO",
+    "name": "C10 机箱",
+    "color": "黑色",
+    "price": 760,
+    "specs": {
+      "tier": 10,
+      "forms": [
+        "mATX",
+        "ATX"
+      ],
+      "gpuLength": 390,
+      "gpuSlots": 4,
+      "coolerHeight": 165,
+      "psuForm": "ATX",
+      "psuLength": 200,
+      "ramClearance": 45
+    },
+    "demo": true
+  },
+  {
+    "id": "storage-18",
+    "category": "storage",
+    "categoryLabel": "硬盘",
+    "brand": "星构 DEMO",
+    "name": "S10 2048GB NVMe",
+    "color": "不适用",
+    "price": 740,
+    "specs": {
+      "tier": 10,
+      "capacity": 2048,
+      "interface": "M.2 NVMe",
+      "length": 80
+    },
+    "demo": true
+  },
+  {
+    "id": "cooler-18",
+    "category": "cooler",
+    "categoryLabel": "散热",
+    "brand": "星构 DEMO",
+    "name": "T10 塔式散热",
+    "color": "黑色",
+    "price": 440,
+    "specs": {
+      "tier": 10,
+      "sockets": [
+        "DEMO-A",
+        "DEMO-B"
+      ],
+      "height": 150,
+      "capacity": 300,
+      "ramClearance": 40
+    },
+    "demo": true
+  },
+  {
+    "id": "cpu-19",
+    "category": "cpu",
+    "categoryLabel": "CPU",
+    "brand": "星构 DEMO",
+    "name": "B10 处理器",
+    "color": "不适用",
+    "price": 4500,
+    "specs": {
+      "socket": "DEMO-B",
+      "ddr": "DDR5",
+      "tier": 10,
+      "cores": 24,
+      "power": 165
+    },
+    "demo": true
+  },
+  {
+    "id": "gpu-19",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "星构 DEMO",
+    "name": "G10 24GB",
+    "color": "白色",
+    "price": 10500,
+    "specs": {
+      "tier": 10,
+      "vram": 24,
+      "power": 310,
+      "length": 310,
+      "slots": 3,
+      "connector": "PCIe 8pin",
+      "connectors": 2
+    },
+    "demo": true
+  },
+  {
+    "id": "motherboard-19",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "星构 DEMO",
+    "name": "B10 主板",
+    "color": "黑色",
+    "price": 1050,
+    "specs": {
+      "socket": "DEMO-B",
+      "ddr": "DDR5",
+      "tier": 10,
+      "form": "mATX",
+      "ramSlots": 4,
+      "maxRam": 128,
+      "m2": true,
+      "supportedCpus": [
+        "cpu-1",
+        "cpu-3",
+        "cpu-5",
+        "cpu-7",
+        "cpu-9",
+        "cpu-11",
+        "cpu-13",
+        "cpu-15",
+        "cpu-17",
+        "cpu-19"
+      ],
+      "biosVerified": true
+    },
+    "demo": true
+  },
+  {
+    "id": "memory-19",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "星构 DEMO",
+    "name": "DDR5 64GB 双条套装",
+    "color": "白色",
+    "price": 760,
+    "specs": {
+      "ddr": "DDR5",
+      "tier": 10,
+      "capacity": 64,
+      "sticks": 2,
+      "height": 35
+    },
+    "demo": true
+  },
+  {
+    "id": "psu-19",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "星构 DEMO",
+    "name": "P10 1400W",
+    "color": "白色",
+    "price": 810,
+    "specs": {
+      "tier": 10,
+      "watts": 1400,
+      "connector": "PCIe 8pin",
+      "connectors": 4,
+      "form": "ATX",
+      "length": 150,
+      "eps": 2
+    },
+    "demo": true
+  },
+  {
+    "id": "case-19",
+    "category": "case",
+    "categoryLabel": "机箱",
+    "brand": "星构 DEMO",
+    "name": "C10 机箱",
+    "color": "白色",
+    "price": 760,
+    "specs": {
+      "tier": 10,
+      "forms": [
+        "mATX",
+        "ATX"
+      ],
+      "gpuLength": 390,
+      "gpuSlots": 4,
+      "coolerHeight": 165,
+      "psuForm": "ATX",
+      "psuLength": 200,
+      "ramClearance": 45
+    },
+    "demo": true
+  },
+  {
+    "id": "storage-19",
+    "category": "storage",
+    "categoryLabel": "硬盘",
+    "brand": "星构 DEMO",
+    "name": "S10 2048GB NVMe",
+    "color": "不适用",
+    "price": 760,
+    "specs": {
+      "tier": 10,
+      "capacity": 2048,
+      "interface": "M.2 NVMe",
+      "length": 80
+    },
+    "demo": true
+  },
+  {
+    "id": "cooler-19",
+    "category": "cooler",
+    "categoryLabel": "散热",
+    "brand": "星构 DEMO",
+    "name": "T10 塔式散热",
+    "color": "白色",
+    "price": 440,
+    "specs": {
+      "tier": 10,
+      "sockets": [
+        "DEMO-A",
+        "DEMO-B"
+      ],
+      "height": 150,
+      "capacity": 300,
+      "ramClearance": 40
+    },
+    "demo": true
+  }
+]

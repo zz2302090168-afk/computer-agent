@@ -1,0 +1,362 @@
+[
+  {
+    "id": "pc-0",
+    "name": "星构 1 号整机",
+    "brand": "星构 DEMO",
+    "color": "黑色",
+    "price": 2295,
+    "partIds": [
+      "cpu-0",
+      "gpu-0",
+      "memory-0",
+      "motherboard-0",
+      "psu-0",
+      "case-0",
+      "storage-0",
+      "cooler-0"
+    ],
+    "demo": true
+  },
+  {
+    "id": "pc-1",
+    "name": "星构 1 号整机",
+    "brand": "星构 DEMO",
+    "color": "白色",
+    "price": 2315,
+    "partIds": [
+      "cpu-1",
+      "gpu-1",
+      "memory-1",
+      "motherboard-1",
+      "psu-1",
+      "case-1",
+      "storage-1",
+      "cooler-1"
+    ],
+    "demo": true
+  },
+  {
+    "id": "pc-2",
+    "name": "星构 2 号整机",
+    "brand": "星构 DEMO",
+    "color": "黑色",
+    "price": 3094,
+    "partIds": [
+      "cpu-2",
+      "gpu-2",
+      "memory-2",
+      "motherboard-2",
+      "psu-2",
+      "case-2",
+      "storage-2",
+      "cooler-2"
+    ],
+    "demo": true
+  },
+  {
+    "id": "pc-3",
+    "name": "星构 2 号整机",
+    "brand": "星构 DEMO",
+    "color": "白色",
+    "price": 3114,
+    "partIds": [
+      "cpu-3",
+      "gpu-3",
+      "memory-3",
+      "motherboard-3",
+      "psu-3",
+      "case-3",
+      "storage-3",
+      "cooler-3"
+    ],
+    "demo": true
+  },
+  {
+    "id": "pc-4",
+    "name": "星构 3 号整机",
+    "brand": "星构 DEMO",
+    "color": "黑色",
+    "price": 4177,
+    "partIds": [
+      "cpu-4",
+      "gpu-4",
+      "memory-4",
+      "motherboard-4",
+      "psu-4",
+      "case-4",
+      "storage-4",
+      "cooler-4"
+    ],
+    "demo": true
+  },
+  {
+    "id": "pc-5",
+    "name": "星构 3 号整机",
+    "brand": "星构 DEMO",
+    "color": "白色",
+    "price": 4197,
+    "partIds": [
+      "cpu-5",
+      "gpu-5",
+      "memory-5",
+      "motherboard-5",
+      "psu-5",
+      "case-5",
+      "storage-5",
+      "cooler-5"
+    ],
+    "demo": true
+  },
+  {
+    "id": "pc-6",
+    "name": "星构 4 号整机",
+    "brand": "星构 DEMO",
+    "color": "黑色",
+    "price": 5544,
+    "partIds": [
+      "cpu-6",
+      "gpu-6",
+      "memory-6",
+      "motherboard-6",
+      "psu-6",
+      "case-6",
+      "storage-6",
+      "cooler-6"
+    ],
+    "demo": true
+  },
+  {
+    "id": "pc-7",
+    "name": "星构 4 号整机",
+    "brand": "星构 DEMO",
+    "color": "白色",
+    "price": 5564,
+    "partIds": [
+      "cpu-7",
+      "gpu-7",
+      "memory-7",
+      "motherboard-7",
+      "psu-7",
+      "case-7",
+      "storage-7",
+      "cooler-7"
+    ],
+    "demo": true
+  },
+  {
+    "id": "pc-8",
+    "name": "星构 5 号整机",
+    "brand": "星构 DEMO",
+    "color": "黑色",
+    "price": 7195,
+    "partIds": [
+      "cpu-8",
+      "gpu-8",
+      "memory-8",
+      "motherboard-8",
+      "psu-8",
+      "case-8",
+      "storage-8",
+      "cooler-8"
+    ],
+    "demo": true
+  },
+  {
+    "id": "pc-9",
+    "name": "星构 5 号整机",
+    "brand": "星构 DEMO",
+    "color": "白色",
+    "price": 7215,
+    "partIds": [
+      "cpu-9",
+      "gpu-9",
+      "memory-9",
+      "motherboard-9",
+      "psu-9",
+      "case-9",
+      "storage-9",
+      "cooler-9"
+    ],
+    "demo": true
+  },
+  {
+    "id": "pc-10",
+    "name": "星构 6 号整机",
+    "brand": "星构 DEMO",
+    "color": "黑色",
+    "price": 9130,
+    "partIds": [
+      "cpu-10",
+      "gpu-10",
+      "memory-10",
+      "motherboard-10",
+      "psu-10",
+      "case-10",
+      "storage-10",
+      "cooler-10"
+    ],
+    "demo": true
+  },
+  {
+    "id": "pc-11",
+    "name": "星构 6 号整机",
+    "brand": "星构 DEMO",
+    "color": "白色",
+    "price": 9150,
+    "partIds": [
+      "cpu-11",
+      "gpu-11",
+      "memory-11",
+      "motherboard-11",
+      "psu-11",
+      "case-11",
+      "storage-11",
+      "cooler-11"
+    ],
+    "demo": true
+  },
+  {
+    "id": "pc-12",
+    "name": "星构 7 号整机",
+    "brand": "星构 DEMO",
+    "color": "黑色",
+    "price": 11349,
+    "partIds": [
+      "cpu-12",
+      "gpu-12",
+      "memory-12",
+      "motherboard-12",
+      "psu-12",
+      "case-12",
+      "storage-12",
+      "cooler-12"
+    ],
+    "demo": true
+  },
+  {
+    "id": "pc-13",
+    "name": "星构 7 号整机",
+    "brand": "星构 DEMO",
+    "color": "白色",
+    "price": 11369,
+    "partIds": [
+      "cpu-13",
+      "gpu-13",
+      "memory-13",
+      "motherboard-13",
+      "psu-13",
+      "case-13",
+      "storage-13",
+      "cooler-13"
+    ],
+    "demo": true
+  },
+  {
+    "id": "pc-14",
+    "name": "星构 8 号整机",
+    "brand": "星构 DEMO",
+    "color": "黑色",
+    "price": 13852,
+    "partIds": [
+      "cpu-14",
+      "gpu-14",
+      "memory-14",
+      "motherboard-14",
+      "psu-14",
+      "case-14",
+      "storage-14",
+      "cooler-14"
+    ],
+    "demo": true
+  },
+  {
+    "id": "pc-15",
+    "name": "星构 8 号整机",
+    "brand": "星构 DEMO",
+    "color": "白色",
+    "price": 13872,
+    "partIds": [
+      "cpu-15",
+      "gpu-15",
+      "memory-15",
+      "motherboard-15",
+      "psu-15",
+      "case-15",
+      "storage-15",
+      "cooler-15"
+    ],
+    "demo": true
+  },
+  {
+    "id": "pc-16",
+    "name": "星构 9 号整机",
+    "brand": "星构 DEMO",
+    "color": "黑色",
+    "price": 16639,
+    "partIds": [
+      "cpu-16",
+      "gpu-16",
+      "memory-16",
+      "motherboard-16",
+      "psu-16",
+      "case-16",
+      "storage-16",
+      "cooler-16"
+    ],
+    "demo": true
+  },
+  {
+    "id": "pc-17",
+    "name": "星构 9 号整机",
+    "brand": "星构 DEMO",
+    "color": "白色",
+    "price": 16659,
+    "partIds": [
+      "cpu-17",
+      "gpu-17",
+      "memory-17",
+      "motherboard-17",
+      "psu-17",
+      "case-17",
+      "storage-17",
+      "cooler-17"
+    ],
+    "demo": true
+  },
+  {
+    "id": "pc-18",
+    "name": "星构 10 号整机",
+    "brand": "星构 DEMO",
+    "color": "黑色",
+    "price": 19710,
+    "partIds": [
+      "cpu-18",
+      "gpu-18",
+      "memory-18",
+      "motherboard-18",
+      "psu-18",
+      "case-18",
+      "storage-18",
+      "cooler-18"
+    ],
+    "demo": true
+  },
+  {
+    "id": "pc-19",
+    "name": "星构 10 号整机",
+    "brand": "星构 DEMO",
+    "color": "白色",
+    "price": 19730,
+    "partIds": [
+      "cpu-19",
+      "gpu-19",
+      "memory-19",
+      "motherboard-19",
+      "psu-19",
+      "case-19",
+      "storage-19",
+      "cooler-19"
+    ],
+    "demo": true
+  }
+]
