@@ -38,6 +38,13 @@ export type Requirements = {
   message: string;
   brand: string;
   game: string;
+  brandPreferences?:Partial<Record<Category,string>>;
+  partPreferences?:Partial<Record<Category,string>>;
+  seriesPreferences?:Partial<Record<Category,string>>;
+  selectionAuthorizations?:Partial<Record<Category,string>>;
+  selectionSources?:Partial<Record<Category,'user'|'assistant'|'confirmed'>>;
+  partSelections?:Partial<Record<Category,string>>;
+  preferCheaper?:boolean;
 };
 export type Validation = {
   status: 'pass' | 'fail' | 'unknown';
@@ -51,7 +58,6 @@ export type Plan = {
   total: number;
   validation: Validation;
   reason: string;
-  fps: { message: string; range?: number[] };
   score: number;
 };
 export type Evidence = {
@@ -70,3 +76,5 @@ export type RecommendationResult = {
   modelStatus?: string;
 };
 export type Catalog = { parts: Part[]; prebuilts: Prebuilt[] };
+export type PcTask={id:string;name:string;draft:Partial<Requirements>;result:RecommendationResult|null;issues:string[];version:number;updatedAt:number};
+export type TaskSummary=Pick<PcTask,'id'|'name'|'version'|'updatedAt'> & {purpose?:string;budget?:number};

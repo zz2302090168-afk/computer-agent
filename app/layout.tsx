@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import './product.css';
+import './chat.css';
+import './task-memory.css';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -14,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: '装机研究所 · 电脑配置助手',
+  title: '啵啵龙装机研究所 · 电脑配置助手',
   description: '按预算与用途匹配 DIY 和整机，提供配置校验与知识依据。',
 };
 

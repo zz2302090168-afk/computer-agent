@@ -1,362 +1,362 @@
 [
   {
-    "id": "pc-0",
-    "name": "星构 1 号整机",
-    "brand": "星构 DEMO",
+    "id": "real-pc-0",
+    "name": "商家组装套餐 01 · 黑色机箱",
+    "brand": "装机研究所",
     "color": "黑色",
-    "price": 2295,
+    "price": 3993,
     "partIds": [
-      "cpu-0",
-      "gpu-0",
-      "memory-0",
-      "motherboard-0",
-      "psu-0",
-      "case-0",
-      "storage-0",
-      "cooler-0"
+      "real-cpu-0",
+      "real-gpu-0",
+      "real-memory-0",
+      "real-motherboard-0",
+      "real-psu-5",
+      "real-case-4",
+      "real-storage-2",
+      "real-cooler-8"
     ],
-    "demo": true
+    "demo": false
   },
   {
-    "id": "pc-1",
-    "name": "星构 1 号整机",
-    "brand": "星构 DEMO",
+    "id": "real-pc-1",
+    "name": "商家组装套餐 01 · 白色机箱",
+    "brand": "装机研究所",
     "color": "白色",
-    "price": 2315,
+    "price": 4043,
     "partIds": [
-      "cpu-1",
-      "gpu-1",
-      "memory-1",
-      "motherboard-1",
-      "psu-1",
-      "case-1",
-      "storage-1",
-      "cooler-1"
+      "real-cpu-0",
+      "real-gpu-0",
+      "real-memory-0",
+      "real-motherboard-0",
+      "real-psu-5",
+      "real-case-5",
+      "real-storage-2",
+      "real-cooler-9"
     ],
-    "demo": true
+    "demo": false
   },
   {
-    "id": "pc-2",
-    "name": "星构 2 号整机",
-    "brand": "星构 DEMO",
+    "id": "real-pc-2",
+    "name": "商家组装套餐 02 · 黑色机箱",
+    "brand": "装机研究所",
     "color": "黑色",
-    "price": 3094,
+    "price": 5053,
     "partIds": [
-      "cpu-2",
-      "gpu-2",
-      "memory-2",
-      "motherboard-2",
-      "psu-2",
-      "case-2",
-      "storage-2",
-      "cooler-2"
+      "real-cpu-1",
+      "real-gpu-2",
+      "real-memory-1",
+      "real-motherboard-0",
+      "real-psu-5",
+      "real-case-4",
+      "real-storage-2",
+      "real-cooler-8"
     ],
-    "demo": true
+    "demo": false
   },
   {
-    "id": "pc-3",
-    "name": "星构 2 号整机",
-    "brand": "星构 DEMO",
+    "id": "real-pc-3",
+    "name": "商家组装套餐 02 · 白色机箱",
+    "brand": "装机研究所",
     "color": "白色",
-    "price": 3114,
+    "price": 5103,
     "partIds": [
-      "cpu-3",
-      "gpu-3",
-      "memory-3",
-      "motherboard-3",
-      "psu-3",
-      "case-3",
-      "storage-3",
-      "cooler-3"
+      "real-cpu-1",
+      "real-gpu-2",
+      "real-memory-1",
+      "real-motherboard-0",
+      "real-psu-5",
+      "real-case-5",
+      "real-storage-2",
+      "real-cooler-9"
     ],
-    "demo": true
+    "demo": false
   },
   {
-    "id": "pc-4",
-    "name": "星构 3 号整机",
-    "brand": "星构 DEMO",
+    "id": "real-pc-4",
+    "name": "商家组装套餐 03 · 黑色机箱",
+    "brand": "装机研究所",
     "color": "黑色",
-    "price": 4177,
+    "price": 5993,
     "partIds": [
-      "cpu-4",
-      "gpu-4",
-      "memory-4",
-      "motherboard-4",
-      "psu-4",
-      "case-4",
-      "storage-4",
-      "cooler-4"
+      "real-cpu-2",
+      "real-gpu-10",
+      "real-memory-3",
+      "real-motherboard-0",
+      "real-psu-5",
+      "real-case-4",
+      "real-storage-3",
+      "real-cooler-8"
     ],
-    "demo": true
+    "demo": false
   },
   {
-    "id": "pc-5",
-    "name": "星构 3 号整机",
-    "brand": "星构 DEMO",
+    "id": "real-pc-5",
+    "name": "商家组装套餐 03 · 白色机箱",
+    "brand": "装机研究所",
     "color": "白色",
-    "price": 4197,
+    "price": 6043,
     "partIds": [
-      "cpu-5",
-      "gpu-5",
-      "memory-5",
-      "motherboard-5",
-      "psu-5",
-      "case-5",
-      "storage-5",
-      "cooler-5"
+      "real-cpu-2",
+      "real-gpu-10",
+      "real-memory-3",
+      "real-motherboard-0",
+      "real-psu-5",
+      "real-case-5",
+      "real-storage-3",
+      "real-cooler-9"
     ],
-    "demo": true
+    "demo": false
   },
   {
-    "id": "pc-6",
-    "name": "星构 4 号整机",
-    "brand": "星构 DEMO",
+    "id": "real-pc-6",
+    "name": "商家组装套餐 04 · 黑色机箱",
+    "brand": "装机研究所",
     "color": "黑色",
-    "price": 5544,
+    "price": 7303,
     "partIds": [
-      "cpu-6",
-      "gpu-6",
-      "memory-6",
-      "motherboard-6",
-      "psu-6",
-      "case-6",
-      "storage-6",
-      "cooler-6"
+      "real-cpu-8",
+      "real-gpu-12",
+      "real-memory-9",
+      "real-motherboard-7",
+      "real-psu-5",
+      "real-case-4",
+      "real-storage-9",
+      "real-cooler-10"
     ],
-    "demo": true
+    "demo": false
   },
   {
-    "id": "pc-7",
-    "name": "星构 4 号整机",
-    "brand": "星构 DEMO",
+    "id": "real-pc-7",
+    "name": "商家组装套餐 04 · 白色机箱",
+    "brand": "装机研究所",
     "color": "白色",
-    "price": 5564,
+    "price": 7353,
     "partIds": [
-      "cpu-7",
-      "gpu-7",
-      "memory-7",
-      "motherboard-7",
-      "psu-7",
-      "case-7",
-      "storage-7",
-      "cooler-7"
+      "real-cpu-8",
+      "real-gpu-12",
+      "real-memory-9",
+      "real-motherboard-7",
+      "real-psu-5",
+      "real-case-5",
+      "real-storage-9",
+      "real-cooler-11"
     ],
-    "demo": true
+    "demo": false
   },
   {
-    "id": "pc-8",
-    "name": "星构 5 号整机",
-    "brand": "星构 DEMO",
+    "id": "real-pc-8",
+    "name": "商家组装套餐 05 · 黑色机箱",
+    "brand": "装机研究所",
     "color": "黑色",
-    "price": 7195,
+    "price": 8833,
     "partIds": [
-      "cpu-8",
-      "gpu-8",
-      "memory-8",
-      "motherboard-8",
-      "psu-8",
-      "case-8",
-      "storage-8",
-      "cooler-8"
+      "real-cpu-9",
+      "real-gpu-13",
+      "real-memory-11",
+      "real-motherboard-7",
+      "real-psu-5",
+      "real-case-4",
+      "real-storage-10",
+      "real-cooler-10"
     ],
-    "demo": true
+    "demo": false
   },
   {
-    "id": "pc-9",
-    "name": "星构 5 号整机",
-    "brand": "星构 DEMO",
+    "id": "real-pc-9",
+    "name": "商家组装套餐 05 · 白色机箱",
+    "brand": "装机研究所",
     "color": "白色",
-    "price": 7215,
+    "price": 8883,
     "partIds": [
-      "cpu-9",
-      "gpu-9",
-      "memory-9",
-      "motherboard-9",
-      "psu-9",
-      "case-9",
-      "storage-9",
-      "cooler-9"
+      "real-cpu-9",
+      "real-gpu-13",
+      "real-memory-11",
+      "real-motherboard-7",
+      "real-psu-5",
+      "real-case-5",
+      "real-storage-10",
+      "real-cooler-11"
     ],
-    "demo": true
+    "demo": false
   },
   {
-    "id": "pc-10",
-    "name": "星构 6 号整机",
-    "brand": "星构 DEMO",
+    "id": "real-pc-10",
+    "name": "商家组装套餐 06 · 黑色机箱",
+    "brand": "装机研究所",
     "color": "黑色",
-    "price": 9130,
+    "price": 8803,
     "partIds": [
-      "cpu-10",
-      "gpu-10",
-      "memory-10",
-      "motherboard-10",
-      "psu-10",
-      "case-10",
-      "storage-10",
-      "cooler-10"
+      "real-cpu-11",
+      "real-gpu-6",
+      "real-memory-13",
+      "real-motherboard-7",
+      "real-psu-6",
+      "real-case-4",
+      "real-storage-11",
+      "real-cooler-10"
     ],
-    "demo": true
+    "demo": false
   },
   {
-    "id": "pc-11",
-    "name": "星构 6 号整机",
-    "brand": "星构 DEMO",
+    "id": "real-pc-11",
+    "name": "商家组装套餐 06 · 白色机箱",
+    "brand": "装机研究所",
     "color": "白色",
-    "price": 9150,
+    "price": 8853,
     "partIds": [
-      "cpu-11",
-      "gpu-11",
-      "memory-11",
-      "motherboard-11",
-      "psu-11",
-      "case-11",
-      "storage-11",
-      "cooler-11"
+      "real-cpu-11",
+      "real-gpu-6",
+      "real-memory-13",
+      "real-motherboard-7",
+      "real-psu-6",
+      "real-case-5",
+      "real-storage-11",
+      "real-cooler-11"
     ],
-    "demo": true
+    "demo": false
   },
   {
-    "id": "pc-12",
-    "name": "星构 7 号整机",
-    "brand": "星构 DEMO",
+    "id": "real-pc-12",
+    "name": "商家组装套餐 07 · 黑色机箱",
+    "brand": "装机研究所",
     "color": "黑色",
-    "price": 11349,
+    "price": 12003,
     "partIds": [
-      "cpu-12",
-      "gpu-12",
-      "memory-12",
-      "motherboard-12",
-      "psu-12",
-      "case-12",
-      "storage-12",
-      "cooler-12"
+      "real-cpu-13",
+      "real-gpu-14",
+      "real-memory-13",
+      "real-motherboard-7",
+      "real-psu-6",
+      "real-case-4",
+      "real-storage-12",
+      "real-cooler-12"
     ],
-    "demo": true
+    "demo": false
   },
   {
-    "id": "pc-13",
-    "name": "星构 7 号整机",
-    "brand": "星构 DEMO",
+    "id": "real-pc-13",
+    "name": "商家组装套餐 07 · 白色机箱",
+    "brand": "装机研究所",
     "color": "白色",
-    "price": 11369,
+    "price": 12063,
     "partIds": [
-      "cpu-13",
-      "gpu-13",
-      "memory-13",
-      "motherboard-13",
-      "psu-13",
-      "case-13",
-      "storage-13",
-      "cooler-13"
+      "real-cpu-13",
+      "real-gpu-14",
+      "real-memory-13",
+      "real-motherboard-7",
+      "real-psu-6",
+      "real-case-5",
+      "real-storage-12",
+      "real-cooler-13"
     ],
-    "demo": true
+    "demo": false
   },
   {
-    "id": "pc-14",
-    "name": "星构 8 号整机",
-    "brand": "星构 DEMO",
+    "id": "real-pc-14",
+    "name": "商家组装套餐 08 · 黑色机箱",
+    "brand": "装机研究所",
     "color": "黑色",
-    "price": 13852,
+    "price": 13273,
     "partIds": [
-      "cpu-14",
-      "gpu-14",
-      "memory-14",
-      "motherboard-14",
-      "psu-14",
-      "case-14",
-      "storage-14",
-      "cooler-14"
+      "real-cpu-18",
+      "real-gpu-8",
+      "real-memory-14",
+      "real-motherboard-7",
+      "real-psu-6",
+      "real-case-4",
+      "real-storage-12",
+      "real-cooler-12"
     ],
-    "demo": true
+    "demo": false
   },
   {
-    "id": "pc-15",
-    "name": "星构 8 号整机",
-    "brand": "星构 DEMO",
+    "id": "real-pc-15",
+    "name": "商家组装套餐 08 · 白色机箱",
+    "brand": "装机研究所",
     "color": "白色",
-    "price": 13872,
+    "price": 13333,
     "partIds": [
-      "cpu-15",
-      "gpu-15",
-      "memory-15",
-      "motherboard-15",
-      "psu-15",
-      "case-15",
-      "storage-15",
-      "cooler-15"
+      "real-cpu-18",
+      "real-gpu-8",
+      "real-memory-14",
+      "real-motherboard-7",
+      "real-psu-6",
+      "real-case-5",
+      "real-storage-12",
+      "real-cooler-13"
     ],
-    "demo": true
+    "demo": false
   },
   {
-    "id": "pc-16",
-    "name": "星构 9 号整机",
-    "brand": "星构 DEMO",
+    "id": "real-pc-16",
+    "name": "商家组装套餐 09 · 黑色机箱",
+    "brand": "装机研究所",
     "color": "黑色",
-    "price": 16639,
+    "price": 17313,
     "partIds": [
-      "cpu-16",
-      "gpu-16",
-      "memory-16",
-      "motherboard-16",
-      "psu-16",
-      "case-16",
-      "storage-16",
-      "cooler-16"
+      "real-cpu-19",
+      "real-gpu-15",
+      "real-memory-14",
+      "real-motherboard-7",
+      "real-psu-7",
+      "real-case-4",
+      "real-storage-13",
+      "real-cooler-12"
     ],
-    "demo": true
+    "demo": false
   },
   {
-    "id": "pc-17",
-    "name": "星构 9 号整机",
-    "brand": "星构 DEMO",
+    "id": "real-pc-17",
+    "name": "商家组装套餐 09 · 白色机箱",
+    "brand": "装机研究所",
     "color": "白色",
-    "price": 16659,
+    "price": 17373,
     "partIds": [
-      "cpu-17",
-      "gpu-17",
-      "memory-17",
-      "motherboard-17",
-      "psu-17",
-      "case-17",
-      "storage-17",
-      "cooler-17"
+      "real-cpu-19",
+      "real-gpu-15",
+      "real-memory-14",
+      "real-motherboard-7",
+      "real-psu-7",
+      "real-case-5",
+      "real-storage-13",
+      "real-cooler-13"
     ],
-    "demo": true
+    "demo": false
   },
   {
-    "id": "pc-18",
-    "name": "星构 10 号整机",
-    "brand": "星构 DEMO",
+    "id": "real-pc-18",
+    "name": "商家组装套餐 10 · 黑色机箱",
+    "brand": "装机研究所",
     "color": "黑色",
-    "price": 19710,
+    "price": 27648,
     "partIds": [
-      "cpu-18",
-      "gpu-18",
-      "memory-18",
-      "motherboard-18",
-      "psu-18",
-      "case-18",
-      "storage-18",
-      "cooler-18"
+      "real-cpu-16",
+      "real-gpu-16",
+      "real-memory-14",
+      "real-motherboard-7",
+      "real-psu-8",
+      "real-case-4",
+      "real-storage-13",
+      "real-cooler-12"
     ],
-    "demo": true
+    "demo": false
   },
   {
-    "id": "pc-19",
-    "name": "星构 10 号整机",
-    "brand": "星构 DEMO",
+    "id": "real-pc-19",
+    "name": "商家组装套餐 10 · 白色机箱",
+    "brand": "装机研究所",
     "color": "白色",
-    "price": 19730,
+    "price": 27708,
     "partIds": [
-      "cpu-19",
-      "gpu-19",
-      "memory-19",
-      "motherboard-19",
-      "psu-19",
-      "case-19",
-      "storage-19",
-      "cooler-19"
+      "real-cpu-16",
+      "real-gpu-16",
+      "real-memory-14",
+      "real-motherboard-7",
+      "real-psu-8",
+      "real-case-5",
+      "real-storage-13",
+      "real-cooler-13"
     ],
-    "demo": true
+    "demo": false
   }
 ]

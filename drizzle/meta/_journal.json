@@ -15,6 +15,27 @@
       "when": 1788759442639,
       "tag": "0001_kind_chameleon",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1788780182836,
+      "tag": "0002_breezy_ben_parker",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1788783000000,
+      "tag": "0003_remove_legacy_demo_recommendations",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1788787000000,
+      "tag": "0004_task_memory",
+      "breakpoints": true
     }
   ]
 }

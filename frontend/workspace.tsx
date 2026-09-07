@@ -83,7 +83,7 @@ export default function Home() {
           <span className="brand-icon">
             <Cpu size={23} />
           </span>{' '}
-          装机研究所 <span className="version">BETA / 01</span>
+          啵啵龙装机研究所 <span className="version">BETA / 01</span>
         </Link>
         <Link href="/catalog">
           商品目录 <ArrowUpRight size={16} />
@@ -115,7 +115,7 @@ export default function Home() {
                 onChange={(e) => setBudget(e.target.value)}
               />
             </div>
-            <p className="hint">方案与预算差额不超过 ¥1,000</p>
+
             <p className="field-label" id="purpose-label">
               主要用途
             </p>
@@ -199,7 +199,7 @@ export default function Home() {
               <ArrowRight size={18} />
             </Button>
             <p className="demo-note">
-              当前为演示商品与演示报价，非实际销售承诺。
+              型号来自厂家资料；价格为商家自行设定的目录价，非实时市场价。
             </p>
           </section>
           <section className="results" aria-live="polite">

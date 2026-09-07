@@ -19,7 +19,7 @@ export function parseRequirements(value: unknown): Requirements {
       Number(match[1]) *
       (match[2] === '万' ? 10000 : /千|k/i.test(match[2] ?? '') ? 1000 : 1);
   if (/办公|文档/.test(message)) purpose = '办公';
-  if (/游戏|CS2|黑神话|赛博朋克|瓦罗兰特/i.test(message)) purpose = '游戏';
+  if (/游戏|CS2|黑神话|赛博朋克|瓦罗兰特|三角洲|英雄联盟/i.test(message)) purpose = '游戏';
   if (/剪辑|设计/.test(message)) purpose = '剪辑设计';
   if (/编程|开发/.test(message)) purpose = '编程';
   if (/本地\s*AI|大模型|显存/i.test(message)) purpose = '本地 AI';
@@ -42,6 +42,6 @@ export function parseRequirements(value: unknown): Requirements {
     message,
     hardCap,
     brand: text(input.brand),
-    game: message.match(/CS2|黑神话|赛博朋克|瓦罗兰特/i)?.[0] ?? '',
+    game: message.match(/CS2|黑神话|赛博朋克|瓦罗兰特|三角洲|英雄联盟/i)?.[0] ?? '',
   };
 }

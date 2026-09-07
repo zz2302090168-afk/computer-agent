@@ -1,4 +1,6 @@
 export const BUDGET_TOLERANCE = 1000;
+// 软预算允许正负 1000 元；hardCap 将上界收紧到预算本身，但不会取消下界。
+// 所有推荐、组装和替换都调用这里，避免各入口产生不同的预算语义。
 export function budgetRange(budget: number, hardCap = false) {
   if (
     !Number.isFinite(budget) ||

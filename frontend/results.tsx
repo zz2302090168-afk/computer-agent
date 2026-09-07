@@ -82,23 +82,34 @@ export default function Results({
           {error}
         </p>
       )}
+      {!result.plans?.length && (
+        <div className="configuration-empty">
+          <h3>无匹配方案</h3>
+          <p>
+            当前预算、购买方式、颜色、品牌或指定型号无法同时满足。系统没有保留旧方案，也不会自动放宽预算。
+          </p>
+        </div>
+      )}
       {result.plans?.map((plan: Plan) => (
         <article className="plan" key={plan.id}>
           <div className="plan-head">
             <div>
               <span className="eyebrow">
-                {plan.kind === 'diy' ? 'DIY BUILD' : 'PREBUILT'}
+                {plan.kind === 'diy'
+                  ? '购买方式：DIY 自由搭配'
+                  : '购买方式：商家组装整机'}
               </span>
               <h3>{plan.name}</h3>
             </div>
             <strong>¥{plan.total.toLocaleString()}</strong>
           </div>
           <p className="hint">
-            预算差额 {plan.total - result.requirements.budget >= 0 ? '+' : ''}¥
+            符合预算 · 预算差额{' '}
+            {plan.total - result.requirements.budget >= 0 ? '+' : ''}¥
             {plan.total - result.requirements.budget} ·{' '}
-            {plan.parts.some((p: Part) => p.demo)
-              ? '演示规格校验通过'
-              : '规格校验通过'}
+            {plan.validation.status === 'pass'
+              ? '已知兼容项目未发现冲突'
+              : '待确认'}
           </p>
           <div className="parts">
             {plan.parts.map((p: Part) => (
@@ -106,7 +117,7 @@ export default function Results({
                 <span>{p.categoryLabel}</span>
                 <b>
                   {p.brand} {p.name}
-                  <small>{p.color}</small>
+                  <small>{p.color} · 商家目录价</small>
                   {plan.kind === 'diy' && (
                     <Button
                       variant="ghost"
@@ -141,11 +152,25 @@ export default function Results({
               </div>
             ))}
           </div>
+          {plan.kind === 'prebuilt' && (
+            <p className="hint">
+              整机售价：¥{plan.total.toLocaleString()}
+              。配件行显示商家目录价，仅用于说明配置构成，不作为拆件合计或成交价。
+            </p>
+          )}
           <p>{plan.reason}</p>
-          <div className="fps-note">
-            <b>游戏帧率</b>
-            <p className="hint">{plan.fps.message}</p>
-          </div>
+          {!!plan.validation.issues.length && (
+            <details>
+              <summary>
+                装机前待核对（{plan.validation.issues.length} 项）
+              </summary>
+              <ul>
+                {plan.validation.issues.map((issue) => (
+                  <li key={issue}>{issue}</li>
+                ))}
+              </ul>
+            </details>
+          )}
           <div className="chips">
             <Button variant="outline" onClick={() => download(plan)}>
               导出配置
@@ -156,30 +181,11 @@ export default function Results({
           </div>
           {confirmed === plan.id && (
             <p className="hint">
-              已选定这套主机。下一步可以根据用途和额外预算讨论显示器；当前演示型号没有实测性能，暂不据此承诺分辨率或刷新率。
+              已选定这套主机。下一步可以根据用途和额外预算讨论显示器；当前未匹配同配置实测性能，暂不据此承诺分辨率或刷新率。
             </p>
           )}
         </article>
       ))}
-      {(result.evidence?.length ?? 0) > 0 && (
-        <details className="sources">
-          <summary>查看推荐依据与知识来源</summary>
-          {result.evidence?.map((k) => (
-            <div key={k.id}>
-              <h4>{k.title}</h4>
-              <p>{k.content}</p>
-              {k.source ? (
-                <a href={k.source} target="_blank" rel="noreferrer">
-                  厂家原始资料 ↗
-                </a>
-              ) : (
-                <span>项目推荐策略</span>
-              )}
-              <small> · 核对日期 {k.checkedAt}</small>
-            </div>
-          ))}
-        </details>
-      )}
     </>
   );
 }

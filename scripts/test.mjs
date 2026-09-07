@@ -14,3 +14,5 @@ registerHooks({
   },
 });
 await import('../backend/tests/core.test.ts');
+
+await import('../backend/tests/reset.test.ts');

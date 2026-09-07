@@ -17,9 +17,12 @@ export function validateBuild(parts: Part[]): Validation {
     box = p.case.specs,
     cooler = p.cooler.specs,
     ssd = p.storage.specs;
+  // false 是已知冲突，必须阻止有效推荐；undefined 是厂家资料不足，只能标为待确认。
   const check = (condition: boolean | undefined, text: string) =>
     condition === undefined
-      ? unknown.push(`${text}：资料不足`)
+      ? unknown.push(
+          `${text.replace(/不匹配|不足|过长|过高|超过主板上限|空间冲突/g, '核对')}：资料不足，待确认`,
+        )
       : !condition && issues.push(text);
   const eq = (a: unknown, b: unknown) =>
     a === undefined || b === undefined ? undefined : a === b;
@@ -36,18 +39,19 @@ export function validateBuild(parts: Part[]): Validation {
   check(le(ram.sticks, board.ramSlots), '内存插槽不足');
   check(includes(box.forms, board.form), '主板板型与机箱不匹配');
   check(le(gpu.length, box.gpuLength), '显卡过长');
-  check(le(gpu.slots, box.gpuSlots), '显卡厚度超过机箱空间');
+  check(le(gpu.thickness, box.gpuThickness), '显卡厚度空间检查');
   check(includes(cooler.sockets, cpu.socket), '散热扣具不匹配');
   check(le(cooler.height, box.coolerHeight), '散热器过高');
   check(le(ram.height, cooler.ramClearance), '内存与散热器空间冲突');
-  check(le(cpu.power, cooler.capacity), '散热能力不足');
-  const recommended =
-    typeof cpu.power === 'number' && typeof gpu.power === 'number'
-      ? Math.ceil((cpu.power + gpu.power + 80) * 1.3)
-      : undefined;
-  check(le(recommended, psu.watts), '电源功率不足');
-  check(eq(gpu.connector, psu.connector), '显卡供电接口不匹配');
-  check(le(gpu.connectors, psu.connectors), '显卡供电接口数量不足');
+  unknown.push('散热满载能力与风道待确认；CPU TDP 不等于实际整机功耗');
+  check(le(gpu.recommendedPsu, psu.watts), '电源未满足显卡厂家建议功率');
+  if (gpu.connector !== 'none') {
+    const counts = psu.connectorCounts as Record<string, number> | undefined;
+    check(
+      le(gpu.connectors, counts?.[String(gpu.connector)]),
+      '显卡供电接口及数量检查',
+    );
+  }
   check(eq(psu.form, box.psuForm), '电源规格不匹配');
   check(le(psu.length, box.psuLength), '电源过长');
   check(

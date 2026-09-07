@@ -14,7 +14,7 @@ export async function POST(request: Request) {
     const plans = recommend(requirements, catalog.parts, catalog.prebuilts),
       range = budgetRange(requirements.budget, requirements.hardCap);
     const evidence = retrieveKnowledge(
-      `${requirements.purpose} ${requirements.message} 预算 兼容 FPS`,
+      `${requirements.purpose} ${requirements.message} 预算 兼容`,
       5,
     );
     let explanation: null | string = null,

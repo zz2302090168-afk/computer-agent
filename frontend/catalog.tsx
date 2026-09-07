@@ -39,8 +39,8 @@ export default function Catalog() {
         <span className="eyebrow">MERCHANT CATALOG</span>
         <h1>每一个配件，都有据可查。</h1>
         <p className="hint">
-          当前 160
-          个演示配件，价格与规格均为流程演示。整机可在推荐页筛选。无库存数量和在售状态。
+          当前 {parts.length}
+          个真实型号配件，价格为自行设定的商家目录价，非实时市场价。整机可在推荐页筛选。无库存数量和在售状态。
         </p>
         <div className="chips">
           {Object.entries(labels).map(([k, v]) => (

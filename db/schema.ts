@@ -32,3 +32,9 @@ export const metadata = sqliteTable('metadata', {
   key: text('key').primaryKey(),
   value: text('value').notNull(),
 });
+export const conversations=sqliteTable('conversations',{
+  id:text('id').primaryKey(),draft:text('draft').notNull(),messages:text('messages').notNull(),currentTaskId:text('current_task_id'),updatedAt:integer('updated_at').notNull(),
+});
+export const tasks=sqliteTable('tasks',{
+ id:text('id').primaryKey(),sessionId:text('session_id').notNull(),name:text('name').notNull(),draft:text('draft').notNull(),result:text('result'),issues:text('issues').notNull(),version:integer('version').notNull(),updatedAt:integer('updated_at').notNull(),
+});

@@ -1,3262 +1,3118 @@
 [
   {
-    "id": "cpu-0",
+    "id": "real-cpu-0",
     "category": "cpu",
     "categoryLabel": "CPU",
-    "brand": "星构 DEMO",
-    "name": "A1 处理器",
+    "brand": "AMD",
+    "name": "Ryzen 5 5600",
     "color": "不适用",
-    "price": 342,
+    "price": 650,
+    "demo": false,
     "specs": {
-      "socket": "DEMO-A",
+      "socket": "AM4",
       "ddr": "DDR4",
-      "tier": 1,
-      "cores": 6,
-      "power": 57
-    },
-    "demo": true
+      "tdp": 65,
+      "source": "https://www.amd.com/en/newsroom/press-releases/2022-3-15-amd-launches-the-ultimate-gaming-processor-brings.html",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
   },
   {
-    "id": "gpu-0",
+    "id": "real-cpu-1",
+    "category": "cpu",
+    "categoryLabel": "CPU",
+    "brand": "AMD",
+    "name": "Ryzen 5 5600X",
+    "color": "不适用",
+    "price": 750,
+    "demo": false,
+    "specs": {
+      "socket": "AM4",
+      "ddr": "DDR4",
+      "tdp": 65,
+      "source": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-5-5600x.html",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-cpu-2",
+    "category": "cpu",
+    "categoryLabel": "CPU",
+    "brand": "AMD",
+    "name": "Ryzen 7 5700X",
+    "color": "不适用",
+    "price": 950,
+    "demo": false,
+    "specs": {
+      "socket": "AM4",
+      "ddr": "DDR4",
+      "tdp": 65,
+      "source": "https://www.amd.com/en/newsroom/press-releases/2022-3-15-amd-launches-the-ultimate-gaming-processor-brings.html",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-cpu-3",
+    "category": "cpu",
+    "categoryLabel": "CPU",
+    "brand": "AMD",
+    "name": "Ryzen 7 5700X3D",
+    "color": "不适用",
+    "price": 1350,
+    "demo": false,
+    "specs": {
+      "socket": "AM4",
+      "ddr": "DDR4",
+      "tdp": 105,
+      "source": "https://www.amd.com/en/newsroom/press-releases/2024-1-8-amd-reveals-next-gen-desktop-processors-for-extrem.html",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-cpu-4",
+    "category": "cpu",
+    "categoryLabel": "CPU",
+    "brand": "AMD",
+    "name": "Ryzen 7 5800X",
+    "color": "不适用",
+    "price": 1150,
+    "demo": false,
+    "specs": {
+      "socket": "AM4",
+      "ddr": "DDR4",
+      "tdp": 105,
+      "source": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-7-5800x.html",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-cpu-5",
+    "category": "cpu",
+    "categoryLabel": "CPU",
+    "brand": "AMD",
+    "name": "Ryzen 7 5800X3D",
+    "color": "不适用",
+    "price": 1750,
+    "demo": false,
+    "specs": {
+      "socket": "AM4",
+      "ddr": "DDR4",
+      "tdp": 105,
+      "source": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-7-5800x3d.html",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-cpu-6",
+    "category": "cpu",
+    "categoryLabel": "CPU",
+    "brand": "AMD",
+    "name": "Ryzen 9 5900X",
+    "color": "不适用",
+    "price": 1500,
+    "demo": false,
+    "specs": {
+      "socket": "AM4",
+      "ddr": "DDR4",
+      "tdp": 105,
+      "source": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-9-5900x.html",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-cpu-7",
+    "category": "cpu",
+    "categoryLabel": "CPU",
+    "brand": "AMD",
+    "name": "Ryzen 9 5950X",
+    "color": "不适用",
+    "price": 2100,
+    "demo": false,
+    "specs": {
+      "socket": "AM4",
+      "ddr": "DDR4",
+      "tdp": 105,
+      "source": "https://www.amd.com/en/products/processors/desktops/ryzen/5000-series/amd-ryzen-9-5950x.html",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-cpu-8",
+    "category": "cpu",
+    "categoryLabel": "CPU",
+    "brand": "AMD",
+    "name": "Ryzen 5 7500F",
+    "color": "不适用",
+    "price": 850,
+    "demo": false,
+    "specs": {
+      "socket": "AM5",
+      "ddr": "DDR5",
+      "tdp": 65,
+      "source": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-5-7500f.html",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-cpu-9",
+    "category": "cpu",
+    "categoryLabel": "CPU",
+    "brand": "AMD",
+    "name": "Ryzen 5 7600",
+    "color": "不适用",
+    "price": 1050,
+    "demo": false,
+    "specs": {
+      "socket": "AM5",
+      "ddr": "DDR5",
+      "tdp": 65,
+      "source": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-5-7600.html",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-cpu-10",
+    "category": "cpu",
+    "categoryLabel": "CPU",
+    "brand": "AMD",
+    "name": "Ryzen 5 7600X",
+    "color": "不适用",
+    "price": 1150,
+    "demo": false,
+    "specs": {
+      "socket": "AM5",
+      "ddr": "DDR5",
+      "tdp": 105,
+      "source": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-5-7600x.html",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-cpu-11",
+    "category": "cpu",
+    "categoryLabel": "CPU",
+    "brand": "AMD",
+    "name": "Ryzen 7 7700",
+    "color": "不适用",
+    "price": 1500,
+    "demo": false,
+    "specs": {
+      "socket": "AM5",
+      "ddr": "DDR5",
+      "tdp": 65,
+      "source": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-7-7700.html",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-cpu-12",
+    "category": "cpu",
+    "categoryLabel": "CPU",
+    "brand": "AMD",
+    "name": "Ryzen 7 7700X",
+    "color": "不适用",
+    "price": 1650,
+    "demo": false,
+    "specs": {
+      "socket": "AM5",
+      "ddr": "DDR5",
+      "tdp": 105,
+      "source": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-7-7700x.html",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-cpu-13",
+    "category": "cpu",
+    "categoryLabel": "CPU",
+    "brand": "AMD",
+    "name": "Ryzen 7 7800X3D",
+    "color": "不适用",
+    "price": 2400,
+    "demo": false,
+    "specs": {
+      "socket": "AM5",
+      "ddr": "DDR5",
+      "tdp": 120,
+      "source": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-7-7800x3d.html",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-cpu-14",
+    "category": "cpu",
+    "categoryLabel": "CPU",
+    "brand": "AMD",
+    "name": "Ryzen 9 7900",
+    "color": "不适用",
+    "price": 2200,
+    "demo": false,
+    "specs": {
+      "socket": "AM5",
+      "ddr": "DDR5",
+      "tdp": 65,
+      "source": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-9-7900.html",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-cpu-15",
+    "category": "cpu",
+    "categoryLabel": "CPU",
+    "brand": "AMD",
+    "name": "Ryzen 9 7900X",
+    "color": "不适用",
+    "price": 2400,
+    "demo": false,
+    "specs": {
+      "socket": "AM5",
+      "ddr": "DDR5",
+      "tdp": 170,
+      "source": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-9-7900x.html",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-cpu-16",
+    "category": "cpu",
+    "categoryLabel": "CPU",
+    "brand": "AMD",
+    "name": "Ryzen 9 7950X",
+    "color": "不适用",
+    "price": 3200,
+    "demo": false,
+    "specs": {
+      "socket": "AM5",
+      "ddr": "DDR5",
+      "tdp": 170,
+      "source": "https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-9-7950x.html",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-cpu-17",
+    "category": "cpu",
+    "categoryLabel": "CPU",
+    "brand": "AMD",
+    "name": "Ryzen 5 9600X",
+    "color": "不适用",
+    "price": 1400,
+    "demo": false,
+    "specs": {
+      "socket": "AM5",
+      "ddr": "DDR5",
+      "tdp": 65,
+      "source": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-5-9600x.html",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-cpu-18",
+    "category": "cpu",
+    "categoryLabel": "CPU",
+    "brand": "AMD",
+    "name": "Ryzen 7 9700X",
+    "color": "不适用",
+    "price": 2100,
+    "demo": false,
+    "specs": {
+      "socket": "AM5",
+      "ddr": "DDR5",
+      "tdp": 65,
+      "source": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-7-9700x.html",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-cpu-19",
+    "category": "cpu",
+    "categoryLabel": "CPU",
+    "brand": "AMD",
+    "name": "Ryzen 7 9800X3D",
+    "color": "不适用",
+    "price": 3500,
+    "demo": false,
+    "specs": {
+      "socket": "AM5",
+      "ddr": "DDR5",
+      "tdp": 120,
+      "source": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-7-9800x3d.html",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-gpu-0",
     "category": "gpu",
     "categoryLabel": "GPU",
-    "brand": "星构 DEMO",
-    "name": "G1 8GB",
-    "color": "黑色",
-    "price": 600,
+    "brand": "MSI 微星",
+    "name": "GeForce RTX 3050 VENTUS 2X 6G OC",
+    "color": "银黑色",
+    "price": 1100,
+    "demo": false,
     "specs": {
-      "tier": 1,
-      "vram": 8,
-      "power": 94,
-      "length": 229,
-      "slots": 2,
-      "connector": "PCIe 8pin",
-      "connectors": 1
-    },
-    "demo": true
+      "power": 70,
+      "recommendedPsu": 300,
+      "length": 189,
+      "thickness": 42,
+      "connector": "none",
+      "connectors": 0,
+      "source": "https://www.msi.com/Graphics-Card/GeForce-RTX-3050-VENTUS-2X-6G-OC/Specification",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
   },
   {
-    "id": "motherboard-0",
-    "category": "motherboard",
-    "categoryLabel": "主板",
-    "brand": "星构 DEMO",
-    "name": "A1 主板",
-    "color": "黑色",
-    "price": 330,
+    "id": "real-gpu-1",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "MSI 微星",
+    "name": "GeForce RTX 3060 VENTUS 2X 12G OC",
+    "color": "银黑色",
+    "price": 1700,
+    "demo": false,
     "specs": {
-      "socket": "DEMO-A",
-      "ddr": "DDR4",
-      "tier": 1,
-      "form": "mATX",
-      "ramSlots": 4,
-      "maxRam": 128,
-      "m2": true,
-      "supportedCpus": [
-        "cpu-0",
-        "cpu-2",
-        "cpu-4",
-        "cpu-6",
-        "cpu-8",
-        "cpu-10",
-        "cpu-12",
-        "cpu-14",
-        "cpu-16",
-        "cpu-18"
-      ],
-      "biosVerified": true
-    },
-    "demo": true
+      "power": 170,
+      "recommendedPsu": 550,
+      "length": 235,
+      "thickness": 42,
+      "connector": "8pin",
+      "connectors": 1,
+      "source": "https://www.msi.com/Graphics-Card/GeForce-RTX-3060-VENTUS-2X-12G-OC/Specification",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
   },
   {
-    "id": "memory-0",
+    "id": "real-gpu-2",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "MSI 微星",
+    "name": "GeForce RTX 4060 VENTUS 2X BLACK 8G OC",
+    "color": "黑色",
+    "price": 1900,
+    "demo": false,
+    "specs": {
+      "power": 120,
+      "recommendedPsu": 550,
+      "length": 199,
+      "thickness": 41,
+      "connector": "8pin",
+      "connectors": 1,
+      "source": "https://www.msi.com/Graphics-Card/GeForce-RTX-4060-VENTUS-2X-BLACK-8G-OC/Specification",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-gpu-3",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "MSI 微星",
+    "name": "GeForce RTX 4060 Ti VENTUS 2X BLACK 8G OC",
+    "color": "黑色",
+    "price": 2400,
+    "demo": false,
+    "specs": {
+      "power": 160,
+      "recommendedPsu": 550,
+      "length": 199,
+      "thickness": 42,
+      "connector": "8pin",
+      "connectors": 1,
+      "source": "https://www.msi.com/Graphics-Card/GeForce-RTX-4060-Ti-VENTUS-2X-BLACK-8G-OC/Specification",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-gpu-4",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "MSI 微星",
+    "name": "GeForce RTX 4060 Ti VENTUS 2X BLACK 16G OC",
+    "color": "黑色",
+    "price": 2800,
+    "demo": false,
+    "specs": {
+      "power": 165,
+      "recommendedPsu": 550,
+      "length": 199,
+      "thickness": 42,
+      "connector": "8pin",
+      "connectors": 1,
+      "source": "https://www.msi.com/Graphics-Card/GeForce-RTX-4060-Ti-VENTUS-2X-BLACK-16G-OC/Specification",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-gpu-5",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "MSI 微星",
+    "name": "GeForce RTX 4070 VENTUS 2X 12G OC",
+    "color": "银黑色",
+    "price": 3300,
+    "demo": false,
+    "specs": {
+      "power": 200,
+      "recommendedPsu": 650,
+      "length": 242,
+      "thickness": 43,
+      "connector": "8pin",
+      "connectors": 1,
+      "source": "https://www.msi.com/Graphics-Card/GeForce-RTX-4070-VENTUS-2X-12G-OC/Specification",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-gpu-6",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "MSI 微星",
+    "name": "GeForce RTX 4070 SUPER 12G VENTUS 2X OC",
+    "color": "银黑色",
+    "price": 3900,
+    "demo": false,
+    "specs": {
+      "power": 220,
+      "recommendedPsu": 650,
+      "length": 242,
+      "thickness": 43,
+      "connector": "16pin",
+      "connectors": 1,
+      "source": "https://www.msi.com/Graphics-Card/GeForce-RTX-4070-SUPER-12G-VENTUS-2X-OC/Specification",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-gpu-7",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "MSI 微星",
+    "name": "GeForce RTX 4070 Ti SUPER 16G VENTUS 3X OC",
+    "color": "银黑色",
+    "price": 4900,
+    "demo": false,
+    "specs": {
+      "power": 285,
+      "recommendedPsu": 700,
+      "length": 308,
+      "thickness": 50,
+      "connector": "16pin",
+      "connectors": 1,
+      "source": "https://www.msi.com/Graphics-Card/GeForce-RTX-4070-Ti-SUPER-16G-VENTUS-3X-OC/Specification",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-gpu-8",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "MSI 微星",
+    "name": "GeForce RTX 4080 SUPER 16G VENTUS 3X OC",
+    "color": "银黑色",
+    "price": 6800,
+    "demo": false,
+    "specs": {
+      "power": 320,
+      "recommendedPsu": 750,
+      "length": 322,
+      "thickness": 62,
+      "connector": "16pin",
+      "connectors": 1,
+      "source": "https://www.msi.com/Graphics-Card/GeForce-RTX-4080-SUPER-16G-VENTUS-3X-OC/Specification",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-gpu-9",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "MSI 微星",
+    "name": "GeForce RTX 4090 VENTUS 3X 24G OC",
+    "color": "银黑色",
+    "price": 13000,
+    "demo": false,
+    "specs": {
+      "source": "https://www.msi.com/Graphics-Card/GeForce-RTX-4090-VENTUS-3X-24G-OC/Specification",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-gpu-10",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "MSI 微星",
+    "name": "GeForce RTX 5060 8G VENTUS 2X OC",
+    "color": "银黑色",
+    "price": 2300,
+    "demo": false,
+    "specs": {
+      "source": "https://www.msi.com/Graphics-Card/GeForce-RTX-5060-8G-VENTUS-2X-OC/Specification",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-gpu-11",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "MSI 微星",
+    "name": "GeForce RTX 5060 Ti 8G VENTUS 2X OC PLUS",
+    "color": "银黑色",
+    "price": 2700,
+    "demo": false,
+    "specs": {
+      "source": "https://www.msi.com/Graphics-Card/GeForce-RTX-5060-Ti-8G-VENTUS-2X-OC-PLUS/Specification",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-gpu-12",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "MSI 微星",
+    "name": "GeForce RTX 5060 Ti 16G VENTUS 2X OC PLUS",
+    "color": "银黑色",
+    "price": 3300,
+    "demo": false,
+    "specs": {
+      "power": 180,
+      "recommendedPsu": 600,
+      "length": 227,
+      "thickness": 41,
+      "connector": "8pin",
+      "connectors": 1,
+      "source": "https://www.msi.com/Graphics-Card/GeForce-RTX-5060-Ti-16G-VENTUS-2X-OC-PLUS/Specification",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-gpu-13",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "MSI 微星",
+    "name": "GeForce RTX 5070 12G VENTUS 2X OC",
+    "color": "银黑色",
+    "price": 4300,
+    "demo": false,
+    "specs": {
+      "power": 250,
+      "recommendedPsu": 650,
+      "length": 236,
+      "thickness": 50,
+      "connector": "16pin",
+      "connectors": 1,
+      "source": "https://www.msi.com/Graphics-Card/GeForce-RTX-5070-12G-VENTUS-2X-OC/Specification",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-gpu-14",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "MSI 微星",
+    "name": "GeForce RTX 5070 Ti 16G VENTUS 3X OC",
+    "color": "银黑色",
+    "price": 5700,
+    "demo": false,
+    "specs": {
+      "power": 300,
+      "recommendedPsu": 750,
+      "length": 303,
+      "thickness": 49,
+      "connector": "16pin",
+      "connectors": 1,
+      "source": "https://www.msi.com/Graphics-Card/GeForce-RTX-5070-Ti-16G-VENTUS-3X-OC/Specification",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-gpu-15",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "MSI 微星",
+    "name": "GeForce RTX 5080 16G VENTUS 3X OC",
+    "color": "银黑色",
+    "price": 8500,
+    "demo": false,
+    "specs": {
+      "power": 360,
+      "recommendedPsu": 850,
+      "length": 303,
+      "thickness": 49,
+      "connector": "16pin",
+      "connectors": 1,
+      "source": "https://www.msi.com/Graphics-Card/GeForce-RTX-5080-16G-VENTUS-3X-OC/Specification",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-gpu-16",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "MSI 微星",
+    "name": "GeForce RTX 5090 32G VENTUS 3X OC",
+    "color": "银黑色",
+    "price": 19000,
+    "demo": false,
+    "specs": {
+      "power": 575,
+      "recommendedPsu": 1000,
+      "length": 325,
+      "thickness": 67,
+      "connector": "16pin",
+      "connectors": 1,
+      "source": "https://www.msi.com/Graphics-Card/GeForce-RTX-5090-32G-VENTUS-3X-OC/Specification",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-gpu-17",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "MSI 微星",
+    "name": "GeForce RTX 4060 VENTUS 2X WHITE 8G OC",
+    "color": "白色",
+    "price": 2100,
+    "demo": false,
+    "specs": {
+      "power": 120,
+      "recommendedPsu": 550,
+      "length": 199,
+      "thickness": 41,
+      "connector": "8pin",
+      "connectors": 1,
+      "source": "https://www.msi.com/Graphics-Card/GeForce-RTX-4060-VENTUS-2X-WHITE-8G-OC/Specification",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-gpu-18",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "MSI 微星",
+    "name": "GeForce RTX 5070 12G VENTUS 2X OC WHITE",
+    "color": "白色",
+    "price": 7000,
+    "demo": false,
+    "specs": {
+      "power": 250,
+      "recommendedPsu": 650,
+      "length": 236,
+      "thickness": 50,
+      "connector": "16pin",
+      "connectors": 1,
+      "source": "https://www.msi.com/Graphics-Card/GeForce-RTX-5070-12G-VENTUS-2X-OC-WHITE/Specification",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-gpu-19",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "MSI 微星",
+    "name": "GeForce RTX 5080 16G VENTUS 3X OC WHITE",
+    "color": "白色",
+    "price": 9300,
+    "demo": false,
+    "specs": {
+      "power": 360,
+      "recommendedPsu": 850,
+      "length": 303,
+      "thickness": 49,
+      "connector": "16pin",
+      "connectors": 1,
+      "source": "https://www.msi.com/Graphics-Card/GeForce-RTX-5080-16G-VENTUS-3X-OC-WHITE/Specification",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-memory-0",
     "category": "memory",
     "categoryLabel": "内存",
-    "brand": "星构 DEMO",
-    "name": "DDR4 16GB 双条套装",
+    "brand": "Kingston 金士顿",
+    "name": "FURY Beast KF432C16BBK2/16",
     "color": "黑色",
-    "price": 175,
+    "price": 230,
+    "demo": false,
     "specs": {
       "ddr": "DDR4",
-      "tier": 1,
       "capacity": 16,
       "sticks": 2,
-      "height": 35
-    },
-    "demo": true
+      "source": "https://www.kingston.com/datasheets/KF432C16BBK2_16.pdf",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
   },
   {
-    "id": "psu-0",
+    "id": "real-memory-1",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "Kingston 金士顿",
+    "name": "FURY Beast KF432C16BBK2/32",
+    "color": "黑色",
+    "price": 390,
+    "demo": false,
+    "specs": {
+      "ddr": "DDR4",
+      "capacity": 32,
+      "sticks": 2,
+      "source": "https://www.kingston.com/datasheets/KF432C16BBK2_32.pdf",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-memory-2",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "Kingston 金士顿",
+    "name": "FURY Beast KF432C16BBK2/64",
+    "color": "黑色",
+    "price": 690,
+    "demo": false,
+    "specs": {
+      "ddr": "DDR4",
+      "capacity": 64,
+      "sticks": 2,
+      "source": "https://www.kingston.com/datasheets/KF432C16BBK2_64.pdf",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-memory-3",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "Kingston 金士顿",
+    "name": "FURY Beast KF436C18BBK2/32",
+    "color": "黑色",
+    "price": 430,
+    "demo": false,
+    "specs": {
+      "ddr": "DDR4",
+      "capacity": 32,
+      "sticks": 2,
+      "source": "https://www.kingston.com/datasheets/KF436C18BBK2_32.pdf",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-memory-4",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "Kingston 金士顿",
+    "name": "FURY Beast KF436C18BBK2/64",
+    "color": "黑色",
+    "price": 750,
+    "demo": false,
+    "specs": {
+      "ddr": "DDR4",
+      "capacity": 64,
+      "sticks": 2,
+      "source": "https://www.kingston.com/datasheets/KF436C18BBK2_64.pdf",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-memory-5",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "Kingston 金士顿",
+    "name": "FURY Beast KF432C16BBAK2/16",
+    "color": "黑色",
+    "price": 270,
+    "demo": false,
+    "specs": {
+      "ddr": "DDR4",
+      "capacity": 16,
+      "sticks": 2,
+      "source": "https://www.kingston.com/datasheets/KF432C16BBAK2_16.pdf",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-memory-6",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "Kingston 金士顿",
+    "name": "FURY Beast KF432C16BBAK2/32",
+    "color": "黑色",
+    "price": 450,
+    "demo": false,
+    "specs": {
+      "ddr": "DDR4",
+      "capacity": 32,
+      "sticks": 2,
+      "source": "https://www.kingston.com/datasheets/KF432C16BBAK2_32.pdf",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-memory-7",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "Kingston 金士顿",
+    "name": "FURY Beast KF436C18BBAK2/32",
+    "color": "黑色",
+    "price": 490,
+    "demo": false,
+    "specs": {
+      "ddr": "DDR4",
+      "capacity": 32,
+      "sticks": 2,
+      "source": "https://www.kingston.com/datasheets/KF436C18BBAK2_32.pdf",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-memory-8",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "Kingston 金士顿",
+    "name": "FURY Beast KF552C36BBEK2-16",
+    "color": "黑色",
+    "price": 320,
+    "demo": false,
+    "specs": {
+      "ddr": "DDR5",
+      "capacity": 16,
+      "sticks": 2,
+      "source": "https://www.kingston.com/datasheets/KF552C36BBEK2-16.pdf",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-memory-9",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "Kingston 金士顿",
+    "name": "FURY Beast KF552C36BBEK2-32",
+    "color": "黑色",
+    "price": 520,
+    "demo": false,
+    "specs": {
+      "ddr": "DDR5",
+      "capacity": 32,
+      "sticks": 2,
+      "source": "https://www.kingston.com/datasheets/KF552C36BBEK2-32.pdf",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-memory-10",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "Kingston 金士顿",
+    "name": "FURY Beast KF556C36BBEK2-16",
+    "color": "黑色",
+    "price": 350,
+    "demo": false,
+    "specs": {
+      "ddr": "DDR5",
+      "capacity": 16,
+      "sticks": 2,
+      "source": "https://www.kingston.com/datasheets/KF556C36BBEK2-16.pdf",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-memory-11",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "Kingston 金士顿",
+    "name": "FURY Beast KF556C36BBEK2-32",
+    "color": "黑色",
+    "price": 550,
+    "demo": false,
+    "specs": {
+      "ddr": "DDR5",
+      "capacity": 32,
+      "sticks": 2,
+      "source": "https://www.kingston.com/datasheets/KF556C36BBEK2-32.pdf",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-memory-12",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "Kingston 金士顿",
+    "name": "FURY Beast KF560C36BBEK2-16",
+    "color": "黑色",
+    "price": 380,
+    "demo": false,
+    "specs": {
+      "ddr": "DDR5",
+      "capacity": 16,
+      "sticks": 2,
+      "source": "https://www.kingston.com/datasheets/KF560C36BBEK2-16.pdf",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-memory-13",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "Kingston 金士顿",
+    "name": "FURY Beast KF560C36BBEK2-32",
+    "color": "黑色",
+    "price": 580,
+    "demo": false,
+    "specs": {
+      "ddr": "DDR5",
+      "capacity": 32,
+      "sticks": 2,
+      "source": "https://www.kingston.com/datasheets/KF560C36BBEK2-32.pdf",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-memory-14",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "Kingston 金士顿",
+    "name": "FURY Beast KF560C36BBEK2-64",
+    "color": "黑色",
+    "price": 1050,
+    "demo": false,
+    "specs": {
+      "ddr": "DDR5",
+      "capacity": 64,
+      "sticks": 2,
+      "source": "https://www.kingston.com/datasheets/KF560C36BBEK2-64.pdf",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-memory-15",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "Kingston 金士顿",
+    "name": "FURY Beast KF560C36BBEAK2-32",
+    "color": "黑色",
+    "price": 650,
+    "demo": false,
+    "specs": {
+      "ddr": "DDR5",
+      "capacity": 32,
+      "sticks": 2,
+      "source": "https://www.kingston.com/datasheets/KF560C36BBEAK2-32.pdf",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-memory-16",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "Kingston 金士顿",
+    "name": "FURY Beast KF560C36BWEK2-32",
+    "color": "白色",
+    "price": 630,
+    "demo": false,
+    "specs": {
+      "ddr": "DDR5",
+      "capacity": 32,
+      "sticks": 2,
+      "source": "https://www.kingston.com/datasheets/KF560C36BWEK2-32.pdf",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-memory-17",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "Kingston 金士顿",
+    "name": "FURY Beast KF560C36BWEAK2-32",
+    "color": "白色",
+    "price": 690,
+    "demo": false,
+    "specs": {
+      "ddr": "DDR5",
+      "capacity": 32,
+      "sticks": 2,
+      "source": "https://www.kingston.com/datasheets/KF560C36BWEAK2-32.pdf",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-memory-18",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "Kingston 金士顿",
+    "name": "FURY Beast KF432C16BB/8",
+    "color": "黑色",
+    "price": 100,
+    "demo": false,
+    "specs": {
+      "ddr": "DDR4",
+      "capacity": 8,
+      "sticks": 1,
+      "source": "https://www.kingston.com/datasheets/KF432C16BB_8.pdf",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-memory-19",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "Kingston 金士顿",
+    "name": "FURY Beast KF432C16BB/16",
+    "color": "黑色",
+    "price": 190,
+    "demo": false,
+    "specs": {
+      "ddr": "DDR4",
+      "capacity": 16,
+      "sticks": 1,
+      "source": "https://www.kingston.com/datasheets/KF432C16BB_16.pdf",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-motherboard-0",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "MSI 微星",
+    "name": "B550M PRO VDH WIFI",
+    "color": "银黑色",
+    "price": 550,
+    "demo": false,
+    "specs": {
+      "socket": "AM4",
+      "ddr": "DDR4",
+      "ramSlots": 4,
+      "form": "mATX",
+      "m2": true,
+      "biosVerified": false,
+      "source": "https://www.msi.com/Motherboard/B550M-PRO-VDH-WIFI/Specification",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-motherboard-1",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "MSI 微星",
+    "name": "B550 A PRO",
+    "color": "银黑色",
+    "price": 650,
+    "demo": false,
+    "specs": {
+      "socket": "AM4",
+      "ddr": "DDR4",
+      "ramSlots": 4,
+      "form": "ATX",
+      "m2": true,
+      "biosVerified": false,
+      "source": "https://www.msi.com/Motherboard/B550-A-PRO/Specification",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-motherboard-2",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "MSI 微星",
+    "name": "MAG B550 TOMAHAWK",
+    "color": "银黑色",
+    "price": 850,
+    "demo": false,
+    "specs": {
+      "socket": "AM4",
+      "ddr": "DDR4",
+      "ramSlots": 4,
+      "form": "ATX",
+      "m2": true,
+      "biosVerified": false,
+      "source": "https://www.msi.com/Motherboard/MAG-B550-TOMAHAWK/Specification",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-motherboard-3",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "MSI 微星",
+    "name": "MPG B550 GAMING PLUS",
+    "color": "银黑色",
+    "price": 750,
+    "demo": false,
+    "specs": {
+      "socket": "AM4",
+      "ddr": "DDR4",
+      "ramSlots": 4,
+      "form": "ATX",
+      "m2": true,
+      "biosVerified": false,
+      "source": "https://www.msi.com/Motherboard/MPG-B550-GAMING-PLUS/Specification",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-motherboard-4",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "MSI 微星",
+    "name": "MAG B550M MORTAR",
+    "color": "银黑色",
+    "price": 750,
+    "demo": false,
+    "specs": {
+      "socket": "AM4",
+      "ddr": "DDR4",
+      "ramSlots": 4,
+      "form": "mATX",
+      "m2": true,
+      "biosVerified": false,
+      "source": "https://www.msi.com/Motherboard/MAG-B550M-MORTAR/Specification",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-motherboard-5",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "MSI 微星",
+    "name": "MAG B550M MORTAR WIFI",
+    "color": "银黑色",
+    "price": 850,
+    "demo": false,
+    "specs": {
+      "socket": "AM4",
+      "ddr": "DDR4",
+      "ramSlots": 4,
+      "form": "mATX",
+      "m2": true,
+      "biosVerified": false,
+      "source": "https://www.msi.com/Motherboard/MAG-B550M-MORTAR-WIFI/Specification",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-motherboard-6",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "MSI 微星",
+    "name": "PRO B650M A WIFI",
+    "color": "银黑色",
+    "price": 950,
+    "demo": false,
+    "specs": {
+      "socket": "AM5",
+      "ddr": "DDR5",
+      "ramSlots": 4,
+      "form": "mATX",
+      "m2": true,
+      "biosVerified": false,
+      "source": "https://www.msi.com/Motherboard/PRO-B650M-A-WIFI/Specification",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-motherboard-7",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "MSI 微星",
+    "name": "PRO B650 S WIFI",
+    "color": "银黑色",
+    "price": 950,
+    "demo": false,
+    "specs": {
+      "socket": "AM5",
+      "ddr": "DDR5",
+      "ramSlots": 4,
+      "form": "ATX",
+      "m2": true,
+      "biosVerified": false,
+      "source": "https://www.msi.com/Motherboard/PRO-B650-S-WIFI/Specification",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-motherboard-8",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "MSI 微星",
+    "name": "B650 GAMING PLUS WIFI",
+    "color": "银黑色",
+    "price": 1050,
+    "demo": false,
+    "specs": {
+      "socket": "AM5",
+      "ddr": "DDR5",
+      "ramSlots": 4,
+      "form": "ATX",
+      "m2": true,
+      "biosVerified": false,
+      "source": "https://www.msi.com/Motherboard/B650-GAMING-PLUS-WIFI/Specification",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-motherboard-9",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "MSI 微星",
+    "name": "MAG B650 TOMAHAWK WIFI",
+    "color": "银黑色",
+    "price": 1350,
+    "demo": false,
+    "specs": {
+      "socket": "AM5",
+      "ddr": "DDR5",
+      "ramSlots": 4,
+      "form": "ATX",
+      "m2": true,
+      "biosVerified": false,
+      "source": "https://www.msi.com/Motherboard/MAG-B650-TOMAHAWK-WIFI/Specification",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-motherboard-10",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "MSI 微星",
+    "name": "MAG B650M MORTAR WIFI",
+    "color": "银黑色",
+    "price": 1250,
+    "demo": false,
+    "specs": {
+      "socket": "AM5",
+      "ddr": "DDR5",
+      "ramSlots": 4,
+      "form": "mATX",
+      "m2": true,
+      "biosVerified": false,
+      "source": "https://www.msi.com/Motherboard/MAG-B650M-MORTAR-WIFI/Specification",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-motherboard-11",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "MSI 微星",
+    "name": "MPG B650 EDGE WIFI",
+    "color": "银黑色",
+    "price": 1650,
+    "demo": false,
+    "specs": {
+      "socket": "AM5",
+      "ddr": "DDR5",
+      "ramSlots": 4,
+      "form": "ATX",
+      "m2": true,
+      "biosVerified": false,
+      "source": "https://www.msi.com/Motherboard/MPG-B650-EDGE-WIFI/Specification",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-motherboard-12",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "MSI 微星",
+    "name": "PRO X670 P WIFI",
+    "color": "银黑色",
+    "price": 1800,
+    "demo": false,
+    "specs": {
+      "socket": "AM5",
+      "ddr": "DDR5",
+      "ramSlots": 4,
+      "form": "ATX",
+      "m2": true,
+      "biosVerified": false,
+      "source": "https://www.msi.com/Motherboard/PRO-X670-P-WIFI/Specification",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-motherboard-13",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "MSI 微星",
+    "name": "MAG X670E TOMAHAWK WIFI",
+    "color": "银黑色",
+    "price": 2100,
+    "demo": false,
+    "specs": {
+      "socket": "AM5",
+      "ddr": "DDR5",
+      "ramSlots": 4,
+      "form": "ATX",
+      "m2": true,
+      "biosVerified": false,
+      "source": "https://www.msi.com/Motherboard/MAG-X670E-TOMAHAWK-WIFI/Specification",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-motherboard-14",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "MSI 微星",
+    "name": "MPG X670E CARBON WIFI",
+    "color": "银黑色",
+    "price": 2900,
+    "demo": false,
+    "specs": {
+      "socket": "AM5",
+      "ddr": "DDR5",
+      "ramSlots": 4,
+      "form": "ATX",
+      "m2": true,
+      "biosVerified": false,
+      "source": "https://www.msi.com/Motherboard/MPG-X670E-CARBON-WIFI/Specification",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-motherboard-15",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "MSI 微星",
+    "name": "PRO B850 P WIFI",
+    "color": "银黑色",
+    "price": 1400,
+    "demo": false,
+    "specs": {
+      "socket": "AM5",
+      "ddr": "DDR5",
+      "ramSlots": 4,
+      "form": "ATX",
+      "m2": true,
+      "biosVerified": false,
+      "source": "https://www.msi.com/Motherboard/PRO-B850-P-WIFI/Specification",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-motherboard-16",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "MSI 微星",
+    "name": "B850 GAMING PLUS WIFI",
+    "color": "银黑色",
+    "price": 1500,
+    "demo": false,
+    "specs": {
+      "socket": "AM5",
+      "ddr": "DDR5",
+      "ramSlots": 4,
+      "form": "ATX",
+      "m2": true,
+      "biosVerified": false,
+      "source": "https://www.msi.com/Motherboard/B850-GAMING-PLUS-WIFI/Specification",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-motherboard-17",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "MSI 微星",
+    "name": "MAG B850 TOMAHAWK MAX WIFI",
+    "color": "银黑色",
+    "price": 2000,
+    "demo": false,
+    "specs": {
+      "socket": "AM5",
+      "ddr": "DDR5",
+      "ramSlots": 4,
+      "form": "ATX",
+      "m2": true,
+      "biosVerified": false,
+      "source": "https://www.msi.com/Motherboard/MAG-B850-TOMAHAWK-MAX-WIFI/Specification",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-motherboard-18",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "MSI 微星",
+    "name": "PRO X870 P WIFI",
+    "color": "银黑色",
+    "price": 1800,
+    "demo": false,
+    "specs": {
+      "socket": "AM5",
+      "ddr": "DDR5",
+      "ramSlots": 4,
+      "form": "ATX",
+      "m2": true,
+      "biosVerified": false,
+      "source": "https://www.msi.com/Motherboard/PRO-X870-P-WIFI/Specification",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-motherboard-19",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "MSI 微星",
+    "name": "MAG X870 TOMAHAWK WIFI",
+    "color": "银黑色",
+    "price": 2300,
+    "demo": false,
+    "specs": {
+      "socket": "AM5",
+      "ddr": "DDR5",
+      "ramSlots": 4,
+      "form": "ATX",
+      "m2": true,
+      "biosVerified": false,
+      "source": "https://www.msi.com/Motherboard/MAG-X870-TOMAHAWK-WIFI/Specification",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-psu-0",
     "category": "psu",
     "categoryLabel": "电源",
-    "brand": "星构 DEMO",
-    "name": "P1 500W",
+    "brand": "CORSAIR 美商海盗船",
+    "name": "RM550x (2021)",
     "color": "黑色",
-    "price": 225,
+    "price": 605,
+    "demo": false,
     "specs": {
-      "tier": 1,
-      "watts": 500,
-      "connector": "PCIe 8pin",
-      "connectors": 4,
+      "watts": 550,
       "form": "ATX",
-      "length": 150,
-      "eps": 2
-    },
-    "demo": true
+      "source": "https://assets.corsair.com/image/upload/corsairmedia/sys_master/productcontent/WW_RMx_Series_2021_QSG_Web_AD.pdf",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
   },
   {
-    "id": "case-0",
+    "id": "real-psu-1",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "CORSAIR 美商海盗船",
+    "name": "RM650x (2021)",
+    "color": "黑色",
+    "price": 715,
+    "demo": false,
+    "specs": {
+      "watts": 650,
+      "form": "ATX",
+      "source": "https://assets.corsair.com/image/upload/corsairmedia/sys_master/productcontent/WW_RMx_Series_2021_QSG_Web_AD.pdf",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-psu-2",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "CORSAIR 美商海盗船",
+    "name": "RM750x (2021)",
+    "color": "黑色",
+    "price": 825,
+    "demo": false,
+    "specs": {
+      "watts": 750,
+      "form": "ATX",
+      "source": "https://assets.corsair.com/image/upload/corsairmedia/sys_master/productcontent/WW_RMx_Series_2021_QSG_Web_AD.pdf",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-psu-3",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "CORSAIR 美商海盗船",
+    "name": "RM850x (2021)",
+    "color": "黑色",
+    "price": 935,
+    "demo": false,
+    "specs": {
+      "watts": 850,
+      "form": "ATX",
+      "source": "https://assets.corsair.com/image/upload/corsairmedia/sys_master/productcontent/WW_RMx_Series_2021_QSG_Web_AD.pdf",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-psu-4",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "CORSAIR 美商海盗船",
+    "name": "RM1000x (2021)",
+    "color": "黑色",
+    "price": 1100,
+    "demo": false,
+    "specs": {
+      "watts": 1000,
+      "form": "ATX",
+      "source": "https://assets.corsair.com/image/upload/corsairmedia/sys_master/productcontent/WW_RMx_Series_2021_QSG_Web_AD.pdf",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-psu-5",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "CORSAIR 美商海盗船",
+    "name": "RM650e (2025)",
+    "color": "黑色",
+    "price": 585,
+    "demo": false,
+    "specs": {
+      "watts": 650,
+      "form": "ATX",
+      "length": 140,
+      "connectorCounts": {
+        "8pin": 1,
+        "16pin": 1
+      },
+      "source": "https://www.corsair.com/ca/en/explorer/diy-builder/power-supply-units/corsair-rme-series-2025/",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-psu-6",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "CORSAIR 美商海盗船",
+    "name": "RM750e (2025)",
+    "color": "黑色",
+    "price": 675,
+    "demo": false,
+    "specs": {
+      "watts": 750,
+      "form": "ATX",
+      "length": 140,
+      "connectorCounts": {
+        "8pin": 2,
+        "16pin": 1
+      },
+      "source": "https://www.corsair.com/ca/en/explorer/diy-builder/power-supply-units/corsair-rme-series-2025/",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-psu-7",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "CORSAIR 美商海盗船",
+    "name": "RM850e (2025)",
+    "color": "黑色",
+    "price": 765,
+    "demo": false,
+    "specs": {
+      "watts": 850,
+      "form": "ATX",
+      "length": 140,
+      "connectorCounts": {
+        "8pin": 2,
+        "16pin": 1
+      },
+      "source": "https://www.corsair.com/ca/en/explorer/diy-builder/power-supply-units/corsair-rme-series-2025/",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-psu-8",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "CORSAIR 美商海盗船",
+    "name": "RM1000e (2025)",
+    "color": "黑色",
+    "price": 900,
+    "demo": false,
+    "specs": {
+      "watts": 1000,
+      "form": "ATX",
+      "length": 140,
+      "connectorCounts": {
+        "8pin": 2,
+        "16pin": 1
+      },
+      "source": "https://www.corsair.com/ca/en/explorer/diy-builder/power-supply-units/corsair-rme-series-2025/",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-psu-9",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "CORSAIR 美商海盗船",
+    "name": "CX550M (2021)",
+    "color": "黑色",
+    "price": 330,
+    "demo": false,
+    "specs": {
+      "watts": 550,
+      "form": "ATX",
+      "source": "https://assets.corsair.com/image/upload/corsairmedia/sys_master/productcontent/WW_CXM_Series_2021_QSG_AA.pdf",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-psu-10",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "CORSAIR 美商海盗船",
+    "name": "CX650M (2021)",
+    "color": "黑色",
+    "price": 390,
+    "demo": false,
+    "specs": {
+      "watts": 650,
+      "form": "ATX",
+      "source": "https://assets.corsair.com/image/upload/corsairmedia/sys_master/productcontent/WW_CXM_Series_2021_QSG_AA.pdf",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-psu-11",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "CORSAIR 美商海盗船",
+    "name": "CX750M (2021)",
+    "color": "黑色",
+    "price": 450,
+    "demo": false,
+    "specs": {
+      "watts": 750,
+      "form": "ATX",
+      "source": "https://assets.corsair.com/image/upload/corsairmedia/sys_master/productcontent/WW_CXM_Series_2021_QSG_AA.pdf",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-psu-12",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "CORSAIR 美商海盗船",
+    "name": "SF750 (2024)",
+    "color": "黑色",
+    "price": 1125,
+    "demo": false,
+    "specs": {
+      "watts": 750,
+      "form": "SFX",
+      "source": "https://www.corsair.com/us/en/explorer/diy-builder/power-supply-units/sf750sf850sf1000-platinum-atx-31-everything-you-need-to-know/",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-psu-13",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "CORSAIR 美商海盗船",
+    "name": "SF850 (2024)",
+    "color": "黑色",
+    "price": 1275,
+    "demo": false,
+    "specs": {
+      "watts": 850,
+      "form": "SFX",
+      "source": "https://www.corsair.com/us/en/explorer/diy-builder/power-supply-units/sf750sf850sf1000-platinum-atx-31-everything-you-need-to-know/",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-psu-14",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "CORSAIR 美商海盗船",
+    "name": "SF1000 (2024)",
+    "color": "黑色",
+    "price": 1500,
+    "demo": false,
+    "specs": {
+      "watts": 1000,
+      "form": "SFX",
+      "source": "https://www.corsair.com/us/en/explorer/diy-builder/power-supply-units/sf750sf850sf1000-platinum-atx-31-everything-you-need-to-know/",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-psu-15",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "CORSAIR 美商海盗船",
+    "name": "RM650 (2021)",
+    "color": "黑色",
+    "price": 585,
+    "demo": false,
+    "specs": {
+      "watts": 650,
+      "form": "ATX",
+      "source": "https://assets.corsair.com/image/upload/corsairmedia/sys_master/productcontent/WW_RM_Series_2021_QSG_Web_AA.pdf",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-psu-16",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "CORSAIR 美商海盗船",
+    "name": "RM750 (2021)",
+    "color": "黑色",
+    "price": 675,
+    "demo": false,
+    "specs": {
+      "watts": 750,
+      "form": "ATX",
+      "source": "https://assets.corsair.com/image/upload/corsairmedia/sys_master/productcontent/WW_RM_Series_2021_QSG_Web_AA.pdf",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-psu-17",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "CORSAIR 美商海盗船",
+    "name": "RM850 (2021)",
+    "color": "黑色",
+    "price": 765,
+    "demo": false,
+    "specs": {
+      "watts": 850,
+      "form": "ATX",
+      "source": "https://assets.corsair.com/image/upload/corsairmedia/sys_master/productcontent/WW_RM_Series_2021_QSG_Web_AA.pdf",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-psu-18",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "CORSAIR 美商海盗船",
+    "name": "HX1000i (2022)",
+    "color": "黑色",
+    "price": 1800,
+    "demo": false,
+    "specs": {
+      "watts": 1000,
+      "form": "ATX",
+      "source": "https://help.corsair.com/hc/en-us/articles/45351527323793-CORSAIR-Spare-Parts-List",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-psu-19",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "CORSAIR 美商海盗船",
+    "name": "HX1500i (2022)",
+    "color": "黑色",
+    "price": 2700,
+    "demo": false,
+    "specs": {
+      "watts": 1500,
+      "form": "ATX",
+      "source": "https://help.corsair.com/hc/en-us/articles/45351527323793-CORSAIR-Spare-Parts-List",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-case-0",
     "category": "case",
     "categoryLabel": "机箱",
-    "brand": "星构 DEMO",
-    "name": "C1 机箱",
+    "brand": "DeepCool 九州风神",
+    "name": "CH160 PLUS",
     "color": "黑色",
-    "price": 175,
+    "price": 299,
+    "demo": false,
     "specs": {
-      "tier": 1,
       "forms": [
+        "ITX",
+        "mATX"
+      ],
+      "coolerHeight": 164,
+      "psuForm": "ATX",
+      "psuLength": 140,
+      "gpuLength": 342,
+      "source": "https://www.deepcool.com/products/Cases/CH160-PLUS-Portable-M-ATX-Compact-Case/2025/21475.shtml",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-case-1",
+    "category": "case",
+    "categoryLabel": "机箱",
+    "brand": "DeepCool 九州风神",
+    "name": "CH160 PLUS WH",
+    "color": "白色",
+    "price": 329,
+    "demo": false,
+    "specs": {
+      "forms": [
+        "ITX",
+        "mATX"
+      ],
+      "coolerHeight": 164,
+      "psuForm": "ATX",
+      "psuLength": 140,
+      "gpuLength": 342,
+      "source": "https://www.deepcool.com/products/Cases/CH160-PLUS-WH-Portable-M-ATX-Compact-Case/2025/21476.shtml",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-case-2",
+    "category": "case",
+    "categoryLabel": "机箱",
+    "brand": "DeepCool 九州风神",
+    "name": "CH160 MESH",
+    "color": "黑色",
+    "price": 259,
+    "demo": false,
+    "specs": {
+      "forms": [
+        "ITX"
+      ],
+      "coolerHeight": 172,
+      "psuForm": "ATX",
+      "psuLength": 140,
+      "gpuLength": 230,
+      "gpuLengthNote": "使用 ATX 电源；SFX 方案另行核对",
+      "source": "https://www.deepcool.com/products/Cases/CH160-Mesh-Portable-High-Airflow-mini-ITX-Case/2024/19462.shtml",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-case-3",
+    "category": "case",
+    "categoryLabel": "机箱",
+    "brand": "DeepCool 九州风神",
+    "name": "CH160 MESH WH",
+    "color": "白色",
+    "price": 289,
+    "demo": false,
+    "specs": {
+      "forms": [
+        "ITX"
+      ],
+      "coolerHeight": 172,
+      "psuForm": "ATX",
+      "psuLength": 140,
+      "gpuLength": 230,
+      "gpuLengthNote": "使用 ATX 电源；SFX 方案另行核对",
+      "source": "https://www.deepcool.com/products/Cases/CH160-Mesh-WH-Portable-High-Airflow-mini-ITX-Case/2024/19463.shtml",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-case-4",
+    "category": "case",
+    "categoryLabel": "机箱",
+    "brand": "DeepCool 九州风神",
+    "name": "CC560 MESH V2",
+    "color": "黑色",
+    "price": 299,
+    "demo": false,
+    "specs": {
+      "forms": [
+        "ITX",
         "mATX",
         "ATX"
       ],
-      "gpuLength": 345,
-      "gpuSlots": 4,
       "coolerHeight": 165,
       "psuForm": "ATX",
-      "psuLength": 200,
-      "ramClearance": 45
-    },
-    "demo": true
+      "psuLength": 170,
+      "gpuLength": 370,
+      "source": "https://www.deepcool.com/products/Cases/CC560-MESH-V2-Mid-Tower-Airflow-Case/2024/19088.shtml",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
   },
   {
-    "id": "storage-0",
-    "category": "storage",
-    "categoryLabel": "硬盘",
-    "brand": "星构 DEMO",
-    "name": "S1 512GB NVMe",
-    "color": "不适用",
-    "price": 200,
+    "id": "real-case-5",
+    "category": "case",
+    "categoryLabel": "机箱",
+    "brand": "DeepCool 九州风神",
+    "name": "CC560 MESH V2 WH",
+    "color": "白色",
+    "price": 329,
+    "demo": false,
     "specs": {
-      "tier": 1,
-      "capacity": 512,
-      "interface": "M.2 NVMe",
-      "length": 80
-    },
-    "demo": true
+      "forms": [
+        "ITX",
+        "mATX",
+        "ATX"
+      ],
+      "coolerHeight": 165,
+      "psuForm": "ATX",
+      "psuLength": 170,
+      "gpuLength": 370,
+      "source": "https://www.deepcool.com/products/Cases/CC560-MESH-WH-V2-Mid-Tower-Airflow-Case/2024/19089.shtml",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
   },
   {
-    "id": "cooler-0",
+    "id": "real-case-6",
+    "category": "case",
+    "categoryLabel": "机箱",
+    "brand": "DeepCool 九州风神",
+    "name": "CH170 DIGITAL",
+    "color": "黑色",
+    "price": 399,
+    "demo": false,
+    "specs": {
+      "forms": [
+        "ITX"
+      ],
+      "coolerHeight": 172,
+      "psuForm": "ATX",
+      "psuLength": 140,
+      "gpuLength": 230,
+      "gpuLengthNote": "使用 ATX 电源；SFX 方案另行核对",
+      "source": "https://www.deepcool.com/products/Cases/CH170-DIGITAL-M-ITX-Case-with-Screen/2024/18891.shtml",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-case-7",
+    "category": "case",
+    "categoryLabel": "机箱",
+    "brand": "DeepCool 九州风神",
+    "name": "CH170 DIGITAL WH",
+    "color": "白色",
+    "price": 429,
+    "demo": false,
+    "specs": {
+      "forms": [
+        "ITX"
+      ],
+      "coolerHeight": 172,
+      "psuForm": "ATX",
+      "psuLength": 140,
+      "gpuLength": 230,
+      "gpuLengthNote": "使用 ATX 电源；SFX 方案另行核对",
+      "source": "https://www.deepcool.com/products/Cases/CH170-DIGITAL-WH-M-ITX-Case-with-Screen/2024/18892.shtml",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-case-8",
+    "category": "case",
+    "categoryLabel": "机箱",
+    "brand": "DeepCool 九州风神",
+    "name": "CH160",
+    "color": "黑色",
+    "price": 249,
+    "demo": false,
+    "specs": {
+      "forms": [
+        "ITX"
+      ],
+      "coolerHeight": 172,
+      "psuForm": "ATX",
+      "psuLength": 140,
+      "gpuLength": 230,
+      "gpuLengthNote": "使用 ATX 电源；SFX 方案另行核对",
+      "source": "https://www.deepcool.com/products/Cases/CH160-Portable-High-Airflow-M-ITX-Case/2024/18115.shtml",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-case-9",
+    "category": "case",
+    "categoryLabel": "机箱",
+    "brand": "DeepCool 九州风神",
+    "name": "CH160 WH",
+    "color": "白色",
+    "price": 279,
+    "demo": false,
+    "specs": {
+      "forms": [
+        "ITX"
+      ],
+      "coolerHeight": 172,
+      "psuForm": "ATX",
+      "psuLength": 140,
+      "gpuLength": 230,
+      "gpuLengthNote": "使用 ATX 电源；SFX 方案另行核对",
+      "source": "https://www.deepcool.com/products/Cases/CH160-WH-Portable-High-Airflow-M-ITX-Case/2024/18116.shtml",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-case-10",
+    "category": "case",
+    "categoryLabel": "机箱",
+    "brand": "DeepCool 九州风神",
+    "name": "CC560 Limited V2",
+    "color": "黑色",
+    "price": 199,
+    "demo": false,
+    "specs": {
+      "forms": [
+        "ITX",
+        "mATX",
+        "ATX"
+      ],
+      "coolerHeight": 165,
+      "psuForm": "ATX",
+      "psuLength": 170,
+      "gpuLength": 370,
+      "source": "https://www.deepcool.com/products/Cases/CC560-Limited-V2-Mid-Tower-Airflow-Case/2023/17784.shtml",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-case-11",
+    "category": "case",
+    "categoryLabel": "机箱",
+    "brand": "DeepCool 九州风神",
+    "name": "CC560 Limited WH V2",
+    "color": "白色",
+    "price": 229,
+    "demo": false,
+    "specs": {
+      "forms": [
+        "ITX",
+        "mATX",
+        "ATX"
+      ],
+      "coolerHeight": 165,
+      "psuForm": "ATX",
+      "psuLength": 170,
+      "gpuLength": 370,
+      "source": "https://www.deepcool.com/products/Cases/CC560-Limited-WH-V2-Mid-Tower-Airflow-Case/2023/17785.shtml",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-case-12",
+    "category": "case",
+    "categoryLabel": "机箱",
+    "brand": "DeepCool 九州风神",
+    "name": "CC560 V2",
+    "color": "黑色",
+    "price": 249,
+    "demo": false,
+    "specs": {
+      "forms": [
+        "ITX",
+        "mATX",
+        "ATX"
+      ],
+      "coolerHeight": 165,
+      "psuForm": "ATX",
+      "psuLength": 170,
+      "gpuLength": 370,
+      "source": "https://www.deepcool.com/products/Cases/CC560-V2-Mid-Tower-Airflow-Case/2023/17782.shtml",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-case-13",
+    "category": "case",
+    "categoryLabel": "机箱",
+    "brand": "DeepCool 九州风神",
+    "name": "CC560 WH V2",
+    "color": "白色",
+    "price": 279,
+    "demo": false,
+    "specs": {
+      "forms": [
+        "ITX",
+        "mATX",
+        "ATX"
+      ],
+      "coolerHeight": 165,
+      "psuForm": "ATX",
+      "psuLength": 170,
+      "gpuLength": 370,
+      "source": "https://www.deepcool.com/products/Cases/CC560-WH-V2-Mid-Tower-Airflow-Case/2023/17783.shtml",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-case-14",
+    "category": "case",
+    "categoryLabel": "机箱",
+    "brand": "DeepCool 九州风神",
+    "name": "CH360 DIGITAL",
+    "color": "黑色",
+    "price": 399,
+    "demo": false,
+    "specs": {
+      "forms": [
+        "ITX",
+        "mATX"
+      ],
+      "coolerHeight": 165,
+      "psuForm": "ATX",
+      "psuLength": 160,
+      "gpuLength": 378,
+      "source": "https://www.deepcool.com/products/Cases/CH360-DIGITAL-M-ATX-Airflow-Case-With-Status-Screen/2023/17715.shtml",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-case-15",
+    "category": "case",
+    "categoryLabel": "机箱",
+    "brand": "DeepCool 九州风神",
+    "name": "CH360 DIGITAL WH",
+    "color": "白色",
+    "price": 429,
+    "demo": false,
+    "specs": {
+      "forms": [
+        "ITX",
+        "mATX"
+      ],
+      "coolerHeight": 165,
+      "psuForm": "ATX",
+      "psuLength": 160,
+      "gpuLength": 378,
+      "source": "https://www.deepcool.com/products/Cases/CH360-DIGITAL-WH-M-ATX-Airflow-Case-With-Status-Screen/2023/17716.shtml",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-case-16",
+    "category": "case",
+    "categoryLabel": "机箱",
+    "brand": "DeepCool 九州风神",
+    "name": "CH560 DIGITAL",
+    "color": "黑色",
+    "price": 549,
+    "demo": false,
+    "specs": {
+      "forms": [
+        "ITX",
+        "mATX",
+        "ATX",
+        "EATX"
+      ],
+      "coolerHeight": 175,
+      "psuForm": "ATX",
+      "psuLength": 170,
+      "gpuLength": 380,
+      "source": "https://www.deepcool.com/products/Cases/CH560-DIGITAL-Airflow-Case-With-Status-Screen/2023/17174.shtml",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-case-17",
+    "category": "case",
+    "categoryLabel": "机箱",
+    "brand": "DeepCool 九州风神",
+    "name": "CH560 DIGITAL WH",
+    "color": "白色",
+    "price": 579,
+    "demo": false,
+    "specs": {
+      "forms": [
+        "ITX",
+        "mATX",
+        "ATX",
+        "EATX"
+      ],
+      "coolerHeight": 175,
+      "psuForm": "ATX",
+      "psuLength": 170,
+      "gpuLength": 380,
+      "source": "https://www.deepcool.com/products/Cases/CH560-DIGITAL-WH-Airflow-Case-With-Status-Screen/2023/17175.shtml",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-case-18",
+    "category": "case",
+    "categoryLabel": "机箱",
+    "brand": "DeepCool 九州风神",
+    "name": "CH560",
+    "color": "黑色",
+    "price": 449,
+    "demo": false,
+    "specs": {
+      "forms": [
+        "ITX",
+        "mATX",
+        "ATX",
+        "EATX"
+      ],
+      "coolerHeight": 175,
+      "psuForm": "ATX",
+      "psuLength": 170,
+      "gpuLength": 380,
+      "source": "https://www.deepcool.com/products/Cases/CH560-New-Generation-of-Airflow-Case/2023/17101.shtml",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-case-19",
+    "category": "case",
+    "categoryLabel": "机箱",
+    "brand": "DeepCool 九州风神",
+    "name": "CH560 WH",
+    "color": "白色",
+    "price": 479,
+    "demo": false,
+    "specs": {
+      "forms": [
+        "ITX",
+        "mATX",
+        "ATX",
+        "EATX"
+      ],
+      "coolerHeight": 175,
+      "psuForm": "ATX",
+      "psuLength": 170,
+      "gpuLength": 380,
+      "source": "https://www.deepcool.com/products/Cases/CH560-WH-New-Generation-of-Airflow-Case/2023/17102.shtml",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-cooler-0",
     "category": "cooler",
     "categoryLabel": "散热",
-    "brand": "星构 DEMO",
-    "name": "T1 塔式散热",
+    "brand": "DeepCool 九州风神",
+    "name": "AG500 G2 ARGB",
     "color": "黑色",
-    "price": 98,
+    "price": 159,
+    "demo": false,
     "specs": {
-      "tier": 1,
+      "height": 156,
       "sockets": [
-        "DEMO-A",
-        "DEMO-B"
+        "AM4",
+        "AM5"
       ],
-      "height": 150,
-      "capacity": 120,
-      "ramClearance": 40
-    },
-    "demo": true
+      "source": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AG500-G2-ARGB-Superior-Performance-5-Heatpipe-Single-Tower-CPU-Cooler/2026/22909.shtml",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
   },
   {
-    "id": "cpu-1",
-    "category": "cpu",
-    "categoryLabel": "CPU",
-    "brand": "星构 DEMO",
-    "name": "B1 处理器",
-    "color": "不适用",
-    "price": 342,
-    "specs": {
-      "socket": "DEMO-B",
-      "ddr": "DDR5",
-      "tier": 1,
-      "cores": 6,
-      "power": 57
-    },
-    "demo": true
-  },
-  {
-    "id": "gpu-1",
-    "category": "gpu",
-    "categoryLabel": "GPU",
-    "brand": "星构 DEMO",
-    "name": "G1 8GB",
+    "id": "real-cooler-1",
+    "category": "cooler",
+    "categoryLabel": "散热",
+    "brand": "DeepCool 九州风神",
+    "name": "AG500 G2 WH ARGB",
     "color": "白色",
-    "price": 600,
+    "price": 179,
+    "demo": false,
     "specs": {
-      "tier": 1,
-      "vram": 8,
-      "power": 94,
-      "length": 229,
-      "slots": 2,
-      "connector": "PCIe 8pin",
-      "connectors": 1
-    },
-    "demo": true
+      "height": 156,
+      "sockets": [
+        "AM4",
+        "AM5"
+      ],
+      "source": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AG500-G2-WH-ARGB-Superior-Performance-5-Heatpipe-Single-Tower-CPU-Cooler/2026/22910.shtml",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
   },
   {
-    "id": "motherboard-1",
-    "category": "motherboard",
-    "categoryLabel": "主板",
-    "brand": "星构 DEMO",
-    "name": "B1 主板",
+    "id": "real-cooler-2",
+    "category": "cooler",
+    "categoryLabel": "散热",
+    "brand": "DeepCool 九州风神",
+    "name": "AG500 G2",
     "color": "黑色",
-    "price": 330,
+    "price": 129,
+    "demo": false,
     "specs": {
-      "socket": "DEMO-B",
-      "ddr": "DDR5",
-      "tier": 1,
-      "form": "mATX",
-      "ramSlots": 4,
-      "maxRam": 128,
-      "m2": true,
-      "supportedCpus": [
-        "cpu-1",
-        "cpu-3",
-        "cpu-5",
-        "cpu-7",
-        "cpu-9",
-        "cpu-11",
-        "cpu-13",
-        "cpu-15",
-        "cpu-17",
-        "cpu-19"
+      "height": 156,
+      "sockets": [
+        "AM4",
+        "AM5"
       ],
-      "biosVerified": true
-    },
-    "demo": true
+      "source": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AG500-G2-Superior-Performance-5-Heatpipe-Single-Tower-CPU-Cooler/2026/22855.shtml",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
   },
   {
-    "id": "memory-1",
-    "category": "memory",
-    "categoryLabel": "内存",
-    "brand": "星构 DEMO",
-    "name": "DDR5 16GB 双条套装",
+    "id": "real-cooler-3",
+    "category": "cooler",
+    "categoryLabel": "散热",
+    "brand": "DeepCool 九州风神",
+    "name": "AG500 G2 WH",
     "color": "白色",
-    "price": 175,
+    "price": 149,
+    "demo": false,
     "specs": {
-      "ddr": "DDR5",
-      "tier": 1,
-      "capacity": 16,
-      "sticks": 2,
-      "height": 35
-    },
-    "demo": true
-  },
-  {
-    "id": "psu-1",
-    "category": "psu",
-    "categoryLabel": "电源",
-    "brand": "星构 DEMO",
-    "name": "P1 500W",
-    "color": "白色",
-    "price": 225,
-    "specs": {
-      "tier": 1,
-      "watts": 500,
-      "connector": "PCIe 8pin",
-      "connectors": 4,
-      "form": "ATX",
-      "length": 150,
-      "eps": 2
-    },
-    "demo": true
-  },
-  {
-    "id": "case-1",
-    "category": "case",
-    "categoryLabel": "机箱",
-    "brand": "星构 DEMO",
-    "name": "C1 机箱",
-    "color": "白色",
-    "price": 175,
-    "specs": {
-      "tier": 1,
-      "forms": [
-        "mATX",
-        "ATX"
+      "height": 156,
+      "sockets": [
+        "AM4",
+        "AM5"
       ],
-      "gpuLength": 345,
-      "gpuSlots": 4,
-      "coolerHeight": 165,
-      "psuForm": "ATX",
-      "psuLength": 200,
-      "ramClearance": 45
-    },
-    "demo": true
+      "source": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AG500-G2-WH-Superior-Performance-5-Heatpipe-Single-Tower-CPU-Cooler/2026/22856.shtml",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
   },
   {
-    "id": "storage-1",
+    "id": "real-cooler-4",
+    "category": "cooler",
+    "categoryLabel": "散热",
+    "brand": "DeepCool 九州风神",
+    "name": "AG620 G2 ARGB",
+    "color": "黑色",
+    "price": 229,
+    "demo": false,
+    "specs": {
+      "height": 159,
+      "sockets": [
+        "AM4",
+        "AM5"
+      ],
+      "source": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AG620-G2-ARGB-Superior-Performance-6-Heatpipe-Dual-Tower-CPU-Cooler/2026/22801.shtml",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-cooler-5",
+    "category": "cooler",
+    "categoryLabel": "散热",
+    "brand": "DeepCool 九州风神",
+    "name": "AG620 G2 WH ARGB",
+    "color": "白色",
+    "price": 249,
+    "demo": false,
+    "specs": {
+      "height": 159,
+      "sockets": [
+        "AM4",
+        "AM5"
+      ],
+      "source": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AG620-G2-WH-ARGB-Superior-Performance-6-Heatpipe-Dual-Tower-CPU-Cooler/2026/22802.shtml",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-cooler-6",
+    "category": "cooler",
+    "categoryLabel": "散热",
+    "brand": "DeepCool 九州风神",
+    "name": "AG400 G2 ARGB",
+    "color": "黑色",
+    "price": 99,
+    "demo": false,
+    "specs": {
+      "height": 152,
+      "sockets": [
+        "AM4",
+        "AM5"
+      ],
+      "source": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AG400-G2-ARGB-Superior-Performance-4-Heatpipe-Single-Tower-CPU-Cooler/2026/22744.shtml",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-cooler-7",
+    "category": "cooler",
+    "categoryLabel": "散热",
+    "brand": "DeepCool 九州风神",
+    "name": "AG400 G2 WH ARGB",
+    "color": "白色",
+    "price": 119,
+    "demo": false,
+    "specs": {
+      "height": 152,
+      "sockets": [
+        "AM4",
+        "AM5"
+      ],
+      "source": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AG400-G2-WH-ARGB-Superior-Performance-4-Heatpipe-Single-Tower-CPU-Cooler/2026/22743.shtml",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-cooler-8",
+    "category": "cooler",
+    "categoryLabel": "散热",
+    "brand": "DeepCool 九州风神",
+    "name": "AG400 G2",
+    "color": "黑色",
+    "price": 79,
+    "demo": false,
+    "specs": {
+      "height": 152,
+      "sockets": [
+        "AM4",
+        "AM5"
+      ],
+      "source": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AG400-G2-Superior-Performance-4-Heatpipe-Single-Tower-CPU-Cooler/2025/22515.shtml",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-cooler-9",
+    "category": "cooler",
+    "categoryLabel": "散热",
+    "brand": "DeepCool 九州风神",
+    "name": "AG400 G2 WH",
+    "color": "白色",
+    "price": 99,
+    "demo": false,
+    "specs": {
+      "height": 152,
+      "sockets": [
+        "AM4",
+        "AM5"
+      ],
+      "source": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AG400-G2-WH-Superior-Performance-4-Heatpipe-Single-Tower-CPU-Cooler/2025/22516.shtml",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-cooler-10",
+    "category": "cooler",
+    "categoryLabel": "散热",
+    "brand": "DeepCool 九州风神",
+    "name": "AG620 G2",
+    "color": "黑色",
+    "price": 199,
+    "demo": false,
+    "specs": {
+      "height": 159,
+      "sockets": [
+        "AM4",
+        "AM5"
+      ],
+      "source": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AG620-G2-Superior-Performance-6-Heatpipe-Dual-Tower-CPU-Cooler/2025/22513.shtml",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-cooler-11",
+    "category": "cooler",
+    "categoryLabel": "散热",
+    "brand": "DeepCool 九州风神",
+    "name": "AG620 G2 WH",
+    "color": "白色",
+    "price": 219,
+    "demo": false,
+    "specs": {
+      "height": 159,
+      "sockets": [
+        "AM4",
+        "AM5"
+      ],
+      "source": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AG620-G2-WH-Superior-Performance-6-Heatpipe-Dual-Tower-CPU-Cooler/2025/22514.shtml",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-cooler-12",
+    "category": "cooler",
+    "categoryLabel": "散热",
+    "brand": "DeepCool 九州风神",
+    "name": "AK620 G2",
+    "color": "黑色",
+    "price": 349,
+    "demo": false,
+    "specs": {
+      "height": 159,
+      "sockets": [
+        "AM4",
+        "AM5"
+      ],
+      "source": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK620-G2-Wood-Grain-Top-Cover-CPU-Cooler/2025/21864.shtml",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-cooler-13",
+    "category": "cooler",
+    "categoryLabel": "散热",
+    "brand": "DeepCool 九州风神",
+    "name": "AK620 G2 WH",
+    "color": "白色",
+    "price": 379,
+    "demo": false,
+    "specs": {
+      "height": 159,
+      "sockets": [
+        "AM4",
+        "AM5"
+      ],
+      "source": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK620-G2-WH-Wood-Grain-Top-Cover-CPU-Cooler/2025/21863.shtml",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-cooler-14",
+    "category": "cooler",
+    "categoryLabel": "散热",
+    "brand": "DeepCool 九州风神",
+    "name": "AK500 G2",
+    "color": "黑色",
+    "price": 279,
+    "demo": false,
+    "specs": {
+      "height": 159,
+      "sockets": [
+        "AM4",
+        "AM5"
+      ],
+      "source": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK500-G2-Wood-Grain-Top-Cover-CPU-Cooler/2025/21986.shtml",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-cooler-15",
+    "category": "cooler",
+    "categoryLabel": "散热",
+    "brand": "DeepCool 九州风神",
+    "name": "AK500 G2 WH",
+    "color": "白色",
+    "price": 299,
+    "demo": false,
+    "specs": {
+      "height": 159,
+      "sockets": [
+        "AM4",
+        "AM5"
+      ],
+      "source": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK500-G2-WH-Wood-Grain-Top-Cover-CPU-Cooler/2025/21987.shtml",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-cooler-16",
+    "category": "cooler",
+    "categoryLabel": "散热",
+    "brand": "DeepCool 九州风神",
+    "name": "AK400 G2",
+    "color": "黑色",
+    "price": 179,
+    "demo": false,
+    "specs": {
+      "height": 156,
+      "sockets": [
+        "AM4",
+        "AM5"
+      ],
+      "source": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK400-G2-Wood-Grain-Top-Cover-CPU-Cooler/2025/21908.shtml",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-cooler-17",
+    "category": "cooler",
+    "categoryLabel": "散热",
+    "brand": "DeepCool 九州风神",
+    "name": "AK400 G2 WH",
+    "color": "白色",
+    "price": 199,
+    "demo": false,
+    "specs": {
+      "height": 156,
+      "sockets": [
+        "AM4",
+        "AM5"
+      ],
+      "source": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK400-G2-WH-Wood-Grain-Top-Cover-CPU-Cooler/2025/21909.shtml",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-cooler-18",
+    "category": "cooler",
+    "categoryLabel": "散热",
+    "brand": "DeepCool 九州风神",
+    "name": "ASSASSIN VC ELITE",
+    "color": "黑色",
+    "price": 699,
+    "demo": false,
+    "specs": {
+      "height": 164,
+      "sockets": [
+        "AM4",
+        "AM5"
+      ],
+      "source": "https://www.deepcool.com/products/Cooling/cpuaircoolers/ASSASSIN-VC-ELITE-Vapor-Chamber-Elite-CPU-Air-Cooler/2025/21850.shtml",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-cooler-19",
+    "category": "cooler",
+    "categoryLabel": "散热",
+    "brand": "DeepCool 九州风神",
+    "name": "ASSASSIN VC ELITE WH",
+    "color": "白色",
+    "price": 749,
+    "demo": false,
+    "specs": {
+      "height": 164,
+      "sockets": [
+        "AM4",
+        "AM5"
+      ],
+      "source": "https://www.deepcool.com/products/Cooling/cpuaircoolers/ASSASSIN-VC-ELITE-WH-Vapor-Chamber-Elite-CPU-Air-Cooler/2025/21119.shtml",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-storage-0",
     "category": "storage",
     "categoryLabel": "硬盘",
-    "brand": "星构 DEMO",
-    "name": "S1 512GB NVMe",
+    "brand": "Samsung 三星",
+    "name": "970 EVO Plus 250GB (MZ-V7S250BW)",
+    "color": "不适用",
+    "price": 150,
+    "demo": false,
+    "specs": {
+      "capacity": 250,
+      "interface": "M.2 NVMe",
+      "source": "https://semiconductor.samsung.com/consumer-storage/magician/",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-storage-1",
+    "category": "storage",
+    "categoryLabel": "硬盘",
+    "brand": "Samsung 三星",
+    "name": "970 EVO Plus 500GB (MZ-V7S500BW)",
     "color": "不适用",
     "price": 220,
+    "demo": false,
     "specs": {
-      "tier": 1,
-      "capacity": 512,
+      "capacity": 500,
       "interface": "M.2 NVMe",
-      "length": 80
-    },
-    "demo": true
+      "source": "https://semiconductor.samsung.com/consumer-storage/magician/",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
   },
   {
-    "id": "cooler-1",
-    "category": "cooler",
-    "categoryLabel": "散热",
-    "brand": "星构 DEMO",
-    "name": "T1 塔式散热",
-    "color": "白色",
-    "price": 98,
-    "specs": {
-      "tier": 1,
-      "sockets": [
-        "DEMO-A",
-        "DEMO-B"
-      ],
-      "height": 150,
-      "capacity": 120,
-      "ramClearance": 40
-    },
-    "demo": true
-  },
-  {
-    "id": "cpu-2",
-    "category": "cpu",
-    "categoryLabel": "CPU",
-    "brand": "星构 DEMO",
-    "name": "A2 处理器",
-    "color": "不适用",
-    "price": 468,
-    "specs": {
-      "socket": "DEMO-A",
-      "ddr": "DDR4",
-      "tier": 2,
-      "cores": 8,
-      "power": 69
-    },
-    "demo": true
-  },
-  {
-    "id": "gpu-2",
-    "category": "gpu",
-    "categoryLabel": "GPU",
-    "brand": "星构 DEMO",
-    "name": "G2 8GB",
-    "color": "黑色",
-    "price": 900,
-    "specs": {
-      "tier": 2,
-      "vram": 8,
-      "power": 118,
-      "length": 238,
-      "slots": 2,
-      "connector": "PCIe 8pin",
-      "connectors": 1
-    },
-    "demo": true
-  },
-  {
-    "id": "motherboard-2",
-    "category": "motherboard",
-    "categoryLabel": "主板",
-    "brand": "星构 DEMO",
-    "name": "A2 主板",
-    "color": "黑色",
-    "price": 410,
-    "specs": {
-      "socket": "DEMO-A",
-      "ddr": "DDR4",
-      "tier": 2,
-      "form": "mATX",
-      "ramSlots": 4,
-      "maxRam": 128,
-      "m2": true,
-      "supportedCpus": [
-        "cpu-0",
-        "cpu-2",
-        "cpu-4",
-        "cpu-6",
-        "cpu-8",
-        "cpu-10",
-        "cpu-12",
-        "cpu-14",
-        "cpu-16",
-        "cpu-18"
-      ],
-      "biosVerified": true
-    },
-    "demo": true
-  },
-  {
-    "id": "memory-2",
-    "category": "memory",
-    "categoryLabel": "内存",
-    "brand": "星构 DEMO",
-    "name": "DDR4 16GB 双条套装",
-    "color": "黑色",
-    "price": 240,
-    "specs": {
-      "ddr": "DDR4",
-      "tier": 2,
-      "capacity": 16,
-      "sticks": 2,
-      "height": 35
-    },
-    "demo": true
-  },
-  {
-    "id": "psu-2",
-    "category": "psu",
-    "categoryLabel": "电源",
-    "brand": "星构 DEMO",
-    "name": "P2 600W",
-    "color": "黑色",
-    "price": 290,
-    "specs": {
-      "tier": 2,
-      "watts": 600,
-      "connector": "PCIe 8pin",
-      "connectors": 4,
-      "form": "ATX",
-      "length": 150,
-      "eps": 2
-    },
-    "demo": true
-  },
-  {
-    "id": "case-2",
-    "category": "case",
-    "categoryLabel": "机箱",
-    "brand": "星构 DEMO",
-    "name": "C2 机箱",
-    "color": "黑色",
-    "price": 240,
-    "specs": {
-      "tier": 2,
-      "forms": [
-        "mATX",
-        "ATX"
-      ],
-      "gpuLength": 350,
-      "gpuSlots": 4,
-      "coolerHeight": 165,
-      "psuForm": "ATX",
-      "psuLength": 200,
-      "ramClearance": 45
-    },
-    "demo": true
-  },
-  {
-    "id": "storage-2",
+    "id": "real-storage-2",
     "category": "storage",
     "categoryLabel": "硬盘",
-    "brand": "星构 DEMO",
-    "name": "S2 512GB NVMe",
+    "brand": "Samsung 三星",
+    "name": "970 EVO Plus 1TB (MZ-V7S1T0BW)",
     "color": "不适用",
-    "price": 260,
+    "price": 350,
+    "demo": false,
     "specs": {
-      "tier": 2,
-      "capacity": 512,
+      "capacity": 1000,
       "interface": "M.2 NVMe",
-      "length": 80
-    },
-    "demo": true
+      "source": "https://semiconductor.samsung.com/consumer-storage/magician/",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
   },
   {
-    "id": "cooler-2",
-    "category": "cooler",
-    "categoryLabel": "散热",
-    "brand": "星构 DEMO",
-    "name": "T2 塔式散热",
-    "color": "黑色",
-    "price": 136,
-    "specs": {
-      "tier": 2,
-      "sockets": [
-        "DEMO-A",
-        "DEMO-B"
-      ],
-      "height": 150,
-      "capacity": 140,
-      "ramClearance": 40
-    },
-    "demo": true
-  },
-  {
-    "id": "cpu-3",
-    "category": "cpu",
-    "categoryLabel": "CPU",
-    "brand": "星构 DEMO",
-    "name": "B2 处理器",
-    "color": "不适用",
-    "price": 468,
-    "specs": {
-      "socket": "DEMO-B",
-      "ddr": "DDR5",
-      "tier": 2,
-      "cores": 8,
-      "power": 69
-    },
-    "demo": true
-  },
-  {
-    "id": "gpu-3",
-    "category": "gpu",
-    "categoryLabel": "GPU",
-    "brand": "星构 DEMO",
-    "name": "G2 8GB",
-    "color": "白色",
-    "price": 900,
-    "specs": {
-      "tier": 2,
-      "vram": 8,
-      "power": 118,
-      "length": 238,
-      "slots": 2,
-      "connector": "PCIe 8pin",
-      "connectors": 1
-    },
-    "demo": true
-  },
-  {
-    "id": "motherboard-3",
-    "category": "motherboard",
-    "categoryLabel": "主板",
-    "brand": "星构 DEMO",
-    "name": "B2 主板",
-    "color": "黑色",
-    "price": 410,
-    "specs": {
-      "socket": "DEMO-B",
-      "ddr": "DDR5",
-      "tier": 2,
-      "form": "mATX",
-      "ramSlots": 4,
-      "maxRam": 128,
-      "m2": true,
-      "supportedCpus": [
-        "cpu-1",
-        "cpu-3",
-        "cpu-5",
-        "cpu-7",
-        "cpu-9",
-        "cpu-11",
-        "cpu-13",
-        "cpu-15",
-        "cpu-17",
-        "cpu-19"
-      ],
-      "biosVerified": true
-    },
-    "demo": true
-  },
-  {
-    "id": "memory-3",
-    "category": "memory",
-    "categoryLabel": "内存",
-    "brand": "星构 DEMO",
-    "name": "DDR5 16GB 双条套装",
-    "color": "白色",
-    "price": 240,
-    "specs": {
-      "ddr": "DDR5",
-      "tier": 2,
-      "capacity": 16,
-      "sticks": 2,
-      "height": 35
-    },
-    "demo": true
-  },
-  {
-    "id": "psu-3",
-    "category": "psu",
-    "categoryLabel": "电源",
-    "brand": "星构 DEMO",
-    "name": "P2 600W",
-    "color": "白色",
-    "price": 290,
-    "specs": {
-      "tier": 2,
-      "watts": 600,
-      "connector": "PCIe 8pin",
-      "connectors": 4,
-      "form": "ATX",
-      "length": 150,
-      "eps": 2
-    },
-    "demo": true
-  },
-  {
-    "id": "case-3",
-    "category": "case",
-    "categoryLabel": "机箱",
-    "brand": "星构 DEMO",
-    "name": "C2 机箱",
-    "color": "白色",
-    "price": 240,
-    "specs": {
-      "tier": 2,
-      "forms": [
-        "mATX",
-        "ATX"
-      ],
-      "gpuLength": 350,
-      "gpuSlots": 4,
-      "coolerHeight": 165,
-      "psuForm": "ATX",
-      "psuLength": 200,
-      "ramClearance": 45
-    },
-    "demo": true
-  },
-  {
-    "id": "storage-3",
+    "id": "real-storage-3",
     "category": "storage",
     "categoryLabel": "硬盘",
-    "brand": "星构 DEMO",
-    "name": "S2 512GB NVMe",
+    "brand": "Samsung 三星",
+    "name": "970 EVO Plus 2TB (MZ-V7S2T0BW)",
     "color": "不适用",
-    "price": 280,
+    "price": 650,
+    "demo": false,
     "specs": {
-      "tier": 2,
-      "capacity": 512,
+      "capacity": 2000,
       "interface": "M.2 NVMe",
-      "length": 80
-    },
-    "demo": true
+      "source": "https://semiconductor.samsung.com/consumer-storage/magician/",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
   },
   {
-    "id": "cooler-3",
-    "category": "cooler",
-    "categoryLabel": "散热",
-    "brand": "星构 DEMO",
-    "name": "T2 塔式散热",
-    "color": "白色",
-    "price": 136,
-    "specs": {
-      "tier": 2,
-      "sockets": [
-        "DEMO-A",
-        "DEMO-B"
-      ],
-      "height": 150,
-      "capacity": 140,
-      "ramClearance": 40
-    },
-    "demo": true
-  },
-  {
-    "id": "cpu-4",
-    "category": "cpu",
-    "categoryLabel": "CPU",
-    "brand": "星构 DEMO",
-    "name": "A3 处理器",
-    "color": "不适用",
-    "price": 678,
-    "specs": {
-      "socket": "DEMO-A",
-      "ddr": "DDR4",
-      "tier": 3,
-      "cores": 10,
-      "power": 81
-    },
-    "demo": true
-  },
-  {
-    "id": "gpu-4",
-    "category": "gpu",
-    "categoryLabel": "GPU",
-    "brand": "星构 DEMO",
-    "name": "G3 8GB",
-    "color": "黑色",
-    "price": 1400,
-    "specs": {
-      "tier": 3,
-      "vram": 8,
-      "power": 142,
-      "length": 247,
-      "slots": 2,
-      "connector": "PCIe 8pin",
-      "connectors": 1
-    },
-    "demo": true
-  },
-  {
-    "id": "motherboard-4",
-    "category": "motherboard",
-    "categoryLabel": "主板",
-    "brand": "星构 DEMO",
-    "name": "A3 主板",
-    "color": "黑色",
-    "price": 490,
-    "specs": {
-      "socket": "DEMO-A",
-      "ddr": "DDR4",
-      "tier": 3,
-      "form": "mATX",
-      "ramSlots": 4,
-      "maxRam": 128,
-      "m2": true,
-      "supportedCpus": [
-        "cpu-0",
-        "cpu-2",
-        "cpu-4",
-        "cpu-6",
-        "cpu-8",
-        "cpu-10",
-        "cpu-12",
-        "cpu-14",
-        "cpu-16",
-        "cpu-18"
-      ],
-      "biosVerified": true
-    },
-    "demo": true
-  },
-  {
-    "id": "memory-4",
-    "category": "memory",
-    "categoryLabel": "内存",
-    "brand": "星构 DEMO",
-    "name": "DDR4 16GB 双条套装",
-    "color": "黑色",
-    "price": 305,
-    "specs": {
-      "ddr": "DDR4",
-      "tier": 3,
-      "capacity": 16,
-      "sticks": 2,
-      "height": 35
-    },
-    "demo": true
-  },
-  {
-    "id": "psu-4",
-    "category": "psu",
-    "categoryLabel": "电源",
-    "brand": "星构 DEMO",
-    "name": "P3 700W",
-    "color": "黑色",
-    "price": 355,
-    "specs": {
-      "tier": 3,
-      "watts": 700,
-      "connector": "PCIe 8pin",
-      "connectors": 4,
-      "form": "ATX",
-      "length": 150,
-      "eps": 2
-    },
-    "demo": true
-  },
-  {
-    "id": "case-4",
-    "category": "case",
-    "categoryLabel": "机箱",
-    "brand": "星构 DEMO",
-    "name": "C3 机箱",
-    "color": "黑色",
-    "price": 305,
-    "specs": {
-      "tier": 3,
-      "forms": [
-        "mATX",
-        "ATX"
-      ],
-      "gpuLength": 355,
-      "gpuSlots": 4,
-      "coolerHeight": 165,
-      "psuForm": "ATX",
-      "psuLength": 200,
-      "ramClearance": 45
-    },
-    "demo": true
-  },
-  {
-    "id": "storage-4",
+    "id": "real-storage-4",
     "category": "storage",
     "categoryLabel": "硬盘",
-    "brand": "星构 DEMO",
-    "name": "S3 1024GB NVMe",
+    "brand": "Samsung 三星",
+    "name": "980 250GB (MZ-V8V250BW)",
+    "color": "不适用",
+    "price": 140,
+    "demo": false,
+    "specs": {
+      "capacity": 250,
+      "interface": "M.2 NVMe",
+      "source": "https://semiconductor.samsung.com/consumer-storage/magician/",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-storage-5",
+    "category": "storage",
+    "categoryLabel": "硬盘",
+    "brand": "Samsung 三星",
+    "name": "980 500GB (MZ-V8V500BW)",
+    "color": "不适用",
+    "price": 200,
+    "demo": false,
+    "specs": {
+      "capacity": 500,
+      "interface": "M.2 NVMe",
+      "source": "https://semiconductor.samsung.com/consumer-storage/magician/",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-storage-6",
+    "category": "storage",
+    "categoryLabel": "硬盘",
+    "brand": "Samsung 三星",
+    "name": "980 1TB (MZ-V8V1T0BW)",
     "color": "不适用",
     "price": 320,
+    "demo": false,
     "specs": {
-      "tier": 3,
-      "capacity": 1024,
+      "capacity": 1000,
       "interface": "M.2 NVMe",
-      "length": 80
-    },
-    "demo": true
+      "source": "https://semiconductor.samsung.com/consumer-storage/magician/",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
   },
   {
-    "id": "cooler-4",
-    "category": "cooler",
-    "categoryLabel": "散热",
-    "brand": "星构 DEMO",
-    "name": "T3 塔式散热",
-    "color": "黑色",
-    "price": 174,
-    "specs": {
-      "tier": 3,
-      "sockets": [
-        "DEMO-A",
-        "DEMO-B"
-      ],
-      "height": 150,
-      "capacity": 160,
-      "ramClearance": 40
-    },
-    "demo": true
-  },
-  {
-    "id": "cpu-5",
-    "category": "cpu",
-    "categoryLabel": "CPU",
-    "brand": "星构 DEMO",
-    "name": "B3 处理器",
+    "id": "real-storage-7",
+    "category": "storage",
+    "categoryLabel": "硬盘",
+    "brand": "Samsung 三星",
+    "name": "980 PRO 250GB (MZ-V8P250BW)",
     "color": "不适用",
-    "price": 678,
+    "price": 190,
+    "demo": false,
     "specs": {
-      "socket": "DEMO-B",
-      "ddr": "DDR5",
-      "tier": 3,
-      "cores": 10,
-      "power": 81
-    },
-    "demo": true
+      "capacity": 250,
+      "interface": "M.2 NVMe",
+      "source": "https://semiconductor.samsung.com/consumer-storage/magician/",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
   },
   {
-    "id": "gpu-5",
-    "category": "gpu",
-    "categoryLabel": "GPU",
-    "brand": "星构 DEMO",
-    "name": "G3 8GB",
-    "color": "白色",
-    "price": 1400,
+    "id": "real-storage-8",
+    "category": "storage",
+    "categoryLabel": "硬盘",
+    "brand": "Samsung 三星",
+    "name": "980 PRO 500GB (MZ-V8P500BW)",
+    "color": "不适用",
+    "price": 280,
+    "demo": false,
     "specs": {
-      "tier": 3,
-      "vram": 8,
-      "power": 142,
-      "length": 247,
-      "slots": 2,
-      "connector": "PCIe 8pin",
-      "connectors": 1
-    },
-    "demo": true
+      "capacity": 500,
+      "interface": "M.2 NVMe",
+      "source": "https://semiconductor.samsung.com/consumer-storage/magician/",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
   },
   {
-    "id": "motherboard-5",
-    "category": "motherboard",
-    "categoryLabel": "主板",
-    "brand": "星构 DEMO",
-    "name": "B3 主板",
-    "color": "黑色",
+    "id": "real-storage-9",
+    "category": "storage",
+    "categoryLabel": "硬盘",
+    "brand": "Samsung 三星",
+    "name": "980 PRO 1TB (MZ-V8P1T0BW)",
+    "color": "不适用",
+    "price": 450,
+    "demo": false,
+    "specs": {
+      "capacity": 1000,
+      "interface": "M.2 NVMe",
+      "source": "https://semiconductor.samsung.com/consumer-storage/magician/",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-storage-10",
+    "category": "storage",
+    "categoryLabel": "硬盘",
+    "brand": "Samsung 三星",
+    "name": "980 PRO 2TB (MZ-V8P2T0BW)",
+    "color": "不适用",
+    "price": 750,
+    "demo": false,
+    "specs": {
+      "capacity": 2000,
+      "interface": "M.2 NVMe",
+      "source": "https://semiconductor.samsung.com/consumer-storage/magician/",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-storage-11",
+    "category": "storage",
+    "categoryLabel": "硬盘",
+    "brand": "Samsung 三星",
+    "name": "990 PRO 1TB (MZ-V9P1T0BW)",
+    "color": "不适用",
+    "price": 550,
+    "demo": false,
+    "specs": {
+      "capacity": 1000,
+      "interface": "M.2 NVMe",
+      "source": "https://semiconductor.samsung.com/consumer-storage/magician/",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-storage-12",
+    "category": "storage",
+    "categoryLabel": "硬盘",
+    "brand": "Samsung 三星",
+    "name": "990 PRO 2TB (MZ-V9P2T0BW)",
+    "color": "不适用",
+    "price": 900,
+    "demo": false,
+    "specs": {
+      "capacity": 2000,
+      "interface": "M.2 NVMe",
+      "source": "https://semiconductor.samsung.com/consumer-storage/magician/",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-storage-13",
+    "category": "storage",
+    "categoryLabel": "硬盘",
+    "brand": "Samsung 三星",
+    "name": "990 PRO 4TB (MZ-V9P4T0BW)",
+    "color": "不适用",
+    "price": 1750,
+    "demo": false,
+    "specs": {
+      "capacity": 4000,
+      "interface": "M.2 NVMe",
+      "source": "https://semiconductor.samsung.com/consumer-storage/magician/",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-storage-14",
+    "category": "storage",
+    "categoryLabel": "硬盘",
+    "brand": "Samsung 三星",
+    "name": "990 EVO 1TB (MZ-V9E1T0BW)",
+    "color": "不适用",
+    "price": 420,
+    "demo": false,
+    "specs": {
+      "capacity": 1000,
+      "interface": "M.2 NVMe",
+      "source": "https://semiconductor.samsung.com/consumer-storage/magician/",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-storage-15",
+    "category": "storage",
+    "categoryLabel": "硬盘",
+    "brand": "Samsung 三星",
+    "name": "990 EVO 2TB (MZ-V9E2T0BW)",
+    "color": "不适用",
+    "price": 720,
+    "demo": false,
+    "specs": {
+      "capacity": 2000,
+      "interface": "M.2 NVMe",
+      "source": "https://semiconductor.samsung.com/consumer-storage/magician/",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-storage-16",
+    "category": "storage",
+    "categoryLabel": "硬盘",
+    "brand": "Samsung 三星",
+    "name": "990 EVO Plus 1TB (MZ-V9S1T0BW)",
+    "color": "不适用",
     "price": 490,
+    "demo": false,
     "specs": {
-      "socket": "DEMO-B",
-      "ddr": "DDR5",
-      "tier": 3,
-      "form": "mATX",
-      "ramSlots": 4,
-      "maxRam": 128,
-      "m2": true,
-      "supportedCpus": [
-        "cpu-1",
-        "cpu-3",
-        "cpu-5",
-        "cpu-7",
-        "cpu-9",
-        "cpu-11",
-        "cpu-13",
-        "cpu-15",
-        "cpu-17",
-        "cpu-19"
-      ],
-      "biosVerified": true
-    },
-    "demo": true
+      "capacity": 1000,
+      "interface": "M.2 NVMe",
+      "source": "https://semiconductor.samsung.com/consumer-storage/magician/",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
   },
   {
-    "id": "memory-5",
-    "category": "memory",
-    "categoryLabel": "内存",
-    "brand": "星构 DEMO",
-    "name": "DDR5 16GB 双条套装",
-    "color": "白色",
-    "price": 305,
-    "specs": {
-      "ddr": "DDR5",
-      "tier": 3,
-      "capacity": 16,
-      "sticks": 2,
-      "height": 35
-    },
-    "demo": true
-  },
-  {
-    "id": "psu-5",
-    "category": "psu",
-    "categoryLabel": "电源",
-    "brand": "星构 DEMO",
-    "name": "P3 700W",
-    "color": "白色",
-    "price": 355,
-    "specs": {
-      "tier": 3,
-      "watts": 700,
-      "connector": "PCIe 8pin",
-      "connectors": 4,
-      "form": "ATX",
-      "length": 150,
-      "eps": 2
-    },
-    "demo": true
-  },
-  {
-    "id": "case-5",
-    "category": "case",
-    "categoryLabel": "机箱",
-    "brand": "星构 DEMO",
-    "name": "C3 机箱",
-    "color": "白色",
-    "price": 305,
-    "specs": {
-      "tier": 3,
-      "forms": [
-        "mATX",
-        "ATX"
-      ],
-      "gpuLength": 355,
-      "gpuSlots": 4,
-      "coolerHeight": 165,
-      "psuForm": "ATX",
-      "psuLength": 200,
-      "ramClearance": 45
-    },
-    "demo": true
-  },
-  {
-    "id": "storage-5",
+    "id": "real-storage-17",
     "category": "storage",
     "categoryLabel": "硬盘",
-    "brand": "星构 DEMO",
-    "name": "S3 1024GB NVMe",
+    "brand": "Samsung 三星",
+    "name": "990 EVO Plus 2TB (MZ-V9S2T0BW)",
     "color": "不适用",
-    "price": 340,
+    "price": 850,
+    "demo": false,
     "specs": {
-      "tier": 3,
-      "capacity": 1024,
+      "capacity": 2000,
       "interface": "M.2 NVMe",
-      "length": 80
-    },
-    "demo": true
+      "source": "https://semiconductor.samsung.com/consumer-storage/magician/",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
   },
   {
-    "id": "cooler-5",
-    "category": "cooler",
-    "categoryLabel": "散热",
-    "brand": "星构 DEMO",
-    "name": "T3 塔式散热",
-    "color": "白色",
-    "price": 174,
-    "specs": {
-      "tier": 3,
-      "sockets": [
-        "DEMO-A",
-        "DEMO-B"
-      ],
-      "height": 150,
-      "capacity": 160,
-      "ramClearance": 40
-    },
-    "demo": true
-  },
-  {
-    "id": "cpu-6",
-    "category": "cpu",
-    "categoryLabel": "CPU",
-    "brand": "星构 DEMO",
-    "name": "A4 处理器",
-    "color": "不适用",
-    "price": 972,
-    "specs": {
-      "socket": "DEMO-A",
-      "ddr": "DDR4",
-      "tier": 4,
-      "cores": 12,
-      "power": 93
-    },
-    "demo": true
-  },
-  {
-    "id": "gpu-6",
-    "category": "gpu",
-    "categoryLabel": "GPU",
-    "brand": "星构 DEMO",
-    "name": "G4 16GB",
-    "color": "黑色",
-    "price": 2100,
-    "specs": {
-      "tier": 4,
-      "vram": 16,
-      "power": 166,
-      "length": 256,
-      "slots": 2,
-      "connector": "PCIe 8pin",
-      "connectors": 1
-    },
-    "demo": true
-  },
-  {
-    "id": "motherboard-6",
-    "category": "motherboard",
-    "categoryLabel": "主板",
-    "brand": "星构 DEMO",
-    "name": "A4 主板",
-    "color": "黑色",
-    "price": 570,
-    "specs": {
-      "socket": "DEMO-A",
-      "ddr": "DDR4",
-      "tier": 4,
-      "form": "mATX",
-      "ramSlots": 4,
-      "maxRam": 128,
-      "m2": true,
-      "supportedCpus": [
-        "cpu-0",
-        "cpu-2",
-        "cpu-4",
-        "cpu-6",
-        "cpu-8",
-        "cpu-10",
-        "cpu-12",
-        "cpu-14",
-        "cpu-16",
-        "cpu-18"
-      ],
-      "biosVerified": true
-    },
-    "demo": true
-  },
-  {
-    "id": "memory-6",
-    "category": "memory",
-    "categoryLabel": "内存",
-    "brand": "星构 DEMO",
-    "name": "DDR4 32GB 双条套装",
-    "color": "黑色",
-    "price": 370,
-    "specs": {
-      "ddr": "DDR4",
-      "tier": 4,
-      "capacity": 32,
-      "sticks": 2,
-      "height": 35
-    },
-    "demo": true
-  },
-  {
-    "id": "psu-6",
-    "category": "psu",
-    "categoryLabel": "电源",
-    "brand": "星构 DEMO",
-    "name": "P4 800W",
-    "color": "黑色",
-    "price": 420,
-    "specs": {
-      "tier": 4,
-      "watts": 800,
-      "connector": "PCIe 8pin",
-      "connectors": 4,
-      "form": "ATX",
-      "length": 150,
-      "eps": 2
-    },
-    "demo": true
-  },
-  {
-    "id": "case-6",
-    "category": "case",
-    "categoryLabel": "机箱",
-    "brand": "星构 DEMO",
-    "name": "C4 机箱",
-    "color": "黑色",
-    "price": 370,
-    "specs": {
-      "tier": 4,
-      "forms": [
-        "mATX",
-        "ATX"
-      ],
-      "gpuLength": 360,
-      "gpuSlots": 4,
-      "coolerHeight": 165,
-      "psuForm": "ATX",
-      "psuLength": 200,
-      "ramClearance": 45
-    },
-    "demo": true
-  },
-  {
-    "id": "storage-6",
+    "id": "real-storage-18",
     "category": "storage",
     "categoryLabel": "硬盘",
-    "brand": "星构 DEMO",
-    "name": "S4 1024GB NVMe",
+    "brand": "Samsung 三星",
+    "name": "990 EVO Plus 4TB (MZ-V9S4T0BW)",
     "color": "不适用",
-    "price": 380,
+    "price": 1550,
+    "demo": false,
     "specs": {
-      "tier": 4,
-      "capacity": 1024,
+      "capacity": 4000,
       "interface": "M.2 NVMe",
-      "length": 80
-    },
-    "demo": true
+      "source": "https://semiconductor.samsung.com/consumer-storage/magician/",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
   },
   {
-    "id": "cooler-6",
-    "category": "cooler",
-    "categoryLabel": "散热",
-    "brand": "星构 DEMO",
-    "name": "T4 塔式散热",
-    "color": "黑色",
-    "price": 212,
-    "specs": {
-      "tier": 4,
-      "sockets": [
-        "DEMO-A",
-        "DEMO-B"
-      ],
-      "height": 150,
-      "capacity": 180,
-      "ramClearance": 40
-    },
-    "demo": true
-  },
-  {
-    "id": "cpu-7",
-    "category": "cpu",
-    "categoryLabel": "CPU",
-    "brand": "星构 DEMO",
-    "name": "B4 处理器",
-    "color": "不适用",
-    "price": 972,
-    "specs": {
-      "socket": "DEMO-B",
-      "ddr": "DDR5",
-      "tier": 4,
-      "cores": 12,
-      "power": 93
-    },
-    "demo": true
-  },
-  {
-    "id": "gpu-7",
-    "category": "gpu",
-    "categoryLabel": "GPU",
-    "brand": "星构 DEMO",
-    "name": "G4 16GB",
-    "color": "白色",
-    "price": 2100,
-    "specs": {
-      "tier": 4,
-      "vram": 16,
-      "power": 166,
-      "length": 256,
-      "slots": 2,
-      "connector": "PCIe 8pin",
-      "connectors": 1
-    },
-    "demo": true
-  },
-  {
-    "id": "motherboard-7",
-    "category": "motherboard",
-    "categoryLabel": "主板",
-    "brand": "星构 DEMO",
-    "name": "B4 主板",
-    "color": "黑色",
-    "price": 570,
-    "specs": {
-      "socket": "DEMO-B",
-      "ddr": "DDR5",
-      "tier": 4,
-      "form": "mATX",
-      "ramSlots": 4,
-      "maxRam": 128,
-      "m2": true,
-      "supportedCpus": [
-        "cpu-1",
-        "cpu-3",
-        "cpu-5",
-        "cpu-7",
-        "cpu-9",
-        "cpu-11",
-        "cpu-13",
-        "cpu-15",
-        "cpu-17",
-        "cpu-19"
-      ],
-      "biosVerified": true
-    },
-    "demo": true
-  },
-  {
-    "id": "memory-7",
-    "category": "memory",
-    "categoryLabel": "内存",
-    "brand": "星构 DEMO",
-    "name": "DDR5 32GB 双条套装",
-    "color": "白色",
-    "price": 370,
-    "specs": {
-      "ddr": "DDR5",
-      "tier": 4,
-      "capacity": 32,
-      "sticks": 2,
-      "height": 35
-    },
-    "demo": true
-  },
-  {
-    "id": "psu-7",
-    "category": "psu",
-    "categoryLabel": "电源",
-    "brand": "星构 DEMO",
-    "name": "P4 800W",
-    "color": "白色",
-    "price": 420,
-    "specs": {
-      "tier": 4,
-      "watts": 800,
-      "connector": "PCIe 8pin",
-      "connectors": 4,
-      "form": "ATX",
-      "length": 150,
-      "eps": 2
-    },
-    "demo": true
-  },
-  {
-    "id": "case-7",
-    "category": "case",
-    "categoryLabel": "机箱",
-    "brand": "星构 DEMO",
-    "name": "C4 机箱",
-    "color": "白色",
-    "price": 370,
-    "specs": {
-      "tier": 4,
-      "forms": [
-        "mATX",
-        "ATX"
-      ],
-      "gpuLength": 360,
-      "gpuSlots": 4,
-      "coolerHeight": 165,
-      "psuForm": "ATX",
-      "psuLength": 200,
-      "ramClearance": 45
-    },
-    "demo": true
-  },
-  {
-    "id": "storage-7",
+    "id": "real-storage-19",
     "category": "storage",
     "categoryLabel": "硬盘",
-    "brand": "星构 DEMO",
-    "name": "S4 1024GB NVMe",
+    "brand": "Samsung 三星",
+    "name": "9100 PRO 2TB (MZ-VAP2T0BW)",
     "color": "不适用",
-    "price": 400,
+    "price": 1400,
+    "demo": false,
     "specs": {
-      "tier": 4,
-      "capacity": 1024,
+      "capacity": 2000,
       "interface": "M.2 NVMe",
-      "length": 80
-    },
-    "demo": true
-  },
-  {
-    "id": "cooler-7",
-    "category": "cooler",
-    "categoryLabel": "散热",
-    "brand": "星构 DEMO",
-    "name": "T4 塔式散热",
-    "color": "白色",
-    "price": 212,
-    "specs": {
-      "tier": 4,
-      "sockets": [
-        "DEMO-A",
-        "DEMO-B"
-      ],
-      "height": 150,
-      "capacity": 180,
-      "ramClearance": 40
-    },
-    "demo": true
-  },
-  {
-    "id": "cpu-8",
-    "category": "cpu",
-    "categoryLabel": "CPU",
-    "brand": "星构 DEMO",
-    "name": "A5 处理器",
-    "color": "不适用",
-    "price": 1350,
-    "specs": {
-      "socket": "DEMO-A",
-      "ddr": "DDR4",
-      "tier": 5,
-      "cores": 14,
-      "power": 105
-    },
-    "demo": true
-  },
-  {
-    "id": "gpu-8",
-    "category": "gpu",
-    "categoryLabel": "GPU",
-    "brand": "星构 DEMO",
-    "name": "G5 16GB",
-    "color": "黑色",
-    "price": 3000,
-    "specs": {
-      "tier": 5,
-      "vram": 16,
-      "power": 190,
-      "length": 265,
-      "slots": 2,
-      "connector": "PCIe 8pin",
-      "connectors": 1
-    },
-    "demo": true
-  },
-  {
-    "id": "motherboard-8",
-    "category": "motherboard",
-    "categoryLabel": "主板",
-    "brand": "星构 DEMO",
-    "name": "A5 主板",
-    "color": "黑色",
-    "price": 650,
-    "specs": {
-      "socket": "DEMO-A",
-      "ddr": "DDR4",
-      "tier": 5,
-      "form": "mATX",
-      "ramSlots": 4,
-      "maxRam": 128,
-      "m2": true,
-      "supportedCpus": [
-        "cpu-0",
-        "cpu-2",
-        "cpu-4",
-        "cpu-6",
-        "cpu-8",
-        "cpu-10",
-        "cpu-12",
-        "cpu-14",
-        "cpu-16",
-        "cpu-18"
-      ],
-      "biosVerified": true
-    },
-    "demo": true
-  },
-  {
-    "id": "memory-8",
-    "category": "memory",
-    "categoryLabel": "内存",
-    "brand": "星构 DEMO",
-    "name": "DDR4 32GB 双条套装",
-    "color": "黑色",
-    "price": 435,
-    "specs": {
-      "ddr": "DDR4",
-      "tier": 5,
-      "capacity": 32,
-      "sticks": 2,
-      "height": 35
-    },
-    "demo": true
-  },
-  {
-    "id": "psu-8",
-    "category": "psu",
-    "categoryLabel": "电源",
-    "brand": "星构 DEMO",
-    "name": "P5 900W",
-    "color": "黑色",
-    "price": 485,
-    "specs": {
-      "tier": 5,
-      "watts": 900,
-      "connector": "PCIe 8pin",
-      "connectors": 4,
-      "form": "ATX",
-      "length": 150,
-      "eps": 2
-    },
-    "demo": true
-  },
-  {
-    "id": "case-8",
-    "category": "case",
-    "categoryLabel": "机箱",
-    "brand": "星构 DEMO",
-    "name": "C5 机箱",
-    "color": "黑色",
-    "price": 435,
-    "specs": {
-      "tier": 5,
-      "forms": [
-        "mATX",
-        "ATX"
-      ],
-      "gpuLength": 365,
-      "gpuSlots": 4,
-      "coolerHeight": 165,
-      "psuForm": "ATX",
-      "psuLength": 200,
-      "ramClearance": 45
-    },
-    "demo": true
-  },
-  {
-    "id": "storage-8",
-    "category": "storage",
-    "categoryLabel": "硬盘",
-    "brand": "星构 DEMO",
-    "name": "S5 1024GB NVMe",
-    "color": "不适用",
-    "price": 440,
-    "specs": {
-      "tier": 5,
-      "capacity": 1024,
-      "interface": "M.2 NVMe",
-      "length": 80
-    },
-    "demo": true
-  },
-  {
-    "id": "cooler-8",
-    "category": "cooler",
-    "categoryLabel": "散热",
-    "brand": "星构 DEMO",
-    "name": "T5 塔式散热",
-    "color": "黑色",
-    "price": 250,
-    "specs": {
-      "tier": 5,
-      "sockets": [
-        "DEMO-A",
-        "DEMO-B"
-      ],
-      "height": 150,
-      "capacity": 200,
-      "ramClearance": 40
-    },
-    "demo": true
-  },
-  {
-    "id": "cpu-9",
-    "category": "cpu",
-    "categoryLabel": "CPU",
-    "brand": "星构 DEMO",
-    "name": "B5 处理器",
-    "color": "不适用",
-    "price": 1350,
-    "specs": {
-      "socket": "DEMO-B",
-      "ddr": "DDR5",
-      "tier": 5,
-      "cores": 14,
-      "power": 105
-    },
-    "demo": true
-  },
-  {
-    "id": "gpu-9",
-    "category": "gpu",
-    "categoryLabel": "GPU",
-    "brand": "星构 DEMO",
-    "name": "G5 16GB",
-    "color": "白色",
-    "price": 3000,
-    "specs": {
-      "tier": 5,
-      "vram": 16,
-      "power": 190,
-      "length": 265,
-      "slots": 2,
-      "connector": "PCIe 8pin",
-      "connectors": 1
-    },
-    "demo": true
-  },
-  {
-    "id": "motherboard-9",
-    "category": "motherboard",
-    "categoryLabel": "主板",
-    "brand": "星构 DEMO",
-    "name": "B5 主板",
-    "color": "黑色",
-    "price": 650,
-    "specs": {
-      "socket": "DEMO-B",
-      "ddr": "DDR5",
-      "tier": 5,
-      "form": "mATX",
-      "ramSlots": 4,
-      "maxRam": 128,
-      "m2": true,
-      "supportedCpus": [
-        "cpu-1",
-        "cpu-3",
-        "cpu-5",
-        "cpu-7",
-        "cpu-9",
-        "cpu-11",
-        "cpu-13",
-        "cpu-15",
-        "cpu-17",
-        "cpu-19"
-      ],
-      "biosVerified": true
-    },
-    "demo": true
-  },
-  {
-    "id": "memory-9",
-    "category": "memory",
-    "categoryLabel": "内存",
-    "brand": "星构 DEMO",
-    "name": "DDR5 32GB 双条套装",
-    "color": "白色",
-    "price": 435,
-    "specs": {
-      "ddr": "DDR5",
-      "tier": 5,
-      "capacity": 32,
-      "sticks": 2,
-      "height": 35
-    },
-    "demo": true
-  },
-  {
-    "id": "psu-9",
-    "category": "psu",
-    "categoryLabel": "电源",
-    "brand": "星构 DEMO",
-    "name": "P5 900W",
-    "color": "白色",
-    "price": 485,
-    "specs": {
-      "tier": 5,
-      "watts": 900,
-      "connector": "PCIe 8pin",
-      "connectors": 4,
-      "form": "ATX",
-      "length": 150,
-      "eps": 2
-    },
-    "demo": true
-  },
-  {
-    "id": "case-9",
-    "category": "case",
-    "categoryLabel": "机箱",
-    "brand": "星构 DEMO",
-    "name": "C5 机箱",
-    "color": "白色",
-    "price": 435,
-    "specs": {
-      "tier": 5,
-      "forms": [
-        "mATX",
-        "ATX"
-      ],
-      "gpuLength": 365,
-      "gpuSlots": 4,
-      "coolerHeight": 165,
-      "psuForm": "ATX",
-      "psuLength": 200,
-      "ramClearance": 45
-    },
-    "demo": true
-  },
-  {
-    "id": "storage-9",
-    "category": "storage",
-    "categoryLabel": "硬盘",
-    "brand": "星构 DEMO",
-    "name": "S5 1024GB NVMe",
-    "color": "不适用",
-    "price": 460,
-    "specs": {
-      "tier": 5,
-      "capacity": 1024,
-      "interface": "M.2 NVMe",
-      "length": 80
-    },
-    "demo": true
-  },
-  {
-    "id": "cooler-9",
-    "category": "cooler",
-    "categoryLabel": "散热",
-    "brand": "星构 DEMO",
-    "name": "T5 塔式散热",
-    "color": "白色",
-    "price": 250,
-    "specs": {
-      "tier": 5,
-      "sockets": [
-        "DEMO-A",
-        "DEMO-B"
-      ],
-      "height": 150,
-      "capacity": 200,
-      "ramClearance": 40
-    },
-    "demo": true
-  },
-  {
-    "id": "cpu-10",
-    "category": "cpu",
-    "categoryLabel": "CPU",
-    "brand": "星构 DEMO",
-    "name": "A6 处理器",
-    "color": "不适用",
-    "price": 1812,
-    "specs": {
-      "socket": "DEMO-A",
-      "ddr": "DDR4",
-      "tier": 6,
-      "cores": 16,
-      "power": 117
-    },
-    "demo": true
-  },
-  {
-    "id": "gpu-10",
-    "category": "gpu",
-    "categoryLabel": "GPU",
-    "brand": "星构 DEMO",
-    "name": "G6 16GB",
-    "color": "黑色",
-    "price": 4100,
-    "specs": {
-      "tier": 6,
-      "vram": 16,
-      "power": 214,
-      "length": 274,
-      "slots": 3,
-      "connector": "PCIe 8pin",
-      "connectors": 2
-    },
-    "demo": true
-  },
-  {
-    "id": "motherboard-10",
-    "category": "motherboard",
-    "categoryLabel": "主板",
-    "brand": "星构 DEMO",
-    "name": "A6 主板",
-    "color": "黑色",
-    "price": 730,
-    "specs": {
-      "socket": "DEMO-A",
-      "ddr": "DDR4",
-      "tier": 6,
-      "form": "mATX",
-      "ramSlots": 4,
-      "maxRam": 128,
-      "m2": true,
-      "supportedCpus": [
-        "cpu-0",
-        "cpu-2",
-        "cpu-4",
-        "cpu-6",
-        "cpu-8",
-        "cpu-10",
-        "cpu-12",
-        "cpu-14",
-        "cpu-16",
-        "cpu-18"
-      ],
-      "biosVerified": true
-    },
-    "demo": true
-  },
-  {
-    "id": "memory-10",
-    "category": "memory",
-    "categoryLabel": "内存",
-    "brand": "星构 DEMO",
-    "name": "DDR4 32GB 双条套装",
-    "color": "黑色",
-    "price": 500,
-    "specs": {
-      "ddr": "DDR4",
-      "tier": 6,
-      "capacity": 32,
-      "sticks": 2,
-      "height": 35
-    },
-    "demo": true
-  },
-  {
-    "id": "psu-10",
-    "category": "psu",
-    "categoryLabel": "电源",
-    "brand": "星构 DEMO",
-    "name": "P6 1000W",
-    "color": "黑色",
-    "price": 550,
-    "specs": {
-      "tier": 6,
-      "watts": 1000,
-      "connector": "PCIe 8pin",
-      "connectors": 4,
-      "form": "ATX",
-      "length": 150,
-      "eps": 2
-    },
-    "demo": true
-  },
-  {
-    "id": "case-10",
-    "category": "case",
-    "categoryLabel": "机箱",
-    "brand": "星构 DEMO",
-    "name": "C6 机箱",
-    "color": "黑色",
-    "price": 500,
-    "specs": {
-      "tier": 6,
-      "forms": [
-        "mATX",
-        "ATX"
-      ],
-      "gpuLength": 370,
-      "gpuSlots": 4,
-      "coolerHeight": 165,
-      "psuForm": "ATX",
-      "psuLength": 200,
-      "ramClearance": 45
-    },
-    "demo": true
-  },
-  {
-    "id": "storage-10",
-    "category": "storage",
-    "categoryLabel": "硬盘",
-    "brand": "星构 DEMO",
-    "name": "S6 1024GB NVMe",
-    "color": "不适用",
-    "price": 500,
-    "specs": {
-      "tier": 6,
-      "capacity": 1024,
-      "interface": "M.2 NVMe",
-      "length": 80
-    },
-    "demo": true
-  },
-  {
-    "id": "cooler-10",
-    "category": "cooler",
-    "categoryLabel": "散热",
-    "brand": "星构 DEMO",
-    "name": "T6 塔式散热",
-    "color": "黑色",
-    "price": 288,
-    "specs": {
-      "tier": 6,
-      "sockets": [
-        "DEMO-A",
-        "DEMO-B"
-      ],
-      "height": 150,
-      "capacity": 220,
-      "ramClearance": 40
-    },
-    "demo": true
-  },
-  {
-    "id": "cpu-11",
-    "category": "cpu",
-    "categoryLabel": "CPU",
-    "brand": "星构 DEMO",
-    "name": "B6 处理器",
-    "color": "不适用",
-    "price": 1812,
-    "specs": {
-      "socket": "DEMO-B",
-      "ddr": "DDR5",
-      "tier": 6,
-      "cores": 16,
-      "power": 117
-    },
-    "demo": true
-  },
-  {
-    "id": "gpu-11",
-    "category": "gpu",
-    "categoryLabel": "GPU",
-    "brand": "星构 DEMO",
-    "name": "G6 16GB",
-    "color": "白色",
-    "price": 4100,
-    "specs": {
-      "tier": 6,
-      "vram": 16,
-      "power": 214,
-      "length": 274,
-      "slots": 3,
-      "connector": "PCIe 8pin",
-      "connectors": 2
-    },
-    "demo": true
-  },
-  {
-    "id": "motherboard-11",
-    "category": "motherboard",
-    "categoryLabel": "主板",
-    "brand": "星构 DEMO",
-    "name": "B6 主板",
-    "color": "黑色",
-    "price": 730,
-    "specs": {
-      "socket": "DEMO-B",
-      "ddr": "DDR5",
-      "tier": 6,
-      "form": "mATX",
-      "ramSlots": 4,
-      "maxRam": 128,
-      "m2": true,
-      "supportedCpus": [
-        "cpu-1",
-        "cpu-3",
-        "cpu-5",
-        "cpu-7",
-        "cpu-9",
-        "cpu-11",
-        "cpu-13",
-        "cpu-15",
-        "cpu-17",
-        "cpu-19"
-      ],
-      "biosVerified": true
-    },
-    "demo": true
-  },
-  {
-    "id": "memory-11",
-    "category": "memory",
-    "categoryLabel": "内存",
-    "brand": "星构 DEMO",
-    "name": "DDR5 32GB 双条套装",
-    "color": "白色",
-    "price": 500,
-    "specs": {
-      "ddr": "DDR5",
-      "tier": 6,
-      "capacity": 32,
-      "sticks": 2,
-      "height": 35
-    },
-    "demo": true
-  },
-  {
-    "id": "psu-11",
-    "category": "psu",
-    "categoryLabel": "电源",
-    "brand": "星构 DEMO",
-    "name": "P6 1000W",
-    "color": "白色",
-    "price": 550,
-    "specs": {
-      "tier": 6,
-      "watts": 1000,
-      "connector": "PCIe 8pin",
-      "connectors": 4,
-      "form": "ATX",
-      "length": 150,
-      "eps": 2
-    },
-    "demo": true
-  },
-  {
-    "id": "case-11",
-    "category": "case",
-    "categoryLabel": "机箱",
-    "brand": "星构 DEMO",
-    "name": "C6 机箱",
-    "color": "白色",
-    "price": 500,
-    "specs": {
-      "tier": 6,
-      "forms": [
-        "mATX",
-        "ATX"
-      ],
-      "gpuLength": 370,
-      "gpuSlots": 4,
-      "coolerHeight": 165,
-      "psuForm": "ATX",
-      "psuLength": 200,
-      "ramClearance": 45
-    },
-    "demo": true
-  },
-  {
-    "id": "storage-11",
-    "category": "storage",
-    "categoryLabel": "硬盘",
-    "brand": "星构 DEMO",
-    "name": "S6 1024GB NVMe",
-    "color": "不适用",
-    "price": 520,
-    "specs": {
-      "tier": 6,
-      "capacity": 1024,
-      "interface": "M.2 NVMe",
-      "length": 80
-    },
-    "demo": true
-  },
-  {
-    "id": "cooler-11",
-    "category": "cooler",
-    "categoryLabel": "散热",
-    "brand": "星构 DEMO",
-    "name": "T6 塔式散热",
-    "color": "白色",
-    "price": 288,
-    "specs": {
-      "tier": 6,
-      "sockets": [
-        "DEMO-A",
-        "DEMO-B"
-      ],
-      "height": 150,
-      "capacity": 220,
-      "ramClearance": 40
-    },
-    "demo": true
-  },
-  {
-    "id": "cpu-12",
-    "category": "cpu",
-    "categoryLabel": "CPU",
-    "brand": "星构 DEMO",
-    "name": "A7 处理器",
-    "color": "不适用",
-    "price": 2358,
-    "specs": {
-      "socket": "DEMO-A",
-      "ddr": "DDR4",
-      "tier": 7,
-      "cores": 18,
-      "power": 129
-    },
-    "demo": true
-  },
-  {
-    "id": "gpu-12",
-    "category": "gpu",
-    "categoryLabel": "GPU",
-    "brand": "星构 DEMO",
-    "name": "G7 16GB",
-    "color": "黑色",
-    "price": 5400,
-    "specs": {
-      "tier": 7,
-      "vram": 16,
-      "power": 238,
-      "length": 283,
-      "slots": 3,
-      "connector": "PCIe 8pin",
-      "connectors": 2
-    },
-    "demo": true
-  },
-  {
-    "id": "motherboard-12",
-    "category": "motherboard",
-    "categoryLabel": "主板",
-    "brand": "星构 DEMO",
-    "name": "A7 主板",
-    "color": "黑色",
-    "price": 810,
-    "specs": {
-      "socket": "DEMO-A",
-      "ddr": "DDR4",
-      "tier": 7,
-      "form": "mATX",
-      "ramSlots": 4,
-      "maxRam": 128,
-      "m2": true,
-      "supportedCpus": [
-        "cpu-0",
-        "cpu-2",
-        "cpu-4",
-        "cpu-6",
-        "cpu-8",
-        "cpu-10",
-        "cpu-12",
-        "cpu-14",
-        "cpu-16",
-        "cpu-18"
-      ],
-      "biosVerified": true
-    },
-    "demo": true
-  },
-  {
-    "id": "memory-12",
-    "category": "memory",
-    "categoryLabel": "内存",
-    "brand": "星构 DEMO",
-    "name": "DDR4 32GB 双条套装",
-    "color": "黑色",
-    "price": 565,
-    "specs": {
-      "ddr": "DDR4",
-      "tier": 7,
-      "capacity": 32,
-      "sticks": 2,
-      "height": 35
-    },
-    "demo": true
-  },
-  {
-    "id": "psu-12",
-    "category": "psu",
-    "categoryLabel": "电源",
-    "brand": "星构 DEMO",
-    "name": "P7 1100W",
-    "color": "黑色",
-    "price": 615,
-    "specs": {
-      "tier": 7,
-      "watts": 1100,
-      "connector": "PCIe 8pin",
-      "connectors": 4,
-      "form": "ATX",
-      "length": 150,
-      "eps": 2
-    },
-    "demo": true
-  },
-  {
-    "id": "case-12",
-    "category": "case",
-    "categoryLabel": "机箱",
-    "brand": "星构 DEMO",
-    "name": "C7 机箱",
-    "color": "黑色",
-    "price": 565,
-    "specs": {
-      "tier": 7,
-      "forms": [
-        "mATX",
-        "ATX"
-      ],
-      "gpuLength": 375,
-      "gpuSlots": 4,
-      "coolerHeight": 165,
-      "psuForm": "ATX",
-      "psuLength": 200,
-      "ramClearance": 45
-    },
-    "demo": true
-  },
-  {
-    "id": "storage-12",
-    "category": "storage",
-    "categoryLabel": "硬盘",
-    "brand": "星构 DEMO",
-    "name": "S7 2048GB NVMe",
-    "color": "不适用",
-    "price": 560,
-    "specs": {
-      "tier": 7,
-      "capacity": 2048,
-      "interface": "M.2 NVMe",
-      "length": 80
-    },
-    "demo": true
-  },
-  {
-    "id": "cooler-12",
-    "category": "cooler",
-    "categoryLabel": "散热",
-    "brand": "星构 DEMO",
-    "name": "T7 塔式散热",
-    "color": "黑色",
-    "price": 326,
-    "specs": {
-      "tier": 7,
-      "sockets": [
-        "DEMO-A",
-        "DEMO-B"
-      ],
-      "height": 150,
-      "capacity": 240,
-      "ramClearance": 40
-    },
-    "demo": true
-  },
-  {
-    "id": "cpu-13",
-    "category": "cpu",
-    "categoryLabel": "CPU",
-    "brand": "星构 DEMO",
-    "name": "B7 处理器",
-    "color": "不适用",
-    "price": 2358,
-    "specs": {
-      "socket": "DEMO-B",
-      "ddr": "DDR5",
-      "tier": 7,
-      "cores": 18,
-      "power": 129
-    },
-    "demo": true
-  },
-  {
-    "id": "gpu-13",
-    "category": "gpu",
-    "categoryLabel": "GPU",
-    "brand": "星构 DEMO",
-    "name": "G7 16GB",
-    "color": "白色",
-    "price": 5400,
-    "specs": {
-      "tier": 7,
-      "vram": 16,
-      "power": 238,
-      "length": 283,
-      "slots": 3,
-      "connector": "PCIe 8pin",
-      "connectors": 2
-    },
-    "demo": true
-  },
-  {
-    "id": "motherboard-13",
-    "category": "motherboard",
-    "categoryLabel": "主板",
-    "brand": "星构 DEMO",
-    "name": "B7 主板",
-    "color": "黑色",
-    "price": 810,
-    "specs": {
-      "socket": "DEMO-B",
-      "ddr": "DDR5",
-      "tier": 7,
-      "form": "mATX",
-      "ramSlots": 4,
-      "maxRam": 128,
-      "m2": true,
-      "supportedCpus": [
-        "cpu-1",
-        "cpu-3",
-        "cpu-5",
-        "cpu-7",
-        "cpu-9",
-        "cpu-11",
-        "cpu-13",
-        "cpu-15",
-        "cpu-17",
-        "cpu-19"
-      ],
-      "biosVerified": true
-    },
-    "demo": true
-  },
-  {
-    "id": "memory-13",
-    "category": "memory",
-    "categoryLabel": "内存",
-    "brand": "星构 DEMO",
-    "name": "DDR5 32GB 双条套装",
-    "color": "白色",
-    "price": 565,
-    "specs": {
-      "ddr": "DDR5",
-      "tier": 7,
-      "capacity": 32,
-      "sticks": 2,
-      "height": 35
-    },
-    "demo": true
-  },
-  {
-    "id": "psu-13",
-    "category": "psu",
-    "categoryLabel": "电源",
-    "brand": "星构 DEMO",
-    "name": "P7 1100W",
-    "color": "白色",
-    "price": 615,
-    "specs": {
-      "tier": 7,
-      "watts": 1100,
-      "connector": "PCIe 8pin",
-      "connectors": 4,
-      "form": "ATX",
-      "length": 150,
-      "eps": 2
-    },
-    "demo": true
-  },
-  {
-    "id": "case-13",
-    "category": "case",
-    "categoryLabel": "机箱",
-    "brand": "星构 DEMO",
-    "name": "C7 机箱",
-    "color": "白色",
-    "price": 565,
-    "specs": {
-      "tier": 7,
-      "forms": [
-        "mATX",
-        "ATX"
-      ],
-      "gpuLength": 375,
-      "gpuSlots": 4,
-      "coolerHeight": 165,
-      "psuForm": "ATX",
-      "psuLength": 200,
-      "ramClearance": 45
-    },
-    "demo": true
-  },
-  {
-    "id": "storage-13",
-    "category": "storage",
-    "categoryLabel": "硬盘",
-    "brand": "星构 DEMO",
-    "name": "S7 2048GB NVMe",
-    "color": "不适用",
-    "price": 580,
-    "specs": {
-      "tier": 7,
-      "capacity": 2048,
-      "interface": "M.2 NVMe",
-      "length": 80
-    },
-    "demo": true
-  },
-  {
-    "id": "cooler-13",
-    "category": "cooler",
-    "categoryLabel": "散热",
-    "brand": "星构 DEMO",
-    "name": "T7 塔式散热",
-    "color": "白色",
-    "price": 326,
-    "specs": {
-      "tier": 7,
-      "sockets": [
-        "DEMO-A",
-        "DEMO-B"
-      ],
-      "height": 150,
-      "capacity": 240,
-      "ramClearance": 40
-    },
-    "demo": true
-  },
-  {
-    "id": "cpu-14",
-    "category": "cpu",
-    "categoryLabel": "CPU",
-    "brand": "星构 DEMO",
-    "name": "A8 处理器",
-    "color": "不适用",
-    "price": 2988,
-    "specs": {
-      "socket": "DEMO-A",
-      "ddr": "DDR4",
-      "tier": 8,
-      "cores": 20,
-      "power": 141
-    },
-    "demo": true
-  },
-  {
-    "id": "gpu-14",
-    "category": "gpu",
-    "categoryLabel": "GPU",
-    "brand": "星构 DEMO",
-    "name": "G8 24GB",
-    "color": "黑色",
-    "price": 6900,
-    "specs": {
-      "tier": 8,
-      "vram": 24,
-      "power": 262,
-      "length": 292,
-      "slots": 3,
-      "connector": "PCIe 8pin",
-      "connectors": 2
-    },
-    "demo": true
-  },
-  {
-    "id": "motherboard-14",
-    "category": "motherboard",
-    "categoryLabel": "主板",
-    "brand": "星构 DEMO",
-    "name": "A8 主板",
-    "color": "黑色",
-    "price": 890,
-    "specs": {
-      "socket": "DEMO-A",
-      "ddr": "DDR4",
-      "tier": 8,
-      "form": "mATX",
-      "ramSlots": 4,
-      "maxRam": 128,
-      "m2": true,
-      "supportedCpus": [
-        "cpu-0",
-        "cpu-2",
-        "cpu-4",
-        "cpu-6",
-        "cpu-8",
-        "cpu-10",
-        "cpu-12",
-        "cpu-14",
-        "cpu-16",
-        "cpu-18"
-      ],
-      "biosVerified": true
-    },
-    "demo": true
-  },
-  {
-    "id": "memory-14",
-    "category": "memory",
-    "categoryLabel": "内存",
-    "brand": "星构 DEMO",
-    "name": "DDR4 64GB 双条套装",
-    "color": "黑色",
-    "price": 630,
-    "specs": {
-      "ddr": "DDR4",
-      "tier": 8,
-      "capacity": 64,
-      "sticks": 2,
-      "height": 35
-    },
-    "demo": true
-  },
-  {
-    "id": "psu-14",
-    "category": "psu",
-    "categoryLabel": "电源",
-    "brand": "星构 DEMO",
-    "name": "P8 1200W",
-    "color": "黑色",
-    "price": 680,
-    "specs": {
-      "tier": 8,
-      "watts": 1200,
-      "connector": "PCIe 8pin",
-      "connectors": 4,
-      "form": "ATX",
-      "length": 150,
-      "eps": 2
-    },
-    "demo": true
-  },
-  {
-    "id": "case-14",
-    "category": "case",
-    "categoryLabel": "机箱",
-    "brand": "星构 DEMO",
-    "name": "C8 机箱",
-    "color": "黑色",
-    "price": 630,
-    "specs": {
-      "tier": 8,
-      "forms": [
-        "mATX",
-        "ATX"
-      ],
-      "gpuLength": 380,
-      "gpuSlots": 4,
-      "coolerHeight": 165,
-      "psuForm": "ATX",
-      "psuLength": 200,
-      "ramClearance": 45
-    },
-    "demo": true
-  },
-  {
-    "id": "storage-14",
-    "category": "storage",
-    "categoryLabel": "硬盘",
-    "brand": "星构 DEMO",
-    "name": "S8 2048GB NVMe",
-    "color": "不适用",
-    "price": 620,
-    "specs": {
-      "tier": 8,
-      "capacity": 2048,
-      "interface": "M.2 NVMe",
-      "length": 80
-    },
-    "demo": true
-  },
-  {
-    "id": "cooler-14",
-    "category": "cooler",
-    "categoryLabel": "散热",
-    "brand": "星构 DEMO",
-    "name": "T8 塔式散热",
-    "color": "黑色",
-    "price": 364,
-    "specs": {
-      "tier": 8,
-      "sockets": [
-        "DEMO-A",
-        "DEMO-B"
-      ],
-      "height": 150,
-      "capacity": 260,
-      "ramClearance": 40
-    },
-    "demo": true
-  },
-  {
-    "id": "cpu-15",
-    "category": "cpu",
-    "categoryLabel": "CPU",
-    "brand": "星构 DEMO",
-    "name": "B8 处理器",
-    "color": "不适用",
-    "price": 2988,
-    "specs": {
-      "socket": "DEMO-B",
-      "ddr": "DDR5",
-      "tier": 8,
-      "cores": 20,
-      "power": 141
-    },
-    "demo": true
-  },
-  {
-    "id": "gpu-15",
-    "category": "gpu",
-    "categoryLabel": "GPU",
-    "brand": "星构 DEMO",
-    "name": "G8 24GB",
-    "color": "白色",
-    "price": 6900,
-    "specs": {
-      "tier": 8,
-      "vram": 24,
-      "power": 262,
-      "length": 292,
-      "slots": 3,
-      "connector": "PCIe 8pin",
-      "connectors": 2
-    },
-    "demo": true
-  },
-  {
-    "id": "motherboard-15",
-    "category": "motherboard",
-    "categoryLabel": "主板",
-    "brand": "星构 DEMO",
-    "name": "B8 主板",
-    "color": "黑色",
-    "price": 890,
-    "specs": {
-      "socket": "DEMO-B",
-      "ddr": "DDR5",
-      "tier": 8,
-      "form": "mATX",
-      "ramSlots": 4,
-      "maxRam": 128,
-      "m2": true,
-      "supportedCpus": [
-        "cpu-1",
-        "cpu-3",
-        "cpu-5",
-        "cpu-7",
-        "cpu-9",
-        "cpu-11",
-        "cpu-13",
-        "cpu-15",
-        "cpu-17",
-        "cpu-19"
-      ],
-      "biosVerified": true
-    },
-    "demo": true
-  },
-  {
-    "id": "memory-15",
-    "category": "memory",
-    "categoryLabel": "内存",
-    "brand": "星构 DEMO",
-    "name": "DDR5 64GB 双条套装",
-    "color": "白色",
-    "price": 630,
-    "specs": {
-      "ddr": "DDR5",
-      "tier": 8,
-      "capacity": 64,
-      "sticks": 2,
-      "height": 35
-    },
-    "demo": true
-  },
-  {
-    "id": "psu-15",
-    "category": "psu",
-    "categoryLabel": "电源",
-    "brand": "星构 DEMO",
-    "name": "P8 1200W",
-    "color": "白色",
-    "price": 680,
-    "specs": {
-      "tier": 8,
-      "watts": 1200,
-      "connector": "PCIe 8pin",
-      "connectors": 4,
-      "form": "ATX",
-      "length": 150,
-      "eps": 2
-    },
-    "demo": true
-  },
-  {
-    "id": "case-15",
-    "category": "case",
-    "categoryLabel": "机箱",
-    "brand": "星构 DEMO",
-    "name": "C8 机箱",
-    "color": "白色",
-    "price": 630,
-    "specs": {
-      "tier": 8,
-      "forms": [
-        "mATX",
-        "ATX"
-      ],
-      "gpuLength": 380,
-      "gpuSlots": 4,
-      "coolerHeight": 165,
-      "psuForm": "ATX",
-      "psuLength": 200,
-      "ramClearance": 45
-    },
-    "demo": true
-  },
-  {
-    "id": "storage-15",
-    "category": "storage",
-    "categoryLabel": "硬盘",
-    "brand": "星构 DEMO",
-    "name": "S8 2048GB NVMe",
-    "color": "不适用",
-    "price": 640,
-    "specs": {
-      "tier": 8,
-      "capacity": 2048,
-      "interface": "M.2 NVMe",
-      "length": 80
-    },
-    "demo": true
-  },
-  {
-    "id": "cooler-15",
-    "category": "cooler",
-    "categoryLabel": "散热",
-    "brand": "星构 DEMO",
-    "name": "T8 塔式散热",
-    "color": "白色",
-    "price": 364,
-    "specs": {
-      "tier": 8,
-      "sockets": [
-        "DEMO-A",
-        "DEMO-B"
-      ],
-      "height": 150,
-      "capacity": 260,
-      "ramClearance": 40
-    },
-    "demo": true
-  },
-  {
-    "id": "cpu-16",
-    "category": "cpu",
-    "categoryLabel": "CPU",
-    "brand": "星构 DEMO",
-    "name": "A9 处理器",
-    "color": "不适用",
-    "price": 3702,
-    "specs": {
-      "socket": "DEMO-A",
-      "ddr": "DDR4",
-      "tier": 9,
-      "cores": 22,
-      "power": 153
-    },
-    "demo": true
-  },
-  {
-    "id": "gpu-16",
-    "category": "gpu",
-    "categoryLabel": "GPU",
-    "brand": "星构 DEMO",
-    "name": "G9 24GB",
-    "color": "黑色",
-    "price": 8600,
-    "specs": {
-      "tier": 9,
-      "vram": 24,
-      "power": 286,
-      "length": 301,
-      "slots": 3,
-      "connector": "PCIe 8pin",
-      "connectors": 2
-    },
-    "demo": true
-  },
-  {
-    "id": "motherboard-16",
-    "category": "motherboard",
-    "categoryLabel": "主板",
-    "brand": "星构 DEMO",
-    "name": "A9 主板",
-    "color": "黑色",
-    "price": 970,
-    "specs": {
-      "socket": "DEMO-A",
-      "ddr": "DDR4",
-      "tier": 9,
-      "form": "mATX",
-      "ramSlots": 4,
-      "maxRam": 128,
-      "m2": true,
-      "supportedCpus": [
-        "cpu-0",
-        "cpu-2",
-        "cpu-4",
-        "cpu-6",
-        "cpu-8",
-        "cpu-10",
-        "cpu-12",
-        "cpu-14",
-        "cpu-16",
-        "cpu-18"
-      ],
-      "biosVerified": true
-    },
-    "demo": true
-  },
-  {
-    "id": "memory-16",
-    "category": "memory",
-    "categoryLabel": "内存",
-    "brand": "星构 DEMO",
-    "name": "DDR4 64GB 双条套装",
-    "color": "黑色",
-    "price": 695,
-    "specs": {
-      "ddr": "DDR4",
-      "tier": 9,
-      "capacity": 64,
-      "sticks": 2,
-      "height": 35
-    },
-    "demo": true
-  },
-  {
-    "id": "psu-16",
-    "category": "psu",
-    "categoryLabel": "电源",
-    "brand": "星构 DEMO",
-    "name": "P9 1300W",
-    "color": "黑色",
-    "price": 745,
-    "specs": {
-      "tier": 9,
-      "watts": 1300,
-      "connector": "PCIe 8pin",
-      "connectors": 4,
-      "form": "ATX",
-      "length": 150,
-      "eps": 2
-    },
-    "demo": true
-  },
-  {
-    "id": "case-16",
-    "category": "case",
-    "categoryLabel": "机箱",
-    "brand": "星构 DEMO",
-    "name": "C9 机箱",
-    "color": "黑色",
-    "price": 695,
-    "specs": {
-      "tier": 9,
-      "forms": [
-        "mATX",
-        "ATX"
-      ],
-      "gpuLength": 385,
-      "gpuSlots": 4,
-      "coolerHeight": 165,
-      "psuForm": "ATX",
-      "psuLength": 200,
-      "ramClearance": 45
-    },
-    "demo": true
-  },
-  {
-    "id": "storage-16",
-    "category": "storage",
-    "categoryLabel": "硬盘",
-    "brand": "星构 DEMO",
-    "name": "S9 2048GB NVMe",
-    "color": "不适用",
-    "price": 680,
-    "specs": {
-      "tier": 9,
-      "capacity": 2048,
-      "interface": "M.2 NVMe",
-      "length": 80
-    },
-    "demo": true
-  },
-  {
-    "id": "cooler-16",
-    "category": "cooler",
-    "categoryLabel": "散热",
-    "brand": "星构 DEMO",
-    "name": "T9 塔式散热",
-    "color": "黑色",
-    "price": 402,
-    "specs": {
-      "tier": 9,
-      "sockets": [
-        "DEMO-A",
-        "DEMO-B"
-      ],
-      "height": 150,
-      "capacity": 280,
-      "ramClearance": 40
-    },
-    "demo": true
-  },
-  {
-    "id": "cpu-17",
-    "category": "cpu",
-    "categoryLabel": "CPU",
-    "brand": "星构 DEMO",
-    "name": "B9 处理器",
-    "color": "不适用",
-    "price": 3702,
-    "specs": {
-      "socket": "DEMO-B",
-      "ddr": "DDR5",
-      "tier": 9,
-      "cores": 22,
-      "power": 153
-    },
-    "demo": true
-  },
-  {
-    "id": "gpu-17",
-    "category": "gpu",
-    "categoryLabel": "GPU",
-    "brand": "星构 DEMO",
-    "name": "G9 24GB",
-    "color": "白色",
-    "price": 8600,
-    "specs": {
-      "tier": 9,
-      "vram": 24,
-      "power": 286,
-      "length": 301,
-      "slots": 3,
-      "connector": "PCIe 8pin",
-      "connectors": 2
-    },
-    "demo": true
-  },
-  {
-    "id": "motherboard-17",
-    "category": "motherboard",
-    "categoryLabel": "主板",
-    "brand": "星构 DEMO",
-    "name": "B9 主板",
-    "color": "黑色",
-    "price": 970,
-    "specs": {
-      "socket": "DEMO-B",
-      "ddr": "DDR5",
-      "tier": 9,
-      "form": "mATX",
-      "ramSlots": 4,
-      "maxRam": 128,
-      "m2": true,
-      "supportedCpus": [
-        "cpu-1",
-        "cpu-3",
-        "cpu-5",
-        "cpu-7",
-        "cpu-9",
-        "cpu-11",
-        "cpu-13",
-        "cpu-15",
-        "cpu-17",
-        "cpu-19"
-      ],
-      "biosVerified": true
-    },
-    "demo": true
-  },
-  {
-    "id": "memory-17",
-    "category": "memory",
-    "categoryLabel": "内存",
-    "brand": "星构 DEMO",
-    "name": "DDR5 64GB 双条套装",
-    "color": "白色",
-    "price": 695,
-    "specs": {
-      "ddr": "DDR5",
-      "tier": 9,
-      "capacity": 64,
-      "sticks": 2,
-      "height": 35
-    },
-    "demo": true
-  },
-  {
-    "id": "psu-17",
-    "category": "psu",
-    "categoryLabel": "电源",
-    "brand": "星构 DEMO",
-    "name": "P9 1300W",
-    "color": "白色",
-    "price": 745,
-    "specs": {
-      "tier": 9,
-      "watts": 1300,
-      "connector": "PCIe 8pin",
-      "connectors": 4,
-      "form": "ATX",
-      "length": 150,
-      "eps": 2
-    },
-    "demo": true
-  },
-  {
-    "id": "case-17",
-    "category": "case",
-    "categoryLabel": "机箱",
-    "brand": "星构 DEMO",
-    "name": "C9 机箱",
-    "color": "白色",
-    "price": 695,
-    "specs": {
-      "tier": 9,
-      "forms": [
-        "mATX",
-        "ATX"
-      ],
-      "gpuLength": 385,
-      "gpuSlots": 4,
-      "coolerHeight": 165,
-      "psuForm": "ATX",
-      "psuLength": 200,
-      "ramClearance": 45
-    },
-    "demo": true
-  },
-  {
-    "id": "storage-17",
-    "category": "storage",
-    "categoryLabel": "硬盘",
-    "brand": "星构 DEMO",
-    "name": "S9 2048GB NVMe",
-    "color": "不适用",
-    "price": 700,
-    "specs": {
-      "tier": 9,
-      "capacity": 2048,
-      "interface": "M.2 NVMe",
-      "length": 80
-    },
-    "demo": true
-  },
-  {
-    "id": "cooler-17",
-    "category": "cooler",
-    "categoryLabel": "散热",
-    "brand": "星构 DEMO",
-    "name": "T9 塔式散热",
-    "color": "白色",
-    "price": 402,
-    "specs": {
-      "tier": 9,
-      "sockets": [
-        "DEMO-A",
-        "DEMO-B"
-      ],
-      "height": 150,
-      "capacity": 280,
-      "ramClearance": 40
-    },
-    "demo": true
-  },
-  {
-    "id": "cpu-18",
-    "category": "cpu",
-    "categoryLabel": "CPU",
-    "brand": "星构 DEMO",
-    "name": "A10 处理器",
-    "color": "不适用",
-    "price": 4500,
-    "specs": {
-      "socket": "DEMO-A",
-      "ddr": "DDR4",
-      "tier": 10,
-      "cores": 24,
-      "power": 165
-    },
-    "demo": true
-  },
-  {
-    "id": "gpu-18",
-    "category": "gpu",
-    "categoryLabel": "GPU",
-    "brand": "星构 DEMO",
-    "name": "G10 24GB",
-    "color": "黑色",
-    "price": 10500,
-    "specs": {
-      "tier": 10,
-      "vram": 24,
-      "power": 310,
-      "length": 310,
-      "slots": 3,
-      "connector": "PCIe 8pin",
-      "connectors": 2
-    },
-    "demo": true
-  },
-  {
-    "id": "motherboard-18",
-    "category": "motherboard",
-    "categoryLabel": "主板",
-    "brand": "星构 DEMO",
-    "name": "A10 主板",
-    "color": "黑色",
-    "price": 1050,
-    "specs": {
-      "socket": "DEMO-A",
-      "ddr": "DDR4",
-      "tier": 10,
-      "form": "mATX",
-      "ramSlots": 4,
-      "maxRam": 128,
-      "m2": true,
-      "supportedCpus": [
-        "cpu-0",
-        "cpu-2",
-        "cpu-4",
-        "cpu-6",
-        "cpu-8",
-        "cpu-10",
-        "cpu-12",
-        "cpu-14",
-        "cpu-16",
-        "cpu-18"
-      ],
-      "biosVerified": true
-    },
-    "demo": true
-  },
-  {
-    "id": "memory-18",
-    "category": "memory",
-    "categoryLabel": "内存",
-    "brand": "星构 DEMO",
-    "name": "DDR4 64GB 双条套装",
-    "color": "黑色",
-    "price": 760,
-    "specs": {
-      "ddr": "DDR4",
-      "tier": 10,
-      "capacity": 64,
-      "sticks": 2,
-      "height": 35
-    },
-    "demo": true
-  },
-  {
-    "id": "psu-18",
-    "category": "psu",
-    "categoryLabel": "电源",
-    "brand": "星构 DEMO",
-    "name": "P10 1400W",
-    "color": "黑色",
-    "price": 810,
-    "specs": {
-      "tier": 10,
-      "watts": 1400,
-      "connector": "PCIe 8pin",
-      "connectors": 4,
-      "form": "ATX",
-      "length": 150,
-      "eps": 2
-    },
-    "demo": true
-  },
-  {
-    "id": "case-18",
-    "category": "case",
-    "categoryLabel": "机箱",
-    "brand": "星构 DEMO",
-    "name": "C10 机箱",
-    "color": "黑色",
-    "price": 760,
-    "specs": {
-      "tier": 10,
-      "forms": [
-        "mATX",
-        "ATX"
-      ],
-      "gpuLength": 390,
-      "gpuSlots": 4,
-      "coolerHeight": 165,
-      "psuForm": "ATX",
-      "psuLength": 200,
-      "ramClearance": 45
-    },
-    "demo": true
-  },
-  {
-    "id": "storage-18",
-    "category": "storage",
-    "categoryLabel": "硬盘",
-    "brand": "星构 DEMO",
-    "name": "S10 2048GB NVMe",
-    "color": "不适用",
-    "price": 740,
-    "specs": {
-      "tier": 10,
-      "capacity": 2048,
-      "interface": "M.2 NVMe",
-      "length": 80
-    },
-    "demo": true
-  },
-  {
-    "id": "cooler-18",
-    "category": "cooler",
-    "categoryLabel": "散热",
-    "brand": "星构 DEMO",
-    "name": "T10 塔式散热",
-    "color": "黑色",
-    "price": 440,
-    "specs": {
-      "tier": 10,
-      "sockets": [
-        "DEMO-A",
-        "DEMO-B"
-      ],
-      "height": 150,
-      "capacity": 300,
-      "ramClearance": 40
-    },
-    "demo": true
-  },
-  {
-    "id": "cpu-19",
-    "category": "cpu",
-    "categoryLabel": "CPU",
-    "brand": "星构 DEMO",
-    "name": "B10 处理器",
-    "color": "不适用",
-    "price": 4500,
-    "specs": {
-      "socket": "DEMO-B",
-      "ddr": "DDR5",
-      "tier": 10,
-      "cores": 24,
-      "power": 165
-    },
-    "demo": true
-  },
-  {
-    "id": "gpu-19",
-    "category": "gpu",
-    "categoryLabel": "GPU",
-    "brand": "星构 DEMO",
-    "name": "G10 24GB",
-    "color": "白色",
-    "price": 10500,
-    "specs": {
-      "tier": 10,
-      "vram": 24,
-      "power": 310,
-      "length": 310,
-      "slots": 3,
-      "connector": "PCIe 8pin",
-      "connectors": 2
-    },
-    "demo": true
-  },
-  {
-    "id": "motherboard-19",
-    "category": "motherboard",
-    "categoryLabel": "主板",
-    "brand": "星构 DEMO",
-    "name": "B10 主板",
-    "color": "黑色",
-    "price": 1050,
-    "specs": {
-      "socket": "DEMO-B",
-      "ddr": "DDR5",
-      "tier": 10,
-      "form": "mATX",
-      "ramSlots": 4,
-      "maxRam": 128,
-      "m2": true,
-      "supportedCpus": [
-        "cpu-1",
-        "cpu-3",
-        "cpu-5",
-        "cpu-7",
-        "cpu-9",
-        "cpu-11",
-        "cpu-13",
-        "cpu-15",
-        "cpu-17",
-        "cpu-19"
-      ],
-      "biosVerified": true
-    },
-    "demo": true
-  },
-  {
-    "id": "memory-19",
-    "category": "memory",
-    "categoryLabel": "内存",
-    "brand": "星构 DEMO",
-    "name": "DDR5 64GB 双条套装",
-    "color": "白色",
-    "price": 760,
-    "specs": {
-      "ddr": "DDR5",
-      "tier": 10,
-      "capacity": 64,
-      "sticks": 2,
-      "height": 35
-    },
-    "demo": true
-  },
-  {
-    "id": "psu-19",
-    "category": "psu",
-    "categoryLabel": "电源",
-    "brand": "星构 DEMO",
-    "name": "P10 1400W",
-    "color": "白色",
-    "price": 810,
-    "specs": {
-      "tier": 10,
-      "watts": 1400,
-      "connector": "PCIe 8pin",
-      "connectors": 4,
-      "form": "ATX",
-      "length": 150,
-      "eps": 2
-    },
-    "demo": true
-  },
-  {
-    "id": "case-19",
-    "category": "case",
-    "categoryLabel": "机箱",
-    "brand": "星构 DEMO",
-    "name": "C10 机箱",
-    "color": "白色",
-    "price": 760,
-    "specs": {
-      "tier": 10,
-      "forms": [
-        "mATX",
-        "ATX"
-      ],
-      "gpuLength": 390,
-      "gpuSlots": 4,
-      "coolerHeight": 165,
-      "psuForm": "ATX",
-      "psuLength": 200,
-      "ramClearance": 45
-    },
-    "demo": true
-  },
-  {
-    "id": "storage-19",
-    "category": "storage",
-    "categoryLabel": "硬盘",
-    "brand": "星构 DEMO",
-    "name": "S10 2048GB NVMe",
-    "color": "不适用",
-    "price": 760,
-    "specs": {
-      "tier": 10,
-      "capacity": 2048,
-      "interface": "M.2 NVMe",
-      "length": 80
-    },
-    "demo": true
-  },
-  {
-    "id": "cooler-19",
-    "category": "cooler",
-    "categoryLabel": "散热",
-    "brand": "星构 DEMO",
-    "name": "T10 塔式散热",
-    "color": "白色",
-    "price": 440,
-    "specs": {
-      "tier": 10,
-      "sockets": [
-        "DEMO-A",
-        "DEMO-B"
-      ],
-      "height": 150,
-      "capacity": 300,
-      "ramClearance": 40
-    },
-    "demo": true
+      "source": "https://semiconductor.samsung.com/consumer-storage/magician/",
+      "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored"
+    }
   }
 ]

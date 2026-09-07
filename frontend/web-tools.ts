@@ -19,7 +19,7 @@ export function registerConfigurationTool(
         name: 'generate_pc_configuration',
         title: '生成主机配置',
         description:
-          '按预算和用途生成主机方案并更新当前页面。会保存当前会话的方案。',
+          '按预算和用途生成主机方案并更新当前页面。保存当前会话的方案。',
         inputSchema: {
           type: 'object',
           properties: {

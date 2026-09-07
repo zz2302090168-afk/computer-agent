@@ -16,10 +16,14 @@ export async function loadCatalog(): Promise<{
   // Tables are created only by migrations. Data initialization is idempotent and never overwrites merchant edits.
   const initialized = await db
     .prepare('SELECT value FROM metadata WHERE key=?')
-    .bind('seed-v1')
+    .bind('real-catalog-v2')
     .first();
   if (!initialized) {
     await db.batch([
+      db.prepare(`DELETE FROM conversations WHERE id IN (SELECT id FROM sessions WHERE plans LIKE '%"demo":true%')`),
+      db.prepare(`DELETE FROM sessions WHERE plans LIKE '%"demo":true%'`),
+      db.prepare("DELETE FROM prebuilts WHERE demo=1 AND brand='星构 DEMO'"),
+      db.prepare("DELETE FROM products WHERE demo=1 AND brand='星构 DEMO'"),
       ...seedParts.map((p) =>
         db
           .prepare(
@@ -33,7 +37,7 @@ export async function loadCatalog(): Promise<{
             p.color,
             p.price,
             JSON.stringify(p.specs),
-            1,
+            p.demo ? 1 : 0,
           ),
       ),
       ...seedPcs.map((p) =>
@@ -48,12 +52,12 @@ export async function loadCatalog(): Promise<{
             p.color,
             p.price,
             JSON.stringify(p.partIds),
-            1,
+            p.demo ? 1 : 0,
           ),
       ),
       db
         .prepare('INSERT OR IGNORE INTO metadata(key,value) VALUES(?,?)')
-        .bind('seed-v1', 'initialized'),
+        .bind('real-catalog-v2', 'initialized'),
     ]);
   }
   const [a, b] = await Promise.all([

@@ -1,1 +1,1 @@
-export { default } from '../frontend/workspace';
+export { default } from '../frontend/chat';

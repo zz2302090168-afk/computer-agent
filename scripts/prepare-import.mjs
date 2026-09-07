@@ -61,7 +61,7 @@ const sql = [
     (p) =>
       `INSERT INTO prebuilts(id,name,brand,color,price,part_ids,demo) VALUES(${[p.id, p.name, p.brand, p.color, p.price, JSON.stringify(p.partIds), p.demo ? 1 : 0].map(q).join(',')});`,
   ),
-  "INSERT OR REPLACE INTO metadata(key,value) VALUES('seed-v1','merchant-import');",
+  "INSERT OR REPLACE INTO metadata(key,value) VALUES('real-catalog-v2','merchant-import');",
   'COMMIT;',
 ];
 await writeFile('data/merchant-import.sql', sql.join('\n'));
