@@ -1,32 +1,108 @@
+import { fixture } from './pc-fixture';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { withinBudget, budgetRange } from '../rules/budget';
 import { validateBuild } from '../rules/compatibility';
-import { parseRequirements } from '../agent/requirements';
-import { assembleBuild, recommend, replacePart } from '../services/recommend';
+import {
+  assembleBuild,
+  findDiyBudgetReferences,
+  recommend,
+  replacePart,
+  selectPrebuilt,
+} from '../services/recommend';
 import { searchCatalog } from '../services/catalog-search';
+import { auditDelivery } from '../services/delivery-audit';
 import { parts, prebuilts } from '../../data/seed/catalog';
 import { retrieveKnowledge } from '../rag/retrieve';
+import { embeddingConfig, embeddingFetch } from './embedding-fixture';
 import {
   applyDraft,
   changesRecommendation,
   completeRequirements,
-  inferExplicitPatch,
 } from '../agent/conversation-state';
 import {
   createToolRegistry,
   executeRegisteredTool,
   registeredTools,
 } from '../tools/registry';
-import type { RegisteredTool, ToolRuntime } from '../tools/types';
+import type { RegisteredTool, ToolContext, ToolRuntime } from '../tools/types';
+import type { Requirements } from '../domain/types';
 import { stripLegacyFps } from '../domain/sanitize';
-import { DatabaseSync } from 'node:sqlite';
 import { readFileSync } from 'node:fs';
-const req = parseRequirements({
+import { conversationToolChoice } from '../agent/conversation';
+import { requiredPartColor } from '../rules/color';
+import { searchCatalogTool } from '../tools/catalog';
+import { assertSameOrigin } from '../api/http';
+import { buildConversationPrompt } from '../agent/prompts';
+const req: Requirements = {
   budget: 6000,
   purpose: '游戏',
   mode: 'both',
   color: '不限',
+  hardCap: false,
+  message: '',
+  brand: '',
+  game: '',
+};
+void test('组装机与DIY措辞在系统提示中路由到不同购买方式', () => {
+  const prompt = buildConversationPrompt({
+    taskId: 'task',
+    currentMessageId: 'message',
+    draft: {},
+    result: null,
+    tasks: [],
+    facts: [],
+  });
+  assert.match(prompt, /“9000预算组装机”[\s\S]*"mode":"prebuilt"/);
+  assert.match(prompt, /“9000预算DIY”[\s\S]*"mode":"diy"/);
+});
+void test('同源校验使用浏览器实际访问主机并拒绝跨站来源', () => {
+  assert.doesNotThrow(() =>
+    assertSameOrigin(
+      new Request('http://localhost:3000/api/chat', {
+        method: 'PUT',
+        headers: {
+          host: '192.168.1.5:3000',
+          origin: 'http://192.168.1.5:3000',
+        },
+      }),
+    ),
+  );
+  assert.throws(
+    () =>
+      assertSameOrigin(
+        new Request('http://localhost:3000/api/chat', {
+          method: 'PUT',
+          headers: {
+            host: '192.168.1.5:3000',
+            origin: 'https://example.com',
+          },
+        }),
+      ),
+    /拒绝跨站写入请求/,
+  );
+});
+void test('配置仍需探索时强制模型继续调用工具', () => {
+  assert.equal(
+    conversationToolChoice({ status: 'continue', reason: '待生成' }, 1, 16),
+    'required',
+  );
+  assert.equal(conversationToolChoice(undefined, 1, 16), 'auto');
+  assert.equal(conversationToolChoice(undefined, 15, 16), 'none');
+});
+void test('CPU和硬盘不接受颜色约束或颜色查询', async () => {
+  const f = fixture();
+  const storage = f.catalog.parts.find((part) => part.category === 'storage')!;
+  assert.equal(requiredPartColor(storage, { color: '白色' }), undefined);
+  assert.throws(() => applyDraft({}, { partColors: { storage: '白色' } }));
+  await assert.rejects(
+    searchCatalogTool.execute(
+      { kind: 'part', category: 'storage', color: '白色' },
+      f.context,
+      f.runtime,
+    ),
+    /不参与配色/,
+  );
 });
 void test('预算严格覆盖正负1000边界与明确上限', () => {
   assert.ok(withinBudget(5000, 6000));
@@ -56,14 +132,119 @@ void test('160个SKU，无库存数量或在售字段', () => {
     { color: '白色', price: 7000 },
   );
 });
-void test('全部商家整机无已知规格冲突，未知项明确保留', () => {
+void test('推定兼容规格有可审计来源，且不会伪装为厂家核实', () => {
+  const fields: [string, string][] = [
+    ['motherboard', 'supportedCpus'],
+    ['motherboard', 'maxRam'],
+    ['case', 'gpuThickness'],
+    ['memory', 'height'],
+    ['cooler', 'ramClearance'],
+    ['psu', 'connectorCounts'],
+  ];
+  for (const [category, field] of fields) {
+    const entries = parts.filter((part) => part.category === category);
+    let inferredCount = 0;
+    assert.ok(entries.length);
+    for (const part of entries) {
+      assert.notEqual(part.specs[field], undefined);
+      if (
+        !Array.isArray(part.specs.inferredFields) ||
+        !part.specs.inferredFields.includes(field)
+      )
+        continue;
+      inferredCount++;
+      const provenance = part.specs.provenance as Record<
+        string,
+        Record<string, unknown>
+      >;
+      assert.equal(provenance[field]?.origin, 'synthetic');
+      assert.equal(provenance[field]?.status, 'inferred');
+      assert.equal(provenance[field]?.manufacturerVerified, false);
+    }
+    assert.ok(inferredCount);
+  }
+  for (const board of parts.filter((part) => part.category === 'motherboard')) {
+    assert.equal(board.specs.biosVerified, false);
+    const provenance = board.specs.provenance as Record<
+      string,
+      Record<string, unknown>
+    >;
+    assert.equal(provenance.biosVerified?.status, 'unverified');
+    assert.equal(provenance.biosVerified?.manufacturerVerified, false);
+  }
+});
+void test('推定值可初筛冲突，但通过时仍保留推定假设', () => {
+  const f = fixture();
+  const inferred = structuredClone(f.runtime.result!.plans[0]!.parts);
+  const byCategory = Object.fromEntries(
+    inferred.map((part) => [part.category, part]),
+  );
+  const board = byCategory.motherboard!;
+  board.specs.provenance = {
+    supportedCpus: { origin: 'synthetic', status: 'inferred' },
+  };
+  board.specs.inferredFields = ['supportedCpus'];
+  const screened = validateBuild(inferred);
+  assert.equal(screened.status, 'unknown');
+  assert.ok(screened.issues.some((item) => item.includes('推定值初筛通过')));
+  const box = byCategory.case!;
+  box.specs.gpuThickness = 30;
+  box.specs.provenance = {
+    gpuThickness: { origin: 'synthetic', status: 'inferred' },
+  };
+  box.specs.inferredFields = ['gpuThickness'];
+  const rejected = validateBuild(inferred);
+  assert.equal(rejected.status, 'fail');
+  assert.ok(rejected.issues.some((item) => item.includes('基于推定值初筛')));
+});
+void test('全部商家整机均引用数据库中八类完整商品', () => {
   assert.equal(prebuilts.length, 20);
   for (const pc of prebuilts) {
     const ps = pc.partIds.map((id) => parts.find((p) => p.id === id)!);
     assert.equal(pc.partIds.length, 8, pc.id);
     assert.equal(new Set(ps.map((p) => p.category)).size, 8, pc.id);
     assert.ok(ps.every(Boolean), pc.id);
-    assert.notEqual(validateBuild(ps).status, 'fail', pc.id);
+  }
+});
+void test('六类配色商品各半，白色完整配置通过统一交付审核', () => {
+  const coloredCategories = [
+    'gpu',
+    'memory',
+    'motherboard',
+    'psu',
+    'case',
+    'cooler',
+  ];
+  for (const category of coloredCategories) {
+    const items = parts.filter((part) => part.category === category);
+    assert.equal(
+      items.filter((part) => part.color === '白色').length,
+      10,
+      category,
+    );
+    assert.equal(
+      items.filter((part) => part.color.includes('黑色')).length,
+      10,
+      category,
+    );
+  }
+  const requirements: Requirements = {
+    ...req,
+    budget: 9000,
+    color: '白色',
+    mode: 'diy',
+  };
+  const plans = recommend(requirements, parts, prebuilts);
+  assert.ok(plans.length > 0);
+  for (const plan of auditDelivery(plans, requirements, { parts, prebuilts })) {
+    assert.equal(plan.parts.length, 8);
+    assert.equal(plan.deliveryAudit?.status, 'passed');
+    assert.ok(
+      plan.parts
+        .filter((part) => coloredCategories.includes(part.category))
+        .every((part) => part.color === '白色'),
+    );
+    assert.notEqual(plan.validation.status, 'fail');
   }
 });
 void test('接口、尺寸、缺失规格和重复类别不能被当成兼容', () => {
@@ -77,6 +258,26 @@ void test('接口、尺寸、缺失规格和重复类别不能被当成兼容', 
   assert.equal(validateBuild(ps).status, 'unknown');
   assert.equal(validateBuild([...ps, ps[0]]).status, 'fail');
 });
+void test('商家整机不执行DIY配件兼容性审核但仍完成交付核验', () => {
+  const catalog = structuredClone(parts),
+    pc = structuredClone(prebuilts[0]),
+    selected = pc.partIds.map((id) => catalog.find((part) => part.id === id)!);
+  selected.find((part) => part.category === 'memory')!.specs.ddr = 'DDR5';
+  assert.equal(validateBuild(selected).status, 'fail');
+  const requirements: Requirements = {
+      ...req,
+      budget: pc.price,
+      mode: 'prebuilt',
+    },
+    plan = selectPrebuilt(pc.id, requirements, catalog, [pc]),
+    audited = auditDelivery([plan], requirements, {
+      parts: catalog,
+      prebuilts: [pc],
+    })[0]!;
+  assert.equal(audited.validation.status, 'not_applicable');
+  assert.deepEqual(audited.validation.issues, []);
+  assert.equal(audited.deliveryAudit?.status, 'passed');
+});
 void test('所有预算用途返回的配置均满足硬约束', () => {
   let count = 0;
   for (const budget of [3000, 6000, 10000, 18000, 30000])
@@ -84,20 +285,32 @@ void test('所有预算用途返回的配置均满足硬约束', () => {
       const r = { ...req, budget, purpose };
       for (const p of recommend(r, parts, prebuilts)) {
         count++;
-        assert.ok(withinBudget(p.total, budget));
+        assert.ok(
+          p.budget.status === 'below_minimum_reference' ||
+            p.budget.status === 'above_high_reference' ||
+            withinBudget(p.total, budget),
+        );
         assert.equal(p.parts.length, 8);
         assert.notEqual(validateBuild(p.parts).status, 'fail');
       }
     }
   assert.ok(count > 20);
 });
-void test('不可能预算返回空，不强行凑方案', () =>
-  assert.deepEqual(
-    recommend({ ...req, budget: 1, hardCap: true }, parts, prebuilts),
-    [],
-  ));
+void test('极低预算返回不可确认的完整超预算参考', () => {
+  const plans = recommend(
+    { ...req, budget: 1, hardCap: true },
+    parts,
+    prebuilts,
+  );
+  assert.ok(plans.length);
+  assert.ok(plans.every((plan) => plan.parts.length === 8));
+  assert.ok(
+    plans.every((plan) => plan.budget.status === 'below_minimum_reference'),
+  );
+  assert.ok(plans.every((plan) => !plan.budget.confirmable));
+});
 void test('硬上限、白色与整机模式生效', () => {
-  const r = parseRequirements({ ...req, message: '最多6000元，白色整机' });
+  const r = { ...req, hardCap: true, color: '白色', mode: 'prebuilt' as const };
   assert.ok(r.hardCap);
   for (const p of recommend(r, parts, prebuilts)) {
     assert.equal(p.kind, 'prebuilt');
@@ -110,6 +323,19 @@ void test('替换不能注入未知商品或跨类别商品', () => {
   assert.ok(p);
   assert.throws(() => replacePart(p, p.parts[0].id, 'missing', req, parts));
   assert.throws(() => replacePart(p, p.parts[0].id, 'case-0', req, parts));
+});
+void test('替换时按最新目录刷新全部配件行价与总价', () => {
+  const plan = recommend({ ...req, mode: 'diy' }, parts, prebuilts)[0]!;
+  const target = plan.parts.find((part) => part.category === 'storage')!;
+  const repriced = parts.map((part) =>
+    part.id === target.id ? { ...part, price: part.price + 25 } : part,
+  );
+  const updated = replacePart(plan, target.id, target.id, req, repriced);
+  assert.equal(
+    updated.parts.find((part) => part.id === target.id)!.price,
+    target.price + 25,
+  );
+  assert.equal(updated.total, plan.total + 25);
 });
 void test('分类品牌偏好同时约束 DIY、整机与替换', () => {
   const branded = { ...req, brandPreferences: { gpu: 'MSI 微星' } };
@@ -158,16 +384,16 @@ void test('需求变化使旧方案失效，便宜一点保留原预算', () => 
     [...plans].sort((a, b) => a.total - b.total).map((p) => p.total),
   );
 });
-void test('明确预算上限和购买方式由服务端确定性提取', () => {
+void test('结构化需求更新保留预算边界和购买方式', () => {
   const changed = applyDraft(
     { budget: 6000, purpose: '游戏', hardCap: false },
-    inferExplicitPatch('改成最多8000元，只看白色整机'),
+    { budget: 8000, hardCap: true, color: '白色', mode: 'prebuilt' },
   );
   assert.equal(changed.budget, 8000);
   assert.equal(changed.hardCap, true);
   assert.equal(changed.color, '白色');
   assert.equal(changed.mode, 'prebuilt');
-  const cheaper = applyDraft(changed, inferExplicitPatch('便宜一点'));
+  const cheaper = applyDraft(changed, { preferCheaper: true });
   assert.equal(cheaper.budget, 8000);
   assert.equal(cheaper.hardCap, true);
   assert.equal(cheaper.preferCheaper, true);
@@ -175,7 +401,12 @@ void test('明确预算上限和购买方式由服务端确定性提取', () => 
 void test('系列授权有局部作用域，5070 不包含 5070 Ti', () => {
   const draft = applyDraft(
     {},
-    inferExplicitPatch('6000元游戏主机，5070你自己选'),
+    {
+      budget: 6000,
+      purpose: '游戏',
+      seriesPreferences: { gpu: 'RTX 5070' },
+      selectionAuthorizations: { gpu: 'RTX 5070' },
+    },
   );
   assert.equal(draft.budget, 6000);
   assert.equal(draft.purpose, '游戏');
@@ -187,91 +418,111 @@ void test('系列授权有局部作用域，5070 不包含 5070 Ti', () => {
     const gpu = plan.parts.find((p) => p.category === 'gpu')!;
     assert.match(gpu.name, /RTX 5070/i);
     assert.doesNotMatch(gpu.name, /5070\s*Ti/i);
-    assert.ok(withinBudget(plan.total, 6000));
+    assert.ok(
+      plan.budget.status === 'below_minimum_reference' ||
+        withinBudget(plan.total, 6000),
+    );
   }
-  const colorOnly = applyDraft(draft, inferExplicitPatch('颜色随便'));
+  const colorOnly = applyDraft(draft, { color: '不限' });
   assert.equal(colorOnly.color, '不限');
   assert.equal(colorOnly.budget, 6000);
   assert.equal(colorOnly.seriesPreferences?.gpu, 'RTX 5070');
-  assert.deepEqual(
-    recommend(
-      completeRequirements({ ...draft, budget: 3000, hardCap: true }),
-      parts,
-      prebuilts,
-    ),
-    [],
+  const low = recommend(
+    completeRequirements({ ...draft, budget: 3000, hardCap: true }),
+    parts,
+    prebuilts,
+  );
+  assert.ok(low.length);
+  assert.ok(
+    low.every((plan) => plan.budget.status === 'below_minimum_reference'),
   );
 });
-void test('数据库升级清除旧演示目录与历史推荐，保留商家维护商品', () => {
-  const db = new DatabaseSync(':memory:');
-  for (const file of [
-    '0000_secret_agent_zero.sql',
-    '0001_kind_chameleon.sql',
-    '0002_breezy_ben_parker.sql',
+void test('L/H 等值属于标准区间，超过 H 返回实际用途高档参考', () => {
+  const refs = findDiyBudgetReferences({ ...req, mode: 'diy' }, parts);
+  assert.ok(refs.minimum && refs.high && refs.highParts);
+  const atL = recommend(
+    { ...req, mode: 'diy', budget: refs.minimum! },
+    parts,
+    prebuilts,
+  );
+  assert.ok(atL.length);
+  assert.ok(atL.every((plan) => plan.budget.status === 'standard'));
+  const atH = recommend(
+    { ...req, mode: 'diy', budget: refs.high! },
+    parts,
+    prebuilts,
+  );
+  assert.ok(atH.length);
+  assert.ok(atH.every((plan) => plan.budget.status === 'standard'));
+  const above = recommend(
+    { ...req, mode: 'diy', budget: 200000 },
+    parts,
+    prebuilts,
+  );
+  assert.equal(above.length, 1);
+  assert.equal(above[0]!.total, refs.high);
+  assert.equal(above[0]!.budget.status, 'above_high_reference');
+  const cheaper = recommend(
+    { ...req, mode: 'diy', budget: 200000, preferCheaper: true },
+    parts,
+    prebuilts,
+  );
+  assert.equal(cheaper.length, 1);
+  assert.equal(cheaper[0]!.total, refs.high);
+});
+void test('MySQL 初始迁移覆盖商品、任务和撤回数据表', () => {
+  const sql = readFileSync(
+    new URL('../../drizzle-mysql/0000_past_smiling_tiger.sql', import.meta.url),
+    'utf8',
+  );
+  for (const table of [
+    'products',
+    'prebuilts',
+    'metadata',
+    'conversations',
+    'tasks',
+    'task_history',
   ])
-    for (const statement of readFileSync(
-      new URL(`../../drizzle/${file}`, import.meta.url),
-      'utf8',
-    ).split('--> statement-breakpoint'))
-      if (statement.trim()) db.exec(statement);
-  db.exec(
-    `INSERT INTO products VALUES ('cpu-0','cpu','星构 DEMO','旧演示','不适用',1,'{}',1),('merchant-cpu','cpu','商家品牌','自行维护','不适用',2,'{}',1);`,
-  );
-  db.exec(
-    `INSERT INTO prebuilts VALUES ('pc-0','旧整机','星构 DEMO','黑色',1,'[]',1);`,
-  );
-  db.exec(
-    `INSERT INTO sessions VALUES ('legacy','{}','[{"id":"pc-0","demo":true}]',1),('current','{}','[]',1);`,
-  );
-  db.exec(
-    `INSERT INTO conversations VALUES ('legacy','{}','[]',1),('current','{}','[]',1);`,
-  );
-  for (const statement of readFileSync(
-    new URL(
-      '../../drizzle/0003_remove_legacy_demo_recommendations.sql',
-      import.meta.url,
-    ),
-    'utf8',
-  ).split('--> statement-breakpoint'))
-    if (statement.trim()) db.exec(statement);
-  const count = (sql: string) =>
-    Number((db.prepare(sql).get() as { n: number } | undefined)?.n);
-  assert.equal(count(`SELECT count(*) n FROM products WHERE id='cpu-0'`), 0);
-  assert.equal(count(`SELECT count(*) n FROM prebuilts WHERE id='pc-0'`), 0);
-  assert.equal(count(`SELECT count(*) n FROM sessions WHERE id='legacy'`), 0);
-  assert.equal(
-    count(`SELECT count(*) n FROM conversations WHERE id='legacy'`),
-    0,
-  );
-  assert.equal(
-    count(`SELECT count(*) n FROM products WHERE id='merchant-cpu'`),
-    1,
-  );
-  assert.equal(count(`SELECT count(*) n FROM sessions WHERE id='current'`), 1);
-  for (const statement of readFileSync(
-    new URL('../../drizzle/0004_task_memory.sql', import.meta.url),
-    'utf8',
-  ).split('--> statement-breakpoint'))
-    if (statement.trim()) db.exec(statement);
-  db.exec(
-    `INSERT INTO tasks VALUES ('task-a','session-a','游戏主机','{}',NULL,'[]',1,1),('task-b','session-b','办公主机','{}',NULL,'[]',1,1);`,
-  );
-  assert.equal(
-    count(
-      `SELECT count(*) n FROM tasks WHERE id='task-a' AND session_id='session-a'`,
-    ),
-    1,
-  );
-  assert.equal(
-    count(
-      `SELECT count(*) n FROM tasks WHERE id='task-a' AND session_id='session-b'`,
-    ),
-    0,
-  );
+    assert.match(sql, new RegExp('CREATE TABLE `' + table + '`'));
+  assert.match(sql, /FOREIGN KEY \(`task_id`\).*ON DELETE cascade/);
+  assert.doesNotMatch(sql, /sqlite|INSERT OR IGNORE|ON CONFLICT/i);
 });
-void test('知识检索返回有来源的DDR文档', () => {
-  const docs = retrieveKnowledge('DDR4 DDR5 内存 主板');
+void test('知识检索返回有来源的DDR文档', async (t) => {
+  t.mock.method(globalThis, 'fetch', embeddingFetch);
+  const docs = await retrieveKnowledge(embeddingConfig, 'DDR4 DDR5 内存 主板');
   assert.ok(docs.some((d) => d.id === 'compat-memory' && d.source));
+});
+void test('Embedding 语料缓存复用，失败后允许重试且不回退关键词', async (t) => {
+  let corpusCalls = 0,
+    failCorpus = true;
+  t.mock.method(
+    globalThis,
+    'fetch',
+    async (url: unknown, options?: RequestInit) => {
+      const input = (JSON.parse(options?.body as string) as { input: string[] })
+        .input;
+      if (input.length > 1) {
+        corpusCalls++;
+        if (failCorpus) {
+          failCorpus = false;
+          return new Response(null, { status: 503 });
+        }
+      }
+      return embeddingFetch(url, options);
+    },
+  );
+  const config = { ...embeddingConfig, model: 'cache-retry-test' };
+  await assert.rejects(
+    retrieveKnowledge(config, 'DDR4 DDR5'),
+    /Embedding 连接失败/,
+  );
+  await retrieveKnowledge(config, 'DDR4 DDR5');
+  await retrieveKnowledge(config, '主板内存');
+  assert.equal(corpusCalls, 2);
+  await assert.rejects(
+    retrieveKnowledge({}, 'DDR4 DDR5'),
+    /Embedding 配置缺失/,
+  );
 });
 void test('目录搜索支持类别、品牌、型号、颜色和价格区间', () => {
   const matches = searchCatalog(parts, {
@@ -363,15 +614,36 @@ function toolRuntime(): ToolRuntime {
   return {
     draft: {},
     result: null,
-    explicitPatch: {},
     approvedPartIds: new Set(),
-    attemptedPlanTool: false,
-    successfulPlanTool: '',
-    ambiguousSearch: false,
-    emptySearch: false,
-    specifiedUpdated: false,
     toolsUsed: [],
     toolErrors: [],
+    task: {
+      id: 'task-a',
+      name: '测试任务',
+      draft: {},
+      result: null,
+      issues: [],
+      version: 1,
+      updatedAt: 1,
+    },
+    contextChanged: false,
+    facts: [],
+  };
+}
+
+function toolContext(): ToolContext {
+  return {
+    embeddingConfig,
+    sessionId: 'session-a',
+    taskId: 'task-a',
+    currentMessageId: 'message-a',
+    messages: [
+      { id: 'message-a', role: 'user', content: '测试', taskId: 'task-a' },
+    ],
+    tasks: [],
+    catalog: { parts, prebuilts },
+    reloadCatalog: async () => ({ parts, prebuilts }),
+    onTaskChange: async () => {},
   };
 }
 
@@ -396,7 +668,7 @@ void test('非法工具参数不会进入目录业务执行，未知工具返回
   let reloads = 0;
   const runtime = toolRuntime(),
     context = {
-      catalog: { parts, prebuilts },
+      ...toolContext(),
       reloadCatalog: async () => {
         reloads++;
         return { parts, prebuilts };
@@ -423,10 +695,7 @@ void test('组装工具不能绕过预算与兼容性校验', async () => {
   const base = recommend({ ...req, mode: 'diy' }, parts, prebuilts)[0]!;
   const runtime = toolRuntime();
   runtime.draft = { ...req, mode: 'diy', budget: 1, hardCap: true };
-  const context = {
-    catalog: { parts, prebuilts },
-    reloadCatalog: async () => ({ parts, prebuilts }),
-  };
+  const context = toolContext();
   const budgetFailure = (await executeRegisteredTool(
     'assemble_build',
     { productIds: base.parts.map((part) => part.id) },
@@ -443,12 +712,43 @@ void test('组装工具不能绕过预算与兼容性校验', async () => {
     'assemble_build',
     { productIds: incompatible.map((part) => part.id) },
     {
+      ...toolContext(),
       catalog: { parts: incompatible, prebuilts },
       reloadCatalog: async () => ({ parts: incompatible, prebuilts }),
     },
     compatibilityRuntime,
   )) as { error?: string };
   assert.match(compatibilityFailure.error ?? '', /不匹配/);
+});
+void test('低预算参考不能通过确认工具写成已确认', async () => {
+  const runtime = toolRuntime(),
+    plan = recommend(
+      { ...req, mode: 'diy', budget: 1, hardCap: true },
+      parts,
+      prebuilts,
+    )[0]!;
+  runtime.draft = {
+    ...req,
+    mode: 'diy',
+    budget: 1,
+    hardCap: true,
+    partSelections: Object.fromEntries(
+      plan.parts.map((part) => [part.category, part.id]),
+    ),
+  };
+  runtime.result = {
+    requirements: completeRequirements(runtime.draft),
+    plans: [plan],
+    summary: '超预算参考',
+  };
+  const result = (await executeRegisteredTool(
+    'confirm_selections',
+    { categories: ['cpu'], sourceMessageId: 'message-a' },
+    toolContext(),
+    runtime,
+  )) as { error?: string };
+  assert.match(result.error ?? '', /超预算参考/);
+  assert.notEqual(runtime.draft.selectionSources?.cpu, 'confirmed');
 });
 
 void test('历史方案恢复时剔除 fps 字段且保留其他任务数据', () => {
@@ -472,4 +772,129 @@ void test('历史方案恢复时剔除 fps 字段且保留其他任务数据', (
   assert.equal(cleaned.result.summary, '保留');
   assert.equal(Object.hasOwn(cleaned, 'fps'), false);
   assert.equal(Object.hasOwn(cleaned.result.plans[0], 'fps'), false);
+});
+
+void test('选择授权必须引用当前任务中的真实用户消息', async () => {
+  const runtime = toolRuntime(),
+    context = toolContext();
+  runtime.draft = {
+    budget: 6000,
+    purpose: '游戏',
+    seriesPreferences: { gpu: 'RTX 5060' },
+  };
+  const rejected = (await executeRegisteredTool(
+    'authorize_selection',
+    {
+      category: 'gpu',
+      scopeType: 'series',
+      scope: 'RTX 5060',
+      sourceMessageId: 'other-message',
+    },
+    context,
+    runtime,
+  )) as { error?: string };
+  assert.match(rejected.error ?? '', /不属于当前任务/);
+  const accepted = (await executeRegisteredTool(
+    'authorize_selection',
+    {
+      category: 'gpu',
+      scopeType: 'series',
+      scope: 'RTX 5060',
+      sourceMessageId: 'message-a',
+    },
+    context,
+    runtime,
+  )) as { operation: { requirementsChanged: boolean; failed: boolean } };
+  assert.equal(accepted.operation.failed, false);
+  assert.equal(accepted.operation.requirementsChanged, true);
+  assert.equal(
+    runtime.draft.selectionAuthorizationMessageIds?.gpu,
+    'message-a',
+  );
+});
+
+void test('方案评估只记录评估结果，不改变配件和报价', async (t) => {
+  t.mock.method(globalThis, 'fetch', embeddingFetch);
+  const plan = recommend({ ...req, mode: 'diy' }, parts, prebuilts)[0]!,
+    runtime = toolRuntime(),
+    context = toolContext();
+  runtime.draft = {
+    ...req,
+    partSelections: Object.fromEntries(
+      plan.parts.map((part) => [part.category, part.id]),
+    ),
+  };
+  runtime.result = {
+    requirements: { ...req, partSelections: runtime.draft.partSelections },
+    plans: [plan],
+    summary: '测试',
+  };
+  const before = JSON.stringify(runtime.result.plans);
+  const evaluated = (await executeRegisteredTool(
+    'evaluate_plan',
+    { focus: '还能改进吗' },
+    context,
+    runtime,
+  )) as {
+    operation: {
+      partsChanged: boolean;
+      quoteChanged: boolean;
+      failed: boolean;
+    };
+  };
+  assert.equal(evaluated.operation.failed, false);
+  assert.equal(evaluated.operation.partsChanged, false);
+  assert.equal(evaluated.operation.quoteChanged, false);
+  assert.equal(JSON.stringify(runtime.result?.plans), before);
+  assert.ok(runtime.result?.evaluation);
+});
+
+void test('普通推荐相邻目标相差500，保留硬上限与极值请求', () => {
+  const base = fixture().catalog.parts.filter(
+    (part) => part.id === part.category,
+  );
+  const storage = base.find((part) => part.category === 'storage')!;
+  const catalog = [
+    ...base,
+    ...[1, 500, 999, 1001, 1500, 1999].map((price) => ({
+      ...storage,
+      id: `storage-${price}`,
+      price,
+    })),
+  ];
+  const requirements: Requirements = { ...req, mode: 'diy', budget: 8000 };
+  const plans = recommend(requirements, catalog, []);
+  assert.deepEqual(
+    plans.map((plan) => plan.total).sort((a, b) => a - b),
+    [7500, 8000, 8500],
+  );
+  assert.ok(
+    recommend({ ...requirements, hardCap: true }, catalog, []).every(
+      (plan) => plan.total <= 8000,
+    ),
+  );
+  assert.equal(
+    recommend({ ...requirements, preferCheaper: true }, catalog, [])[0]!.total,
+    7001,
+  );
+  assert.equal(
+    recommend({ ...requirements, preferExpensive: true }, catalog, [])[0]!
+      .total,
+    8999,
+  );
+  const pcs = [7001, 7500, 7999, 8000, 8001, 8500, 8999].map((price) => ({
+    id: `pc-${price}`,
+    name: `测试整机${price}`,
+    price,
+    partIds: base.map((part) => part.id),
+    brand: '测试品牌',
+    color: '黑色',
+    demo: true,
+  }));
+  assert.deepEqual(
+    recommend({ ...requirements, mode: 'prebuilt' }, base, pcs)
+      .map((plan) => plan.total)
+      .sort((a, b) => a - b),
+    [7500, 8000, 8500],
+  );
 });

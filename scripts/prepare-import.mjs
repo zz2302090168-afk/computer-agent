@@ -1,4 +1,4 @@
-// Validate a complete merchant catalog and produce a transaction for local D1 import.
+// Validate a complete merchant catalog and produce a transaction for MySQL import.
 import './register-typescript.mjs';
 import { readFile, writeFile } from 'node:fs/promises';
 const { validateBuild } = await import('../backend/rules/compatibility.ts');
@@ -49,8 +49,7 @@ for (const pc of prebuilts) {
 }
 const q = (x) => "'" + String(x).replaceAll("'", "''") + "'";
 const sql = [
-  'BEGIN TRANSACTION;',
-  'DELETE FROM sessions;',
+  'START TRANSACTION;',
   'DELETE FROM prebuilts;',
   'DELETE FROM products;',
   ...parts.map(
@@ -61,7 +60,7 @@ const sql = [
     (p) =>
       `INSERT INTO prebuilts(id,name,brand,color,price,part_ids,demo) VALUES(${[p.id, p.name, p.brand, p.color, p.price, JSON.stringify(p.partIds), p.demo ? 1 : 0].map(q).join(',')});`,
   ),
-  "INSERT OR REPLACE INTO metadata(key,value) VALUES('real-catalog-v2','merchant-import');",
+  "REPLACE INTO metadata(`key`,`value`) VALUES('real-catalog-v2','merchant-import');",
   'COMMIT;',
 ];
 await writeFile('data/merchant-import.sql', sql.join('\n'));

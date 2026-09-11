@@ -1,9 +1,12 @@
-import type { Category, Requirements } from '../domain/types';
-import { budgetRange } from '../rules/budget';
+import type { Category, Requirements, TaskDraft } from '../domain/types';
+import { budgetRange, validateTolerance } from '../rules/budget';
+import { isColorCategory } from '../rules/color';
 
-export type Draft = Partial<Requirements>;
+export type Draft = TaskDraft;
 const recommendationFields: (keyof Requirements)[] = [
   'budget',
+  'budgetTolerance',
+  'partColors',
   'hardCap',
   'purpose',
   'mode',
@@ -13,14 +16,35 @@ const recommendationFields: (keyof Requirements)[] = [
   'partPreferences',
   'seriesPreferences',
   'selectionAuthorizations',
+  'selectionAuthorizationMessageIds',
   'preferCheaper',
+  'preferExpensive',
 ];
 
 export function applyDraft(
   draft: Draft,
   patch: Record<string, unknown>,
 ): Draft {
-  const next = { ...draft };
+  // 重新声明整套配色时清除旧的单件例外；同次提交的partColors可明确设定新例外。
+  const next = { ...draft, ...('color' in patch ? { partColors: {} } : {}) };
+  if ('budgetTolerance' in patch)
+    next.budgetTolerance = validateTolerance(patch.budgetTolerance);
+  if ('partColors' in patch) {
+    const colors = patch.partColors;
+    if (!colors || typeof colors !== 'object' || Array.isArray(colors))
+      throw Error('配件颜色无效');
+    next.partColors = { ...next.partColors };
+    for (const [category, color] of Object.entries(colors)) {
+      if (
+        !isColorCategory(category) ||
+        typeof color !== 'string' ||
+        !['', '不限', '黑色', '白色', '黑色优先，白色备选'].includes(color)
+      )
+        throw Error('配件颜色类别或颜色无效');
+      if (color) next.partColors[category as Category] = color;
+      else delete next.partColors[category as Category];
+    }
+  }
   if ('budget' in patch) {
     if (typeof patch.budget !== 'number') throw Error('预算必须是数字');
     budgetRange(patch.budget);
@@ -33,11 +57,19 @@ export function applyDraft(
   if ('preferCheaper' in patch) {
     if (typeof patch.preferCheaper !== 'boolean') throw Error('排序偏好无效');
     next.preferCheaper = patch.preferCheaper;
+    if (patch.preferCheaper) next.preferExpensive = false;
+  }
+  if ('preferExpensive' in patch) {
+    if (typeof patch.preferExpensive !== 'boolean') throw Error('排序偏好无效');
+    if (patch.preferExpensive && patch.preferCheaper)
+      throw Error('最贵与最便宜不能同时选择');
+    next.preferExpensive = patch.preferExpensive;
+    if (patch.preferExpensive) next.preferCheaper = false;
   }
   for (const [key, allowed] of Object.entries({
     purpose: ['游戏', '办公', '剪辑设计', '编程', '本地 AI'],
     mode: ['diy', 'prebuilt', 'both'],
-    color: ['不限', '黑色', '白色'],
+    color: ['不限', '黑色', '白色', '黑色优先，白色备选'],
   })) {
     if (key in patch) {
       const v = patch[key];
@@ -99,7 +131,12 @@ export function applyDraft(
     }
   }
   // 系列限制和选择授权分开保存：授权仅对指定类别和系列有效，不能把一次“随便”扩大成永久全权。
-  for (const field of ['seriesPreferences', 'selectionAuthorizations'] as const)
+  for (const field of [
+    'seriesPreferences',
+    'selectionAuthorizations',
+    'selectionAuthorizationMessageIds',
+    'selectionConfirmationMessageIds',
+  ] as const)
     if (field in patch) {
       const prefs = patch[field];
       if (!prefs || typeof prefs !== 'object' || Array.isArray(prefs))
@@ -188,6 +225,8 @@ export function completeRequirements(draft: Draft): Requirements {
     throw Error('还需要主机预算和主要用途，请先询问用户。');
   return {
     budget: draft.budget,
+    budgetTolerance: draft.budgetTolerance,
+    partColors: draft.partColors ?? {},
     purpose: draft.purpose,
     hardCap: draft.hardCap ?? false,
     mode: draft.mode ?? 'both',
@@ -199,56 +238,13 @@ export function completeRequirements(draft: Draft): Requirements {
     partPreferences: draft.partPreferences ?? {},
     seriesPreferences: draft.seriesPreferences ?? {},
     selectionAuthorizations: draft.selectionAuthorizations ?? {},
+    selectionAuthorizationMessageIds:
+      draft.selectionAuthorizationMessageIds ?? {},
     selectionSources: draft.selectionSources ?? {},
+    selectionConfirmationMessageIds:
+      draft.selectionConfirmationMessageIds ?? {},
     partSelections: draft.partSelections ?? {},
     preferCheaper: draft.preferCheaper ?? false,
+    preferExpensive: draft.preferExpensive ?? false,
   };
-}
-
-export function inferExplicitPatch(message: string): Record<string, unknown> {
-  const patch: Record<string, unknown> = {};
-  const budget = message.match(
-    /(?:^|预算(?:改成|调整为|是|到)?|最多|不超过|上限(?:是|为)?|控制在)\s*(\d+(?:\.\d+)?)\s*(万|千|k)?/i,
-  );
-  if (budget) {
-    patch.budget =
-      Number(budget[1]) *
-      (budget[2] === '万' ? 10000 : /千|k/i.test(budget[2] ?? '') ? 1000 : 1);
-    patch.hardCap = /(?:最多|不超过|上限|不能超|不要超|以内)/.test(message);
-  }
-  if (/白色/.test(message)) patch.color = '白色';
-  else if (/黑色/.test(message)) patch.color = '黑色';
-  else if (/颜色不限|不限颜色/.test(message)) patch.color = '不限';
-  if (/(?:只看|改成|选择|要)?\s*(?:已组装)?整机/.test(message))
-    patch.mode = 'prebuilt';
-  if (/DIY|自己装|自由搭配/i.test(message)) patch.mode = 'diy';
-  if (/两种都|都看看|都可以/.test(message)) patch.mode = 'both';
-  if (/便宜(?:一点|些)|省钱|更低价/.test(message)) patch.preferCheaper = true;
-  if (/办公|文档/.test(message)) patch.purpose = '办公';
-  else if (/游戏/.test(message)) patch.purpose = '游戏';
-  else if (/剪辑|设计/.test(message)) patch.purpose = '剪辑设计';
-  else if (/编程|开发/.test(message)) patch.purpose = '编程';
-  else if (/本地\s*AI|大模型|显存/i.test(message)) patch.purpose = '本地 AI';
-  const gpuSeries = message.match(/(?:RTX\s*)?(5070|5060|5080|5090)(?!\s*Ti)/i);
-  if (gpuSeries) {
-    const series = `RTX ${gpuSeries[1]}`;
-    patch.seriesPreferences = { gpu: series };
-    if (/你选|你自己选|随便|都可以/.test(message))
-      patch.selectionAuthorizations = { gpu: series };
-  }
-  if (/(?:其他|其余).*(?:你选|随便|都可以)/.test(message))
-    patch.selectionAuthorizations = Object.fromEntries(
-      [
-        'cpu',
-        'gpu',
-        'memory',
-        'motherboard',
-        'psu',
-        'case',
-        'storage',
-        'cooler',
-      ].map((category) => [category, '现有需求范围内']),
-    );
-  if (/颜色随便|颜色都可以|颜色不限/.test(message)) patch.color = '不限';
-  return patch;
 }

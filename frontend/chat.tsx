@@ -1,27 +1,22 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import {
-  Cpu,
-  Send,
-  Plus,
-  ArrowUpRight,
-  Check,
-  MessageCircle,
-  Layers,
-} from 'lucide-react';
+import { Cpu, Send, Plus, ArrowUpRight, Layers } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { readResponse } from './api';
 import Results from './results';
+import GenerationProgress from './generation-progress';
+import { updateProgress } from './progress-state';
+import { loadWorkspace } from './workspace-session';
 import { labels, type Catalog, type Category } from '@/backend/domain/types';
 import type { ChatState } from '@/backend/agent/conversation';
+import type { ChatStreamEvent, Progress } from '@/backend/agent/progress';
+import { readLines } from '@/lib/stream';
 
 const emptyState: ChatState = { draft: {}, messages: [], result: null };
 const starter =
-  '你好，我来帮你配主机。大概准备花多少钱，主要用来做什么？\n不懂硬件也没关系，比如：“6000 元左右，主要玩游戏”。';
-// 模块生命周期内复用初始化请求，避免 StrictMode 重复执行；整页刷新会重新创建。
-let initialWorkspace: Promise<ChatState> | undefined;
+  '你好，我可以帮你选电脑，也可以一起排查电脑故障。\n想配主机，告诉我预算和用途；遇到故障，直接描述现象和屏幕提示。';
 const sourceText = {
   user: '用户指定',
   assistant: '助手已选',
@@ -33,35 +28,48 @@ export default function Chat() {
     [catalog, setCatalog] = useState<Catalog | null>(null),
     [input, setInput] = useState(''),
     [busy, setBusy] = useState(false),
+    [progress, setProgress] = useState<Progress[]>([]),
     [loading, setLoading] = useState(true),
+    [mobileView, setMobileView] = useState('chat'),
     [error, setError] = useState('');
   const end = useRef<HTMLDivElement>(null),
     currentTask = useRef(''),
     requestVersion = useRef(0);
+  const activeRequest = useRef<AbortController | null>(null);
+  const followMessages = useRef(true);
+  useEffect(() => () => activeRequest.current?.abort(), []);
   useEffect(() => {
+    let active = true;
     Promise.all([
-      (initialWorkspace ??= fetch('/api/chat', { method: 'PUT' }).then((r) =>
-        readResponse<ChatState>(r),
-      )),
+      loadWorkspace(),
       fetch('/api/catalog').then((r) => readResponse<Catalog>(r)),
     ])
       .then(([chat, items]) => {
+        if (!active) return;
         setState(chat);
         currentTask.current = chat.currentTaskId ?? '';
         setCatalog(items);
       })
-      .catch((e) => setError(e.message))
-      .finally(() => setLoading(false));
+      .catch((e) => active && setError(e.message))
+      .finally(() => active && setLoading(false));
+    return () => {
+      active = false;
+    };
   }, []);
   useEffect(() => {
-    end.current?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    if (followMessages.current)
+      end.current?.scrollIntoView({ block: 'nearest', behavior: 'instant' });
   }, [state.messages.length, busy]);
   async function send(text = input) {
     // 发起请求时绑定任务和本地序号；切换任务后，迟到响应不得覆盖当前右栏。
     if (!text.trim() || busy || loading) return;
+    followMessages.current = true;
     const requestTask = currentTask.current,
       version = ++requestVersion.current;
     setBusy(true);
+    setProgress([{ scope: 'main', label: '连接当前任务', status: 'running' }]);
+    const controller = new AbortController();
+    activeRequest.current = controller;
     setError('');
     setInput('');
     setState((s) => ({
@@ -73,11 +81,54 @@ export default function Chat() {
     }));
     try {
       const r = await fetch('/api/chat', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: text, taskId: requestTask }),
-        }),
-        data = await readResponse<ChatState>(r);
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/x-ndjson',
+        },
+        signal: controller.signal,
+        body: JSON.stringify({ message: text, taskId: requestTask }),
+      });
+      if (!r.ok) await readResponse<ChatState>(r);
+      if (!r.body) throw Error('没有收到处理进度，请重试');
+      let data: ChatState | undefined;
+      for await (const line of readLines(r.body)) {
+        if (version !== requestVersion.current) return;
+        if (!line.trim()) continue;
+        const event = JSON.parse(line) as ChatStreamEvent;
+        if (event.type === 'error') throw Error(event.error);
+        if (event.type === 'progress') {
+          setProgress((items) => updateProgress(items, event.progress));
+        }
+        if (event.type === 'complete') {
+          data = event.state;
+          const savedPlans = data.result?.plans ?? [];
+          setProgress((items) =>
+            items.map((item) => {
+              if (!item.generationId || item.scope === 'main') return item;
+              const saved = savedPlans.find(
+                (plan) => plan.id === item.plan?.id,
+              );
+              return saved
+                ? {
+                    ...item,
+                    plan: saved,
+                    status: 'done',
+                    phase: 'complete',
+                    label: '已审核并保存，可查看方案',
+                  }
+                : {
+                    ...item,
+                    plan: undefined,
+                    status: 'error',
+                    label: '此候选未纳入最终交付',
+                  };
+            }),
+          );
+        }
+      }
+      if (!data)
+        throw Error('连接在处理完成前中断，已保存的需求可重新打开任务恢复');
       if (version !== requestVersion.current) return;
       if (currentTask.current === requestTask) {
         currentTask.current = data.currentTaskId ?? '';
@@ -91,23 +142,23 @@ export default function Chat() {
     } catch (e) {
       if (version === requestVersion.current)
         setError(e instanceof Error ? e.message : '发送失败，请重试');
+      if (version === requestVersion.current)
+        setProgress((items) =>
+          items.map((item) => ({
+            ...item,
+            status: 'error',
+            plan: undefined,
+            label:
+              item.scope === 'main'
+                ? '本次处理未完成'
+                : '生成中断，请刷新恢复已保存方案',
+          })),
+        );
     } finally {
-      if (version === requestVersion.current) setBusy(false);
-    }
-  }
-  async function switchTo(taskId: string) {
-    setError('');
-    try {
-      const r = await fetch('/api/chat', {
-          method: 'PATCH',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ taskId }),
-        }),
-        data = await readResponse<ChatState>(r);
-      currentTask.current = data.currentTaskId ?? '';
-      setState(data);
-    } catch (e) {
-      setError((e as Error).message);
+      if (version === requestVersion.current) {
+        setBusy(false);
+        activeRequest.current = null;
+      }
     }
   }
   async function reset() {
@@ -120,6 +171,7 @@ export default function Chat() {
       );
       currentTask.current = fresh.currentTaskId ?? '';
       setState(fresh);
+      setProgress([]);
       setInput('');
     } catch (e) {
       setError((e as Error).message);
@@ -147,7 +199,7 @@ export default function Chat() {
     return { part, source, series, authorization };
   };
   return (
-    <div className="chat-app">
+    <div className="chat-app" data-mobile-view={mobileView}>
       <header>
         <Link className="brand" href="/">
           <span className="brand-icon">
@@ -165,26 +217,30 @@ export default function Chat() {
           </Link>
         </div>
       </header>
+      <nav className="mobile-view-switch" aria-label="工作区视图">
+        <button
+          aria-pressed={mobileView === 'chat'}
+          onClick={() => setMobileView('chat')}
+        >
+          对话
+        </button>
+        <button
+          aria-pressed={mobileView === 'configuration'}
+          onClick={() => setMobileView('configuration')}
+        >
+          配置{' '}
+          {busy
+            ? '· 生成中'
+            : state.result?.plans.length
+              ? `· ${state.result.plans.length} 套方案`
+              : ''}
+        </button>
+      </nav>
       <main className="chat-main">
         <section className="chat-column">
-          <div className="task-switcher" aria-label="配机任务">
-            {state.tasks?.map((t) => (
-              <button
-                key={t.id}
-                className={t.id === state.currentTaskId ? 'active' : ''}
-                onClick={() => switchTo(t.id)}
-              >
-                <b>{t.name}</b>
-                <small>
-                  {t.budget ? `¥${t.budget}` : '等待预算'} ·{' '}
-                  {t.purpose ?? '等待用途'}
-                </small>
-              </button>
-            ))}
-          </div>
           <div className="chat-heading">
             <div>
-              <span className="eyebrow">CURRENT TASK</span>
+              <span className="eyebrow">电脑选购与故障排查</span>
               <h1>{state.task?.name ?? '我的主机'}</h1>
             </div>
             <Button
@@ -193,16 +249,26 @@ export default function Chat() {
               onClick={reset}
             >
               <Plus size={16} />
-              清空全部任务
+              开始新会话
             </Button>
           </div>
-          <div className="chat-scroll" aria-live="polite">
-            <div className="bubble-row assistant">
-              <span className="avatar">
-                <Cpu size={19} />
-              </span>
-              <div className="bubble">{starter}</div>
-            </div>
+          <div
+            className="chat-scroll"
+            aria-live="polite"
+            onScroll={(event) => {
+              const panel = event.currentTarget;
+              followMessages.current =
+                panel.scrollHeight - panel.scrollTop - panel.clientHeight < 80;
+            }}
+          >
+            {!shownMessages.length && (
+              <div className="bubble-row assistant">
+                <span className="avatar">
+                  <Cpu size={19} />
+                </span>
+                <div className="bubble">{starter}</div>
+              </div>
+            )}
             {shownMessages.map((m, i) => (
               <div className={`bubble-row ${m.role}`} key={`${m.taskId}-${i}`}>
                 {m.role === 'assistant' && (
@@ -212,45 +278,21 @@ export default function Chat() {
                 )}
                 <div>
                   <div className="bubble">{m.content}</div>
-                  {m.toolsUsed?.length ? (
-                    <div className="tool-trace">
-                      {m.toolsUsed.map((t) => (
-                        <span key={t}>
-                          <Check size={11} />
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                  ) : null}
                 </div>
               </div>
             ))}
-            {busy && (
-              <div className="bubble-row assistant">
-                <span className="avatar">
-                  <Cpu size={19} />
-                </span>
-                <div className="bubble pending">正在更新当前任务…</div>
-              </div>
-            )}
-            {!shownMessages.length && !busy && (
-              <div className="conversation-examples">
-                {[
-                  '6000元游戏主机，5070你自己选',
-                  '8000元，白色主机，做剪辑',
-                  '另外帮朋友配一台办公电脑',
-                ].map((t) => (
-                  <button key={t} disabled={loading} onClick={() => send(t)}>
-                    <MessageCircle size={15} />
-                    {t}
-                    <ArrowUpRight size={14} />
-                  </button>
-                ))}
-              </div>
-            )}
             <div ref={end} />
           </div>
           <div className="composer-wrap">
+            {!busy && !!state.result?.plans.length && (
+              <button
+                className="mobile-result-link"
+                onClick={() => setMobileView('configuration')}
+              >
+                方案已生成，查看配置与报价 →
+              </button>
+            )}
+            {busy && <GenerationProgress items={progress} />}
             {error && (
               <p className="error" role="alert">
                 {error}
@@ -283,26 +325,25 @@ export default function Chat() {
                 <Send size={19} />
               </Button>
             </div>
-            <p className="composer-hint">
-              Enter 发送 · Shift + Enter 换行<span>先配主机，再聊显示器</span>
-            </p>
+            <p className="composer-hint">Enter 发送 · Shift + Enter 换行</p>
           </div>
         </section>
         <aside className="configuration-column">
           <div className="configuration-heading">
             <div>
-              <span className="eyebrow">
-                TASK VERSION {state.task?.version ?? 1}
-              </span>
-              <h2>实时需求与配置</h2>
+              <span>当前任务 · 第 {state.task?.version ?? 1} 版</span>
+              <h2>配置工作区</h2>
             </div>
-            <Layers size={21} />
+            <Layers size={19} />
           </div>
-          <div className="requirement-tags">
+          <div className="requirement-tags" aria-label="当前需求">
             {d.budget ? (
               <span>
                 预算 ¥{d.budget.toLocaleString()}
                 {d.hardCap ? ' · 硬上限' : ''}
+                {d.budgetTolerance !== undefined
+                  ? ` · 误差≤¥${d.budgetTolerance}`
+                  : ''}
               </span>
             ) : (
               <span className="unfilled">等待预算</span>
@@ -320,61 +361,83 @@ export default function Chat() {
                   : 'DIY 与整机均可'}
             </span>
             <span>
-              {d.color && d.color !== '不限' ? `${d.color}机箱` : '颜色不限'}
+              {d.color && d.color !== '不限'
+                ? `整套默认${d.color}`
+                : '颜色不限'}
             </span>
+            {Object.entries(d.partColors ?? {}).map(([category, color]) => (
+              <span key={category}>
+                {labels[category as Category]}：{color}
+              </span>
+            ))}
           </div>
-          <div className="selection-grid">
-            {(Object.keys(labels) as Category[]).map((category) => {
-              const item = selection(category);
-              return (
-                <div key={category}>
-                  <span>{labels[category]}</span>
-                  {item.part ? (
-                    <>
-                      <b>
-                        {item.part.brand} {item.part.name}
-                      </b>
-                      <small>
-                        {sourceText[item.source ?? 'assistant']} · 商家目录价 ¥
-                        {item.part.price}
-                      </small>
-                    </>
-                  ) : item.series ? (
-                    <>
-                      <b>{item.series}</b>
-                      <small>
-                        {item.authorization
-                          ? '已限定系列 · 具体版本由助手选择'
-                          : '已限定系列 · 等待确认版本'}
-                      </small>
-                    </>
-                  ) : (
-                    <>
-                      <b>待选择</b>
-                      <small>尚未确定具体商品</small>
-                    </>
-                  )}
-                </div>
-              );
-            })}
-          </div>
+          {!state.result?.plans.length && (
+            <div className="selection-grid">
+              {(Object.keys(labels) as Category[]).map((category) => {
+                const item = selection(category);
+                return (
+                  <div key={category}>
+                    <span>{labels[category]}</span>
+                    {item.part ? (
+                      <>
+                        <b>
+                          {item.part.brand} {item.part.name}
+                        </b>
+                        <small>
+                          {sourceText[item.source ?? 'assistant']} · ¥
+                          {item.part.price.toLocaleString()}
+                        </small>
+                      </>
+                    ) : item.series ? (
+                      <>
+                        <b>{item.series}</b>
+                        <small>
+                          {item.authorization
+                            ? '已限定系列 · 助手选择具体版本'
+                            : '已限定系列 · 等待确认版本'}
+                        </small>
+                      </>
+                    ) : (
+                      <>
+                        <b>待选择</b>
+                        <small>尚未确定商品</small>
+                      </>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          )}
           {!state.result && selectedParts.length > 0 && (
             <p className="result-summary">
-              已选配件小计 ¥{selectedSubtotal.toLocaleString()}
-              。尚未形成完整主机，不代表整机总价。
+              已锁定 {selectedParts.length}/8 件，配件小计 ¥
+              {selectedSubtotal.toLocaleString()}。完整后再计算整机总价。
             </p>
           )}
           {state.result ? (
             <Results
               key={state.currentTaskId}
+              taskId={state.currentTaskId}
+              disabled={busy}
               result={state.result}
-              onChange={(result) => setState((s) => ({ ...s, result }))}
+              onChange={(result) =>
+                setState((s) =>
+                  s.currentTaskId === state.currentTaskId
+                    ? {
+                        ...s,
+                        result,
+                        draft: { ...s.draft, ...result.requirements },
+                      }
+                    : s,
+                )
+              }
             />
           ) : (
             <div className="configuration-empty">
-              <h3>任务尚未形成完整方案</h3>
+              <h3>等待形成完整方案</h3>
               <p>
-                已明确的需求和配件会持续保存在上方。八类完整后才计算整机总价并校验兼容性。
+                需求和已选配件会显示在这里，八类完整后生成报价；DIY
+                方案另做兼容性检查。
               </p>
             </div>
           )}

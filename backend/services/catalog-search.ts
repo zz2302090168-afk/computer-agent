@@ -47,7 +47,9 @@ export function searchCatalog(parts: Part[], filter: CatalogSearch) {
       (!filter.category || p.category === filter.category) &&
       (!brand || p.brand.toLowerCase().includes(brand)) &&
       (!keyword || matchesModel(`${p.brand} ${p.name}`, keyword)) &&
-      (!filter.color || filter.color === '不限' || p.color === filter.color) &&
+      (!filter.color ||
+        filter.color === '不限' ||
+        p.color.includes(filter.color)) &&
       p.price >= min &&
       p.price <= max,
   );
@@ -58,9 +60,7 @@ export function searchPrebuiltCatalog(
   requirements: Requirements,
 ) {
   return pcs.filter(
-    (pc) =>
-      (requirements.color === '不限' || pc.color === requirements.color) &&
-      (!requirements.brand || pc.brand.includes(requirements.brand)),
+    (pc) => !requirements.brand || pc.brand.includes(requirements.brand),
   );
 }
 

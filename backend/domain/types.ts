@@ -30,6 +30,8 @@ export type Prebuilt = {
   demo: boolean;
 };
 export type Requirements = {
+  budgetTolerance?: number;
+  partColors?: Partial<Record<Category, string>>;
   budget: number;
   hardCap: boolean;
   purpose: string;
@@ -38,19 +40,39 @@ export type Requirements = {
   message: string;
   brand: string;
   game: string;
-  brandPreferences?:Partial<Record<Category,string>>;
-  partPreferences?:Partial<Record<Category,string>>;
-  seriesPreferences?:Partial<Record<Category,string>>;
-  selectionAuthorizations?:Partial<Record<Category,string>>;
-  selectionSources?:Partial<Record<Category,'user'|'assistant'|'confirmed'>>;
-  partSelections?:Partial<Record<Category,string>>;
-  preferCheaper?:boolean;
+  brandPreferences?: Partial<Record<Category, string>>;
+  partPreferences?: Partial<Record<Category, string>>;
+  seriesPreferences?: Partial<Record<Category, string>>;
+  selectionAuthorizations?: Partial<Record<Category, string>>;
+  selectionAuthorizationMessageIds?: Partial<Record<Category, string>>;
+  selectionSources?: Partial<
+    Record<Category, 'user' | 'assistant' | 'confirmed'>
+  >;
+  selectionConfirmationMessageIds?: Partial<Record<Category, string>>;
+  partSelections?: Partial<Record<Category, string>>;
+  preferCheaper?: boolean;
+  preferExpensive?: boolean;
 };
 export type Validation = {
-  status: 'pass' | 'fail' | 'unknown';
+  status: 'pass' | 'fail' | 'unknown' | 'not_applicable';
   issues: string[];
 };
+export type BudgetStatus =
+  | 'below_minimum_reference'
+  | 'standard'
+  | 'above_high_reference';
+export type BudgetAssessment = {
+  status: BudgetStatus;
+  difference: number;
+  confirmable: boolean;
+  label: string;
+  reason: string;
+  minimumReference: number;
+  highReference: number;
+  highReferenceBasis: string;
+};
 export type Plan = {
+  tier?: '方案一' | '方案二' | '方案三' | '低价方案' | '均衡方案' | '高价方案';
   id: string;
   kind: 'diy' | 'prebuilt';
   name: string;
@@ -59,22 +81,79 @@ export type Plan = {
   validation: Validation;
   reason: string;
   score: number;
+  budget: BudgetAssessment;
+  deliveryAudit?: { status: 'passed' | 'reference'; checkedAt: string };
 };
 export type Evidence = {
   id: string;
   title: string;
   content: string;
   source: string | null;
-  checkedAt: string;
+  checkedAt: string | null;
 };
 export type RecommendationResult = {
+  selection?: {
+    planId: string;
+    status: 'selected' | 'confirmed';
+    source: 'user_message' | 'ui';
+    messageId?: string;
+  };
   requirements: Requirements;
   plans: Plan[];
   summary: string;
   evidence?: Evidence[];
   explanation?: string | null;
   modelStatus?: string;
+  evaluation?: PlanEvaluation;
+  budgetDiagnostic?: {
+    status: BudgetStatus;
+    minimumReference?: number;
+    highReference?: number;
+    reason: string;
+    searchComplete: boolean;
+    kind?:
+      | 'missing_products'
+      | 'known_conflict'
+      | 'search_insufficient'
+      | 'budget_gap';
+  };
+};
+export type PlanSuggestion = {
+  id: string;
+  planId: string;
+  category: Category;
+  oldProductId: string;
+  candidateProductId: string;
+  summary: string;
+  valid: boolean;
+  reason?: string;
+};
+export type PlanEvaluation = {
+  planId: string;
+  issues: string[];
+  directions: string[];
+  suggestions: PlanSuggestion[];
+  evidence?: Evidence[];
+  createdAt: number;
 };
 export type Catalog = { parts: Part[]; prebuilts: Prebuilt[] };
-export type PcTask={id:string;name:string;draft:Partial<Requirements>;result:RecommendationResult|null;issues:string[];version:number;updatedAt:number};
-export type TaskSummary=Pick<PcTask,'id'|'name'|'version'|'updatedAt'> & {purpose?:string;budget?:number};
+export type SupportCase = {
+  status: 'active' | 'stopped' | 'resolved' | 'handoff_requested';
+  symptom: string;
+  currentStepId?: string;
+  history: { messageId: string; report: string; stepId?: string }[];
+};
+export type TaskDraft = Partial<Requirements> & { support?: SupportCase };
+export type PcTask = {
+  id: string;
+  name: string;
+  draft: TaskDraft;
+  result: RecommendationResult | null;
+  issues: string[];
+  version: number;
+  updatedAt: number;
+};
+export type TaskSummary = Pick<
+  PcTask,
+  'id' | 'name' | 'version' | 'updatedAt'
+> & { purpose?: string; budget?: number };

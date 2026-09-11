@@ -1,0 +1,22 @@
+.generation-progress {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 18px;
+  margin: 0 1px 7px;
+  color: #737e8e;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.generation-progress > span {
+  width: 6px;
+  height: 6px;
+  flex: 0 0 auto;
+  background: var(--lab-signal);
+  animation: generation-blink 1.1s steps(2, end) infinite;
+}
+
+@keyframes generation-blink {
+  50% { opacity: 0.25; }
+}

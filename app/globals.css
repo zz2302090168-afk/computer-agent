@@ -7,8 +7,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: "Segoe UI", "Microsoft YaHei", Arial, sans-serif;
+  --font-mono: Consolas, "SFMono-Regular", monospace;
   --font-heading: var(--font-sans);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -49,10 +49,20 @@
 }
 
 body {
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
 }
 
 :root {
+  --lab-paper: #f8fafc;
+  --lab-surface: #ffffff;
+  --lab-ink: #0f172a;
+  --lab-muted: #475569;
+  --lab-line: #e4e7eb;
+  --lab-blue: #0369a1;
+  --lab-signal: #059669;
+  --console-bg: #eef2f6;
+  --console-panel: #ffffff;
+  --console-line: #d7dfe8;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);

@@ -381,27 +381,6 @@
     }
   },
   {
-    "id": "real-gpu-1",
-    "category": "gpu",
-    "categoryLabel": "GPU",
-    "brand": "MSI 微星",
-    "name": "GeForce RTX 3060 VENTUS 2X 12G OC",
-    "color": "银黑色",
-    "price": 1700,
-    "demo": false,
-    "specs": {
-      "power": 170,
-      "recommendedPsu": 550,
-      "length": 235,
-      "thickness": 42,
-      "connector": "8pin",
-      "connectors": 1,
-      "source": "https://www.msi.com/Graphics-Card/GeForce-RTX-3060-VENTUS-2X-12G-OC/Specification",
-      "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
-    }
-  },
-  {
     "id": "real-gpu-2",
     "category": "gpu",
     "categoryLabel": "GPU",
@@ -418,69 +397,6 @@
       "connector": "8pin",
       "connectors": 1,
       "source": "https://www.msi.com/Graphics-Card/GeForce-RTX-4060-VENTUS-2X-BLACK-8G-OC/Specification",
-      "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
-    }
-  },
-  {
-    "id": "real-gpu-3",
-    "category": "gpu",
-    "categoryLabel": "GPU",
-    "brand": "MSI 微星",
-    "name": "GeForce RTX 4060 Ti VENTUS 2X BLACK 8G OC",
-    "color": "黑色",
-    "price": 2400,
-    "demo": false,
-    "specs": {
-      "power": 160,
-      "recommendedPsu": 550,
-      "length": 199,
-      "thickness": 42,
-      "connector": "8pin",
-      "connectors": 1,
-      "source": "https://www.msi.com/Graphics-Card/GeForce-RTX-4060-Ti-VENTUS-2X-BLACK-8G-OC/Specification",
-      "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
-    }
-  },
-  {
-    "id": "real-gpu-4",
-    "category": "gpu",
-    "categoryLabel": "GPU",
-    "brand": "MSI 微星",
-    "name": "GeForce RTX 4060 Ti VENTUS 2X BLACK 16G OC",
-    "color": "黑色",
-    "price": 2800,
-    "demo": false,
-    "specs": {
-      "power": 165,
-      "recommendedPsu": 550,
-      "length": 199,
-      "thickness": 42,
-      "connector": "8pin",
-      "connectors": 1,
-      "source": "https://www.msi.com/Graphics-Card/GeForce-RTX-4060-Ti-VENTUS-2X-BLACK-16G-OC/Specification",
-      "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
-    }
-  },
-  {
-    "id": "real-gpu-5",
-    "category": "gpu",
-    "categoryLabel": "GPU",
-    "brand": "MSI 微星",
-    "name": "GeForce RTX 4070 VENTUS 2X 12G OC",
-    "color": "银黑色",
-    "price": 3300,
-    "demo": false,
-    "specs": {
-      "power": 200,
-      "recommendedPsu": 650,
-      "length": 242,
-      "thickness": 43,
-      "connector": "8pin",
-      "connectors": 1,
-      "source": "https://www.msi.com/Graphics-Card/GeForce-RTX-4070-VENTUS-2X-12G-OC/Specification",
       "checkedAt": "2026-09-07",
       "priceBasis": "merchant-authored"
     }
@@ -507,27 +423,6 @@
     }
   },
   {
-    "id": "real-gpu-7",
-    "category": "gpu",
-    "categoryLabel": "GPU",
-    "brand": "MSI 微星",
-    "name": "GeForce RTX 4070 Ti SUPER 16G VENTUS 3X OC",
-    "color": "银黑色",
-    "price": 4900,
-    "demo": false,
-    "specs": {
-      "power": 285,
-      "recommendedPsu": 700,
-      "length": 308,
-      "thickness": 50,
-      "connector": "16pin",
-      "connectors": 1,
-      "source": "https://www.msi.com/Graphics-Card/GeForce-RTX-4070-Ti-SUPER-16G-VENTUS-3X-OC/Specification",
-      "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
-    }
-  },
-  {
     "id": "real-gpu-8",
     "category": "gpu",
     "categoryLabel": "GPU",
@@ -549,21 +444,6 @@
     }
   },
   {
-    "id": "real-gpu-9",
-    "category": "gpu",
-    "categoryLabel": "GPU",
-    "brand": "MSI 微星",
-    "name": "GeForce RTX 4090 VENTUS 3X 24G OC",
-    "color": "银黑色",
-    "price": 13000,
-    "demo": false,
-    "specs": {
-      "source": "https://www.msi.com/Graphics-Card/GeForce-RTX-4090-VENTUS-3X-24G-OC/Specification",
-      "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
-    }
-  },
-  {
     "id": "real-gpu-10",
     "category": "gpu",
     "categoryLabel": "GPU",
@@ -574,21 +454,6 @@
     "demo": false,
     "specs": {
       "source": "https://www.msi.com/Graphics-Card/GeForce-RTX-5060-8G-VENTUS-2X-OC/Specification",
-      "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
-    }
-  },
-  {
-    "id": "real-gpu-11",
-    "category": "gpu",
-    "categoryLabel": "GPU",
-    "brand": "MSI 微星",
-    "name": "GeForce RTX 5060 Ti 8G VENTUS 2X OC PLUS",
-    "color": "银黑色",
-    "price": 2700,
-    "demo": false,
-    "specs": {
-      "source": "https://www.msi.com/Graphics-Card/GeForce-RTX-5060-Ti-8G-VENTUS-2X-OC-PLUS/Specification",
       "checkedAt": "2026-09-07",
       "priceBasis": "merchant-authored"
     }
@@ -762,6 +627,153 @@
     }
   },
   {
+    "id": "real-gpu-20",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "MSI 微星",
+    "name": "GeForce RTX 5060 8G VENTUS 2X OC WHITE",
+    "color": "白色",
+    "price": 2400,
+    "demo": false,
+    "specs": {
+      "power": 145,
+      "recommendedPsu": 550,
+      "length": 197,
+      "thickness": 41,
+      "connector": "8pin",
+      "connectors": 1,
+      "source": "https://www.msi.com/Graphics-Card/GeForce-RTX-5060-8G-VENTUS-2X-OC-WHITE/Specification",
+      "checkedAt": "2026-09-09",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-gpu-21",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "MSI 微星",
+    "name": "GeForce RTX 5060 8G GAMING TRIO OC WHITE",
+    "color": "白色",
+    "price": 2600,
+    "demo": false,
+    "specs": {
+      "power": 155,
+      "recommendedPsu": 550,
+      "length": 300,
+      "thickness": 44,
+      "connector": "8pin",
+      "connectors": 1,
+      "source": "https://www.msi.com/Graphics-Card/GeForce-RTX-5060-8G-GAMING-TRIO-OC-WHITE/Specification",
+      "checkedAt": "2026-09-09",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-gpu-22",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "MSI 微星",
+    "name": "GeForce RTX 5060 Ti 8G GAMING TRIO OC WHITE",
+    "color": "白色",
+    "price": 3000,
+    "demo": false,
+    "specs": {
+      "power": 180,
+      "recommendedPsu": 600,
+      "length": 300,
+      "thickness": 44,
+      "connector": "16pin",
+      "connectors": 1,
+      "source": "https://www.msi.com/Graphics-Card/GeForce-RTX-5060-Ti-8G-GAMING-TRIO-OC-WHITE/Specification",
+      "checkedAt": "2026-09-09",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-gpu-23",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "MSI 微星",
+    "name": "GeForce RTX 5060 Ti 16G GAMING TRIO OC WHITE",
+    "color": "白色",
+    "price": 3600,
+    "demo": false,
+    "specs": {
+      "power": 180,
+      "recommendedPsu": 600,
+      "length": 300,
+      "thickness": 44,
+      "connector": "16pin",
+      "connectors": 1,
+      "source": "https://www.msi.com/Graphics-Card/GeForce-RTX-5060-Ti-16G-GAMING-TRIO-OC-WHITE/Specification",
+      "checkedAt": "2026-09-09",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-gpu-24",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "MSI 微星",
+    "name": "GeForce RTX 5070 12G GAMING TRIO OC WHITE",
+    "color": "白色",
+    "price": 4600,
+    "demo": false,
+    "specs": {
+      "power": 250,
+      "recommendedPsu": 650,
+      "length": 338,
+      "thickness": 50,
+      "connector": "16pin",
+      "connectors": 1,
+      "source": "https://www.msi.com/Graphics-Card/GeForce-RTX-5070-12G-GAMING-TRIO-OC-WHITE/Specification",
+      "checkedAt": "2026-09-09",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-gpu-25",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "MSI 微星",
+    "name": "GeForce RTX 5070 Ti 16G GAMING TRIO OC WHITE",
+    "color": "白色",
+    "price": 6200,
+    "demo": false,
+    "specs": {
+      "power": 300,
+      "recommendedPsu": 750,
+      "length": 338,
+      "thickness": 50,
+      "connector": "16pin",
+      "connectors": 1,
+      "source": "https://www.msi.com/Graphics-Card/GeForce-RTX-5070-Ti-16G-GAMING-TRIO-OC-WHITE/Specification",
+      "checkedAt": "2026-09-09",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-gpu-26",
+    "category": "gpu",
+    "categoryLabel": "GPU",
+    "brand": "MSI 微星",
+    "name": "GeForce RTX 5080 16G GAMING TRIO OC WHITE",
+    "color": "白色",
+    "price": 9600,
+    "demo": false,
+    "specs": {
+      "power": 360,
+      "recommendedPsu": 850,
+      "length": 338,
+      "thickness": 50,
+      "connector": "16pin",
+      "connectors": 1,
+      "source": "https://www.msi.com/Graphics-Card/GeForce-RTX-5080-16G-GAMING-TRIO-OC-WHITE/Specification",
+      "checkedAt": "2026-09-09",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
     "id": "real-memory-0",
     "category": "memory",
     "categoryLabel": "内存",
@@ -776,7 +788,21 @@
       "sticks": 2,
       "source": "https://www.kingston.com/datasheets/KF432C16BBK2_16.pdf",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "height": 35,
+      "provenance": {
+        "height": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "FURY Beast non-RGB product-family baseline; no manufacturer height claim",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "height"
+      ]
     }
   },
   {
@@ -794,25 +820,21 @@
       "sticks": 2,
       "source": "https://www.kingston.com/datasheets/KF432C16BBK2_32.pdf",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
-    }
-  },
-  {
-    "id": "real-memory-2",
-    "category": "memory",
-    "categoryLabel": "内存",
-    "brand": "Kingston 金士顿",
-    "name": "FURY Beast KF432C16BBK2/64",
-    "color": "黑色",
-    "price": 690,
-    "demo": false,
-    "specs": {
-      "ddr": "DDR4",
-      "capacity": 64,
-      "sticks": 2,
-      "source": "https://www.kingston.com/datasheets/KF432C16BBK2_64.pdf",
-      "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "height": 35,
+      "provenance": {
+        "height": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "FURY Beast non-RGB product-family baseline; no manufacturer height claim",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "height"
+      ]
     }
   },
   {
@@ -830,97 +852,21 @@
       "sticks": 2,
       "source": "https://www.kingston.com/datasheets/KF436C18BBK2_32.pdf",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
-    }
-  },
-  {
-    "id": "real-memory-4",
-    "category": "memory",
-    "categoryLabel": "内存",
-    "brand": "Kingston 金士顿",
-    "name": "FURY Beast KF436C18BBK2/64",
-    "color": "黑色",
-    "price": 750,
-    "demo": false,
-    "specs": {
-      "ddr": "DDR4",
-      "capacity": 64,
-      "sticks": 2,
-      "source": "https://www.kingston.com/datasheets/KF436C18BBK2_64.pdf",
-      "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
-    }
-  },
-  {
-    "id": "real-memory-5",
-    "category": "memory",
-    "categoryLabel": "内存",
-    "brand": "Kingston 金士顿",
-    "name": "FURY Beast KF432C16BBAK2/16",
-    "color": "黑色",
-    "price": 270,
-    "demo": false,
-    "specs": {
-      "ddr": "DDR4",
-      "capacity": 16,
-      "sticks": 2,
-      "source": "https://www.kingston.com/datasheets/KF432C16BBAK2_16.pdf",
-      "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
-    }
-  },
-  {
-    "id": "real-memory-6",
-    "category": "memory",
-    "categoryLabel": "内存",
-    "brand": "Kingston 金士顿",
-    "name": "FURY Beast KF432C16BBAK2/32",
-    "color": "黑色",
-    "price": 450,
-    "demo": false,
-    "specs": {
-      "ddr": "DDR4",
-      "capacity": 32,
-      "sticks": 2,
-      "source": "https://www.kingston.com/datasheets/KF432C16BBAK2_32.pdf",
-      "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
-    }
-  },
-  {
-    "id": "real-memory-7",
-    "category": "memory",
-    "categoryLabel": "内存",
-    "brand": "Kingston 金士顿",
-    "name": "FURY Beast KF436C18BBAK2/32",
-    "color": "黑色",
-    "price": 490,
-    "demo": false,
-    "specs": {
-      "ddr": "DDR4",
-      "capacity": 32,
-      "sticks": 2,
-      "source": "https://www.kingston.com/datasheets/KF436C18BBAK2_32.pdf",
-      "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
-    }
-  },
-  {
-    "id": "real-memory-8",
-    "category": "memory",
-    "categoryLabel": "内存",
-    "brand": "Kingston 金士顿",
-    "name": "FURY Beast KF552C36BBEK2-16",
-    "color": "黑色",
-    "price": 320,
-    "demo": false,
-    "specs": {
-      "ddr": "DDR5",
-      "capacity": 16,
-      "sticks": 2,
-      "source": "https://www.kingston.com/datasheets/KF552C36BBEK2-16.pdf",
-      "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "height": 35,
+      "provenance": {
+        "height": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "FURY Beast non-RGB product-family baseline; no manufacturer height claim",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "height"
+      ]
     }
   },
   {
@@ -938,25 +884,21 @@
       "sticks": 2,
       "source": "https://www.kingston.com/datasheets/KF552C36BBEK2-32.pdf",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
-    }
-  },
-  {
-    "id": "real-memory-10",
-    "category": "memory",
-    "categoryLabel": "内存",
-    "brand": "Kingston 金士顿",
-    "name": "FURY Beast KF556C36BBEK2-16",
-    "color": "黑色",
-    "price": 350,
-    "demo": false,
-    "specs": {
-      "ddr": "DDR5",
-      "capacity": 16,
-      "sticks": 2,
-      "source": "https://www.kingston.com/datasheets/KF556C36BBEK2-16.pdf",
-      "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "height": 35,
+      "provenance": {
+        "height": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "FURY Beast non-RGB product-family baseline; no manufacturer height claim",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "height"
+      ]
     }
   },
   {
@@ -974,25 +916,21 @@
       "sticks": 2,
       "source": "https://www.kingston.com/datasheets/KF556C36BBEK2-32.pdf",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
-    }
-  },
-  {
-    "id": "real-memory-12",
-    "category": "memory",
-    "categoryLabel": "内存",
-    "brand": "Kingston 金士顿",
-    "name": "FURY Beast KF560C36BBEK2-16",
-    "color": "黑色",
-    "price": 380,
-    "demo": false,
-    "specs": {
-      "ddr": "DDR5",
-      "capacity": 16,
-      "sticks": 2,
-      "source": "https://www.kingston.com/datasheets/KF560C36BBEK2-16.pdf",
-      "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "height": 35,
+      "provenance": {
+        "height": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "FURY Beast non-RGB product-family baseline; no manufacturer height claim",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "height"
+      ]
     }
   },
   {
@@ -1010,7 +948,21 @@
       "sticks": 2,
       "source": "https://www.kingston.com/datasheets/KF560C36BBEK2-32.pdf",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "height": 35,
+      "provenance": {
+        "height": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "FURY Beast non-RGB product-family baseline; no manufacturer height claim",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "height"
+      ]
     }
   },
   {
@@ -1028,7 +980,21 @@
       "sticks": 2,
       "source": "https://www.kingston.com/datasheets/KF560C36BBEK2-64.pdf",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "height": 35,
+      "provenance": {
+        "height": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "FURY Beast non-RGB product-family baseline; no manufacturer height claim",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "height"
+      ]
     }
   },
   {
@@ -1046,7 +1012,21 @@
       "sticks": 2,
       "source": "https://www.kingston.com/datasheets/KF560C36BBEAK2-32.pdf",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "height": 35,
+      "provenance": {
+        "height": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "FURY Beast non-RGB product-family baseline; no manufacturer height claim",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "height"
+      ]
     }
   },
   {
@@ -1064,7 +1044,21 @@
       "sticks": 2,
       "source": "https://www.kingston.com/datasheets/KF560C36BWEK2-32.pdf",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "height": 35,
+      "provenance": {
+        "height": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "FURY Beast non-RGB product-family baseline; no manufacturer height claim",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "height"
+      ]
     }
   },
   {
@@ -1082,7 +1076,21 @@
       "sticks": 2,
       "source": "https://www.kingston.com/datasheets/KF560C36BWEAK2-32.pdf",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "height": 35,
+      "provenance": {
+        "height": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "FURY Beast non-RGB product-family baseline; no manufacturer height claim",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "height"
+      ]
     }
   },
   {
@@ -1100,7 +1108,21 @@
       "sticks": 1,
       "source": "https://www.kingston.com/datasheets/KF432C16BB_8.pdf",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "height": 35,
+      "provenance": {
+        "height": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "FURY Beast non-RGB product-family baseline; no manufacturer height claim",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "height"
+      ]
     }
   },
   {
@@ -1118,7 +1140,277 @@
       "sticks": 1,
       "source": "https://www.kingston.com/datasheets/KF432C16BB_16.pdf",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "height": 35,
+      "provenance": {
+        "height": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "FURY Beast non-RGB product-family baseline; no manufacturer height claim",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "height"
+      ]
+    }
+  },
+  {
+    "id": "real-memory-20",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "Kingston 金士顿",
+    "name": "FURY Beast KF560C36BWEK2-64",
+    "color": "白色",
+    "price": 1190,
+    "demo": false,
+    "specs": {
+      "ddr": "DDR5",
+      "capacity": 64,
+      "sticks": 2,
+      "source": "https://www.kingston.com/datasheets/KF560C36BWEK2-64.pdf",
+      "checkedAt": "2026-09-09",
+      "priceBasis": "merchant-authored",
+      "height": 35,
+      "provenance": {
+        "height": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "FURY Beast non-RGB product-family baseline; no manufacturer height claim",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "height"
+      ]
+    }
+  },
+  {
+    "id": "real-memory-21",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "Kingston 金士顿",
+    "name": "FURY Beast KF560C36BWEAK2-64",
+    "color": "白色",
+    "price": 1290,
+    "demo": false,
+    "specs": {
+      "ddr": "DDR5",
+      "capacity": 64,
+      "sticks": 2,
+      "source": "https://www.kingston.com/datasheets/KF560C36BWEAK2-64.pdf",
+      "checkedAt": "2026-09-09",
+      "priceBasis": "merchant-authored",
+      "height": 35,
+      "provenance": {
+        "height": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "FURY Beast non-RGB product-family baseline; no manufacturer height claim",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "height"
+      ]
+    }
+  },
+  {
+    "id": "real-memory-22",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "Kingston 金士顿",
+    "name": "FURY Beast KF560C30BWK2-32",
+    "color": "白色",
+    "price": 690,
+    "demo": false,
+    "specs": {
+      "ddr": "DDR5",
+      "capacity": 32,
+      "sticks": 2,
+      "source": "https://www.kingston.com/datasheets/KF560C30BWK2-32.pdf",
+      "checkedAt": "2026-09-09",
+      "priceBasis": "merchant-authored",
+      "height": 35,
+      "provenance": {
+        "height": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "FURY Beast non-RGB product-family baseline; no manufacturer height claim",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "height"
+      ]
+    }
+  },
+  {
+    "id": "real-memory-23",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "Kingston 金士顿",
+    "name": "FURY Beast KF560C30BWAK2-32",
+    "color": "白色",
+    "price": 750,
+    "demo": false,
+    "specs": {
+      "ddr": "DDR5",
+      "capacity": 32,
+      "sticks": 2,
+      "source": "https://www.kingston.com/datasheets/KF560C30BWAK2-32.pdf",
+      "checkedAt": "2026-09-09",
+      "priceBasis": "merchant-authored",
+      "height": 35,
+      "provenance": {
+        "height": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "FURY Beast non-RGB product-family baseline; no manufacturer height claim",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "height"
+      ]
+    }
+  },
+  {
+    "id": "real-memory-24",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "Kingston 金士顿",
+    "name": "FURY Beast KF552C40BWK2-32",
+    "color": "白色",
+    "price": 520,
+    "demo": false,
+    "specs": {
+      "ddr": "DDR5",
+      "capacity": 32,
+      "sticks": 2,
+      "source": "https://www.kingston.com/datasheets/KF552C40BWK2-32.pdf",
+      "checkedAt": "2026-09-09",
+      "priceBasis": "merchant-authored",
+      "height": 35,
+      "provenance": {
+        "height": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "FURY Beast non-RGB product-family baseline; no manufacturer height claim",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "height"
+      ]
+    }
+  },
+  {
+    "id": "real-memory-25",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "Kingston 金士顿",
+    "name": "FURY Beast KF556C40BWK2-32",
+    "color": "白色",
+    "price": 560,
+    "demo": false,
+    "specs": {
+      "ddr": "DDR5",
+      "capacity": 32,
+      "sticks": 2,
+      "source": "https://www.kingston.com/datasheets/KF556C40BWK2-32.pdf",
+      "checkedAt": "2026-09-09",
+      "priceBasis": "merchant-authored",
+      "height": 35,
+      "provenance": {
+        "height": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "FURY Beast non-RGB product-family baseline; no manufacturer height claim",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "height"
+      ]
+    }
+  },
+  {
+    "id": "real-memory-26",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "Kingston 金士顿",
+    "name": "FURY Beast KF564C32BWK2-32",
+    "color": "白色",
+    "price": 760,
+    "demo": false,
+    "specs": {
+      "ddr": "DDR5",
+      "capacity": 32,
+      "sticks": 2,
+      "source": "https://www.kingston.com/datasheets/KF564C32BWK2-32.pdf",
+      "checkedAt": "2026-09-09",
+      "priceBasis": "merchant-authored",
+      "height": 35,
+      "provenance": {
+        "height": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "FURY Beast non-RGB product-family baseline; no manufacturer height claim",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "height"
+      ]
+    }
+  },
+  {
+    "id": "real-memory-27",
+    "category": "memory",
+    "categoryLabel": "内存",
+    "brand": "Kingston 金士顿",
+    "name": "FURY Beast KF564C32BWAK2-32",
+    "color": "白色",
+    "price": 820,
+    "demo": false,
+    "specs": {
+      "ddr": "DDR5",
+      "capacity": 32,
+      "sticks": 2,
+      "source": "https://www.kingston.com/datasheets/KF564C32BWAK2-32.pdf",
+      "checkedAt": "2026-09-09",
+      "priceBasis": "merchant-authored",
+      "height": 35,
+      "provenance": {
+        "height": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "FURY Beast non-RGB product-family baseline; no manufacturer height claim",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "height"
+      ]
     }
   },
   {
@@ -1139,28 +1431,47 @@
       "biosVerified": false,
       "source": "https://www.msi.com/Motherboard/B550M-PRO-VDH-WIFI/Specification",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
-    }
-  },
-  {
-    "id": "real-motherboard-1",
-    "category": "motherboard",
-    "categoryLabel": "主板",
-    "brand": "MSI 微星",
-    "name": "B550 A PRO",
-    "color": "银黑色",
-    "price": 650,
-    "demo": false,
-    "specs": {
-      "socket": "AM4",
-      "ddr": "DDR4",
-      "ramSlots": 4,
-      "form": "ATX",
-      "m2": true,
-      "biosVerified": false,
-      "source": "https://www.msi.com/Motherboard/B550-A-PRO/Specification",
-      "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "supportedCpus": [
+        "real-cpu-0",
+        "real-cpu-1",
+        "real-cpu-2",
+        "real-cpu-3",
+        "real-cpu-4",
+        "real-cpu-5",
+        "real-cpu-6",
+        "real-cpu-7"
+      ],
+      "provenance": {
+        "supportedCpus": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "catalog CPU socket and memory-generation match",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        },
+        "maxRam": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "installed memory-slot count multiplied by conservative 32 GiB per slot",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        },
+        "biosVerified": {
+          "origin": "catalog",
+          "status": "unverified",
+          "manufacturerVerified": false,
+          "method": "no board CPU-support-list and shipped-BIOS evidence in catalog",
+          "use": "must_confirm_before_assembly"
+        }
+      },
+      "maxRam": 128,
+      "inferredFields": [
+        "supportedCpus",
+        "maxRam"
+      ]
     }
   },
   {
@@ -1181,28 +1492,47 @@
       "biosVerified": false,
       "source": "https://www.msi.com/Motherboard/MAG-B550-TOMAHAWK/Specification",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
-    }
-  },
-  {
-    "id": "real-motherboard-3",
-    "category": "motherboard",
-    "categoryLabel": "主板",
-    "brand": "MSI 微星",
-    "name": "MPG B550 GAMING PLUS",
-    "color": "银黑色",
-    "price": 750,
-    "demo": false,
-    "specs": {
-      "socket": "AM4",
-      "ddr": "DDR4",
-      "ramSlots": 4,
-      "form": "ATX",
-      "m2": true,
-      "biosVerified": false,
-      "source": "https://www.msi.com/Motherboard/MPG-B550-GAMING-PLUS/Specification",
-      "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "supportedCpus": [
+        "real-cpu-0",
+        "real-cpu-1",
+        "real-cpu-2",
+        "real-cpu-3",
+        "real-cpu-4",
+        "real-cpu-5",
+        "real-cpu-6",
+        "real-cpu-7"
+      ],
+      "provenance": {
+        "supportedCpus": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "catalog CPU socket and memory-generation match",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        },
+        "maxRam": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "installed memory-slot count multiplied by conservative 32 GiB per slot",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        },
+        "biosVerified": {
+          "origin": "catalog",
+          "status": "unverified",
+          "manufacturerVerified": false,
+          "method": "no board CPU-support-list and shipped-BIOS evidence in catalog",
+          "use": "must_confirm_before_assembly"
+        }
+      },
+      "maxRam": 128,
+      "inferredFields": [
+        "supportedCpus",
+        "maxRam"
+      ]
     }
   },
   {
@@ -1223,28 +1553,47 @@
       "biosVerified": false,
       "source": "https://www.msi.com/Motherboard/MAG-B550M-MORTAR/Specification",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
-    }
-  },
-  {
-    "id": "real-motherboard-5",
-    "category": "motherboard",
-    "categoryLabel": "主板",
-    "brand": "MSI 微星",
-    "name": "MAG B550M MORTAR WIFI",
-    "color": "银黑色",
-    "price": 850,
-    "demo": false,
-    "specs": {
-      "socket": "AM4",
-      "ddr": "DDR4",
-      "ramSlots": 4,
-      "form": "mATX",
-      "m2": true,
-      "biosVerified": false,
-      "source": "https://www.msi.com/Motherboard/MAG-B550M-MORTAR-WIFI/Specification",
-      "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "supportedCpus": [
+        "real-cpu-0",
+        "real-cpu-1",
+        "real-cpu-2",
+        "real-cpu-3",
+        "real-cpu-4",
+        "real-cpu-5",
+        "real-cpu-6",
+        "real-cpu-7"
+      ],
+      "provenance": {
+        "supportedCpus": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "catalog CPU socket and memory-generation match",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        },
+        "maxRam": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "installed memory-slot count multiplied by conservative 32 GiB per slot",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        },
+        "biosVerified": {
+          "origin": "catalog",
+          "status": "unverified",
+          "manufacturerVerified": false,
+          "method": "no board CPU-support-list and shipped-BIOS evidence in catalog",
+          "use": "must_confirm_before_assembly"
+        }
+      },
+      "maxRam": 128,
+      "inferredFields": [
+        "supportedCpus",
+        "maxRam"
+      ]
     }
   },
   {
@@ -1265,7 +1614,51 @@
       "biosVerified": false,
       "source": "https://www.msi.com/Motherboard/PRO-B650M-A-WIFI/Specification",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "supportedCpus": [
+        "real-cpu-8",
+        "real-cpu-9",
+        "real-cpu-10",
+        "real-cpu-11",
+        "real-cpu-12",
+        "real-cpu-13",
+        "real-cpu-14",
+        "real-cpu-15",
+        "real-cpu-16",
+        "real-cpu-17",
+        "real-cpu-18",
+        "real-cpu-19"
+      ],
+      "provenance": {
+        "supportedCpus": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "catalog CPU socket and memory-generation match",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        },
+        "maxRam": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "installed memory-slot count multiplied by conservative 32 GiB per slot",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        },
+        "biosVerified": {
+          "origin": "catalog",
+          "status": "unverified",
+          "manufacturerVerified": false,
+          "method": "no board CPU-support-list and shipped-BIOS evidence in catalog",
+          "use": "must_confirm_before_assembly"
+        }
+      },
+      "maxRam": 128,
+      "inferredFields": [
+        "supportedCpus",
+        "maxRam"
+      ]
     }
   },
   {
@@ -1286,28 +1679,51 @@
       "biosVerified": false,
       "source": "https://www.msi.com/Motherboard/PRO-B650-S-WIFI/Specification",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
-    }
-  },
-  {
-    "id": "real-motherboard-8",
-    "category": "motherboard",
-    "categoryLabel": "主板",
-    "brand": "MSI 微星",
-    "name": "B650 GAMING PLUS WIFI",
-    "color": "银黑色",
-    "price": 1050,
-    "demo": false,
-    "specs": {
-      "socket": "AM5",
-      "ddr": "DDR5",
-      "ramSlots": 4,
-      "form": "ATX",
-      "m2": true,
-      "biosVerified": false,
-      "source": "https://www.msi.com/Motherboard/B650-GAMING-PLUS-WIFI/Specification",
-      "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "supportedCpus": [
+        "real-cpu-8",
+        "real-cpu-9",
+        "real-cpu-10",
+        "real-cpu-11",
+        "real-cpu-12",
+        "real-cpu-13",
+        "real-cpu-14",
+        "real-cpu-15",
+        "real-cpu-16",
+        "real-cpu-17",
+        "real-cpu-18",
+        "real-cpu-19"
+      ],
+      "provenance": {
+        "supportedCpus": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "catalog CPU socket and memory-generation match",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        },
+        "maxRam": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "installed memory-slot count multiplied by conservative 32 GiB per slot",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        },
+        "biosVerified": {
+          "origin": "catalog",
+          "status": "unverified",
+          "manufacturerVerified": false,
+          "method": "no board CPU-support-list and shipped-BIOS evidence in catalog",
+          "use": "must_confirm_before_assembly"
+        }
+      },
+      "maxRam": 128,
+      "inferredFields": [
+        "supportedCpus",
+        "maxRam"
+      ]
     }
   },
   {
@@ -1328,28 +1744,51 @@
       "biosVerified": false,
       "source": "https://www.msi.com/Motherboard/MAG-B650-TOMAHAWK-WIFI/Specification",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
-    }
-  },
-  {
-    "id": "real-motherboard-10",
-    "category": "motherboard",
-    "categoryLabel": "主板",
-    "brand": "MSI 微星",
-    "name": "MAG B650M MORTAR WIFI",
-    "color": "银黑色",
-    "price": 1250,
-    "demo": false,
-    "specs": {
-      "socket": "AM5",
-      "ddr": "DDR5",
-      "ramSlots": 4,
-      "form": "mATX",
-      "m2": true,
-      "biosVerified": false,
-      "source": "https://www.msi.com/Motherboard/MAG-B650M-MORTAR-WIFI/Specification",
-      "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "supportedCpus": [
+        "real-cpu-8",
+        "real-cpu-9",
+        "real-cpu-10",
+        "real-cpu-11",
+        "real-cpu-12",
+        "real-cpu-13",
+        "real-cpu-14",
+        "real-cpu-15",
+        "real-cpu-16",
+        "real-cpu-17",
+        "real-cpu-18",
+        "real-cpu-19"
+      ],
+      "provenance": {
+        "supportedCpus": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "catalog CPU socket and memory-generation match",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        },
+        "maxRam": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "installed memory-slot count multiplied by conservative 32 GiB per slot",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        },
+        "biosVerified": {
+          "origin": "catalog",
+          "status": "unverified",
+          "manufacturerVerified": false,
+          "method": "no board CPU-support-list and shipped-BIOS evidence in catalog",
+          "use": "must_confirm_before_assembly"
+        }
+      },
+      "maxRam": 128,
+      "inferredFields": [
+        "supportedCpus",
+        "maxRam"
+      ]
     }
   },
   {
@@ -1370,28 +1809,51 @@
       "biosVerified": false,
       "source": "https://www.msi.com/Motherboard/MPG-B650-EDGE-WIFI/Specification",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
-    }
-  },
-  {
-    "id": "real-motherboard-12",
-    "category": "motherboard",
-    "categoryLabel": "主板",
-    "brand": "MSI 微星",
-    "name": "PRO X670 P WIFI",
-    "color": "银黑色",
-    "price": 1800,
-    "demo": false,
-    "specs": {
-      "socket": "AM5",
-      "ddr": "DDR5",
-      "ramSlots": 4,
-      "form": "ATX",
-      "m2": true,
-      "biosVerified": false,
-      "source": "https://www.msi.com/Motherboard/PRO-X670-P-WIFI/Specification",
-      "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "supportedCpus": [
+        "real-cpu-8",
+        "real-cpu-9",
+        "real-cpu-10",
+        "real-cpu-11",
+        "real-cpu-12",
+        "real-cpu-13",
+        "real-cpu-14",
+        "real-cpu-15",
+        "real-cpu-16",
+        "real-cpu-17",
+        "real-cpu-18",
+        "real-cpu-19"
+      ],
+      "provenance": {
+        "supportedCpus": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "catalog CPU socket and memory-generation match",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        },
+        "maxRam": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "installed memory-slot count multiplied by conservative 32 GiB per slot",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        },
+        "biosVerified": {
+          "origin": "catalog",
+          "status": "unverified",
+          "manufacturerVerified": false,
+          "method": "no board CPU-support-list and shipped-BIOS evidence in catalog",
+          "use": "must_confirm_before_assembly"
+        }
+      },
+      "maxRam": 128,
+      "inferredFields": [
+        "supportedCpus",
+        "maxRam"
+      ]
     }
   },
   {
@@ -1412,28 +1874,51 @@
       "biosVerified": false,
       "source": "https://www.msi.com/Motherboard/MAG-X670E-TOMAHAWK-WIFI/Specification",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
-    }
-  },
-  {
-    "id": "real-motherboard-14",
-    "category": "motherboard",
-    "categoryLabel": "主板",
-    "brand": "MSI 微星",
-    "name": "MPG X670E CARBON WIFI",
-    "color": "银黑色",
-    "price": 2900,
-    "demo": false,
-    "specs": {
-      "socket": "AM5",
-      "ddr": "DDR5",
-      "ramSlots": 4,
-      "form": "ATX",
-      "m2": true,
-      "biosVerified": false,
-      "source": "https://www.msi.com/Motherboard/MPG-X670E-CARBON-WIFI/Specification",
-      "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "supportedCpus": [
+        "real-cpu-8",
+        "real-cpu-9",
+        "real-cpu-10",
+        "real-cpu-11",
+        "real-cpu-12",
+        "real-cpu-13",
+        "real-cpu-14",
+        "real-cpu-15",
+        "real-cpu-16",
+        "real-cpu-17",
+        "real-cpu-18",
+        "real-cpu-19"
+      ],
+      "provenance": {
+        "supportedCpus": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "catalog CPU socket and memory-generation match",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        },
+        "maxRam": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "installed memory-slot count multiplied by conservative 32 GiB per slot",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        },
+        "biosVerified": {
+          "origin": "catalog",
+          "status": "unverified",
+          "manufacturerVerified": false,
+          "method": "no board CPU-support-list and shipped-BIOS evidence in catalog",
+          "use": "must_confirm_before_assembly"
+        }
+      },
+      "maxRam": 128,
+      "inferredFields": [
+        "supportedCpus",
+        "maxRam"
+      ]
     }
   },
   {
@@ -1454,28 +1939,51 @@
       "biosVerified": false,
       "source": "https://www.msi.com/Motherboard/PRO-B850-P-WIFI/Specification",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
-    }
-  },
-  {
-    "id": "real-motherboard-16",
-    "category": "motherboard",
-    "categoryLabel": "主板",
-    "brand": "MSI 微星",
-    "name": "B850 GAMING PLUS WIFI",
-    "color": "银黑色",
-    "price": 1500,
-    "demo": false,
-    "specs": {
-      "socket": "AM5",
-      "ddr": "DDR5",
-      "ramSlots": 4,
-      "form": "ATX",
-      "m2": true,
-      "biosVerified": false,
-      "source": "https://www.msi.com/Motherboard/B850-GAMING-PLUS-WIFI/Specification",
-      "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "supportedCpus": [
+        "real-cpu-8",
+        "real-cpu-9",
+        "real-cpu-10",
+        "real-cpu-11",
+        "real-cpu-12",
+        "real-cpu-13",
+        "real-cpu-14",
+        "real-cpu-15",
+        "real-cpu-16",
+        "real-cpu-17",
+        "real-cpu-18",
+        "real-cpu-19"
+      ],
+      "provenance": {
+        "supportedCpus": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "catalog CPU socket and memory-generation match",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        },
+        "maxRam": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "installed memory-slot count multiplied by conservative 32 GiB per slot",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        },
+        "biosVerified": {
+          "origin": "catalog",
+          "status": "unverified",
+          "manufacturerVerified": false,
+          "method": "no board CPU-support-list and shipped-BIOS evidence in catalog",
+          "use": "must_confirm_before_assembly"
+        }
+      },
+      "maxRam": 128,
+      "inferredFields": [
+        "supportedCpus",
+        "maxRam"
+      ]
     }
   },
   {
@@ -1496,17 +2004,61 @@
       "biosVerified": false,
       "source": "https://www.msi.com/Motherboard/MAG-B850-TOMAHAWK-MAX-WIFI/Specification",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "supportedCpus": [
+        "real-cpu-8",
+        "real-cpu-9",
+        "real-cpu-10",
+        "real-cpu-11",
+        "real-cpu-12",
+        "real-cpu-13",
+        "real-cpu-14",
+        "real-cpu-15",
+        "real-cpu-16",
+        "real-cpu-17",
+        "real-cpu-18",
+        "real-cpu-19"
+      ],
+      "provenance": {
+        "supportedCpus": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "catalog CPU socket and memory-generation match",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        },
+        "maxRam": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "installed memory-slot count multiplied by conservative 32 GiB per slot",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        },
+        "biosVerified": {
+          "origin": "catalog",
+          "status": "unverified",
+          "manufacturerVerified": false,
+          "method": "no board CPU-support-list and shipped-BIOS evidence in catalog",
+          "use": "must_confirm_before_assembly"
+        }
+      },
+      "maxRam": 128,
+      "inferredFields": [
+        "supportedCpus",
+        "maxRam"
+      ]
     }
   },
   {
-    "id": "real-motherboard-18",
+    "id": "real-motherboard-20",
     "category": "motherboard",
     "categoryLabel": "主板",
-    "brand": "MSI 微星",
-    "name": "PRO X870 P WIFI",
-    "color": "银黑色",
-    "price": 1800,
+    "brand": "ASRock 华擎",
+    "name": "B850 Steel Legend WiFi",
+    "color": "白色",
+    "price": 1599,
     "demo": false,
     "specs": {
       "socket": "AM5",
@@ -1515,19 +2067,128 @@
       "form": "ATX",
       "m2": true,
       "biosVerified": false,
-      "source": "https://www.msi.com/Motherboard/PRO-X870-P-WIFI/Specification",
-      "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "source": "https://www.asrock.com/mb/AMD/B850%20Steel%20Legend%20WiFi/",
+      "checkedAt": "2026-09-09",
+      "priceBasis": "merchant-authored",
+      "supportedCpus": [
+        "real-cpu-8",
+        "real-cpu-9",
+        "real-cpu-10",
+        "real-cpu-11",
+        "real-cpu-12",
+        "real-cpu-13",
+        "real-cpu-14",
+        "real-cpu-15",
+        "real-cpu-16",
+        "real-cpu-17",
+        "real-cpu-18",
+        "real-cpu-19"
+      ],
+      "provenance": {
+        "supportedCpus": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "catalog CPU socket and memory-generation match",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        },
+        "maxRam": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "installed memory-slot count multiplied by conservative 32 GiB per slot",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        },
+        "biosVerified": {
+          "origin": "catalog",
+          "status": "unverified",
+          "manufacturerVerified": false,
+          "method": "no board CPU-support-list and shipped-BIOS evidence in catalog",
+          "use": "must_confirm_before_assembly"
+        }
+      },
+      "maxRam": 128,
+      "inferredFields": [
+        "supportedCpus",
+        "maxRam"
+      ]
     }
   },
   {
-    "id": "real-motherboard-19",
+    "id": "real-motherboard-21",
     "category": "motherboard",
     "categoryLabel": "主板",
-    "brand": "MSI 微星",
-    "name": "MAG X870 TOMAHAWK WIFI",
-    "color": "银黑色",
-    "price": 2300,
+    "brand": "ASRock 华擎",
+    "name": "B850M Steel Legend WiFi",
+    "color": "白色",
+    "price": 1399,
+    "demo": false,
+    "specs": {
+      "socket": "AM5",
+      "ddr": "DDR5",
+      "ramSlots": 4,
+      "form": "mATX",
+      "m2": true,
+      "biosVerified": false,
+      "source": "https://www.asrock.com/mb/AMD/B850M%20Steel%20Legend%20WiFi/",
+      "checkedAt": "2026-09-09",
+      "priceBasis": "merchant-authored",
+      "supportedCpus": [
+        "real-cpu-8",
+        "real-cpu-9",
+        "real-cpu-10",
+        "real-cpu-11",
+        "real-cpu-12",
+        "real-cpu-13",
+        "real-cpu-14",
+        "real-cpu-15",
+        "real-cpu-16",
+        "real-cpu-17",
+        "real-cpu-18",
+        "real-cpu-19"
+      ],
+      "provenance": {
+        "supportedCpus": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "catalog CPU socket and memory-generation match",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        },
+        "maxRam": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "installed memory-slot count multiplied by conservative 32 GiB per slot",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        },
+        "biosVerified": {
+          "origin": "catalog",
+          "status": "unverified",
+          "manufacturerVerified": false,
+          "method": "no board CPU-support-list and shipped-BIOS evidence in catalog",
+          "use": "must_confirm_before_assembly"
+        }
+      },
+      "maxRam": 128,
+      "inferredFields": [
+        "supportedCpus",
+        "maxRam"
+      ]
+    }
+  },
+  {
+    "id": "real-motherboard-22",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "ASRock 华擎",
+    "name": "B650 Steel Legend WiFi",
+    "color": "白色",
+    "price": 1299,
     "demo": false,
     "specs": {
       "socket": "AM5",
@@ -1536,26 +2197,508 @@
       "form": "ATX",
       "m2": true,
       "biosVerified": false,
-      "source": "https://www.msi.com/Motherboard/MAG-X870-TOMAHAWK-WIFI/Specification",
-      "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "source": "https://www.asrock.com/mb/AMD/B650%20Steel%20Legend%20WiFi/",
+      "checkedAt": "2026-09-09",
+      "priceBasis": "merchant-authored",
+      "supportedCpus": [
+        "real-cpu-8",
+        "real-cpu-9",
+        "real-cpu-10",
+        "real-cpu-11",
+        "real-cpu-12",
+        "real-cpu-13",
+        "real-cpu-14",
+        "real-cpu-15",
+        "real-cpu-16",
+        "real-cpu-17",
+        "real-cpu-18",
+        "real-cpu-19"
+      ],
+      "provenance": {
+        "supportedCpus": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "catalog CPU socket and memory-generation match",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        },
+        "maxRam": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "installed memory-slot count multiplied by conservative 32 GiB per slot",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        },
+        "biosVerified": {
+          "origin": "catalog",
+          "status": "unverified",
+          "manufacturerVerified": false,
+          "method": "no board CPU-support-list and shipped-BIOS evidence in catalog",
+          "use": "must_confirm_before_assembly"
+        }
+      },
+      "maxRam": 128,
+      "inferredFields": [
+        "supportedCpus",
+        "maxRam"
+      ]
     }
   },
   {
-    "id": "real-psu-0",
-    "category": "psu",
-    "categoryLabel": "电源",
-    "brand": "CORSAIR 美商海盗船",
-    "name": "RM550x (2021)",
-    "color": "黑色",
-    "price": 605,
+    "id": "real-motherboard-23",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "GIGABYTE 技嘉",
+    "name": "B650 AORUS ELITE AX ICE",
+    "color": "白色",
+    "price": 1299,
     "demo": false,
     "specs": {
-      "watts": 550,
+      "socket": "AM5",
+      "ddr": "DDR5",
+      "ramSlots": 4,
       "form": "ATX",
-      "source": "https://assets.corsair.com/image/upload/corsairmedia/sys_master/productcontent/WW_RMx_Series_2021_QSG_Web_AD.pdf",
-      "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "m2": true,
+      "biosVerified": false,
+      "source": "https://www.gigabyte.com/Motherboard/B650-AORUS-ELITE-AX-ICE/sp",
+      "checkedAt": "2026-09-09",
+      "priceBasis": "merchant-authored",
+      "supportedCpus": [
+        "real-cpu-8",
+        "real-cpu-9",
+        "real-cpu-10",
+        "real-cpu-11",
+        "real-cpu-12",
+        "real-cpu-13",
+        "real-cpu-14",
+        "real-cpu-15",
+        "real-cpu-16",
+        "real-cpu-17",
+        "real-cpu-18",
+        "real-cpu-19"
+      ],
+      "provenance": {
+        "supportedCpus": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "catalog CPU socket and memory-generation match",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        },
+        "maxRam": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "installed memory-slot count multiplied by conservative 32 GiB per slot",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        },
+        "biosVerified": {
+          "origin": "catalog",
+          "status": "unverified",
+          "manufacturerVerified": false,
+          "method": "no board CPU-support-list and shipped-BIOS evidence in catalog",
+          "use": "must_confirm_before_assembly"
+        }
+      },
+      "maxRam": 128,
+      "inferredFields": [
+        "supportedCpus",
+        "maxRam"
+      ]
+    }
+  },
+  {
+    "id": "real-motherboard-24",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "GIGABYTE 技嘉",
+    "name": "B650M AORUS ELITE AX ICE",
+    "color": "白色",
+    "price": 1199,
+    "demo": false,
+    "specs": {
+      "socket": "AM5",
+      "ddr": "DDR5",
+      "ramSlots": 4,
+      "form": "mATX",
+      "m2": true,
+      "biosVerified": false,
+      "source": "https://www.gigabyte.com/Motherboard/B650M-AORUS-ELITE-AX-ICE-rev-1x/sp",
+      "checkedAt": "2026-09-09",
+      "priceBasis": "merchant-authored",
+      "supportedCpus": [
+        "real-cpu-8",
+        "real-cpu-9",
+        "real-cpu-10",
+        "real-cpu-11",
+        "real-cpu-12",
+        "real-cpu-13",
+        "real-cpu-14",
+        "real-cpu-15",
+        "real-cpu-16",
+        "real-cpu-17",
+        "real-cpu-18",
+        "real-cpu-19"
+      ],
+      "provenance": {
+        "supportedCpus": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "catalog CPU socket and memory-generation match",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        },
+        "maxRam": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "installed memory-slot count multiplied by conservative 32 GiB per slot",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        },
+        "biosVerified": {
+          "origin": "catalog",
+          "status": "unverified",
+          "manufacturerVerified": false,
+          "method": "no board CPU-support-list and shipped-BIOS evidence in catalog",
+          "use": "must_confirm_before_assembly"
+        }
+      },
+      "maxRam": 128,
+      "inferredFields": [
+        "supportedCpus",
+        "maxRam"
+      ]
+    }
+  },
+  {
+    "id": "real-motherboard-25",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "GIGABYTE 技嘉",
+    "name": "B850 AORUS ELITE WIFI7 ICE",
+    "color": "白色",
+    "price": 1699,
+    "demo": false,
+    "specs": {
+      "socket": "AM5",
+      "ddr": "DDR5",
+      "ramSlots": 4,
+      "form": "ATX",
+      "m2": true,
+      "biosVerified": false,
+      "source": "https://www.gigabyte.com/Motherboard/B850-AORUS-ELITE-WIFI7-ICE-rev-1x/sp",
+      "checkedAt": "2026-09-09",
+      "priceBasis": "merchant-authored",
+      "supportedCpus": [
+        "real-cpu-8",
+        "real-cpu-9",
+        "real-cpu-10",
+        "real-cpu-11",
+        "real-cpu-12",
+        "real-cpu-13",
+        "real-cpu-14",
+        "real-cpu-15",
+        "real-cpu-16",
+        "real-cpu-17",
+        "real-cpu-18",
+        "real-cpu-19"
+      ],
+      "provenance": {
+        "supportedCpus": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "catalog CPU socket and memory-generation match",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        },
+        "maxRam": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "installed memory-slot count multiplied by conservative 32 GiB per slot",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        },
+        "biosVerified": {
+          "origin": "catalog",
+          "status": "unverified",
+          "manufacturerVerified": false,
+          "method": "no board CPU-support-list and shipped-BIOS evidence in catalog",
+          "use": "must_confirm_before_assembly"
+        }
+      },
+      "maxRam": 128,
+      "inferredFields": [
+        "supportedCpus",
+        "maxRam"
+      ]
+    }
+  },
+  {
+    "id": "real-motherboard-26",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "GIGABYTE 技嘉",
+    "name": "B850M AORUS ELITE WIFI6E ICE",
+    "color": "白色",
+    "price": 1399,
+    "demo": false,
+    "specs": {
+      "socket": "AM5",
+      "ddr": "DDR5",
+      "ramSlots": 4,
+      "form": "mATX",
+      "m2": true,
+      "biosVerified": false,
+      "source": "https://www.gigabyte.com/Motherboard/B850M-AORUS-ELITE-WIFI6E-ICE-rev-1x/sp",
+      "checkedAt": "2026-09-09",
+      "priceBasis": "merchant-authored",
+      "supportedCpus": [
+        "real-cpu-8",
+        "real-cpu-9",
+        "real-cpu-10",
+        "real-cpu-11",
+        "real-cpu-12",
+        "real-cpu-13",
+        "real-cpu-14",
+        "real-cpu-15",
+        "real-cpu-16",
+        "real-cpu-17",
+        "real-cpu-18",
+        "real-cpu-19"
+      ],
+      "provenance": {
+        "supportedCpus": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "catalog CPU socket and memory-generation match",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        },
+        "maxRam": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "installed memory-slot count multiplied by conservative 32 GiB per slot",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        },
+        "biosVerified": {
+          "origin": "catalog",
+          "status": "unverified",
+          "manufacturerVerified": false,
+          "method": "no board CPU-support-list and shipped-BIOS evidence in catalog",
+          "use": "must_confirm_before_assembly"
+        }
+      },
+      "maxRam": 128,
+      "inferredFields": [
+        "supportedCpus",
+        "maxRam"
+      ]
+    }
+  },
+  {
+    "id": "real-motherboard-27",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "GIGABYTE 技嘉",
+    "name": "X870 AORUS ELITE WIFI7 ICE",
+    "color": "白色",
+    "price": 2199,
+    "demo": false,
+    "specs": {
+      "socket": "AM5",
+      "ddr": "DDR5",
+      "ramSlots": 4,
+      "form": "ATX",
+      "m2": true,
+      "biosVerified": false,
+      "source": "https://www.gigabyte.com/Motherboard/X870-AORUS-ELITE-WIFI7-ICE-rev-10-11/sp",
+      "checkedAt": "2026-09-09",
+      "priceBasis": "merchant-authored",
+      "supportedCpus": [
+        "real-cpu-8",
+        "real-cpu-9",
+        "real-cpu-10",
+        "real-cpu-11",
+        "real-cpu-12",
+        "real-cpu-13",
+        "real-cpu-14",
+        "real-cpu-15",
+        "real-cpu-16",
+        "real-cpu-17",
+        "real-cpu-18",
+        "real-cpu-19"
+      ],
+      "provenance": {
+        "supportedCpus": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "catalog CPU socket and memory-generation match",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        },
+        "maxRam": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "installed memory-slot count multiplied by conservative 32 GiB per slot",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        },
+        "biosVerified": {
+          "origin": "catalog",
+          "status": "unverified",
+          "manufacturerVerified": false,
+          "method": "no board CPU-support-list and shipped-BIOS evidence in catalog",
+          "use": "must_confirm_before_assembly"
+        }
+      },
+      "maxRam": 128,
+      "inferredFields": [
+        "supportedCpus",
+        "maxRam"
+      ]
+    }
+  },
+  {
+    "id": "real-motherboard-28",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "GIGABYTE 技嘉",
+    "name": "B850 EAGLE ICE",
+    "color": "白色",
+    "price": 999,
+    "demo": false,
+    "specs": {
+      "socket": "AM5",
+      "ddr": "DDR5",
+      "ramSlots": 4,
+      "form": "ATX",
+      "m2": true,
+      "biosVerified": false,
+      "source": "https://www.gigabyte.com/Motherboard/B850-EAGLE-ICE/sp",
+      "checkedAt": "2026-09-09",
+      "priceBasis": "merchant-authored",
+      "supportedCpus": [
+        "real-cpu-8",
+        "real-cpu-9",
+        "real-cpu-10",
+        "real-cpu-11",
+        "real-cpu-12",
+        "real-cpu-13",
+        "real-cpu-14",
+        "real-cpu-15",
+        "real-cpu-16",
+        "real-cpu-17",
+        "real-cpu-18",
+        "real-cpu-19"
+      ],
+      "provenance": {
+        "supportedCpus": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "catalog CPU socket and memory-generation match",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        },
+        "maxRam": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "installed memory-slot count multiplied by conservative 32 GiB per slot",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        },
+        "biosVerified": {
+          "origin": "catalog",
+          "status": "unverified",
+          "manufacturerVerified": false,
+          "method": "no board CPU-support-list and shipped-BIOS evidence in catalog",
+          "use": "must_confirm_before_assembly"
+        }
+      },
+      "maxRam": 128,
+      "inferredFields": [
+        "supportedCpus",
+        "maxRam"
+      ]
+    }
+  },
+  {
+    "id": "real-motherboard-29",
+    "category": "motherboard",
+    "categoryLabel": "主板",
+    "brand": "GIGABYTE 技嘉",
+    "name": "B850 EAGLE WIFI7 ICE",
+    "color": "白色",
+    "price": 1199,
+    "demo": false,
+    "specs": {
+      "socket": "AM5",
+      "ddr": "DDR5",
+      "ramSlots": 4,
+      "form": "ATX",
+      "m2": true,
+      "biosVerified": false,
+      "source": "https://www.gigabyte.com/Motherboard/B850-EAGLE-WIFI7-ICE/sp",
+      "checkedAt": "2026-09-09",
+      "priceBasis": "merchant-authored",
+      "supportedCpus": [
+        "real-cpu-8",
+        "real-cpu-9",
+        "real-cpu-10",
+        "real-cpu-11",
+        "real-cpu-12",
+        "real-cpu-13",
+        "real-cpu-14",
+        "real-cpu-15",
+        "real-cpu-16",
+        "real-cpu-17",
+        "real-cpu-18",
+        "real-cpu-19"
+      ],
+      "provenance": {
+        "supportedCpus": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "catalog CPU socket and memory-generation match",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        },
+        "maxRam": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "installed memory-slot count multiplied by conservative 32 GiB per slot",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        },
+        "biosVerified": {
+          "origin": "catalog",
+          "status": "unverified",
+          "manufacturerVerified": false,
+          "method": "no board CPU-support-list and shipped-BIOS evidence in catalog",
+          "use": "must_confirm_before_assembly"
+        }
+      },
+      "maxRam": 128,
+      "inferredFields": [
+        "supportedCpus",
+        "maxRam"
+      ]
     }
   },
   {
@@ -1572,58 +2715,23 @@
       "form": "ATX",
       "source": "https://assets.corsair.com/image/upload/corsairmedia/sys_master/productcontent/WW_RMx_Series_2021_QSG_Web_AD.pdf",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
-    }
-  },
-  {
-    "id": "real-psu-2",
-    "category": "psu",
-    "categoryLabel": "电源",
-    "brand": "CORSAIR 美商海盗船",
-    "name": "RM750x (2021)",
-    "color": "黑色",
-    "price": 825,
-    "demo": false,
-    "specs": {
-      "watts": 750,
-      "form": "ATX",
-      "source": "https://assets.corsair.com/image/upload/corsairmedia/sys_master/productcontent/WW_RMx_Series_2021_QSG_Web_AD.pdf",
-      "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
-    }
-  },
-  {
-    "id": "real-psu-3",
-    "category": "psu",
-    "categoryLabel": "电源",
-    "brand": "CORSAIR 美商海盗船",
-    "name": "RM850x (2021)",
-    "color": "黑色",
-    "price": 935,
-    "demo": false,
-    "specs": {
-      "watts": 850,
-      "form": "ATX",
-      "source": "https://assets.corsair.com/image/upload/corsairmedia/sys_master/productcontent/WW_RMx_Series_2021_QSG_Web_AD.pdf",
-      "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
-    }
-  },
-  {
-    "id": "real-psu-4",
-    "category": "psu",
-    "categoryLabel": "电源",
-    "brand": "CORSAIR 美商海盗船",
-    "name": "RM1000x (2021)",
-    "color": "黑色",
-    "price": 1100,
-    "demo": false,
-    "specs": {
-      "watts": 1000,
-      "form": "ATX",
-      "source": "https://assets.corsair.com/image/upload/corsairmedia/sys_master/productcontent/WW_RMx_Series_2021_QSG_Web_AD.pdf",
-      "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "connectorCounts": {
+        "8pin": 1
+      },
+      "provenance": {
+        "connectorCounts": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative wattage-tier estimate for legacy model with no connector sheet; 16pin is intentionally not inferred",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "connectorCounts"
+      ]
     }
   },
   {
@@ -1728,24 +2836,23 @@
       "form": "ATX",
       "source": "https://assets.corsair.com/image/upload/corsairmedia/sys_master/productcontent/WW_CXM_Series_2021_QSG_AA.pdf",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
-    }
-  },
-  {
-    "id": "real-psu-10",
-    "category": "psu",
-    "categoryLabel": "电源",
-    "brand": "CORSAIR 美商海盗船",
-    "name": "CX650M (2021)",
-    "color": "黑色",
-    "price": 390,
-    "demo": false,
-    "specs": {
-      "watts": 650,
-      "form": "ATX",
-      "source": "https://assets.corsair.com/image/upload/corsairmedia/sys_master/productcontent/WW_CXM_Series_2021_QSG_AA.pdf",
-      "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "connectorCounts": {
+        "8pin": 1
+      },
+      "provenance": {
+        "connectorCounts": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative wattage-tier estimate for legacy model with no connector sheet; 16pin is intentionally not inferred",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "connectorCounts"
+      ]
     }
   },
   {
@@ -1762,92 +2869,23 @@
       "form": "ATX",
       "source": "https://assets.corsair.com/image/upload/corsairmedia/sys_master/productcontent/WW_CXM_Series_2021_QSG_AA.pdf",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
-    }
-  },
-  {
-    "id": "real-psu-12",
-    "category": "psu",
-    "categoryLabel": "电源",
-    "brand": "CORSAIR 美商海盗船",
-    "name": "SF750 (2024)",
-    "color": "黑色",
-    "price": 1125,
-    "demo": false,
-    "specs": {
-      "watts": 750,
-      "form": "SFX",
-      "source": "https://www.corsair.com/us/en/explorer/diy-builder/power-supply-units/sf750sf850sf1000-platinum-atx-31-everything-you-need-to-know/",
-      "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
-    }
-  },
-  {
-    "id": "real-psu-13",
-    "category": "psu",
-    "categoryLabel": "电源",
-    "brand": "CORSAIR 美商海盗船",
-    "name": "SF850 (2024)",
-    "color": "黑色",
-    "price": 1275,
-    "demo": false,
-    "specs": {
-      "watts": 850,
-      "form": "SFX",
-      "source": "https://www.corsair.com/us/en/explorer/diy-builder/power-supply-units/sf750sf850sf1000-platinum-atx-31-everything-you-need-to-know/",
-      "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
-    }
-  },
-  {
-    "id": "real-psu-14",
-    "category": "psu",
-    "categoryLabel": "电源",
-    "brand": "CORSAIR 美商海盗船",
-    "name": "SF1000 (2024)",
-    "color": "黑色",
-    "price": 1500,
-    "demo": false,
-    "specs": {
-      "watts": 1000,
-      "form": "SFX",
-      "source": "https://www.corsair.com/us/en/explorer/diy-builder/power-supply-units/sf750sf850sf1000-platinum-atx-31-everything-you-need-to-know/",
-      "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
-    }
-  },
-  {
-    "id": "real-psu-15",
-    "category": "psu",
-    "categoryLabel": "电源",
-    "brand": "CORSAIR 美商海盗船",
-    "name": "RM650 (2021)",
-    "color": "黑色",
-    "price": 585,
-    "demo": false,
-    "specs": {
-      "watts": 650,
-      "form": "ATX",
-      "source": "https://assets.corsair.com/image/upload/corsairmedia/sys_master/productcontent/WW_RM_Series_2021_QSG_Web_AA.pdf",
-      "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
-    }
-  },
-  {
-    "id": "real-psu-16",
-    "category": "psu",
-    "categoryLabel": "电源",
-    "brand": "CORSAIR 美商海盗船",
-    "name": "RM750 (2021)",
-    "color": "黑色",
-    "price": 675,
-    "demo": false,
-    "specs": {
-      "watts": 750,
-      "form": "ATX",
-      "source": "https://assets.corsair.com/image/upload/corsairmedia/sys_master/productcontent/WW_RM_Series_2021_QSG_Web_AA.pdf",
-      "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "connectorCounts": {
+        "8pin": 2
+      },
+      "provenance": {
+        "connectorCounts": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative wattage-tier estimate for legacy model with no connector sheet; 16pin is intentionally not inferred",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "connectorCounts"
+      ]
     }
   },
   {
@@ -1864,7 +2902,23 @@
       "form": "ATX",
       "source": "https://assets.corsair.com/image/upload/corsairmedia/sys_master/productcontent/WW_RM_Series_2021_QSG_Web_AA.pdf",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "connectorCounts": {
+        "8pin": 2
+      },
+      "provenance": {
+        "connectorCounts": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative wattage-tier estimate for legacy model with no connector sheet; 16pin is intentionally not inferred",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "connectorCounts"
+      ]
     }
   },
   {
@@ -1881,7 +2935,23 @@
       "form": "ATX",
       "source": "https://help.corsair.com/hc/en-us/articles/45351527323793-CORSAIR-Spare-Parts-List",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "connectorCounts": {
+        "8pin": 2
+      },
+      "provenance": {
+        "connectorCounts": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative wattage-tier estimate for legacy model with no connector sheet; 16pin is intentionally not inferred",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "connectorCounts"
+      ]
     }
   },
   {
@@ -1898,6 +2968,268 @@
       "form": "ATX",
       "source": "https://help.corsair.com/hc/en-us/articles/45351527323793-CORSAIR-Spare-Parts-List",
       "checkedAt": "2026-09-07",
+      "priceBasis": "merchant-authored",
+      "connectorCounts": {
+        "8pin": 2
+      },
+      "provenance": {
+        "connectorCounts": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative wattage-tier estimate for legacy model with no connector sheet; 16pin is intentionally not inferred",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "connectorCounts"
+      ]
+    }
+  },
+  {
+    "id": "real-psu-20",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "CORSAIR 美商海盗船",
+    "name": "RM750e WHITE (2025)",
+    "color": "白色",
+    "price": 699,
+    "demo": false,
+    "specs": {
+      "watts": 750,
+      "form": "ATX",
+      "length": 140,
+      "connectorCounts": {
+        "16pin": 1
+      },
+      "source": "https://www.corsair.com/us/en/p/psu/cp-9020292-na/rme-series-rm750e-fully-modular-low-noise-atx-power-supply-white-na-cp-9020292-na",
+      "checkedAt": "2026-09-09",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-psu-21",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "CORSAIR 美商海盗船",
+    "name": "RM850e WHITE (2025)",
+    "color": "白色",
+    "price": 799,
+    "demo": false,
+    "specs": {
+      "watts": 850,
+      "form": "ATX",
+      "length": 140,
+      "connectorCounts": {
+        "16pin": 1
+      },
+      "source": "https://www.corsair.com/us/en/p/psu/cp-9020293-na/rme-series-rm850e-fully-modular-low-noise-atx-power-supply-white-na-cp-9020293-na",
+      "checkedAt": "2026-09-09",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-psu-22",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "CORSAIR 美商海盗船",
+    "name": "RM1000e WHITE (2025)",
+    "color": "白色",
+    "price": 999,
+    "demo": false,
+    "specs": {
+      "watts": 1000,
+      "form": "ATX",
+      "length": 140,
+      "connectorCounts": {
+        "16pin": 1
+      },
+      "source": "https://www.corsair.com/us/en/p/psu/cp-9020294-na/rme-series-rm1000e-fully-modular-low-noise-atx-power-supply-white-na-cp-9020294-na",
+      "checkedAt": "2026-09-09",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-psu-23",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "DeepCool 九州风神",
+    "name": "PN650M WH",
+    "color": "白色",
+    "price": 499,
+    "demo": false,
+    "specs": {
+      "watts": 650,
+      "form": "ATX",
+      "length": 140,
+      "connectorCounts": {
+        "16pin": 1
+      },
+      "source": "https://www.deepcool.com/products/PowerSupplyUnits/powersupplyunits/2024/19528.shtml",
+      "checkedAt": "2026-09-09",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-psu-24",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "DeepCool 九州风神",
+    "name": "PN750M WH",
+    "color": "白色",
+    "price": 599,
+    "demo": false,
+    "specs": {
+      "watts": 750,
+      "form": "ATX",
+      "length": 140,
+      "connectorCounts": {
+        "16pin": 1
+      },
+      "source": "https://www.deepcool.com/products/PowerSupplyUnits/powersupplyunits/2024/19529.shtml",
+      "checkedAt": "2026-09-09",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-psu-25",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "DeepCool 九州风神",
+    "name": "PN850M WH",
+    "color": "白色",
+    "price": 699,
+    "demo": false,
+    "specs": {
+      "watts": 850,
+      "form": "ATX",
+      "length": 140,
+      "connectorCounts": {
+        "16pin": 1
+      },
+      "source": "https://www.deepcool.com/products/PowerSupplyUnits/powersupplyunits/2024/19530.shtml",
+      "checkedAt": "2026-09-09",
+      "priceBasis": "merchant-authored"
+    }
+  },
+  {
+    "id": "real-psu-26",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "DeepCool 九州风神",
+    "name": "PL550D WH",
+    "color": "白色",
+    "price": 329,
+    "demo": false,
+    "specs": {
+      "watts": 550,
+      "form": "ATX",
+      "source": "https://www.deepcool.com/download/pdf/PL_D.pdf",
+      "checkedAt": "2026-09-09",
+      "priceBasis": "merchant-authored",
+      "connectorCounts": {
+        "8pin": 1
+      },
+      "provenance": {
+        "connectorCounts": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative wattage-tier estimate for legacy model with no connector sheet; 16pin is intentionally not inferred",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "connectorCounts"
+      ]
+    }
+  },
+  {
+    "id": "real-psu-27",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "DeepCool 九州风神",
+    "name": "PL650D WH",
+    "color": "白色",
+    "price": 379,
+    "demo": false,
+    "specs": {
+      "watts": 650,
+      "form": "ATX",
+      "source": "https://www.deepcool.com/download/pdf/PL_D.pdf",
+      "checkedAt": "2026-09-09",
+      "priceBasis": "merchant-authored",
+      "connectorCounts": {
+        "8pin": 1
+      },
+      "provenance": {
+        "connectorCounts": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative wattage-tier estimate for legacy model with no connector sheet; 16pin is intentionally not inferred",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "connectorCounts"
+      ]
+    }
+  },
+  {
+    "id": "real-psu-28",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "DeepCool 九州风神",
+    "name": "PL750D WH",
+    "color": "白色",
+    "price": 429,
+    "demo": false,
+    "specs": {
+      "watts": 750,
+      "form": "ATX",
+      "source": "https://www.deepcool.com/download/pdf/PL_D.pdf",
+      "checkedAt": "2026-09-09",
+      "priceBasis": "merchant-authored",
+      "connectorCounts": {
+        "8pin": 2
+      },
+      "provenance": {
+        "connectorCounts": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative wattage-tier estimate for legacy model with no connector sheet; 16pin is intentionally not inferred",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "connectorCounts"
+      ]
+    }
+  },
+  {
+    "id": "real-psu-29",
+    "category": "psu",
+    "categoryLabel": "电源",
+    "brand": "MSI 微星",
+    "name": "MAG A850GL PCIE5 WHITE",
+    "color": "白色",
+    "price": 799,
+    "demo": false,
+    "specs": {
+      "watts": 850,
+      "form": "ATX",
+      "length": 140,
+      "connectorCounts": {
+        "16pin": 1
+      },
+      "source": "https://us.msi.com/Power-Supply/MAG-A850GL-PCIE5-WHITE/Specification",
+      "checkedAt": "2026-09-09",
       "priceBasis": "merchant-authored"
     }
   },
@@ -1921,7 +3253,21 @@
       "gpuLength": 342,
       "source": "https://www.deepcool.com/products/Cases/CH160-PLUS-Portable-M-ATX-Compact-Case/2025/21475.shtml",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "gpuThickness": 60,
+      "provenance": {
+        "gpuThickness": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative clearance tier inferred from supported board-form class",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "gpuThickness"
+      ]
     }
   },
   {
@@ -1944,7 +3290,21 @@
       "gpuLength": 342,
       "source": "https://www.deepcool.com/products/Cases/CH160-PLUS-WH-Portable-M-ATX-Compact-Case/2025/21476.shtml",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "gpuThickness": 60,
+      "provenance": {
+        "gpuThickness": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative clearance tier inferred from supported board-form class",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "gpuThickness"
+      ]
     }
   },
   {
@@ -1967,7 +3327,21 @@
       "gpuLengthNote": "使用 ATX 电源；SFX 方案另行核对",
       "source": "https://www.deepcool.com/products/Cases/CH160-Mesh-Portable-High-Airflow-mini-ITX-Case/2024/19462.shtml",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "gpuThickness": 55,
+      "provenance": {
+        "gpuThickness": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative clearance tier inferred from supported board-form class",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "gpuThickness"
+      ]
     }
   },
   {
@@ -1990,7 +3364,21 @@
       "gpuLengthNote": "使用 ATX 电源；SFX 方案另行核对",
       "source": "https://www.deepcool.com/products/Cases/CH160-Mesh-WH-Portable-High-Airflow-mini-ITX-Case/2024/19463.shtml",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "gpuThickness": 55,
+      "provenance": {
+        "gpuThickness": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative clearance tier inferred from supported board-form class",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "gpuThickness"
+      ]
     }
   },
   {
@@ -2014,7 +3402,21 @@
       "gpuLength": 370,
       "source": "https://www.deepcool.com/products/Cases/CC560-MESH-V2-Mid-Tower-Airflow-Case/2024/19088.shtml",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "gpuThickness": 70,
+      "provenance": {
+        "gpuThickness": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative clearance tier inferred from supported board-form class",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "gpuThickness"
+      ]
     }
   },
   {
@@ -2038,7 +3440,21 @@
       "gpuLength": 370,
       "source": "https://www.deepcool.com/products/Cases/CC560-MESH-WH-V2-Mid-Tower-Airflow-Case/2024/19089.shtml",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "gpuThickness": 70,
+      "provenance": {
+        "gpuThickness": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative clearance tier inferred from supported board-form class",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "gpuThickness"
+      ]
     }
   },
   {
@@ -2061,7 +3477,21 @@
       "gpuLengthNote": "使用 ATX 电源；SFX 方案另行核对",
       "source": "https://www.deepcool.com/products/Cases/CH170-DIGITAL-M-ITX-Case-with-Screen/2024/18891.shtml",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "gpuThickness": 55,
+      "provenance": {
+        "gpuThickness": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative clearance tier inferred from supported board-form class",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "gpuThickness"
+      ]
     }
   },
   {
@@ -2084,7 +3514,21 @@
       "gpuLengthNote": "使用 ATX 电源；SFX 方案另行核对",
       "source": "https://www.deepcool.com/products/Cases/CH170-DIGITAL-WH-M-ITX-Case-with-Screen/2024/18892.shtml",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "gpuThickness": 55,
+      "provenance": {
+        "gpuThickness": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative clearance tier inferred from supported board-form class",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "gpuThickness"
+      ]
     }
   },
   {
@@ -2107,7 +3551,21 @@
       "gpuLengthNote": "使用 ATX 电源；SFX 方案另行核对",
       "source": "https://www.deepcool.com/products/Cases/CH160-Portable-High-Airflow-M-ITX-Case/2024/18115.shtml",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "gpuThickness": 55,
+      "provenance": {
+        "gpuThickness": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative clearance tier inferred from supported board-form class",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "gpuThickness"
+      ]
     }
   },
   {
@@ -2130,7 +3588,21 @@
       "gpuLengthNote": "使用 ATX 电源；SFX 方案另行核对",
       "source": "https://www.deepcool.com/products/Cases/CH160-WH-Portable-High-Airflow-M-ITX-Case/2024/18116.shtml",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "gpuThickness": 55,
+      "provenance": {
+        "gpuThickness": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative clearance tier inferred from supported board-form class",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "gpuThickness"
+      ]
     }
   },
   {
@@ -2154,7 +3626,21 @@
       "gpuLength": 370,
       "source": "https://www.deepcool.com/products/Cases/CC560-Limited-V2-Mid-Tower-Airflow-Case/2023/17784.shtml",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "gpuThickness": 70,
+      "provenance": {
+        "gpuThickness": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative clearance tier inferred from supported board-form class",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "gpuThickness"
+      ]
     }
   },
   {
@@ -2178,7 +3664,21 @@
       "gpuLength": 370,
       "source": "https://www.deepcool.com/products/Cases/CC560-Limited-WH-V2-Mid-Tower-Airflow-Case/2023/17785.shtml",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "gpuThickness": 70,
+      "provenance": {
+        "gpuThickness": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative clearance tier inferred from supported board-form class",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "gpuThickness"
+      ]
     }
   },
   {
@@ -2202,7 +3702,21 @@
       "gpuLength": 370,
       "source": "https://www.deepcool.com/products/Cases/CC560-V2-Mid-Tower-Airflow-Case/2023/17782.shtml",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "gpuThickness": 70,
+      "provenance": {
+        "gpuThickness": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative clearance tier inferred from supported board-form class",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "gpuThickness"
+      ]
     }
   },
   {
@@ -2226,7 +3740,21 @@
       "gpuLength": 370,
       "source": "https://www.deepcool.com/products/Cases/CC560-WH-V2-Mid-Tower-Airflow-Case/2023/17783.shtml",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "gpuThickness": 70,
+      "provenance": {
+        "gpuThickness": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative clearance tier inferred from supported board-form class",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "gpuThickness"
+      ]
     }
   },
   {
@@ -2249,7 +3777,21 @@
       "gpuLength": 378,
       "source": "https://www.deepcool.com/products/Cases/CH360-DIGITAL-M-ATX-Airflow-Case-With-Status-Screen/2023/17715.shtml",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "gpuThickness": 60,
+      "provenance": {
+        "gpuThickness": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative clearance tier inferred from supported board-form class",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "gpuThickness"
+      ]
     }
   },
   {
@@ -2272,7 +3814,21 @@
       "gpuLength": 378,
       "source": "https://www.deepcool.com/products/Cases/CH360-DIGITAL-WH-M-ATX-Airflow-Case-With-Status-Screen/2023/17716.shtml",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "gpuThickness": 60,
+      "provenance": {
+        "gpuThickness": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative clearance tier inferred from supported board-form class",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "gpuThickness"
+      ]
     }
   },
   {
@@ -2297,7 +3853,21 @@
       "gpuLength": 380,
       "source": "https://www.deepcool.com/products/Cases/CH560-DIGITAL-Airflow-Case-With-Status-Screen/2023/17174.shtml",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "gpuThickness": 70,
+      "provenance": {
+        "gpuThickness": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative clearance tier inferred from supported board-form class",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "gpuThickness"
+      ]
     }
   },
   {
@@ -2322,7 +3892,21 @@
       "gpuLength": 380,
       "source": "https://www.deepcool.com/products/Cases/CH560-DIGITAL-WH-Airflow-Case-With-Status-Screen/2023/17175.shtml",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "gpuThickness": 70,
+      "provenance": {
+        "gpuThickness": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative clearance tier inferred from supported board-form class",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "gpuThickness"
+      ]
     }
   },
   {
@@ -2347,7 +3931,21 @@
       "gpuLength": 380,
       "source": "https://www.deepcool.com/products/Cases/CH560-New-Generation-of-Airflow-Case/2023/17101.shtml",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "gpuThickness": 70,
+      "provenance": {
+        "gpuThickness": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative clearance tier inferred from supported board-form class",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "gpuThickness"
+      ]
     }
   },
   {
@@ -2372,7 +3970,21 @@
       "gpuLength": 380,
       "source": "https://www.deepcool.com/products/Cases/CH560-WH-New-Generation-of-Airflow-Case/2023/17102.shtml",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "gpuThickness": 70,
+      "provenance": {
+        "gpuThickness": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative clearance tier inferred from supported board-form class",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "gpuThickness"
+      ]
     }
   },
   {
@@ -2392,7 +4004,21 @@
       ],
       "source": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AG500-G2-ARGB-Superior-Performance-5-Heatpipe-Single-Tower-CPU-Cooler/2026/22909.shtml",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "ramClearance": 45,
+      "provenance": {
+        "ramClearance": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative cooler-tower family tier; fan position still requires manufacturer confirmation",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "ramClearance"
+      ]
     }
   },
   {
@@ -2412,7 +4038,21 @@
       ],
       "source": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AG500-G2-WH-ARGB-Superior-Performance-5-Heatpipe-Single-Tower-CPU-Cooler/2026/22910.shtml",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "ramClearance": 45,
+      "provenance": {
+        "ramClearance": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative cooler-tower family tier; fan position still requires manufacturer confirmation",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "ramClearance"
+      ]
     }
   },
   {
@@ -2432,7 +4072,21 @@
       ],
       "source": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AG500-G2-Superior-Performance-5-Heatpipe-Single-Tower-CPU-Cooler/2026/22855.shtml",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "ramClearance": 45,
+      "provenance": {
+        "ramClearance": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative cooler-tower family tier; fan position still requires manufacturer confirmation",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "ramClearance"
+      ]
     }
   },
   {
@@ -2452,7 +4106,21 @@
       ],
       "source": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AG500-G2-WH-Superior-Performance-5-Heatpipe-Single-Tower-CPU-Cooler/2026/22856.shtml",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "ramClearance": 45,
+      "provenance": {
+        "ramClearance": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative cooler-tower family tier; fan position still requires manufacturer confirmation",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "ramClearance"
+      ]
     }
   },
   {
@@ -2472,7 +4140,21 @@
       ],
       "source": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AG620-G2-ARGB-Superior-Performance-6-Heatpipe-Dual-Tower-CPU-Cooler/2026/22801.shtml",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "ramClearance": 40,
+      "provenance": {
+        "ramClearance": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative cooler-tower family tier; fan position still requires manufacturer confirmation",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "ramClearance"
+      ]
     }
   },
   {
@@ -2492,7 +4174,21 @@
       ],
       "source": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AG620-G2-WH-ARGB-Superior-Performance-6-Heatpipe-Dual-Tower-CPU-Cooler/2026/22802.shtml",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "ramClearance": 40,
+      "provenance": {
+        "ramClearance": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative cooler-tower family tier; fan position still requires manufacturer confirmation",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "ramClearance"
+      ]
     }
   },
   {
@@ -2512,7 +4208,21 @@
       ],
       "source": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AG400-G2-ARGB-Superior-Performance-4-Heatpipe-Single-Tower-CPU-Cooler/2026/22744.shtml",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "ramClearance": 45,
+      "provenance": {
+        "ramClearance": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative cooler-tower family tier; fan position still requires manufacturer confirmation",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "ramClearance"
+      ]
     }
   },
   {
@@ -2532,7 +4242,21 @@
       ],
       "source": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AG400-G2-WH-ARGB-Superior-Performance-4-Heatpipe-Single-Tower-CPU-Cooler/2026/22743.shtml",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "ramClearance": 45,
+      "provenance": {
+        "ramClearance": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative cooler-tower family tier; fan position still requires manufacturer confirmation",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "ramClearance"
+      ]
     }
   },
   {
@@ -2552,7 +4276,21 @@
       ],
       "source": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AG400-G2-Superior-Performance-4-Heatpipe-Single-Tower-CPU-Cooler/2025/22515.shtml",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "ramClearance": 45,
+      "provenance": {
+        "ramClearance": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative cooler-tower family tier; fan position still requires manufacturer confirmation",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "ramClearance"
+      ]
     }
   },
   {
@@ -2572,7 +4310,21 @@
       ],
       "source": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AG400-G2-WH-Superior-Performance-4-Heatpipe-Single-Tower-CPU-Cooler/2025/22516.shtml",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "ramClearance": 45,
+      "provenance": {
+        "ramClearance": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative cooler-tower family tier; fan position still requires manufacturer confirmation",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "ramClearance"
+      ]
     }
   },
   {
@@ -2592,7 +4344,21 @@
       ],
       "source": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AG620-G2-Superior-Performance-6-Heatpipe-Dual-Tower-CPU-Cooler/2025/22513.shtml",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "ramClearance": 40,
+      "provenance": {
+        "ramClearance": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative cooler-tower family tier; fan position still requires manufacturer confirmation",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "ramClearance"
+      ]
     }
   },
   {
@@ -2612,7 +4378,21 @@
       ],
       "source": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AG620-G2-WH-Superior-Performance-6-Heatpipe-Dual-Tower-CPU-Cooler/2025/22514.shtml",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "ramClearance": 40,
+      "provenance": {
+        "ramClearance": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative cooler-tower family tier; fan position still requires manufacturer confirmation",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "ramClearance"
+      ]
     }
   },
   {
@@ -2632,7 +4412,21 @@
       ],
       "source": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK620-G2-Wood-Grain-Top-Cover-CPU-Cooler/2025/21864.shtml",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "ramClearance": 40,
+      "provenance": {
+        "ramClearance": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative cooler-tower family tier; fan position still requires manufacturer confirmation",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "ramClearance"
+      ]
     }
   },
   {
@@ -2652,7 +4446,21 @@
       ],
       "source": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK620-G2-WH-Wood-Grain-Top-Cover-CPU-Cooler/2025/21863.shtml",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "ramClearance": 40,
+      "provenance": {
+        "ramClearance": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative cooler-tower family tier; fan position still requires manufacturer confirmation",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "ramClearance"
+      ]
     }
   },
   {
@@ -2672,7 +4480,21 @@
       ],
       "source": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK500-G2-Wood-Grain-Top-Cover-CPU-Cooler/2025/21986.shtml",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "ramClearance": 45,
+      "provenance": {
+        "ramClearance": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative cooler-tower family tier; fan position still requires manufacturer confirmation",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "ramClearance"
+      ]
     }
   },
   {
@@ -2692,7 +4514,21 @@
       ],
       "source": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK500-G2-WH-Wood-Grain-Top-Cover-CPU-Cooler/2025/21987.shtml",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "ramClearance": 45,
+      "provenance": {
+        "ramClearance": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative cooler-tower family tier; fan position still requires manufacturer confirmation",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "ramClearance"
+      ]
     }
   },
   {
@@ -2712,7 +4548,21 @@
       ],
       "source": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK400-G2-Wood-Grain-Top-Cover-CPU-Cooler/2025/21908.shtml",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "ramClearance": 45,
+      "provenance": {
+        "ramClearance": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative cooler-tower family tier; fan position still requires manufacturer confirmation",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "ramClearance"
+      ]
     }
   },
   {
@@ -2732,7 +4582,21 @@
       ],
       "source": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK400-G2-WH-Wood-Grain-Top-Cover-CPU-Cooler/2025/21909.shtml",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "ramClearance": 45,
+      "provenance": {
+        "ramClearance": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative cooler-tower family tier; fan position still requires manufacturer confirmation",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "ramClearance"
+      ]
     }
   },
   {
@@ -2752,7 +4616,21 @@
       ],
       "source": "https://www.deepcool.com/products/Cooling/cpuaircoolers/ASSASSIN-VC-ELITE-Vapor-Chamber-Elite-CPU-Air-Cooler/2025/21850.shtml",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "ramClearance": 38,
+      "provenance": {
+        "ramClearance": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative cooler-tower family tier; fan position still requires manufacturer confirmation",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "ramClearance"
+      ]
     }
   },
   {
@@ -2772,7 +4650,21 @@
       ],
       "source": "https://www.deepcool.com/products/Cooling/cpuaircoolers/ASSASSIN-VC-ELITE-WH-Vapor-Chamber-Elite-CPU-Air-Cooler/2025/21119.shtml",
       "checkedAt": "2026-09-07",
-      "priceBasis": "merchant-authored"
+      "priceBasis": "merchant-authored",
+      "ramClearance": 38,
+      "provenance": {
+        "ramClearance": {
+          "origin": "synthetic",
+          "status": "inferred",
+          "manufacturerVerified": false,
+          "method": "conservative cooler-tower family tier; fan position still requires manufacturer confirmation",
+          "use": "candidate_screening_only",
+          "generatedAt": "2026-09-12"
+        }
+      },
+      "inferredFields": [
+        "ramClearance"
+      ]
     }
   },
   {

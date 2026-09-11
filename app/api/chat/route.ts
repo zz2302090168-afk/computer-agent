@@ -1,4 +1,3 @@
-import { env } from 'cloudflare:workers';
 import { database, loadCatalog } from '@/backend/db/catalog';
 import {
   ensureWorkspace,
@@ -20,7 +19,7 @@ import {
   type StateEvent,
 } from '@/backend/agent/conversation';
 import type { PcTask } from '@/backend/domain/types';
-import { executeTaskCommand } from '@/backend/tools/tasks';
+import type { ChatStreamEvent } from '@/backend/agent/progress';
 
 function responseState(
   task: PcTask,
@@ -37,7 +36,9 @@ function responseState(
     messages,
     events,
     modelConfigured:
-      !!env.MODEL_API_KEY && !!env.MODEL_NAME && !!env.MODEL_BASE_URL,
+      !!process.env.MODEL_API_KEY &&
+      !!process.env.MODEL_NAME &&
+      !!process.env.MODEL_BASE_URL,
   };
 }
 export async function GET(request: Request) {
@@ -79,125 +80,161 @@ export async function POST(request: Request) {
     )
       throw Error('请输入不超过 2000 字的消息');
     const message = input.message.trim(),
-      id = sessionId(request);
-    let workspace = await ensureWorkspace(id),
-      task =
-        typeof input.taskId === 'string'
-          ? await getTask(id, input.taskId)
-          : workspace.task;
-    const taskAction = await executeTaskCommand(
-      id,
-      task,
-      message,
-      await listTasks(id),
-    );
-    task = taskAction.task;
-    if (taskAction.reset) {
-      const messages = [
-        ...workspace.messages,
-        {
-          role: 'assistant' as const,
-          content: '已清空这台主机的旧需求和配置。请告诉我新的预算和用途。',
-          taskId: task.id,
-        },
-      ];
-      await database()
-        .prepare('UPDATE conversations SET messages=? WHERE id=?')
-        .bind(JSON.stringify(messages), id)
-        .run();
-      return json(responseState(task, messages, await listTasks(id)));
-    }
-    if (taskAction.changed) {
-      workspace = await ensureWorkspace(id);
-    } else if (taskAction.reply) {
-      const messages = [
-        ...workspace.messages,
-        { role: 'user' as const, content: message, taskId: task.id },
-        {
-          role: 'assistant' as const,
-          content: taskAction.reply,
-          taskId: task.id,
-        },
-      ].slice(-60);
-      await database()
-        .prepare('UPDATE conversations SET messages=?,updated_at=? WHERE id=?')
-        .bind(JSON.stringify(messages), Date.now(), id)
-        .run();
-      return json(responseState(task, messages, await listTasks(id)));
-    }
-    const catalog = await loadCatalog(),
-      events: StateEvent[] = [];
-    let current = task;
-    // 每次成功更新立即落库并递增版本；乐观锁会拒绝过期请求覆盖同一任务的新状态。
-    const onUpdate = async (
-      type: StateEvent['type'],
-      draft: ChatState['draft'],
-      result: ChatState['result'],
-    ) => {
-      const name =
-        current.name === '我的主机' && draft.purpose
-          ? `${draft.purpose}主机`
-          : current.name;
-      current = await saveTask(
-        id,
-        {
-          ...current,
-          name,
-          draft,
-          result,
-          issues: result && !result.plans.length ? [result.summary] : [],
-        },
-        current.version,
-      );
-      events.push({ type, taskId: current.id, version: current.version });
-      return current.version;
-    };
-    const currentMessages = workspace.messages.filter(
-      (m: ChatMessage) => !m.taskId || m.taskId === task.id,
-    );
-    const next = await runConversation(
-      {
-        key: env.MODEL_API_KEY,
-        base: env.MODEL_BASE_URL,
-        model: env.MODEL_NAME,
+      id = sessionId(request),
+      messageId = crypto.randomUUID();
+    const cancellation = new AbortController();
+    const signal = AbortSignal.any([
+      request.signal,
+      cancellation.signal,
+      AbortSignal.timeout(300000),
+    ]);
+    const encoder = new TextEncoder();
+    const stream = new ReadableStream<Uint8Array>({
+      async start(controller) {
+        const emit = (event: ChatStreamEvent) => {
+          if (!cancellation.signal.aborted)
+            controller.enqueue(encoder.encode(JSON.stringify(event) + '\n'));
+        };
+        try {
+          emit({
+            type: 'progress',
+            progress: {
+              scope: 'main',
+              label: '读取当前任务与商品目录',
+              status: 'running',
+            },
+          });
+          const workspace = await ensureWorkspace(id),
+            task =
+              typeof input.taskId === 'string'
+                ? await getTask(id, input.taskId)
+                : workspace.task;
+          const catalog = await loadCatalog(),
+            events: StateEvent[] = [];
+          let current = task;
+          // 每次成功更新立即落库并递增版本；乐观锁会拒绝过期请求覆盖同一任务的新状态。
+          const onUpdate = async (
+            type: StateEvent['type'],
+            draft: ChatState['draft'],
+            result: ChatState['result'],
+          ) => {
+            signal.throwIfAborted();
+            const name =
+              current.name === '我的主机' && draft.purpose
+                ? `${draft.purpose}主机`
+                : current.name;
+            current = await saveTask(
+              id,
+              {
+                ...current,
+                name,
+                draft,
+                result,
+                issues: result && !result.plans.length ? [result.summary] : [],
+              },
+              current.version,
+              messageId,
+              type !== 'support',
+            );
+            events.push({ type, taskId: current.id, version: current.version });
+            return current.version;
+          };
+          const currentMessages = workspace.messages.filter(
+            (m: ChatMessage) => !m.taskId || m.taskId === task.id,
+          );
+          const next = await runConversation(
+            {
+              key: process.env.MODEL_API_KEY,
+              base: process.env.MODEL_BASE_URL,
+              model: process.env.MODEL_NAME,
+            },
+            {
+              draft: task.draft,
+              result: task.result,
+              messages: currentMessages,
+              task,
+              tasks: workspace.tasks,
+              currentTaskId: task.id,
+            },
+            message,
+            messageId,
+            catalog,
+            loadCatalog,
+            onUpdate,
+            id,
+            async (changedTask) => {
+              current = changedTask;
+              events.push({
+                type: 'task',
+                taskId: changedTask.id,
+                version: changedTask.version,
+              });
+            },
+            (progress) => emit({ type: 'progress', progress }),
+            signal,
+            {
+              key: process.env.EMBEDDING_API_KEY,
+              base: process.env.EMBEDDING_BASE_URL,
+              model: process.env.EMBEDDING_MODEL,
+            },
+          );
+          signal.throwIfAborted();
+          const added = next.messages
+              .slice(-2)
+              .map((m) => ({ ...m, taskId: next.taskId })),
+            messages = [...workspace.messages, ...added].slice(-60);
+          // 旧请求不能在重置后写回包含旧需求的聊天上下文。
+          const saved = await database()
+            .prepare(
+              'UPDATE conversations SET draft=?,messages=?,updated_at=? WHERE id=? AND current_task_id=? AND EXISTS(SELECT 1 FROM tasks WHERE id=? AND session_id=? AND version=?)',
+            )
+            .bind(
+              '{}',
+              JSON.stringify(messages),
+              Date.now(),
+              id,
+              current.id,
+              current.id,
+              id,
+              current.version,
+            )
+            .run();
+          if (!saved.meta.changes)
+            throw Error('任务已重置或更新，本次旧结果已丢弃');
+          current = await getTask(id, next.taskId);
+          emit({
+            type: 'complete',
+            state: {
+              ...responseState(current, messages, await listTasks(id), events),
+              modelConfigured: true,
+            },
+          });
+        } catch (cause) {
+          emit({
+            type: 'error',
+            error: signal.aborted
+              ? '本次处理已中断或超时，已保存的需求可刷新恢复'
+              : cause instanceof Error
+                ? cause.message
+                : '对话暂时失败',
+          });
+        } finally {
+          if (!cancellation.signal.aborted) controller.close();
+        }
       },
-      {
-        draft: task.draft,
-        result: task.result,
-        messages: currentMessages,
-        currentTaskId: task.id,
+      cancel() {
+        cancellation.abort();
       },
-      message,
-      catalog,
-      loadCatalog,
-      onUpdate,
-      id,
-    );
-    const added = next.messages
-        .slice(-2)
-        .map((m) => ({ ...m, taskId: task.id })),
-      messages = [...workspace.messages, ...added].slice(-60);
-    // 旧请求不能在重置后写回包含旧需求的聊天上下文。
-    const saved = await database()
-      .prepare(
-        'UPDATE conversations SET draft=?,messages=?,updated_at=? WHERE id=? AND EXISTS(SELECT 1 FROM tasks WHERE id=? AND session_id=? AND version=?)',
-      )
-      .bind(
-        '{}',
-        JSON.stringify(messages),
-        Date.now(),
-        id,
-        current.id,
-        id,
-        current.version,
-      )
-      .run();
-    if (!saved.meta.changes) throw Error('任务已重置或更新，本次旧结果已丢弃');
-    current = await getTask(id, task.id);
-    return json({
-      ...responseState(current, messages, await listTasks(id), events),
-      modelConfigured: true,
     });
+    const headers = json(
+      null,
+      200,
+      id,
+      new URL(request.url).protocol === 'https:',
+    ).headers;
+    headers.set('Content-Type', 'application/x-ndjson; charset=utf-8');
+    headers.set('X-Accel-Buffering', 'no');
+    return new Response(stream, { headers });
   } catch (e) {
     return json(
       { error: e instanceof Error ? e.message : '对话暂时失败' },
@@ -213,7 +250,6 @@ export async function DELETE(request: Request) {
     await db.batch([
       db.prepare('DELETE FROM tasks WHERE session_id=?').bind(id),
       db.prepare('DELETE FROM conversations WHERE id=?').bind(id),
-      db.prepare('DELETE FROM sessions WHERE id=?').bind(id),
     ]);
     return json({ ok: true });
   } catch {
@@ -232,7 +268,8 @@ export async function PUT(request: Request) {
       id,
       new URL(request.url).protocol === 'https:',
     );
-  } catch {
+  } catch (cause) {
+    console.error('无法开始新会话', cause);
     return json({ error: '无法开始新会话' }, 503);
   }
 }

@@ -1,6 +1,13 @@
 import type { Draft } from '../agent/conversation-state';
-import type { ToolDefinition } from '../agent/chat-model';
-import type { Catalog, RecommendationResult } from '../domain/types';
+import type { ModelConfig, ToolDefinition } from '../agent/chat-model';
+import type { Progress } from '../agent/progress';
+import type { EmbeddingConfig } from '../rag/retrieve';
+import type {
+  Catalog,
+  PcTask,
+  RecommendationResult,
+  TaskSummary,
+} from '../domain/types';
 
 export const categories = [
   'cpu',
@@ -12,6 +19,7 @@ export const categories = [
   'storage',
   'cooler',
 ] as const;
+export const MAX_CANDIDATE_ATTEMPTS = 3;
 export const objectSchema = (
   properties: Record<string, unknown>,
   required: string[] = [],
@@ -25,29 +33,63 @@ export const categoryStringsSchema = () =>
   );
 
 export type ToolRuntime = {
+  supportKnowledgeIds?: Set<string>;
+  localEdit?: boolean;
   draft: Draft;
   result: RecommendationResult | null;
-  explicitPatch: Record<string, unknown>;
   approvedPartIds: Set<string>;
-  attemptedPlanTool: boolean;
-  successfulPlanTool: '' | 'recommend' | 'assemble';
-  ambiguousSearch: boolean;
-  emptySearch: boolean;
-  specifiedUpdated: boolean;
   toolsUsed: string[];
   toolErrors: string[];
+  task: PcTask;
+  contextChanged: boolean;
+  facts: OperationFacts[];
+  exploration?: {
+    status: 'continue' | 'ready' | 'reference' | 'blocked';
+    reason: string;
+  };
+  failedAttempts?: Map<string, { error: string; observation?: unknown }>;
+  recommendationAttemptKeys?: Set<string>;
+  candidateSubmissionKeys?: Set<string>;
+  readOnlyEvaluationTurn?: boolean;
+};
+
+export { ToolExecutionError } from '../domain/errors';
+
+export type ToolMessage = {
+  id?: string;
+  role: 'user' | 'assistant';
+  content: string;
+  taskId?: string;
+  replacementQueries?: import('../agent/chat-model').ModelMessage[];
+};
+export type OperationFacts = {
+  tool: string;
+  requirementsChanged: boolean;
+  partsChanged: boolean;
+  quoteChanged: boolean;
+  hasPendingItems: boolean;
+  failed: boolean;
+  error?: string;
 };
 
 export type ToolContext = {
-  sessionId?: string;
-  taskId?: string;
+  embeddingConfig?: EmbeddingConfig;
+  modelConfig?: ModelConfig;
+  signal?: AbortSignal;
+  onProgress?: (progress: Progress) => void;
+  sessionId: string;
+  taskId: string;
+  currentMessageId: string;
+  messages: ToolMessage[];
+  tasks: TaskSummary[];
   catalog: Catalog;
   reloadCatalog: () => Promise<Catalog>;
   onUpdate?: (
-    type: 'requirements' | 'parts' | 'plan',
+    type: 'requirements' | 'parts' | 'plan' | 'evaluation' | 'task' | 'support',
     draft: Draft,
     result: RecommendationResult | null,
   ) => Promise<number>;
+  onTaskChange: (task: PcTask) => Promise<void>;
 };
 
 export type RegisteredTool = {

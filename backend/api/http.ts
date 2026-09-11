@@ -1,7 +1,32 @@
 export function assertSameOrigin(request: Request) {
-  const origin = request.headers.get('origin');
-  if (origin && origin !== new URL(request.url).origin)
-    throw Error('拒绝跨站写入请求');
+  const originValue = request.headers.get('origin');
+  if (!originValue) return;
+  try {
+    const requestUrl = new URL(request.url),
+      origin = new URL(originValue),
+      host = (
+        request.headers.get('x-forwarded-host') ??
+        request.headers.get('host') ??
+        requestUrl.host
+      )
+        .split(',')[0]
+        .trim()
+        .toLowerCase(),
+      protocol = (
+        request.headers.get('x-forwarded-proto') ??
+        requestUrl.protocol
+      )
+        .split(',')[0]
+        .trim()
+        .replace(/:$/, '')
+        .toLowerCase();
+    if (
+      origin.host.toLowerCase() === host &&
+      origin.protocol.toLowerCase() === `${protocol}:`
+    )
+      return;
+  } catch {}
+  throw Error('拒绝跨站写入请求');
 }
 export async function readJson(request: Request) {
   assertSameOrigin(request);
