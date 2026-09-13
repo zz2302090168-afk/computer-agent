@@ -1,3 +1,4 @@
+import { traceOperation } from '../diagnostics/chat-trace';
 import { readLines } from '../../lib/stream';
 
 export type ToolCall = {
@@ -20,12 +21,13 @@ export type ToolDefinition = {
   };
 };
 export type ModelConfig = { key?: string; base?: string; model?: string };
-export async function chatCompletion(
+async function requestCompletion(
   config: ModelConfig,
   messages: ModelMessage[],
   tools: ToolDefinition[],
   toolChoice: 'auto' | 'required' | 'none' = 'auto',
   signal?: AbortSignal,
+  onText?: (text: string) => void,
 ) {
   if (!config.key || !config.base || !config.model)
     throw Error('模型配置缺失，请在服务端配置 API。');
@@ -54,8 +56,10 @@ export async function chatCompletion(
       }),
     },
   );
-  if (!response.ok)
+  if (!response.ok) {
+    await response.body?.cancel().catch(() => {});
     throw Error(`模型连接失败（HTTP ${response.status}），请稍后重试。`);
+  }
   if (!response.body) throw Error('模型没有返回消息流');
   const calls = new Map<number, ToolCall>();
   let content = '',
@@ -65,7 +69,8 @@ export async function chatCompletion(
   const consume = () => {
     const payload = eventData.join('\n');
     eventData = [];
-    if (!payload || payload === '[DONE]') return;
+    if (payload === '[DONE]') return true;
+    if (!payload) return false;
     const event = JSON.parse(payload) as {
       error?: unknown;
       choices?: {
@@ -83,12 +88,16 @@ export async function chatCompletion(
     };
     if (event.error) throw Error('模型流返回错误，请重试');
     const choice = event.choices?.find((item) => item.index === 0);
-    if (!choice) return;
+    if (!choice) return false;
     if (choice.finish_reason) {
       finished = true;
       truncated = !['stop', 'tool_calls'].includes(choice.finish_reason);
     }
-    content += choice.delta?.content ?? '';
+    const text = choice.delta?.content;
+    if (text) {
+      content += text;
+      onText?.(text);
+    }
     for (const delta of choice.delta?.tool_calls ?? []) {
       const call = calls.get(delta.index) ?? {
         id: '',
@@ -100,10 +109,12 @@ export async function chatCompletion(
       call.function.arguments += delta.function?.arguments ?? '';
       calls.set(delta.index, call);
     }
+    return false;
   };
   for await (const line of readLines(response.body)) {
-    if (!line) consume();
-    else if (line.startsWith('data:'))
+    if (!line) {
+      if (consume()) break;
+    } else if (line.startsWith('data:'))
       eventData.push(line.slice(5).trimStart());
   }
   if (eventData.length) consume();
@@ -119,3 +130,15 @@ export async function chatCompletion(
     ...(toolCalls.length ? { tool_calls: toolCalls } : {}),
   } satisfies ModelMessage;
 }
+
+export const chatCompletion = (...args: Parameters<typeof requestCompletion>) =>
+  traceOperation(
+    'model',
+    {
+      model: args[0].model,
+      messages: args[1],
+      tools: args[2].map((tool) => tool.function.name),
+      toolChoice: args[3] ?? 'auto',
+    },
+    () => requestCompletion(...args),
+  );

@@ -28,6 +28,19 @@ const documents = [
   ],
 ] as const;
 
+export const supportTopicIds = documents.map(([topicId]) => topicId);
+export type SupportKnowledgeKind =
+  | 'step'
+  | 'clarification'
+  | 'context'
+  | 'stop';
+function supportKind(sectionTitle: string): SupportKnowledgeKind {
+  if (/^步骤\d+[：:]/u.test(sectionTitle)) return 'step';
+  if (sectionTitle === '先问') return 'clarification';
+  if (sectionTitle === '停止条件') return 'stop';
+  return 'context';
+}
+
 // 文档是唯一正文来源。按标题拆成可选择的步骤，不把整篇故障树塞进一条回复。
 export const supportKnowledge = documents.flatMap(
   ([topicId, markdown, tags]) => {
@@ -42,6 +55,8 @@ export const supportKnowledge = documents.flatMap(
         id: `${topicId}.${index + 1}`,
         topicId,
         title: `${title} · ${match[1]}`,
+        sectionTitle: match[1],
+        supportKind: supportKind(match[1]),
         category: 'support',
         tags: [...tags],
         content: match[2].trim(),

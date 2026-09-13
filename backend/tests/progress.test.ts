@@ -35,16 +35,20 @@ void test('三分支同时开始，先完成的审核方案立即推送，不等
   assert.equal(events.filter((event) => event.plan).length, 3);
 });
 
-void test('商品报价改变导致审核失败时，该分支不发送可查看方案', async () => {
+void test('商品报价改变导致单个分支审核失败时，其余方案仍可交付', async () => {
   const f = fixture(),
     events: Progress[] = [];
   const changed = structuredClone(f.catalog);
   changed.parts.find((part) => part.id === 'gpu-cheaper')!.price += 500;
   f.context.reloadCatalog = async () => changed;
   f.context.onProgress = (event) => events.push(event);
-  await assert.rejects(
-    exploreParallelPlans(f.runtime.result!.plans, f.context, f.runtime, []),
+  const plans = await exploreParallelPlans(
+    f.runtime.result!.plans,
+    f.context,
+    f.runtime,
+    [],
   );
+  assert.equal(plans.length, 2);
   assert.equal(
     events.some((event) => event.scope === 'plan-0' && event.plan),
     false,

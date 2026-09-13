@@ -10,7 +10,7 @@ import {
   replacePart,
   selectPrebuilt,
 } from '../services/recommend';
-import { searchCatalog } from '../services/catalog-search';
+import { matchesExclusions, searchCatalog } from '../services/catalog-search';
 import { auditDelivery } from '../services/delivery-audit';
 import { parts, prebuilts } from '../../data/seed/catalog';
 import { retrieveKnowledge } from '../rag/retrieve';
@@ -30,10 +30,11 @@ import type { Requirements } from '../domain/types';
 import { stripLegacyFps } from '../domain/sanitize';
 import { readFileSync } from 'node:fs';
 import { conversationToolChoice } from '../agent/conversation';
-import { requiredPartColor } from '../rules/color';
+import { matchesRequirementColor, requiredPartColor } from '../rules/color';
 import { searchCatalogTool } from '../tools/catalog';
 import { assertSameOrigin } from '../api/http';
 import { buildConversationPrompt } from '../agent/prompts';
+import { updateRequirementsTool } from '../tools/requirements/update';
 const req: Requirements = {
   budget: 6000,
   purpose: '游戏',
@@ -44,6 +45,69 @@ const req: Requirements = {
   brand: '',
   game: '',
 };
+void test('CPU品牌误填型号时按目录归位，旧错误需求也能恢复推荐', async () => {
+  for (const brand of ['AMD', 'Intel', '英特尔']) {
+    const f = fixture();
+    f.context.catalog = { parts, prebuilts };
+    f.runtime.result = null;
+    f.runtime.draft = {
+      budget: 10000,
+      purpose: '游戏',
+      mode: 'diy',
+      seriesPreferences: { cpu: brand },
+    };
+    const previous = f.runtime.draft;
+    await updateRequirementsTool.execute({}, f.context, f.runtime);
+    assert.equal(f.runtime.draft.seriesPreferences?.cpu, undefined);
+    assert.ok(f.runtime.draft.brandPreferences?.cpu?.includes(brand));
+    assert.deepEqual(previous.seriesPreferences, { cpu: brand });
+    assert.equal(f.saved.length, 1);
+    const requirements = completeRequirements(f.runtime.draft);
+    const plans = recommend(requirements, parts, prebuilts);
+    assert.ok(plans.length > 0);
+    assert.ok(
+      auditDelivery(plans, requirements, { parts, prebuilts }).every(
+        (plan) => plan.deliveryAudit?.status === 'passed',
+      ),
+    );
+  }
+});
+void test('品牌归位不改具体型号、否定条件或冲突需求，也不绕过局部修改边界', async () => {
+  for (const series of ['7800X3D', 'Ryzen 7', '不要AMD', '不存在的型号']) {
+    const f = fixture();
+    f.context.catalog = { parts, prebuilts };
+    f.runtime.result = null;
+    f.runtime.draft = {};
+    await updateRequirementsTool.execute(
+      { seriesPreferences: { cpu: series } },
+      f.context,
+      f.runtime,
+    );
+    assert.equal(f.runtime.draft.seriesPreferences?.cpu, series);
+    assert.equal(f.runtime.draft.brandPreferences?.cpu, undefined);
+  }
+  const f = fixture();
+  f.context.catalog = { parts, prebuilts };
+  await assert.rejects(
+    updateRequirementsTool.execute(
+      { seriesPreferences: { cpu: 'AMD' } },
+      f.context,
+      f.runtime,
+    ),
+    /配件级修改/,
+  );
+  f.runtime.result = null;
+  f.runtime.draft = { brandPreferences: { cpu: 'Intel' } };
+  await assert.rejects(
+    updateRequirementsTool.execute(
+      { seriesPreferences: { cpu: 'AMD' } },
+      f.context,
+      f.runtime,
+    ),
+    /品牌冲突/,
+  );
+  assert.deepEqual(f.runtime.draft, { brandPreferences: { cpu: 'Intel' } });
+});
 void test('组装机与DIY措辞在系统提示中路由到不同购买方式', () => {
   const prompt = buildConversationPrompt({
     taskId: 'task',
@@ -104,23 +168,38 @@ void test('CPU和硬盘不接受颜色约束或颜色查询', async () => {
     /不参与配色/,
   );
 });
-void test('预算严格覆盖正负1000边界与明确上限', () => {
-  assert.ok(withinBudget(5000, 6000));
-  assert.ok(withinBudget(7000, 6000));
-  assert.ok(!withinBudget(4999.99, 6000));
-  assert.ok(!withinBudget(7000.01, 6000));
+void test('预算默认正负500边界，显式误差与明确上限保持有效', () => {
+  assert.ok(withinBudget(5500, 6000));
+  assert.ok(withinBudget(6500, 6000));
+  assert.ok(!withinBudget(5499.99, 6000));
+  assert.ok(!withinBudget(6500.01, 6000));
   assert.ok(!withinBudget(6000.01, 6000, true));
+  assert.deepEqual(budgetRange(10000), {
+    min: 9500,
+    max: 10500,
+    reference: false,
+  });
+  assert.deepEqual(budgetRange(10000, false, undefined, 0), {
+    min: 10000,
+    max: 10000,
+    reference: false,
+  });
+  assert.ok(withinBudget(7000, 6000, false, undefined, 1000));
   for (const x of [NaN, Infinity, -1, 0]) assert.throws(() => budgetRange(x));
 });
-void test('160个SKU，无库存数量或在售字段', () => {
-  assert.equal(parts.length, 160);
-  for (const c of new Set(parts.map((p) => p.category)))
-    assert.equal(parts.filter((p) => p.category === c).length, 20);
+void test('保留原160个商品并扩充演示目录，无库存数量或在售字段', () => {
+  const original = parts.filter((p) => !p.demo);
+  assert.equal(original.length, 160);
+  assert.ok(parts.length > original.length);
+  assert.equal(new Set(parts.map((p) => p.id)).size, parts.length);
+  for (const c of new Set(original.map((p) => p.category)))
+    assert.equal(original.filter((p) => p.category === c).length, 20);
   for (const p of parts) {
     assert.ok(!('stock' in p));
     assert.ok(!('status' in p));
     assert.match(String(p.specs.source), /^https:\/\//);
-    assert.equal(p.demo, false);
+    assert.equal(typeof p.demo, 'boolean');
+    if (p.demo) assert.match(String(p.specs.priceBasis), /演示/);
   }
   const whiteMsi5070 = parts.find(
     (p) =>
@@ -198,7 +277,7 @@ void test('推定值可初筛冲突，但通过时仍保留推定假设', () => 
   assert.ok(rejected.issues.some((item) => item.includes('基于推定值初筛')));
 });
 void test('全部商家整机均引用数据库中八类完整商品', () => {
-  assert.equal(prebuilts.length, 20);
+  assert.equal(prebuilts.filter((pc) => !pc.demo).length, 20);
   for (const pc of prebuilts) {
     const ps = pc.partIds.map((id) => parts.find((p) => p.id === id)!);
     assert.equal(pc.partIds.length, 8, pc.id);
@@ -206,7 +285,7 @@ void test('全部商家整机均引用数据库中八类完整商品', () => {
     assert.ok(ps.every(Boolean), pc.id);
   }
 });
-void test('六类配色商品各半，白色完整配置通过统一交付审核', () => {
+void test('原六类配色商品各半，扩充后白色完整配置通过统一交付审核', () => {
   const coloredCategories = [
     'gpu',
     'memory',
@@ -216,7 +295,9 @@ void test('六类配色商品各半，白色完整配置通过统一交付审核
     'cooler',
   ];
   for (const category of coloredCategories) {
-    const items = parts.filter((part) => part.category === category);
+    const items = parts.filter(
+      (part) => part.category === category && !part.demo,
+    );
     assert.equal(
       items.filter((part) => part.color === '白色').length,
       10,
@@ -245,6 +326,44 @@ void test('六类配色商品各半，白色完整配置通过统一交付审核
         .every((part) => part.color === '白色'),
     );
     assert.notEqual(plan.validation.status, 'fail');
+  }
+});
+void test('扩充目录支持Intel两代平台、DDR4与白色配置，保留AMD推荐', () => {
+  for (const patch of [
+    { budget: 20000, brandPreferences: { cpu: 'Intel' } },
+    {
+      budget: 5000,
+      brandPreferences: { cpu: 'Intel' },
+      seriesPreferences: { motherboard: 'PRIME B760M-A D4' },
+    },
+    { budget: 20000, seriesPreferences: { cpu: 'Core Ultra 7 265K' } },
+    { budget: 12000, color: '白色', brandPreferences: { cpu: 'Intel' } },
+    { budget: 8000, brandPreferences: { cpu: 'AMD' } },
+  ]) {
+    const requirements: Requirements = {
+      ...req,
+      mode: 'diy',
+      game: '三角洲',
+      ...patch,
+    };
+    const plans = recommend(requirements, parts, prebuilts);
+    assert.ok(plans.length > 0, JSON.stringify(patch));
+    for (const plan of auditDelivery(plans, requirements, {
+      parts,
+      prebuilts,
+    })) {
+      assert.equal(plan.parts.length, 8);
+      assert.equal(plan.deliveryAudit?.status, 'passed');
+      assert.ok(withinBudget(plan.total, requirements.budget));
+      assert.notEqual(plan.validation.status, 'fail');
+      if (patch.brandPreferences)
+        assert.ok(
+          plan.parts
+            .find((part) => part.category === 'cpu')!
+            .brand.includes(patch.brandPreferences.cpu),
+        );
+      if (plan.parts.some((part) => part.demo)) assert.equal(plan.demo, true);
+    }
   }
 });
 void test('接口、尺寸、缺失规格和重复类别不能被当成兼容', () => {
@@ -875,12 +994,12 @@ void test('普通推荐相邻目标相差500，保留硬上限与极值请求', 
   );
   assert.equal(
     recommend({ ...requirements, preferCheaper: true }, catalog, [])[0]!.total,
-    7001,
+    7500,
   );
   assert.equal(
     recommend({ ...requirements, preferExpensive: true }, catalog, [])[0]!
       .total,
-    8999,
+    8500,
   );
   const pcs = [7001, 7500, 7999, 8000, 8001, 8500, 8999].map((price) => ({
     id: `pc-${price}`,
@@ -897,4 +1016,188 @@ void test('普通推荐相邻目标相差500，保留硬上限与极值请求', 
       .sort((a, b) => a - b),
     [7500, 8000, 8500],
   );
+});
+
+void test('两轮需求保留型号和颜色排除，AMD万元配置可生成并通过交付审核', () => {
+  const first = applyDraft(
+    {},
+    {
+      budget: 10000,
+      mode: 'diy',
+      color: '不限',
+      excludedModels: { cpu: ['5600X'] },
+      excludedColors: ['白色'],
+    },
+  );
+  assert.throws(() => completeRequirements(first), /用途/);
+  const second = applyDraft(first, {
+    purpose: '游戏',
+    brandPreferences: { cpu: 'AMD' },
+  });
+  const requirements = completeRequirements(second);
+  const plans = recommend(requirements, parts, prebuilts);
+  assert.ok(plans.length > 0);
+  for (const plan of auditDelivery(plans, requirements, { parts, prebuilts })) {
+    assert.equal(plan.deliveryAudit?.status, 'passed');
+    assert.ok(Math.abs(plan.total - 10000) <= 500);
+    const cpu = plan.parts.find((p) => p.category === 'cpu')!;
+    assert.ok(cpu.brand.includes('AMD'));
+    assert.ok(!cpu.name.toLowerCase().includes('5600x'));
+    assert.ok(
+      plan.parts
+        .filter((p) => !['cpu', 'storage'].includes(p.category))
+        .every((p) => !p.color.includes('白色')),
+    );
+    assert.throws(
+      () =>
+        assembleBuild(
+          plan.parts.map((p) => p.id),
+          { ...requirements, excludedModels: { cpu: [cpu.name] } },
+          parts,
+          prebuilts,
+        ),
+      /排除/,
+    );
+  }
+  const cleared = applyDraft(second, {
+    excludedModels: { cpu: [] },
+    excludedColors: [],
+  });
+  assert.ok(changesRecommendation(second, cleared));
+  assert.deepEqual(second.excludedModels, { cpu: ['5600X'] });
+  assert.deepEqual(cleared.excludedModels, { cpu: [] });
+});
+void test('排除匹配不误伤相邻型号，颜色覆盖六类，品牌排除参与整机与DIY审核', () => {
+  const cpu = parts.find((p) => p.category === 'cpu')!;
+  const requirements = {
+    ...req,
+    excludedModels: { cpu: ['5600X'] },
+    excludedColors: ['白色'],
+  };
+  assert.equal(
+    matchesExclusions({ ...cpu, name: 'AMD Ryzen 5 5600X' }, requirements),
+    false,
+  );
+  assert.equal(
+    matchesExclusions({ ...cpu, name: 'AMD Ryzen 5 5600' }, requirements),
+    true,
+  );
+  assert.equal(
+    matchesExclusions({ ...cpu, name: 'AMD Ryzen 7 5700X' }, requirements),
+    true,
+  );
+  for (const category of [
+    'gpu',
+    'memory',
+    'motherboard',
+    'psu',
+    'case',
+    'cooler',
+  ] as const) {
+    assert.equal(
+      matchesRequirementColor(
+        { ...cpu, category, color: '白色' },
+        requirements,
+      ),
+      false,
+    );
+    assert.equal(
+      matchesRequirementColor(
+        { ...cpu, category, color: '灰色' },
+        requirements,
+      ),
+      true,
+    );
+  }
+  assert.equal(
+    matchesRequirementColor({ ...cpu, color: '白色' }, requirements),
+    true,
+  );
+  const pc = prebuilts[0];
+  const prebuiltReq = { ...req, budget: pc.price, mode: 'prebuilt' as const };
+  const plan = selectPrebuilt(pc.id, prebuiltReq, parts, prebuilts);
+  const brand = plan.parts.find((p) => p.category === 'cpu')!.brand;
+  assert.throws(() =>
+    selectPrebuilt(
+      pc.id,
+      { ...prebuiltReq, excludedBrands: { cpu: [brand] } },
+      parts,
+      prebuilts,
+    ),
+  );
+  const intel = recommend(
+    { ...req, mode: 'diy', budget: 10000, excludedBrands: { cpu: ['AMD'] } },
+    parts,
+    prebuilts,
+  );
+  assert.ok(intel.length > 0);
+  assert.ok(
+    intel.every(
+      (p) =>
+        !p.parts.find((part) => part.category === 'cpu')!.brand.includes('AMD'),
+    ),
+  );
+  for (const patch of [
+    { excludedModels: { cpu: '5600X' } },
+    { excludedColors: [''] },
+    { excludedBrands: { invalid: ['AMD'] } },
+  ])
+    assert.throws(() => applyDraft({}, patch));
+});
+
+void test('零误差保留原值并提示可能无匹配，不擅自放宽预算', async () => {
+  const f = fixture();
+  f.runtime.result = null;
+  f.runtime.draft = {
+    budget: 10000,
+    purpose: '游戏',
+    mode: 'diy',
+    budgetTolerance: 0,
+  };
+  assert.throws(() => completeRequirements(f.runtime.draft), /等待确认/);
+  assert.equal(applyDraft(f.runtime.draft, {}).budgetTolerance, 0);
+  const result = await updateRequirementsTool.execute(
+    { budgetTolerance: 0 },
+    f.context,
+    f.runtime,
+  );
+  assert.equal(f.runtime.draft.budgetTolerance, 0);
+  assert.match(JSON.stringify(result), /可能找不到匹配配置/);
+  assert.equal(f.runtime.requestAction, 'save_requirements');
+  await assert.rejects(
+    updateRequirementsTool.execute(
+      { zeroBudgetConfirmationMessageId: f.context.currentMessageId },
+      f.context,
+      f.runtime,
+    ),
+    /等待后续/,
+  );
+  f.context.currentMessageId = 'confirm-zero';
+  f.context.messages.push({
+    id: 'confirm-zero',
+    role: 'user',
+    content: '确认坚持零误差',
+    taskId: f.context.taskId,
+  });
+  await updateRequirementsTool.execute(
+    { zeroBudgetConfirmationMessageId: 'confirm-zero' },
+    f.context,
+    f.runtime,
+  );
+  assert.equal(completeRequirements(f.runtime.draft).budgetTolerance, 0);
+
+  assert.equal(withinBudget(10001, 10000, false, undefined, 0), false);
+  assert.equal(withinBudget(10000, 10000, false, undefined, 0), true);
+  const normal = await updateRequirementsTool.execute(
+    { budgetTolerance: 50 },
+    f.context,
+    f.runtime,
+  );
+  assert.equal(f.runtime.draft.budgetTolerance, 50);
+  assert.doesNotMatch(JSON.stringify(normal), /budgetNotice/);
+  assert.deepEqual(budgetRange(10000), {
+    min: 9500,
+    max: 10500,
+    reference: false,
+  });
 });

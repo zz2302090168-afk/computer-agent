@@ -3,8 +3,15 @@ import {
   parts as seedParts,
   prebuilts as seedPcs,
 } from '../../data/seed/catalog';
+import { monitors as seedMonitors } from '../../data/seed/monitors';
 import { enrichInferredSpecs } from '../../data/seed/inferred-specs';
-import { labels, type Part, type Prebuilt } from '../domain/types';
+import {
+  labels,
+  type Monitor,
+  type MonitorCatalog,
+  type Part,
+  type Prebuilt,
+} from '../domain/types';
 export { database };
 
 export async function loadCatalog(): Promise<{
@@ -80,6 +87,62 @@ export async function loadCatalog(): Promise<{
       ...p,
       partIds: JSON.parse(p.part_ids),
       demo: !!p.demo,
+    })),
+  };
+}
+
+export async function loadMonitorCatalog(): Promise<MonitorCatalog> {
+  try {
+    return await readMonitorCatalog();
+  } catch (cause) {
+    const missingTable =
+      cause instanceof Error &&
+      'code' in cause &&
+      cause.code === 'ER_NO_SUCH_TABLE';
+    throw Error(
+      missingTable
+        ? '显示器数据库尚未初始化，请运行数据库迁移。'
+        : '显示器数据库暂时不可用，请稍后重试。',
+      { cause },
+    );
+  }
+}
+
+async function readMonitorCatalog(): Promise<MonitorCatalog> {
+  const db = database();
+  const initialized = await db
+    .prepare('SELECT value FROM metadata WHERE `key`=?')
+    .bind('monitor-catalog-v1')
+    .first();
+  if (!initialized) {
+    await db.batch([
+      ...seedMonitors.map((monitor) =>
+        db
+          .prepare(
+            'INSERT IGNORE INTO monitors(id,brand,name,price,specs,demo) VALUES(?,?,?,?,?,?)',
+          )
+          .bind(
+            monitor.id,
+            monitor.brand,
+            monitor.name,
+            monitor.price,
+            JSON.stringify(monitor.specs),
+            monitor.demo ? 1 : 0,
+          ),
+      ),
+      db
+        .prepare('INSERT IGNORE INTO metadata(`key`,`value`) VALUES(?,?)')
+        .bind('monitor-catalog-v1', 'initialized'),
+    ]);
+  }
+  const rows = await db
+    .prepare('SELECT * FROM monitors ORDER BY price,id')
+    .all<Omit<Monitor, 'specs' | 'demo'> & { specs: string; demo: number }>();
+  return {
+    monitors: rows.results.map((monitor) => ({
+      ...monitor,
+      specs: JSON.parse(monitor.specs),
+      demo: !!monitor.demo,
     })),
   };
 }

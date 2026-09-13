@@ -8,11 +8,21 @@ import { readResponse } from './api';
 import Results from './results';
 import GenerationProgress from './generation-progress';
 import { updateProgress } from './progress-state';
-import { loadWorkspace } from './workspace-session';
+import {
+  loadWorkspace,
+  pageSessionHeaders,
+  startNewPageSession,
+} from './workspace-session';
+import {
+  applyPlanActionResponse,
+  applyRequirementSnapshot,
+  applyWorkspaceResponse,
+} from './result-state';
 import { labels, type Catalog, type Category } from '@/backend/domain/types';
 import type { ChatState } from '@/backend/agent/conversation';
 import type { ChatStreamEvent, Progress } from '@/backend/agent/progress';
 import { readLines } from '@/lib/stream';
+import { catalogMessageParts } from './catalog-links';
 
 const emptyState: ChatState = { draft: {}, messages: [], result: null };
 const starter =
@@ -23,10 +33,28 @@ const sourceText = {
   confirmed: '用户已确认',
 } as const;
 
-export default function Chat() {
+const inquiryPrompt = (name: string) =>
+  `我想咨询“${name}”这台组装整机，请介绍当前售价和八类配置。先了解商品，不修改或确认我的方案。`;
+
+function clearInquiryLocation() {
+  const url = new URL(window.location.href);
+  if (!url.searchParams.has('prebuilt')) return;
+  url.searchParams.delete('prebuilt');
+  window.history.replaceState(
+    null,
+    '',
+    `${url.pathname}${url.search}${url.hash}`,
+  );
+}
+
+export default function Chat({
+  active: visible = true,
+  consultPrebuiltId,
+}: { active?: boolean; consultPrebuiltId?: string } = {}) {
   const [state, setState] = useState<ChatState>(emptyState),
     [catalog, setCatalog] = useState<Catalog | null>(null),
     [input, setInput] = useState(''),
+    [inquiry, setInquiry] = useState<{ id: string; name: string } | null>(null),
     [busy, setBusy] = useState(false),
     [progress, setProgress] = useState<Progress[]>([]),
     [loading, setLoading] = useState(true),
@@ -40,34 +68,90 @@ export default function Chat() {
   useEffect(() => () => activeRequest.current?.abort(), []);
   useEffect(() => {
     let active = true;
-    Promise.all([
-      loadWorkspace(),
-      fetch('/api/catalog').then((r) => readResponse<Catalog>(r)),
-    ])
-      .then(([chat, items]) => {
-        if (!active) return;
-        setState(chat);
-        currentTask.current = chat.currentTaskId ?? '';
-        setCatalog(items);
-      })
-      .catch((e) => active && setError(e.message))
-      .finally(() => active && setLoading(false));
+    const initialize = () => {
+      const version = ++requestVersion.current;
+      Promise.all([
+        loadWorkspace(),
+        fetch('/api/catalog').then((r) => readResponse<Catalog>(r)),
+      ])
+        .then(([chat, items]) => {
+          if (!active || version !== requestVersion.current) return;
+          setState(chat);
+          currentTask.current = chat.currentTaskId ?? '';
+          setCatalog(items);
+        })
+        .catch((e) => {
+          if (active && version === requestVersion.current) setError(e.message);
+        })
+        .finally(() => {
+          if (active && version === requestVersion.current) setLoading(false);
+        });
+    };
+    const resumePage = (event: PageTransitionEvent) => {
+      if (!event.persisted) return;
+      activeRequest.current?.abort();
+      activeRequest.current = null;
+      currentTask.current = '';
+      setState(emptyState);
+      setProgress([]);
+      setError('');
+      setInput('');
+      setInquiry(null);
+      setBusy(false);
+      setLoading(true);
+      initialize();
+    };
+    initialize();
+    window.addEventListener('pageshow', resumePage);
     return () => {
       active = false;
+      window.removeEventListener('pageshow', resumePage);
     };
   }, []);
   useEffect(() => {
-    if (followMessages.current)
+    if (!visible || busy || loading || !consultPrebuiltId) return;
+    let active = true;
+    // 等本轮处理结束后独立读取咨询商品，不重置聊天；目录可能在浏览期间更新。
+    fetch('/api/catalog')
+      .then((response) => readResponse<Catalog>(response))
+      .then((items) => {
+        if (!active) return;
+        setCatalog(items);
+        const pc = items.prebuilts.find(
+          (item) => item.id === consultPrebuiltId,
+        );
+        if (!pc)
+          throw Error('这台整机已不在当前商品目录中，请返回目录重新选择。');
+        setInquiry({ id: pc.id, name: pc.name });
+        setInput(inquiryPrompt(pc.name));
+        clearInquiryLocation();
+      })
+      .catch((cause) => {
+        if (!active) return;
+        setInquiry(null);
+        setInput('');
+        setError(cause instanceof Error ? cause.message : '咨询商品读取失败');
+        clearInquiryLocation();
+      });
+    return () => {
+      active = false;
+    };
+  }, [visible, busy, loading, consultPrebuiltId]);
+  useEffect(() => {
+    if (visible && followMessages.current)
       end.current?.scrollIntoView({ block: 'nearest', behavior: 'instant' });
-  }, [state.messages.length, busy]);
+  }, [state.messages, busy, visible]);
   async function send(text = input) {
-    // 发起请求时绑定任务和本地序号；切换任务后，迟到响应不得覆盖当前右栏。
-    if (!text.trim() || busy || loading) return;
+    // 发起请求时绑定本轮状态；新会话后的迟到响应不得覆盖当前右栏。
+    if (!text.trim() || busy || loading || consultPrebuiltId) return;
     followMessages.current = true;
     const requestTask = currentTask.current,
-      version = ++requestVersion.current;
+      version = ++requestVersion.current,
+      sessionHeaders = pageSessionHeaders(),
+      requestInquiry = inquiry,
+      replyId = crypto.randomUUID();
     setBusy(true);
-    setProgress([{ scope: 'main', label: '连接当前任务', status: 'running' }]);
+    setProgress([{ scope: 'main', label: '处理本次对话', status: 'running' }]);
     const controller = new AbortController();
     activeRequest.current = controller;
     setError('');
@@ -76,18 +160,28 @@ export default function Chat() {
       ...s,
       messages: [
         ...s.messages,
-        { role: 'user', content: text, taskId: requestTask },
+        {
+          role: 'user',
+          content: text,
+          taskId: requestTask,
+          ...(requestInquiry ? { consultPrebuiltId: requestInquiry.id } : {}),
+        },
       ],
     }));
     try {
       const r = await fetch('/api/chat', {
         method: 'POST',
         headers: {
+          ...sessionHeaders,
           'Content-Type': 'application/json',
           Accept: 'application/x-ndjson',
         },
         signal: controller.signal,
-        body: JSON.stringify({ message: text, taskId: requestTask }),
+        body: JSON.stringify({
+          message: text,
+          taskId: requestTask,
+          ...(requestInquiry ? { consultPrebuiltId: requestInquiry.id } : {}),
+        }),
       });
       if (!r.ok) await readResponse<ChatState>(r);
       if (!r.body) throw Error('没有收到处理进度，请重试');
@@ -97,8 +191,31 @@ export default function Chat() {
         if (!line.trim()) continue;
         const event = JSON.parse(line) as ChatStreamEvent;
         if (event.type === 'error') throw Error(event.error);
+        if (event.type === 'text') {
+          setState((previous) => ({
+            ...previous,
+            messages: [
+              ...previous.messages.filter((entry) => entry.id !== replyId),
+              ...(event.text
+                ? [
+                    {
+                      id: replyId,
+                      role: 'assistant' as const,
+                      content: event.text,
+                      taskId: requestTask,
+                    },
+                  ]
+                : []),
+            ],
+          }));
+        }
         if (event.type === 'progress') {
           setProgress((items) => updateProgress(items, event.progress));
+        }
+        if (event.type === 'requirements') {
+          setState((previous) =>
+            applyRequirementSnapshot(previous, event.task),
+          );
         }
         if (event.type === 'complete') {
           data = event.state;
@@ -115,7 +232,7 @@ export default function Chat() {
                     plan: saved,
                     status: 'done',
                     phase: 'complete',
-                    label: '已审核并保存，可查看方案',
+                    label: '已完成审核，可查看方案',
                   }
                 : {
                     ...item,
@@ -127,12 +244,12 @@ export default function Chat() {
           );
         }
       }
-      if (!data)
-        throw Error('连接在处理完成前中断，已保存的需求可重新打开任务恢复');
+      if (!data) throw Error('连接在处理完成前中断，请在当前页面重试');
       if (version !== requestVersion.current) return;
+      setInquiry((current) => (current === requestInquiry ? null : current));
       if (currentTask.current === requestTask) {
         currentTask.current = data.currentTaskId ?? '';
-        setState(data);
+        setState((previous) => applyWorkspaceResponse(previous, data));
       } else
         setState((previous) => ({
           ...previous,
@@ -140,6 +257,11 @@ export default function Chat() {
           messages: data.messages,
         }));
     } catch (e) {
+      if (version === requestVersion.current)
+        setState((previous) => ({
+          ...previous,
+          messages: previous.messages.filter((entry) => entry.id !== replyId),
+        }));
       if (version === requestVersion.current)
         setError(e instanceof Error ? e.message : '发送失败，请重试');
       if (version === requestVersion.current)
@@ -151,9 +273,35 @@ export default function Chat() {
             label:
               item.scope === 'main'
                 ? '本次处理未完成'
-                : '生成中断，请刷新恢复已保存方案',
+                : '生成中断，请在当前页面重试',
           })),
         );
+      // 工具可能已更新本页面临时状态；保留错误，重新读取当前版本。
+      if (!controller.signal.aborted && version === requestVersion.current) {
+        try {
+          const recovered = await readResponse<ChatState>(
+            await fetch('/api/chat', {
+              cache: 'no-store',
+              headers: sessionHeaders,
+              signal: controller.signal,
+            }),
+          );
+          if (version === requestVersion.current) {
+            currentTask.current = recovered.currentTaskId ?? '';
+            setState((previous) =>
+              applyWorkspaceResponse(previous, {
+                ...recovered,
+                messages:
+                  recovered.currentTaskId === requestTask
+                    ? previous.messages
+                    : recovered.messages,
+              }),
+            );
+          }
+        } catch {
+          // 重新读取也失败时保留原始错误，不把旧页面状态标成已同步。
+        }
+      }
     } finally {
       if (version === requestVersion.current) {
         setBusy(false);
@@ -162,21 +310,33 @@ export default function Chat() {
     }
   }
   async function reset() {
-    requestVersion.current++;
+    const version = ++requestVersion.current,
+      previousSession = pageSessionHeaders()['x-page-session'];
+    activeRequest.current?.abort();
+    activeRequest.current = null;
     setError('');
     setBusy(true);
     try {
-      const fresh = await readResponse<ChatState>(
-        await fetch('/api/chat', { method: 'PUT' }),
-      );
+      const fresh = await startNewPageSession();
+      if (version !== requestVersion.current) return;
       currentTask.current = fresh.currentTaskId ?? '';
       setState(fresh);
       setProgress([]);
       setInput('');
+      setInquiry(null);
     } catch (e) {
-      setError((e as Error).message);
+      if (version === requestVersion.current) {
+        if (pageSessionHeaders()['x-page-session'] !== previousSession) {
+          currentTask.current = '';
+          setState(emptyState);
+          setProgress([]);
+          setInput('');
+          setInquiry(null);
+        }
+        setError((e as Error).message);
+      }
     } finally {
-      setBusy(false);
+      if (version === requestVersion.current) setBusy(false);
     }
   }
   const d = state.draft,
@@ -210,10 +370,10 @@ export default function Chat() {
         <div className="header-actions">
           <span className="connection">
             <i />
-            任务记忆已开启
+            本次对话不保留
           </span>
-          <Link href="/catalog">
-            真实商品目录 <ArrowUpRight size={15} />
+          <Link href="/catalog?kind=prebuilt">
+            商品目录 <ArrowUpRight size={15} />
           </Link>
         </div>
       </header>
@@ -230,7 +390,7 @@ export default function Chat() {
         >
           配置{' '}
           {busy
-            ? '· 生成中'
+            ? '· 处理中'
             : state.result?.plans.length
               ? `· ${state.result.plans.length} 套方案`
               : ''}
@@ -245,7 +405,7 @@ export default function Chat() {
             </div>
             <Button
               variant="outline"
-              disabled={busy || loading}
+              disabled={busy || loading || !!consultPrebuiltId}
               onClick={reset}
             >
               <Plus size={16} />
@@ -277,13 +437,44 @@ export default function Chat() {
                   </span>
                 )}
                 <div>
-                  <div className="bubble">{m.content}</div>
+                  <div className="bubble">
+                    {m.role === 'assistant'
+                      ? catalogMessageParts(m.content).map((part, index) =>
+                          part.href ? (
+                            <Link key={index} href={part.href}>
+                              {part.text}
+                            </Link>
+                          ) : (
+                            part.text
+                          ),
+                        )
+                      : m.content}
+                  </div>
                 </div>
               </div>
             ))}
             <div ref={end} />
           </div>
           <div className="composer-wrap">
+            {inquiry && (
+              <div className="catalog-inquiry" aria-label="本次咨询商品">
+                <div>
+                  <span>正在咨询组装整机</span>
+                  <strong>{inquiry.name}</strong>
+                </div>
+                <Button
+                  variant="ghost"
+                  disabled={busy || !!consultPrebuiltId}
+                  onClick={() => {
+                    if (input === inquiryPrompt(inquiry.name)) setInput('');
+                    setInquiry(null);
+                    clearInquiryLocation();
+                  }}
+                >
+                  移除商品
+                </Button>
+              </div>
+            )}
             {!busy && !!state.result?.plans.length && (
               <button
                 className="mobile-result-link"
@@ -301,10 +492,10 @@ export default function Chat() {
             <div className="composer">
               <Textarea
                 aria-label="输入装机需求"
-                placeholder="说说预算、用途，或者切换任务…"
+                placeholder="说说预算、用途，或者描述电脑故障…"
                 value={input}
                 maxLength={2000}
-                disabled={loading}
+                disabled={loading || !!consultPrebuiltId}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => {
                   if (
@@ -319,19 +510,23 @@ export default function Chat() {
               />
               <Button
                 aria-label="发送消息"
-                disabled={busy || loading || !input.trim()}
+                disabled={
+                  busy || loading || !!consultPrebuiltId || !input.trim()
+                }
                 onClick={() => send()}
               >
                 <Send size={19} />
               </Button>
             </div>
-            <p className="composer-hint">Enter 发送 · Shift + Enter 换行</p>
+            <p className="composer-hint">
+              Enter 发送 · Shift + Enter 换行 · 刷新页面会清空本次对话
+            </p>
           </div>
         </section>
         <aside className="configuration-column">
           <div className="configuration-heading">
             <div>
-              <span>当前任务 · 第 {state.task?.version ?? 1} 版</span>
+              <span>本次对话</span>
               <h2>配置工作区</h2>
             </div>
             <Layers size={19} />
@@ -384,6 +579,7 @@ export default function Chat() {
                           {item.part.brand} {item.part.name}
                         </b>
                         <small>
+                          {item.part.demo ? '演示商品' : '真实型号'} ·{' '}
                           {sourceText[item.source ?? 'assistant']} · ¥
                           {item.part.price.toLocaleString()}
                         </small>
@@ -418,18 +614,11 @@ export default function Chat() {
             <Results
               key={state.currentTaskId}
               taskId={state.currentTaskId}
+              taskVersion={state.task?.version}
               disabled={busy}
               result={state.result}
               onChange={(result) =>
-                setState((s) =>
-                  s.currentTaskId === state.currentTaskId
-                    ? {
-                        ...s,
-                        result,
-                        draft: { ...s.draft, ...result.requirements },
-                      }
-                    : s,
-                )
+                setState((s) => applyPlanActionResponse(s, result))
               }
             />
           ) : (

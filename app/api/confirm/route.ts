@@ -1,7 +1,14 @@
 import { loadCatalog } from '@/backend/db/catalog';
-import { ensureWorkspace, saveTask } from '@/backend/db/tasks';
+import {
+  readPageSession,
+  updatePageTask,
+} from '@/backend/session/page-session';
 import { selectPlan } from '@/backend/services/select-plan';
 import { readJson, sessionId, json } from '@/backend/api/http';
+import {
+  assertPlanActionTask,
+  planActionResponse,
+} from '@/backend/api/plan-actions';
 
 // 与聊天select_plan使用同一选择服务；不下单或付款。
 export async function POST(request: Request) {
@@ -13,9 +20,8 @@ export async function POST(request: Request) {
     )
       throw Error('选择方案参数无效');
     const session = sessionId(request);
-    const { task } = await ensureWorkspace(session);
-    if (input.taskId !== undefined && input.taskId !== task.id)
-      throw Error('当前任务已切换，请刷新后重试');
+    const { task } = readPageSession(session);
+    assertPlanActionTask(input, task);
     const next = selectPlan(
       task,
       input.planId,
@@ -23,8 +29,8 @@ export async function POST(request: Request) {
       { source: 'ui' },
       input.confirm !== false,
     );
-    const saved = await saveTask(session, next, task.version);
-    return json({ ...saved.result, taskId: saved.id, version: saved.version });
+    const saved = updatePageTask(session, next, task.version);
+    return json(planActionResponse(saved.task));
   } catch (cause) {
     return json(
       { error: cause instanceof Error ? cause.message : '交付审核失败' },

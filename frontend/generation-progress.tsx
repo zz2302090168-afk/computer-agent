@@ -22,7 +22,7 @@ export default function GenerationProgress({ items }: { items: Progress[] }) {
   return (
     <output className="generation-progress" aria-live="polite">
       <span aria-hidden="true" />
-      正在生成：{status}
+      {branches.length ? '正在生成' : '正在处理'}：{status}
       {branches.length > 0 && ` · ${ready}/${branches.length} 套已完成`}
     </output>
   );

@@ -1,4 +1,6 @@
-import { retrieveKnowledge } from '../../rag/retrieve';
+import { retrieveEvidence } from '../../rag/evidence';
+import { isSelfServiceStopped } from '../support';
+import { supportKnowledge, supportTopicIds } from '../../../knowledge/support';
 import {
   objectSchema,
   parseObject,
@@ -12,12 +14,12 @@ export const retrieveKnowledgeTool: RegisteredTool = {
     function: {
       name: 'retrieve_knowledge',
       description:
-        '仅在当前任务明确需要RAG知识文字时检索选型解释或故障排查知识。配置生成、商品搜索、预算计算、兼容性审核、方案保存不得调用。售后传category=support；返回分块知识ID后用update_support保存所选的一步。',
+        '仅在当前任务明确需要RAG知识文字时检索选型解释或故障排查知识。配置生成、商品搜索、预算计算、兼容性审核、方案保存不得调用。售后传category=support；当前任务已停止自行排查时禁止检索售后步骤，只能由用户明确请求人工。售后检索服务失败时，仅明确指定有效topicId才读取本地同主题已有指导；没有匹配资料时不扩展到其他主题。返回分块知识ID及supportKind后用update_support保存所选的一步，只有step或clarification可作为下一步正文。',
       parameters: objectSchema(
         {
           query: { type: 'string' },
           category: { type: 'string', enum: ['support', 'sales'] },
-          topicId: { type: 'string' },
+          topicId: { type: 'string', enum: supportTopicIds },
         },
         ['query'],
       ),
@@ -26,6 +28,27 @@ export const retrieveKnowledgeTool: RegisteredTool = {
   async execute(value, _context, runtime) {
     const input = parseObject(value);
     rejectUnknownKeys(input, ['query', 'category', 'topicId']);
+    const isSupport = input.category === 'support';
+    const scope = {
+      taskId: _context.taskId,
+      messageId: _context.currentMessageId,
+    };
+    if (isSupport) {
+      runtime.supportEvidence = new Map(
+        [...(runtime.supportEvidence ?? [])].filter(
+          ([, evidence]) =>
+            evidence.taskId === scope.taskId &&
+            evidence.messageId === scope.messageId,
+        ),
+      );
+      runtime.supportRetrieval = { ...scope, status: 'failed', source: 'none' };
+      if (isSelfServiceStopped(runtime.draft.support)) {
+        runtime.supportRetrieval.status = 'stopped';
+        throw Error(
+          '当前任务已停止自行排查，不能继续检索售后步骤；仅允许记录用户明确提出的转人工请求。',
+        );
+      }
+    }
     if (typeof input.query !== 'string' || !input.query.trim())
       throw Error('知识查询内容不能为空');
     if (
@@ -36,7 +59,13 @@ export const retrieveKnowledgeTool: RegisteredTool = {
       throw Error('知识类别无效');
     if (input.topicId !== undefined && typeof input.topicId !== 'string')
       throw Error('知识主题无效');
-    const hits = await retrieveKnowledge(
+    if (
+      isSupport &&
+      input.topicId !== undefined &&
+      !supportTopicIds.some((id) => id === input.topicId)
+    )
+      throw Error('售后知识主题不存在，请先明确故障主题；不能回退到其他主题');
+    const retrieval = await retrieveEvidence(
       _context.embeddingConfig ?? {},
       input.query,
       input.topicId ? 10 : 4,
@@ -44,10 +73,51 @@ export const retrieveKnowledgeTool: RegisteredTool = {
       input.topicId as string | undefined,
       _context.signal,
     );
-    runtime.supportKnowledgeIds ??= new Set();
-    for (const hit of hits)
-      if (hit.category === 'support') runtime.supportKnowledgeIds.add(hit.id);
-    runtime.toolsUsed.push('检索知识');
-    return hits;
+    const local =
+      isSupport &&
+      input.topicId &&
+      retrieval.knowledgeFailure === 'service_error'
+        ? supportKnowledge.filter((item) => item.topicId === input.topicId)
+        : [];
+    const hits = local.length ? local : retrieval.evidence;
+    const source = local.length ? 'local' : hits.length ? 'embedding' : 'none';
+    if (isSupport) {
+      runtime.supportRetrieval = {
+        ...scope,
+        status: hits.length
+          ? 'available'
+          : retrieval.knowledgeFailure === 'no_match'
+            ? 'empty'
+            : 'failed',
+        source,
+      };
+      if (source !== 'none')
+        for (const hit of hits)
+          if (hit.category === 'support')
+            runtime.supportEvidence!.set(hit.id, { ...scope, source });
+      runtime.toolsUsed.push(
+        local.length
+          ? '读取本地售后知识'
+          : hits.length
+            ? '检索知识'
+            : '知识检索不可用',
+      );
+      if (local.length)
+        return {
+          evidence: local,
+          knowledgeStatus: 'available',
+          knowledgeSource: 'local',
+          knowledgeFailure: retrieval.knowledgeFailure,
+          knowledgeNotice:
+            '向量检索服务暂时不可用，已读取本地同主题售后指导。这些是已编写资料，未经厂家逐项验证；只选择与当前现象相符的一步。',
+        };
+      return hits.length
+        ? hits.map((hit) => ({ ...hit, knowledgeSource: 'embedding' }))
+        : { ...retrieval, knowledgeSource: 'none' };
+    }
+    runtime.knowledgeUnavailable ||=
+      retrieval.knowledgeStatus === 'unavailable';
+    runtime.toolsUsed.push(hits.length ? '检索知识' : '知识检索不可用');
+    return hits.length ? hits : retrieval;
   },
 };

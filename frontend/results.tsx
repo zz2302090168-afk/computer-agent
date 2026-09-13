@@ -11,6 +11,9 @@ import {
   SelectItem,
 } from '@/components/ui/select';
 import { readResponse } from './api';
+import { pageSessionHeaders } from './workspace-session';
+import MonitorRecommendation from './monitor-recommendation';
+import type { PlanActionResponse } from '@/backend/api/plan-actions';
 import type {
   Part,
   Plan,
@@ -21,11 +24,13 @@ export default function Results({
   result,
   onChange,
   taskId,
+  taskVersion,
   disabled = false,
 }: {
   result: RecommendationResult;
-  onChange: (r: RecommendationResult) => void;
+  onChange: (r: PlanActionResponse) => void;
   taskId?: string;
+  taskVersion?: number;
   disabled?: boolean;
 }) {
   const [catalog, setCatalog] = useState<Part[]>([]),
@@ -59,11 +64,20 @@ export default function Results({
     try {
       const r = await fetch('/api/replace', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ planId, oldId, newId, taskId }),
+        headers: {
+          ...pageSessionHeaders(),
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          planId,
+          oldId,
+          newId,
+          taskId,
+          expectedVersion: taskVersion,
+        }),
       });
-      const data = await readResponse<RecommendationResult>(r);
-      onChange({ ...result, ...data });
+      const data = await readResponse<PlanActionResponse>(r);
+      onChange(data);
       setEdit('');
     } catch (e) {
       setError((e as Error).message);
@@ -77,8 +91,15 @@ export default function Results({
     try {
       const response = await fetch('/api/export-docx', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ planId: plan.id, taskId }),
+        headers: {
+          ...pageSessionHeaders(),
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          planId: plan.id,
+          taskId,
+          expectedVersion: taskVersion,
+        }),
       });
       if (!response.ok) {
         const data = (await response.json()) as { error?: string };
@@ -102,10 +123,18 @@ export default function Results({
     try {
       const response = await fetch('/api/confirm', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ planId, confirm, taskId }),
+        headers: {
+          ...pageSessionHeaders(),
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          planId,
+          confirm,
+          taskId,
+          expectedVersion: taskVersion,
+        }),
       });
-      const data = await readResponse<RecommendationResult>(response);
+      const data = await readResponse<PlanActionResponse>(response);
       onChange(data);
     } catch (cause) {
       setError(cause instanceof Error ? cause.message : '交付审核失败');
@@ -191,6 +220,7 @@ export default function Results({
                       : '购买方式：商家组装整机'}
                   </span>
                   <h3>{plan.tier ?? plan.name}</h3>
+                  {plan.demo && <small>包含演示商品，型号与报价仅供演示</small>}
                   {result.selection?.planId === plan.id && (
                     <small>
                       {confirmed === plan.id ? '已确认方案' : '当前选定方案'}
@@ -244,7 +274,10 @@ export default function Results({
                     <span>{p.categoryLabel}</span>
                     <b>
                       {p.brand} {p.name}
-                      <small>{p.color} · 商家目录价</small>
+                      <small>
+                        {p.color} · {p.demo ? '演示商品' : '真实型号'} ·
+                        商家目录价
+                      </small>
                       {plan.kind === 'diy' && (
                         <Button
                           variant="ghost"
@@ -262,14 +295,18 @@ export default function Results({
                           onValueChange={(v) => v && replace(plan.id, p.id, v)}
                         >
                           <SelectTrigger aria-label={`替换${p.categoryLabel}`}>
-                            <SelectValue />
+                            <SelectValue>
+                              {p.name} · {p.color} · ¥{p.price} ·{' '}
+                              {p.demo ? '演示商品' : '真实型号'}
+                            </SelectValue>
                           </SelectTrigger>
                           <SelectContent>
                             {catalog
                               .filter((x) => x.category === p.category)
                               .map((x) => (
                                 <SelectItem key={x.id} value={x.id}>
-                                  {x.name} · {x.color} · ¥{x.price}
+                                  {x.name} · {x.color} · ¥{x.price} ·{' '}
+                                  {x.demo ? '演示商品' : '真实型号'}
                                 </SelectItem>
                               ))}
                           </SelectContent>
@@ -369,6 +406,19 @@ export default function Results({
           </TabsContent>
         ))}
       </Tabs>
+      <MonitorRecommendation
+        key={JSON.stringify([
+          result.requirements.purpose,
+          result.monitorRecommendation?.criteria,
+        ])}
+        taskId={taskId}
+        recommendation={result.monitorRecommendation}
+        taskVersion={taskVersion}
+        onChange={onChange}
+        hostReady={result.plans.length > 0}
+        defaultPurpose={result.requirements.purpose}
+        disabled={disabled}
+      />
     </>
   );
 }

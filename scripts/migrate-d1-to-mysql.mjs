@@ -8,8 +8,9 @@ dotenv.config({ path: '.env.local', quiet: true });
 const explicitSource = process.argv[2];
 const candidates = explicitSource
   ? [explicitSource]
-  : globSync('.wrangler/state/v3/d1/miniflare-D1DatabaseObject/*.sqlite')
-      .filter((path) => !path.endsWith('metadata.sqlite'));
+  : globSync(
+      '.wrangler/state/v3/d1/miniflare-D1DatabaseObject/*.sqlite',
+    ).filter((path) => !path.endsWith('metadata.sqlite'));
 
 if (candidates.length !== 1 || !existsSync(candidates[0]))
   throw Error(
@@ -22,14 +23,7 @@ if (!databaseUrl || !/^mysql:\/\//i.test(databaseUrl))
 
 const source = new DatabaseSync(candidates[0], { readOnly: true });
 const target = await mysql.createConnection(databaseUrl);
-const tableOrder = [
-  'products',
-  'prebuilts',
-  'metadata',
-  'tasks',
-  'conversations',
-  'task_history',
-];
+const tableOrder = ['products', 'prebuilts', 'metadata'];
 const sourceTables = new Set(
   source
     .prepare("SELECT name FROM sqlite_master WHERE type='table'")

@@ -51,7 +51,12 @@ export function editPlan(
     draft.partColors[category as Category] = color;
   }
   const requirements = completeRequirements(draft);
-  const candidate = assembleBuild(ids, requirements, catalog.parts);
+  const candidate = assembleBuild(
+    ids,
+    requirements,
+    catalog.parts,
+    catalog.prebuilts,
+  );
   const updated = auditDelivery(
     [{ ...candidate, id: plan.id }],
     requirements,

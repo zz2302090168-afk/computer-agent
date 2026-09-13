@@ -59,15 +59,17 @@ export const recommendPcTool: RegisteredTool = {
     context.catalog = await context.reloadCatalog();
     const plans = auditDelivery(explored, requirements, context.catalog);
     if (plans[0]) {
-      runtime.draft = applyDraft(
+      const nextDraft = applyDraft(
         runtime.draft,
         recordPlanSelections(plans[0], requirements),
       );
+      await context.onUpdate?.('parts', nextDraft, null);
+      runtime.draft = nextDraft;
+      runtime.result = null;
       requirements = completeRequirements(runtime.draft);
-      await context.onUpdate?.('parts', runtime.draft, null);
     }
     const primaryBudget = plans[0]?.budget;
-    runtime.result = {
+    const result: NonNullable<typeof runtime.result> = {
       requirements,
       plans,
       evidence: [],
@@ -94,11 +96,8 @@ export const recommendPcTool: RegisteredTool = {
           },
       modelStatus: '模型对话与工具调用',
     };
-    const version = await context.onUpdate?.(
-      'plan',
-      runtime.draft,
-      runtime.result,
-    );
+    const version = await context.onUpdate?.('plan', runtime.draft, result);
+    runtime.result = result;
     runtime.toolsUsed.push(
       '选配商品',
       ...(plans.some((plan) => plan.kind === 'diy') ? ['检查兼容性'] : []),

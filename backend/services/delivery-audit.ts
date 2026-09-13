@@ -47,7 +47,7 @@ export function auditDelivery(
       if (colorIssues.length) throw Error(colorIssues.join('；'));
       const fresh =
         plan.kind === 'diy'
-          ? assembleBuild(ids, requirements, catalog.parts)
+          ? assembleBuild(ids, requirements, catalog.parts, catalog.prebuilts)
           : selectPrebuilt(
               plan.id,
               requirements,

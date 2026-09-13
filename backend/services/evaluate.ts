@@ -1,23 +1,28 @@
 import type {
-  Part,
+  Catalog,
   PlanEvaluation,
   RecommendationResult,
+  Requirements,
 } from '../domain/types';
 import { replacePart } from './recommend';
 import { budgetRange } from '../rules/budget';
-import { retrieveKnowledge } from '../rag/retrieve';
+import { retrieveEvidence } from '../rag/evidence';
 import { resolvePlan } from './resolve-plan';
+import { auditDelivery } from './delivery-audit';
 
 export async function evaluatePlan(
   result: RecommendationResult,
-  catalog: Part[],
+  catalog: Catalog,
+  requirements: Requirements,
   options: { planId?: string; candidateProductId?: string; focus?: string },
   embeddingConfig: import('../rag/retrieve').EmbeddingConfig,
   signal?: AbortSignal,
 ): Promise<PlanEvaluation> {
-  const plan = resolvePlan(result, options.planId);
-  if (!plan.budget)
-    throw Error('当前方案缺少最新预算分类，请按当前数据库重新生成后再评估');
+  const plan = auditDelivery(
+    [resolvePlan(result, options.planId)],
+    requirements,
+    catalog,
+  )[0]!;
   const issues = [...plan.validation.issues],
     directions: string[] = [],
     suggestions: PlanEvaluation['suggestions'] = [];
@@ -26,13 +31,13 @@ export async function evaluatePlan(
       `先核实 ${issues.length} 项兼容性资料，未知项不能视为已经通过`,
     );
   const range = budgetRange(
-      result.requirements.budget,
-      result.requirements.hardCap,
+      requirements.budget,
+      requirements.hardCap,
       {
         minimum: plan.budget.minimumReference,
         high: plan.budget.highReference,
       },
-      result.requirements.budgetTolerance,
+      requirements.budgetTolerance,
     ),
     headroom = range.max - plan.total;
   if (headroom > 0)
@@ -40,7 +45,7 @@ export async function evaluatePlan(
       `当前距离允许上界还有 ¥${headroom}，调整仍须重新校验预算和兼容性`,
     );
   if (options.candidateProductId) {
-    const candidate = catalog.find(
+    const candidate = catalog.parts.find(
       (part) => part.id === options.candidateProductId,
     );
     if (!candidate) throw Error('比较商品不存在');
@@ -53,8 +58,9 @@ export async function evaluatePlan(
         plan,
         old.id,
         candidate.id,
-        result.requirements,
-        catalog,
+        requirements,
+        catalog.parts,
+        catalog.prebuilts,
       );
       reason =
         updated.budget.status === 'below_minimum_reference'
@@ -83,9 +89,9 @@ export async function evaluatePlan(
   if (!options.candidateProductId) {
     const candidates = plan.parts
       .flatMap((old) =>
-        result.requirements.partPreferences?.[old.category]
+        requirements.partPreferences?.[old.category]
           ? []
-          : catalog
+          : catalog.parts
               .filter(
                 (candidate) =>
                   candidate.category === old.category &&
@@ -101,7 +107,14 @@ export async function evaluatePlan(
       .sort((a, b) => a.saving - b.saving);
     for (const { old, candidate, saving } of candidates) {
       try {
-        replacePart(plan, old.id, candidate.id, result.requirements, catalog);
+        replacePart(
+          plan,
+          old.id,
+          candidate.id,
+          requirements,
+          catalog.parts,
+          catalog.prebuilts,
+        );
         suggestions.push({
           id: `replace:${plan.id}:${old.id}:${candidate.id}`,
           planId: plan.id,
@@ -131,14 +144,14 @@ export async function evaluatePlan(
     issues,
     directions,
     suggestions,
-    evidence: await retrieveKnowledge(
+    ...(await retrieveEvidence(
       embeddingConfig,
-      `${options.focus ?? ''} ${result.requirements.purpose} 兼容 预算`,
+      `${options.focus ?? ''} ${requirements.purpose} 兼容 预算`,
       4,
       'sales',
       undefined,
       signal,
-    ),
+    )),
     createdAt: Date.now(),
   };
 }

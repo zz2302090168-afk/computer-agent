@@ -15,6 +15,9 @@ const recommendationFields: (keyof Requirements)[] = [
   'brandPreferences',
   'partPreferences',
   'seriesPreferences',
+  'excludedModels',
+  'excludedBrands',
+  'excludedColors',
   'selectionAuthorizations',
   'selectionAuthorizationMessageIds',
   'preferCheaper',
@@ -43,6 +46,41 @@ export function applyDraft(
         throw Error('配件颜色类别或颜色无效');
       if (color) next.partColors[category as Category] = color;
       else delete next.partColors[category as Category];
+    }
+  }
+  const exclusions = (value: unknown): string[] => {
+    if (
+      !Array.isArray(value) ||
+      value.some(
+        (item) => typeof item !== 'string' || !item.trim() || item.length > 100,
+      )
+    )
+      throw Error('排除条件必须是非空名称数组');
+    return [...new Set(value.map((item: string) => item.trim()))];
+  };
+  if ('excludedColors' in patch)
+    next.excludedColors = exclusions(patch.excludedColors);
+  for (const field of ['excludedModels', 'excludedBrands'] as const) {
+    if (!(field in patch)) continue;
+    const values = patch[field];
+    if (!values || typeof values !== 'object' || Array.isArray(values))
+      throw Error('排除条件类别无效');
+    next[field] = { ...next[field] };
+    for (const [category, value] of Object.entries(values)) {
+      if (
+        ![
+          'cpu',
+          'gpu',
+          'memory',
+          'motherboard',
+          'psu',
+          'case',
+          'storage',
+          'cooler',
+        ].includes(category)
+      )
+        throw Error('排除条件类别无效');
+      next[field]![category as Category] = exclusions(value);
     }
   }
   if ('budget' in patch) {
@@ -210,22 +248,34 @@ export function applyDraft(
       next.partSelections[key as Category] = value;
     }
   }
+  if (
+    next.budget !== draft.budget ||
+    next.budgetTolerance !== draft.budgetTolerance
+  ) {
+    delete next.zeroBudgetPromptMessageId;
+    delete next.zeroBudgetConfirmed;
+  }
   return next;
 }
 
 export function changesRecommendation(before: Draft, after: Draft) {
-  // 只要影响选型的事实改变，持久化层就应清空旧方案并等待重新校验。
+  // 只要影响选型的事实改变，临时状态就应清空旧方案并等待重新校验。
   return recommendationFields.some(
     (key) => JSON.stringify(before[key]) !== JSON.stringify(after[key]),
   );
 }
 
 export function completeRequirements(draft: Draft): Requirements {
+  if (draft.budgetTolerance === 0 && !draft.zeroBudgetConfirmed)
+    throw Error('零误差可能找不到匹配配置，请先询问用户是否坚持并等待确认');
   if (!draft.budget || !draft.purpose)
     throw Error('还需要主机预算和主要用途，请先询问用户。');
   return {
     budget: draft.budget,
-    budgetTolerance: draft.budgetTolerance,
+    budgetTolerance:
+      draft.budgetTolerance === undefined
+        ? undefined
+        : validateTolerance(draft.budgetTolerance),
     partColors: draft.partColors ?? {},
     purpose: draft.purpose,
     hardCap: draft.hardCap ?? false,
@@ -237,6 +287,9 @@ export function completeRequirements(draft: Draft): Requirements {
     brandPreferences: draft.brandPreferences ?? {},
     partPreferences: draft.partPreferences ?? {},
     seriesPreferences: draft.seriesPreferences ?? {},
+    excludedModels: draft.excludedModels ?? {},
+    excludedBrands: draft.excludedBrands ?? {},
+    excludedColors: draft.excludedColors ?? [],
     selectionAuthorizations: draft.selectionAuthorizations ?? {},
     selectionAuthorizationMessageIds:
       draft.selectionAuthorizationMessageIds ?? {},

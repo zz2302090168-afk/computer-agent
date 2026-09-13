@@ -6,6 +6,24 @@
   background: #f8fafc;
 }
 
+.catalog-inquiry {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  border: 1px solid #bae6fd;
+  border-radius: 8px;
+  background: #f0f9ff;
+}
+.catalog-inquiry div { min-width: 0; }
+.catalog-inquiry span { display: block; color: #475569; font-size: 12px; }
+.catalog-inquiry strong { display: block; color: #075985; font-size: 14px; overflow-wrap: anywhere; }
+.catalog-inquiry button { min-height: 44px; flex-shrink: 0; }
+.bubble a { color: #0369a1; text-decoration: underline; text-underline-offset: 3px; }
+.bubble a:focus-visible { outline: 2px solid #0369a1; outline-offset: 3px; }
+
 .chat-app > header {
   height: 66px;
   flex: 0 0 auto;

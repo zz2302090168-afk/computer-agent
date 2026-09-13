@@ -358,5 +358,59 @@
       "real-cooler-13"
     ],
     "demo": false
+  },
+  {
+    "id": "demo-20260912-pc-intel-entry",
+    "name": "Intel 入门演示组合（非商家组装实物）",
+    "brand": "目录演示组合",
+    "color": "黑色",
+    "price": 5999,
+    "partIds": ["demo-20260912-cpu-i3-12100f", "demo-20260912-gpu-asus-4060", "demo-20260912-ram-corsair-d4-16", "demo-20260912-mb-asus-b760m-d4", "demo-20260912-psu-seasonic-650", "demo-20260912-case-corsair-4000d", "demo-20260912-ssd-wd-sn580-1t", "demo-20260912-cooler-cm-212-black"],
+    "demo": true
+  },
+  {
+    "id": "demo-20260912-pc-intel-mid",
+    "name": "Intel 中端演示组合（非商家组装实物）",
+    "brand": "目录演示组合",
+    "color": "黑色",
+    "price": 11999,
+    "partIds": ["demo-20260912-cpu-i5-14600k", "demo-20260912-gpu-gb-4070s", "demo-20260912-ram-gskill-d5-32", "demo-20260912-mb-asus-z790-p", "demo-20260912-psu-seasonic-850", "demo-20260912-case-nzxt-h5", "demo-20260912-ssd-wd-sn850x-2t", "demo-20260912-cooler-arctic-36"],
+    "demo": true
+  },
+  {
+    "id": "demo-20260912-pc-intel-high",
+    "name": "Intel 高端演示组合（非商家组装实物）",
+    "brand": "目录演示组合",
+    "color": "黑色",
+    "price": 17299,
+    "partIds": ["demo-20260912-cpu-ultra9-285k", "demo-20260912-gpu-sapphire-7800xt", "demo-20260912-ram-corsair-d5-64", "demo-20260912-mb-gb-z890-aorus", "demo-20260912-psu-bequiet-1000", "demo-20260912-case-fractal-north", "demo-20260912-ssd-kingston-kc3000-4t", "demo-20260912-cooler-arctic-36"],
+    "demo": true
+  },
+  {
+    "id": "demo-20260912-pc-amd-entry",
+    "name": "AMD 入门演示组合（非商家组装实物）",
+    "brand": "目录演示组合",
+    "color": "黑色",
+    "price": 4199,
+    "partIds": ["real-cpu-0", "real-gpu-0", "real-memory-0", "real-motherboard-0", "real-psu-5", "real-case-4", "real-storage-2", "real-cooler-8"],
+    "demo": true
+  },
+  {
+    "id": "demo-20260912-pc-amd-mid",
+    "name": "AMD 中端演示组合（非商家组装实物）",
+    "brand": "目录演示组合",
+    "color": "黑色",
+    "price": 8999,
+    "partIds": ["real-cpu-11", "real-gpu-6", "real-memory-13", "real-motherboard-7", "real-psu-6", "real-case-4", "real-storage-11", "real-cooler-10"],
+    "demo": true
+  },
+  {
+    "id": "demo-20260912-pc-amd-high",
+    "name": "AMD 高端演示组合（非商家组装实物）",
+    "brand": "目录演示组合",
+    "color": "黑色",
+    "price": 27999,
+    "partIds": ["real-cpu-16", "real-gpu-16", "real-memory-14", "real-motherboard-7", "real-psu-8", "real-case-4", "real-storage-13", "real-cooler-12"],
+    "demo": true
   }
 ]

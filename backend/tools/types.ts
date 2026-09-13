@@ -32,8 +32,66 @@ export const categoryStringsSchema = () =>
     ),
   );
 
+export const requestToolActions = [
+  'search_catalog',
+  'select_plan',
+  'confirm_selections',
+  'replace_parts',
+  'apply_suggestion',
+  'explain_selection',
+  'evaluate_plan',
+  'find_replacements',
+  'retrieve_knowledge',
+  'recommend_monitor',
+  'update_support',
+] as const;
+
+export const supportActions = [
+  'continue',
+  'new_issue',
+  'stop',
+  'resolved',
+  'handoff',
+] as const;
+export type SupportAction = (typeof supportActions)[number];
+
 export type ToolRuntime = {
-  supportKnowledgeIds?: Set<string>;
+  otherTopic?: 'support' | 'general';
+  consultPrebuiltId?: string;
+  consultPrebuiltQueried?: boolean;
+  requestAction?:
+    | 'pending'
+    | 'recommend'
+    | 'clarify'
+    | 'save_requirements'
+    | 'other'
+    | (typeof requestToolActions)[number];
+  supportRequest?: {
+    action: SupportAction;
+    sourceMessageId: string;
+    taskId: string;
+  };
+  requirementsTaskId?: string;
+  configurationTaskId?: string;
+  knowledgeUnavailable?: boolean;
+  pendingEvaluation?: { planIds: string[] };
+  supportEvidence?: Map<
+    string,
+    { taskId: string; messageId: string; source: 'embedding' | 'local' }
+  >;
+  supportRetrieval?: {
+    taskId: string;
+    messageId: string;
+    status: 'available' | 'empty' | 'failed' | 'stopped';
+    source: 'embedding' | 'local' | 'none';
+  };
+  supportDelivery?: {
+    taskId: string;
+    messageId: string;
+    action: SupportAction;
+    knowledgeId?: string;
+    questionId?: import('../support/reply').SupportQuestionId;
+  };
   localEdit?: boolean;
   draft: Draft;
   result: RecommendationResult | null;
@@ -59,6 +117,7 @@ export type ToolMessage = {
   id?: string;
   role: 'user' | 'assistant';
   content: string;
+  consultPrebuiltId?: string;
   taskId?: string;
   replacementQueries?: import('../agent/chat-model').ModelMessage[];
 };
@@ -85,7 +144,14 @@ export type ToolContext = {
   catalog: Catalog;
   reloadCatalog: () => Promise<Catalog>;
   onUpdate?: (
-    type: 'requirements' | 'parts' | 'plan' | 'evaluation' | 'task' | 'support',
+    type:
+      | 'requirements'
+      | 'parts'
+      | 'plan'
+      | 'evaluation'
+      | 'task'
+      | 'support'
+      | 'monitor',
     draft: Draft,
     result: RecommendationResult | null,
   ) => Promise<number>;

@@ -50,3 +50,11 @@ next-env.d.ts
 # Python generated caches
 __pycache__/
 *.py[cod]
+
+# backend diagnostic traces
+/logs/
+
+# private interview materials and Office lock files
+/docs/*面试*
+/docs/~$*
+/scripts/build_resume_pdf.py

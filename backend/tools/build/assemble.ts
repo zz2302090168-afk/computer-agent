@@ -48,6 +48,7 @@ export const assembleBuildTool: RegisteredTool = {
         input.productIds,
         requirements,
         context.catalog.parts,
+        context.catalog.prebuilts,
       );
     } catch (cause) {
       const ids = input.productIds as string[];

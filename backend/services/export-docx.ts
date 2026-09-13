@@ -15,6 +15,7 @@ import {
   WidthType,
 } from 'docx';
 import type { Plan, Requirements } from '../domain/types';
+import { requiredPartColor } from '../rules/color';
 
 const border = { style: BorderStyle.SINGLE, size: 1, color: 'D9D9D9' };
 const cellBorders = {
@@ -74,8 +75,19 @@ function compatibilityLabel(plan: Plan) {
   return '存在购买与装机前待核对项目';
 }
 
+function colorSummary(plan: Plan, requirements: Requirements) {
+  const overrides = plan.parts.flatMap((part) => {
+    const color = requiredPartColor(part, requirements);
+    return color && color !== requirements.color
+      ? [`${part.categoryLabel} ${color}`]
+      : [];
+  });
+  return `默认配色：${requirements.color}${overrides.length ? `；单件覆盖：${overrides.join('、')}（优先于默认配色）` : ''}`;
+}
+
 export async function buildPlanDocx(plan: Plan, requirements: Requirements) {
   const difference = plan.total - requirements.budget;
+  const hasDemoParts = plan.parts.some((part) => part.demo);
   const children = [
     new Paragraph({
       text: '电脑配置方案',
@@ -86,7 +98,7 @@ export async function buildPlanDocx(plan: Plan, requirements: Requirements) {
     new Paragraph({
       children: [
         new TextRun({
-          text: `本文件记录“${plan.tier ?? plan.name}”的当前商品、价格、预算及兼容性结果。方案总价为 ${money(plan.total)}。`,
+          text: `本文件记录“${plan.tier ?? plan.name}”的当前商品、价格、预算及兼容性结果。方案总价为 ${money(plan.total)}。${hasDemoParts ? '标注“演示型号”的配件仅用于演示，不代表真实商品报价。' : plan.demo ? '本方案含演示商品，方案名称和总价仅供演示。' : ''}`,
         }),
       ],
       spacing: { after: 240, line: 320 },
@@ -111,7 +123,7 @@ export async function buildPlanDocx(plan: Plan, requirements: Requirements) {
             ? `${requirements.purpose}（${requirements.game}）`
             : requirements.purpose,
         ),
-        factRow('配色要求', requirements.color, true),
+        factRow('配色要求', colorSummary(plan, requirements), true),
         factRow('主机预算', money(requirements.budget)),
         factRow('方案总价', money(plan.total)),
         factRow(
@@ -152,9 +164,13 @@ export async function buildPlanDocx(plan: Plan, requirements: Requirements) {
                   shade: index % 2 === 1,
                   align: AlignmentType.CENTER,
                 }),
-                cell(`${part.brand} ${part.name}`, 52, {
-                  shade: index % 2 === 1,
-                }),
+                cell(
+                  `${part.brand} ${part.name}（${part.demo ? '演示型号' : '真实商品'}）`,
+                  52,
+                  {
+                    shade: index % 2 === 1,
+                  },
+                ),
                 cell(part.color, 14, {
                   shade: index % 2 === 1,
                   align: AlignmentType.CENTER,

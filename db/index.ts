@@ -17,11 +17,15 @@ type SqlParameter =
   | Uint8Array;
 
 export class PreparedQuery {
-  constructor(
-    private readonly executor: Executor,
-    readonly sql: string,
-    readonly params: SqlParameter[] = [],
-  ) {}
+  private readonly executor: Executor;
+  readonly sql: string;
+  readonly params: SqlParameter[];
+
+  constructor(executor: Executor, sql: string, params: SqlParameter[] = []) {
+    this.executor = executor;
+    this.sql = sql;
+    this.params = params;
+  }
 
   bind(...params: SqlParameter[]) {
     return new PreparedQuery(this.executor, this.sql, params);
@@ -53,7 +57,11 @@ export class PreparedQuery {
 }
 
 export class MySqlDatabase {
-  constructor(private readonly executor: Executor) {}
+  private readonly executor: Executor;
+
+  constructor(executor: Executor) {
+    this.executor = executor;
+  }
 
   prepare(sql: string) {
     return new PreparedQuery(this.executor, sql);
@@ -102,7 +110,8 @@ const globalForMysql = globalThis as typeof globalThis & { mysqlPool?: Pool };
 function connectionUrl() {
   const url = process.env.DATABASE_URL?.trim();
   if (!url) throw Error('MySQL 未配置，请在 .env.local 设置 DATABASE_URL');
-  if (!/^mysql:\/\//i.test(url)) throw Error('DATABASE_URL 必须是 mysql:// 地址');
+  if (!/^mysql:\/\//i.test(url))
+    throw Error('DATABASE_URL 必须是 mysql:// 地址');
   return url;
 }
 
@@ -115,7 +124,7 @@ export function database() {
       charset: 'utf8mb4',
       enableKeepAlive: true,
     });
-  if (process.env.NODE_ENV !== 'production') globalForMysql.mysqlPool = pool;
+  globalForMysql.mysqlPool = pool;
   return new MySqlDatabase(pool);
 }
 

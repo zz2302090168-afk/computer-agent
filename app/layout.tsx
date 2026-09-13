@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
+import WorkspaceLayout from '@/frontend/workspace-layout';
 import './globals.css';
 import './product.css';
 import './chat.css';
@@ -17,7 +19,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-CN">
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <Suspense fallback={children}>
+          <WorkspaceLayout>{children}</WorkspaceLayout>
+        </Suspense>
+      </body>
     </html>
   );
 }

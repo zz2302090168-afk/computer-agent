@@ -31,13 +31,15 @@ export async function saveSelectedPlan(
     completeRequirements(runtime.draft),
     context.catalog,
   )[0]!;
-  runtime.draft = applyDraft(
+  const nextDraft = applyDraft(
     runtime.draft,
     recordPlanSelections(plan, requirements),
   );
-  // 配件事实先独立持久化；即使之后方案事件中断，已成功选中的数据库商品仍可恢复。
-  await context.onUpdate?.('parts', runtime.draft, null);
-  runtime.result = {
+  // 配件事实先写入本次对话的临时状态；后续方案事件中断时仍可在当前页面继续。
+  await context.onUpdate?.('parts', nextDraft, null);
+  runtime.draft = nextDraft;
+  runtime.result = null;
+  const result: NonNullable<ToolRuntime['result']> = {
     requirements: {
       ...requirements,
       partSelections: runtime.draft.partSelections,
@@ -55,11 +57,8 @@ export async function saveSelectedPlan(
     },
     modelStatus: '模型对话与工具调用',
   };
-  const version = await context.onUpdate?.(
-    'plan',
-    runtime.draft,
-    runtime.result,
-  );
+  const version = await context.onUpdate?.('plan', runtime.draft, result);
+  runtime.result = result;
   runtime.toolsUsed.push(
     '自主选型',
     '读取数据库',

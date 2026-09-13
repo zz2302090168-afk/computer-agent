@@ -1,4 +1,6 @@
 import { evaluatePlan } from '../../services/evaluate';
+import { resolvePlan } from '../../services/resolve-plan';
+import { completeRequirements } from '../../agent/conversation-state';
 import {
   objectSchema,
   parseObject,
@@ -27,16 +29,32 @@ export const evaluatePlanTool: RegisteredTool = {
       if (input[key] !== undefined && typeof input[key] !== 'string')
         throw Error(`${key} 必须是字符串`);
     if (!runtime.result) throw Error('当前任务没有可评估方案');
+    runtime.readOnlyEvaluationTurn = true;
+    if (
+      !input.planId &&
+      !runtime.result.selection &&
+      runtime.result.plans.length > 1
+    ) {
+      runtime.pendingEvaluation = {
+        planIds: runtime.result.plans.map((plan) => plan.id),
+      };
+      resolvePlan(runtime.result);
+    }
     context.catalog = await context.reloadCatalog();
     const evaluation = await evaluatePlan(
       runtime.result,
-      context.catalog.parts,
+      context.catalog,
+      completeRequirements(runtime.draft),
       input as { planId?: string; candidateProductId?: string; focus?: string },
       context.embeddingConfig ?? {},
       context.signal,
     );
-    runtime.result = { ...runtime.result, evaluation };
-    await context.onUpdate?.('evaluation', runtime.draft, runtime.result);
+    const result = { ...runtime.result, evaluation };
+    await context.onUpdate?.('evaluation', runtime.draft, result);
+    runtime.result = result;
+    runtime.knowledgeUnavailable ||=
+      evaluation.knowledgeStatus === 'unavailable';
+    runtime.pendingEvaluation = undefined;
     runtime.toolsUsed.push('评估方案');
     return evaluation;
   },

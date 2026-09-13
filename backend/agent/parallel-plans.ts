@@ -13,6 +13,8 @@ import {
   type ToolRuntime,
 } from '../tools/types';
 
+const BRANCH_SELECTION_TIMEOUT_MS = 75_000;
+
 const signature = (plan: Plan) =>
   plan.kind === 'prebuilt'
     ? `prebuilt:${plan.id}`
@@ -80,6 +82,10 @@ export async function exploreParallelPlans(
     branches.map(async ({ seed, tier, min, max, target }, index) => {
       const scope = `plan-${index}`,
         label = tier ?? '候选方案';
+      const selectionSignal = AbortSignal.any([
+        ...(context.signal ? [context.signal] : []),
+        AbortSignal.timeout(BRANCH_SELECTION_TIMEOUT_MS),
+      ]);
       const progress = (
         text: string,
         status: 'running' | 'done' | 'error' = 'running',
@@ -136,6 +142,7 @@ export async function exploreParallelPlans(
       };
       const branchContext: ToolContext = {
         ...context,
+        signal: selectionSignal,
         onUpdate: undefined,
         onProgress: undefined,
       };
@@ -168,14 +175,14 @@ export async function exploreParallelPlans(
           return await finish(seed);
         }
         for (let round = 0; round < 6; round++) {
-          context.signal?.throwIfAborted();
+          selectionSignal.throwIfAborted();
           progress(round ? '根据查询与审核结果继续选型' : '分析数据库候选');
           const response = await chatCompletion(
             context.modelConfig,
             messages,
             allowed.map((tool) => tool.definition),
             'required',
-            context.signal,
+            selectionSignal,
           );
           messages.push(response);
           if (!response.tool_calls?.length) {
@@ -188,7 +195,7 @@ export async function exploreParallelPlans(
           for (const [callIndex, call] of response.tool_calls.entries()) {
             let output: unknown;
             try {
-              context.signal?.throwIfAborted();
+              selectionSignal.throwIfAborted();
               if (callIndex >= 8) throw Error('单轮最多执行八次调用');
               const tool = allowed.find(
                 (item) => item.definition.function.name === call.function.name,
@@ -231,7 +238,7 @@ export async function exploreParallelPlans(
                 return await finish(plan);
               }
             } catch (cause) {
-              context.signal?.throwIfAborted();
+              selectionSignal.throwIfAborted();
               output = {
                 error: cause instanceof Error ? cause.message : '候选执行失败',
                 observation:
@@ -258,7 +265,7 @@ export async function exploreParallelPlans(
         }
       } catch {
         context.signal?.throwIfAborted();
-        progress('选型暂时中断，审核已有搜索候选', 'running', 'audit');
+        progress('选型超时或中断，立即审核已有候选', 'running', 'audit');
       }
       if (submitted.has(signature(seed))) {
         progress('原始候选已提交失败，不再重复审核', 'error', 'audit');
@@ -273,9 +280,11 @@ export async function exploreParallelPlans(
       }
     }),
   );
-  const failure = outcomes.find((outcome) => outcome.status === 'rejected');
-  if (failure?.status === 'rejected') throw failure.reason;
-  return outcomes.flatMap((outcome) =>
+  const completed = outcomes.flatMap((outcome) =>
     outcome.status === 'fulfilled' ? [outcome.value] : [],
   );
+  if (completed.length) return completed;
+  const failure = outcomes.find((outcome) => outcome.status === 'rejected');
+  if (failure?.status === 'rejected') throw failure.reason;
+  return [];
 }

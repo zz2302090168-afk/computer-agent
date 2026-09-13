@@ -13,8 +13,7 @@ export function assertSameOrigin(request: Request) {
         .trim()
         .toLowerCase(),
       protocol = (
-        request.headers.get('x-forwarded-proto') ??
-        requestUrl.protocol
+        request.headers.get('x-forwarded-proto') ?? requestUrl.protocol
       )
         .split(',')[0]
         .trim()
@@ -35,26 +34,21 @@ export async function readJson(request: Request) {
   return JSON.parse(text);
 }
 export function sessionId(request: Request) {
-  const value = request.headers
-    .get('cookie')
-    ?.match(/(?:^|;\s*)pc_session=([a-f0-9-]{36})(?:;|$)/)?.[1];
-  return value || crypto.randomUUID();
+  const value = request.headers.get('x-page-session');
+  if (
+    !value ||
+    !/^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i.test(
+      value,
+    )
+  )
+    throw Error('当前页面会话无效，请重新开始对话');
+  return value;
 }
-export function json(
-  data: unknown,
-  status = 200,
-  session?: string,
-  secure = false,
-) {
+export function json(data: unknown, status = 200) {
   return Response.json(data, {
     status,
     headers: {
       'Cache-Control': 'no-store',
-      ...(session
-        ? {
-            'Set-Cookie': `pc_session=${session}; Path=/; HttpOnly; SameSite=Strict; Max-Age=2592000${secure ? '; Secure' : ''}`,
-          }
-        : {}),
     },
   });
 }

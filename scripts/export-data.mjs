@@ -11,4 +11,6 @@ for (const k of knowledge) {
     `# ${k.title}\n\n知识ID: ${k.id}\n核对日期: ${k.checkedAt}\n类型: ${k.kind}\n\n${k.content}\n\n来源: ${k.source ?? '本项目设计策略，不作为厂家规格或实测依据'}\n`,
   );
 }
-console.log('已导出 160 个配件、20 台整机、10 篇知识文档。');
+console.log(
+  `已导出 ${parts.length} 个配件、${prebuilts.length} 台整机、${knowledge.length} 篇知识文档。`,
+);

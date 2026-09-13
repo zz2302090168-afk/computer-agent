@@ -54,6 +54,7 @@ export const applySuggestionTool: RegisteredTool = {
         suggestion.candidateProductId,
         requirements,
         context.catalog.parts,
+        context.catalog.prebuilts,
       ),
       updated = auditDelivery([candidate], requirements, context.catalog)[0]!,
       category = suggestion.category;

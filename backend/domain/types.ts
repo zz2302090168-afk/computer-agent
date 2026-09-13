@@ -29,6 +29,41 @@ export type Prebuilt = {
   partIds: string[];
   demo: boolean;
 };
+export type MonitorResolution = '1080p' | '1440p' | '4K';
+export type MonitorPanel = 'IPS' | 'VA' | 'OLED' | 'MiniLED';
+export type MonitorPurpose = '办公' | '游戏' | '剪辑设计' | '综合';
+export type MonitorSpecs = {
+  resolution: MonitorResolution;
+  panel: MonitorPanel;
+  refreshRate: number;
+  refreshRateNote?: string;
+  size: number;
+  source?: string;
+  checkedAt?: string;
+  priceBasis?: 'merchant-authored';
+};
+export type Monitor = {
+  id: string;
+  brand: string;
+  name: string;
+  price: number;
+  specs: MonitorSpecs;
+  demo: boolean;
+};
+export type MonitorCriteria = {
+  budget?: number;
+  resolution?: MonitorResolution;
+  panel?: MonitorPanel;
+  minRefreshRate?: number;
+  purpose?: MonitorPurpose;
+};
+export type MonitorRecommendation = {
+  criteria: MonitorCriteria;
+  catalogTotal: number;
+  total: number;
+  monitors: Monitor[];
+  note: string;
+};
 export type Requirements = {
   budgetTolerance?: number;
   partColors?: Partial<Record<Category, string>>;
@@ -43,6 +78,9 @@ export type Requirements = {
   brandPreferences?: Partial<Record<Category, string>>;
   partPreferences?: Partial<Record<Category, string>>;
   seriesPreferences?: Partial<Record<Category, string>>;
+  excludedModels?: Partial<Record<Category, string[]>>;
+  excludedBrands?: Partial<Record<Category, string[]>>;
+  excludedColors?: string[];
   selectionAuthorizations?: Partial<Record<Category, string>>;
   selectionAuthorizationMessageIds?: Partial<Record<Category, string>>;
   selectionSources?: Partial<
@@ -75,6 +113,8 @@ export type Plan = {
   tier?: '方案一' | '方案二' | '方案三' | '低价方案' | '均衡方案' | '高价方案';
   id: string;
   kind: 'diy' | 'prebuilt';
+  // 整机自身或任一构成配件为演示商品；旧方案在交付审核时补齐。
+  demo?: boolean;
   name: string;
   parts: Part[];
   total: number;
@@ -92,6 +132,7 @@ export type Evidence = {
   checkedAt: string | null;
 };
 export type RecommendationResult = {
+  monitorRecommendation?: MonitorRecommendation;
   selection?: {
     planId: string;
     status: 'selected' | 'confirmed';
@@ -129,6 +170,8 @@ export type PlanSuggestion = {
   reason?: string;
 };
 export type PlanEvaluation = {
+  knowledgeStatus?: 'available' | 'unavailable';
+  knowledgeNotice?: string;
   planId: string;
   issues: string[];
   directions: string[];
@@ -137,13 +180,19 @@ export type PlanEvaluation = {
   createdAt: number;
 };
 export type Catalog = { parts: Part[]; prebuilts: Prebuilt[] };
+export type MonitorCatalog = { monitors: Monitor[] };
 export type SupportCase = {
   status: 'active' | 'stopped' | 'resolved' | 'handoff_requested';
+  selfServiceStopped?: true;
   symptom: string;
   currentStepId?: string;
   history: { messageId: string; report: string; stepId?: string }[];
 };
-export type TaskDraft = Partial<Requirements> & { support?: SupportCase };
+export type TaskDraft = Partial<Requirements> & {
+  support?: SupportCase;
+  zeroBudgetPromptMessageId?: string;
+  zeroBudgetConfirmed?: boolean;
+};
 export type PcTask = {
   id: string;
   name: string;

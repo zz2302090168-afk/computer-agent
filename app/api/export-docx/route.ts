@@ -1,10 +1,11 @@
 import { readJson, sessionId, json } from '@/backend/api/http';
 import { completeRequirements } from '@/backend/agent/conversation-state';
 import { loadCatalog } from '@/backend/db/catalog';
-import { ensureWorkspace } from '@/backend/db/tasks';
+import { readPageSession } from '@/backend/session/page-session';
 import { auditDelivery } from '@/backend/services/delivery-audit';
 import { buildPlanDocx } from '@/backend/services/export-docx';
 import { resolvePlan } from '@/backend/services/resolve-plan';
+import { assertPlanActionTask } from '@/backend/api/plan-actions';
 
 export const runtime = 'nodejs';
 
@@ -13,9 +14,8 @@ export async function POST(request: Request) {
     const input = await readJson(request);
     if (typeof input.planId !== 'string' || !input.planId.trim())
       throw Error('导出方案参数无效');
-    const { task } = await ensureWorkspace(sessionId(request));
-    if (input.taskId !== undefined && input.taskId !== task.id)
-      throw Error('当前任务已切换，请刷新后重试');
+    const { task } = readPageSession(sessionId(request));
+    assertPlanActionTask(input, task);
     const requirements = completeRequirements(task.draft);
     const selected = resolvePlan(task.result, input.planId);
     const plan = auditDelivery(

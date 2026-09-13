@@ -59,9 +59,10 @@ export const authorizeSelectionTool: RegisteredTool = {
       };
     if (input.scopeType === 'series')
       patch.seriesPreferences = { [category]: scope };
-    runtime.draft = clearComputedSelection(applyDraft(runtime.draft, patch));
+    const nextDraft = clearComputedSelection(applyDraft(runtime.draft, patch));
+    await context.onUpdate?.('requirements', nextDraft, null);
+    runtime.draft = nextDraft;
     runtime.result = null;
-    await context.onUpdate?.('requirements', runtime.draft, null);
     runtime.toolsUsed.push('记录选择授权');
     return { category, scope, sourceMessageId: input.sourceMessageId };
   },

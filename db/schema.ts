@@ -1,13 +1,4 @@
-import {
-  mysqlTable,
-  varchar,
-  text,
-  longtext,
-  int,
-  bigint,
-  index,
-  uniqueIndex,
-} from 'drizzle-orm/mysql-core';
+import { mysqlTable, varchar, text, int, index } from 'drizzle-orm/mysql-core';
 export const products = mysqlTable(
   'products',
   {
@@ -31,40 +22,20 @@ export const prebuilts = mysqlTable('prebuilts', {
   partIds: text('part_ids').notNull(),
   demo: int('demo').notNull().default(1),
 });
+// 显示器是主机配置完成后独立推荐的外设，不混入八类 DIY 配件。
+export const monitors = mysqlTable(
+  'monitors',
+  {
+    id: varchar('id', { length: 191 }).primaryKey(),
+    brand: varchar('brand', { length: 191 }).notNull(),
+    name: varchar('name', { length: 255 }).notNull(),
+    price: int('price').notNull(),
+    specs: text('specs').notNull(),
+    demo: int('demo').notNull().default(1),
+  },
+  (t) => [index('idx_monitors_price').on(t.price)],
+);
 export const metadata = mysqlTable('metadata', {
   key: varchar('key', { length: 191 }).primaryKey(),
   value: text('value').notNull(),
 });
-export const conversations = mysqlTable('conversations', {
-  id: varchar('id', { length: 191 }).primaryKey(),
-  draft: longtext('draft').notNull(),
-  messages: longtext('messages').notNull(),
-  currentTaskId: varchar('current_task_id', { length: 191 }),
-  updatedAt: bigint('updated_at', { mode: 'number' }).notNull(),
-});
-export const tasks = mysqlTable('tasks', {
-  id: varchar('id', { length: 191 }).primaryKey(),
-  sessionId: varchar('session_id', { length: 191 }).notNull(),
-  name: varchar('name', { length: 255 }).notNull(),
-  draft: longtext('draft').notNull(),
-  result: longtext('result'),
-  issues: longtext('issues').notNull(),
-  version: int('version').notNull(),
-  updatedAt: bigint('updated_at', { mode: 'number' }).notNull(),
-});
-export const taskHistory = mysqlTable(
-  'task_history',
-  {
-    id: varchar('id', { length: 191 }).primaryKey(),
-    taskId: varchar('task_id', { length: 191 })
-      .notNull()
-      .references(() => tasks.id, { onDelete: 'cascade' }),
-    operationId: varchar('operation_id', { length: 191 }).notNull(),
-    sourceVersion: int('source_version').notNull(),
-    snapshot: longtext('snapshot').notNull(),
-  },
-  (t) => [
-    uniqueIndex('idx_task_history_operation').on(t.taskId, t.operationId),
-    index('idx_task_history_version').on(t.taskId, t.sourceVersion),
-  ],
-);

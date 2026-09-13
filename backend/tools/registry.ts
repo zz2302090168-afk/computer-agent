@@ -1,3 +1,4 @@
+import { traceOperation } from '../diagnostics/chat-trace';
 import type { ToolDefinition } from '../agent/chat-model';
 import {
   applySuggestionTool,
@@ -12,33 +13,30 @@ import {
   findReplacementsTool,
 } from './build';
 import { searchCatalogTool } from './catalog';
+import { recommendMonitorTool } from './monitor';
 import { retrieveKnowledgeTool } from './knowledge';
-import { updateSupportTool } from './support';
+import { isSelfServiceStopped, updateSupportTool } from './support';
 import {
   authorizeSelectionTool,
   confirmSelectionsTool,
   updateRequirementsTool,
 } from './requirements';
-import {
-  createTaskTool,
-  resetCurrentTaskTool,
-  switchTaskTool,
-  undoLastChangeTool,
-} from './tasks';
 import type { RegisteredTool, ToolContext, ToolRuntime } from './types';
 import { MAX_CANDIDATE_ATTEMPTS, ToolExecutionError } from './types';
+import { setRequestActionTool } from './requirements/action';
 
 export const registeredTools = [
+  setRequestActionTool,
   updateSupportTool,
   selectPlanTool,
   findReplacementsTool,
   explainSelectionTool,
   replacePartsTool,
-  undoLastChangeTool,
   updateRequirementsTool,
   authorizeSelectionTool,
   confirmSelectionsTool,
   recommendPcTool,
+  recommendMonitorTool,
   searchCatalogTool,
   assembleBuildTool,
   selectPrebuiltTool,
@@ -46,9 +44,6 @@ export const registeredTools = [
   retrieveKnowledgeTool,
   evaluatePlanTool,
   applySuggestionTool,
-  createTaskTool,
-  switchTaskTool,
-  resetCurrentTaskTool,
 ] as const;
 
 // 注册表是工具名称到执行入口的唯一映射，启动和测试时都能发现重名。
@@ -63,28 +58,63 @@ export function createToolRegistry(tools: readonly RegisteredTool[]) {
 
 const registry = createToolRegistry(registeredTools);
 const stateChangingTools = new Set([
+  'recommend_monitor',
   'apply_suggestion',
   'assemble_build',
   'authorize_selection',
   'confirm_selections',
-  'create_task',
   'recommend_pc',
   'replace_parts',
-  'reset_current_task',
   'select_plan',
   'select_prebuilt',
-  'switch_task',
-  'undo_last_change',
   'update_requirements',
   'update_support',
 ]);
 const preservesConfigurationOnFailure = new Set([
+  'confirm_selections',
+  'apply_suggestion',
   'replace_parts',
-  'undo_last_change',
   'explain_selection',
+  'evaluate_plan',
   'select_plan',
   'find_replacements',
 ]);
+
+const catalogReadTools = ['search_catalog', 'retrieve_knowledge'];
+const evaluationReadTools = [
+  'evaluate_plan',
+  'explain_selection',
+  ...catalogReadTools,
+  'find_replacements',
+];
+
+// 工具展示和执行入口共用动作边界，错误调用也不能取得额外权限。
+export function restrictedToolNames(
+  runtime: ToolRuntime,
+): readonly string[] | undefined {
+  if (runtime.requestAction === 'pending') return undefined;
+  if (runtime.consultPrebuiltId) return catalogReadTools;
+  if (runtime.readOnlyEvaluationTurn) return evaluationReadTools;
+  if (
+    runtime.requestAction === 'update_support' &&
+    isSelfServiceStopped(runtime.draft.support)
+  )
+    return ['update_support'];
+  switch (runtime.requestAction) {
+    case 'other':
+      return [];
+    case 'search_catalog':
+    case 'retrieve_knowledge':
+      return catalogReadTools;
+    case 'explain_selection':
+    case 'find_replacements':
+      return [runtime.requestAction, ...catalogReadTools];
+    case 'evaluate_plan':
+      return evaluationReadTools;
+    default:
+      return undefined;
+  }
+}
 export const toolDefinitions: ToolDefinition[] = registeredTools.map(
   (tool) => tool.definition,
 );
@@ -135,7 +165,7 @@ function facts(
   return operation;
 }
 
-export async function executeRegisteredTool(
+async function executeTool(
   name: string,
   argumentsValue: unknown,
   context: ToolContext,
@@ -148,8 +178,28 @@ export async function executeRegisteredTool(
     runtime.toolErrors.push(error);
     return { error, operation: facts(name, before, runtime, true, error) };
   }
-  if (runtime.readOnlyEvaluationTurn && stateChangingTools.has(name)) {
-    const error = '本轮只读评估已经完成；如要修改，请在下一条消息明确接受具体建议或提出新需求';
+  const restrictedNames = restrictedToolNames(runtime);
+  if (
+    (runtime.requestAction === 'pending' && name !== 'set_request_action') ||
+    (restrictedNames !== undefined && !restrictedNames.includes(name)) ||
+    (runtime.requestAction &&
+      runtime.requestAction !== 'recommend' &&
+      ['recommend_pc', 'assemble_build', 'select_prebuilt'].includes(name)) ||
+    (runtime.requestAction === 'recommend' &&
+      runtime.requirementsTaskId !== context.taskId &&
+      ['recommend_pc', 'assemble_build', 'select_prebuilt'].includes(name)) ||
+    (runtime.requestAction &&
+      !['recommend', 'clarify', 'save_requirements'].includes(
+        runtime.requestAction,
+      ) &&
+      ['update_requirements', 'authorize_selection'].includes(name)) ||
+    ((runtime.requestAction === 'save_requirements' ||
+      runtime.requestAction === 'clarify') &&
+      stateChangingTools.has(name) &&
+      !['update_requirements', 'authorize_selection'].includes(name))
+  ) {
+    const error =
+      '当前用户动作不允许此操作，请保留咨询、暂不生成或局部修改的边界';
     return { error, operation: facts(name, before, runtime, true, error) };
   }
   if (name === 'recommend_pc') {
@@ -163,7 +213,8 @@ export async function executeRegisteredTool(
   }
   if (name === 'assemble_build' || name === 'select_prebuilt') {
     if (runtime.recommendationAttemptKeys?.size) {
-      const error = '本轮推荐已在受限分支内完成候选修正，不能在外层追加组合审核次数';
+      const error =
+        '本轮推荐已在受限分支内完成候选修正，不能在外层追加组合审核次数';
       return { error, operation: facts(name, before, runtime, true, error) };
     }
     const input =
@@ -222,12 +273,14 @@ export async function executeRegisteredTool(
       ? undefined
       : runtime.failedAttempts?.get(attemptKey);
   if (previous) {
-    runtime.exploration = {
-      status: preservesConfigurationOnFailure.has(name)
-        ? 'blocked'
-        : 'continue',
-      reason: previous.error,
-    };
+    // 外设失败不启动或覆盖主机探索，去重反馈仍然保留。
+    if (name !== 'recommend_monitor')
+      runtime.exploration = preservesConfigurationOnFailure.has(name)
+        ? { status: 'blocked', reason: previous.error }
+        : runtime.requestAction === undefined ||
+            runtime.requestAction === 'recommend'
+          ? { status: 'continue', reason: previous.error }
+          : undefined;
     return {
       error:
         '相同条件下已尝试失败，请依据上次反馈更换候选或查询条件，不要重复提交',
@@ -250,6 +303,17 @@ export async function executeRegisteredTool(
         '本轮为局部替换，只能继续replace_parts调整指定配件；不能清空原方案或重新生成整套',
       );
     const data = await tool.execute(argumentsValue, context, runtime);
+    if (name === 'update_requirements')
+      runtime.requirementsTaskId = context.taskId;
+    if (
+      [
+        'recommend_pc',
+        'assemble_build',
+        'select_prebuilt',
+        'finish_exploration',
+      ].includes(name)
+    )
+      runtime.configurationTaskId = context.taskId;
     if (name === 'evaluate_plan') runtime.readOnlyEvaluationTurn = true;
     if (
       preservesConfigurationOnFailure.has(name) &&
@@ -258,22 +322,17 @@ export async function executeRegisteredTool(
       runtime.facts.at(-1)?.failed
     )
       runtime.exploration = undefined;
-    if (
-      [
-        'update_requirements',
-        'authorize_selection',
-        'create_task',
-        'reset_current_task',
-      ].includes(name)
-    )
+    if (['update_requirements', 'authorize_selection'].includes(name))
       runtime.exploration =
-        runtime.draft.budget && runtime.draft.purpose
+        (runtime.requestAction === undefined ||
+          runtime.requestAction === 'recommend') &&
+        runtime.draft.budget &&
+        runtime.draft.purpose
           ? {
               status: 'continue',
-              reason: '需求已保存，尚需根据数据库候选生成并校验配置',
+              reason: '需求已在本次对话记录，尚需根据数据库候选生成并校验配置',
             }
           : undefined;
-    if (name === 'switch_task') runtime.exploration = undefined;
     if (
       [
         'recommend_pc',
@@ -350,3 +409,10 @@ export async function executeRegisteredTool(
     };
   }
 }
+
+export const executeRegisteredTool = (
+  ...args: Parameters<typeof executeTool>
+) =>
+  traceOperation('tool', { name: args[0], arguments: args[1] }, () =>
+    executeTool(...args),
+  );

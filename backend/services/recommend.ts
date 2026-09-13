@@ -18,21 +18,10 @@ import { createBuildSearch } from './build-search';
 import {
   calculateQuote,
   matchesModel,
+  matchesExclusions,
   searchPrebuiltCatalog,
 } from './catalog-search';
 import { purposeBudgetWeights as weights } from './selection-policy';
-function matchesSeries(name: string, series?: string) {
-  if (!series) return true;
-  if (
-    /^(?:geforce\s+)?(?:rtx\s*)?\d{4}(?:\s*(?:ti|super|ti super))?$/i.test(
-      series.trim(),
-    )
-  )
-    return matchesModel(name, series);
-  const normalized = name.toUpperCase().replace(/\s+/g, ' '),
-    wanted = series.toUpperCase().replace(/\s+/g, ' ');
-  return normalized.includes(wanted);
-}
 function candidatesByCategory(r: Requirements, parts: Part[]) {
   return Object.keys(labels).map((category) =>
     parts
@@ -43,7 +32,8 @@ function candidatesByCategory(r: Requirements, parts: Part[]) {
           p.price >= 0 &&
           (!r.partPreferences?.[category as Category] ||
             p.id === r.partPreferences[category as Category]) &&
-          matchesSeries(p.name, r.seriesPreferences?.[category as Category]) &&
+          matchesExclusions(p, r) &&
+          matchesModel(p.name, r.seriesPreferences?.[p.category], p.category) &&
           (!r.brandPreferences?.[category as Category] ||
             p.brand
               .toLowerCase()
@@ -122,36 +112,26 @@ function assessBudget(
       status === 'below_minimum_reference'
         ? '超预算参考'
         : status === 'above_high_reference'
-          ? total === references.high
-            ? '目录最高参考'
-            : '高预算可用方案'
+          ? '目录最高参考'
           : '符合预算',
     reason:
       status === 'below_minimum_reference'
         ? `预算低于最低完整配置，当前仅展示超预算参考，超出 ¥${total - r.budget}`
         : status === 'above_high_reference'
-          ? total === references.high
-            ? `预算高于目录最高完整兼容参考，允许节省；${highBasis}`
-            : '当前方案在预算内且通过已知约束校验，未达到目录最高总价，不能称为最贵或性能最强'
+          ? `预算高于目录最高完整兼容参考，允许节省；${highBasis}`
           : `总价位于预算允许区间 ¥${range.min}～¥${range.max}`,
     minimumReference: references.minimum,
     highReference: references.high,
     highReferenceBasis: highBasis,
   };
 }
-// 工具消费同一次搜索的方案与诊断，空结果不再重新搜索或猜测原因。
-export function recommendDetailed(
-  r: Requirements,
-  parts: Part[],
-  pcs: Prebuilt[],
-): { plans: Plan[]; failure?: RecommendationFailure } {
-  const range = budgetRange(r.budget, r.hardCap, undefined, r.budgetTolerance);
+// 推荐、组装和整机选择共用购买方式下的目录边界，避免 both 被重新按 DIY 分类。
+function prepareCatalog(r: Requirements, parts: Part[], pcs: Prebuilt[]) {
   const groups = candidatesByCategory(r, parts);
   const search = createBuildSearch(groups);
   const diy =
     r.mode === 'prebuilt' ? undefined : calculateDiyReferences(groups, search);
   const fail = (kind: FailureKind, reason: string, searchComplete = true) => ({
-    plans: [] as Plan[],
     failure: { kind, reason, searchComplete },
   });
   if (diy && !diy.searchComplete)
@@ -224,11 +204,62 @@ export function recommendDetailed(
         );
   }
   const references = { minimum, high };
-  const status = budgetStatus(r.budget, references);
   const highBasis =
     highPc?.pc.price === high
       ? '目录内满足当前约束的实际最高完整整机售价；不代表实测性能最高'
       : diy!.highBasis!;
+  return { search, diy, eligiblePcs, lowPc, highPc, references, highBasis };
+}
+function requireCatalog(r: Requirements, parts: Part[], pcs: Prebuilt[]) {
+  const prepared = prepareCatalog(r, parts, pcs);
+  if ('failure' in prepared) throw Error(prepared.failure.reason);
+  return prepared;
+}
+function assertPlanBudget(
+  total: number,
+  r: Requirements,
+  catalog: ReturnType<typeof requireCatalog>,
+) {
+  const { references, diy, search, eligiblePcs } = catalog;
+  if (!withinBudget(total, r.budget, r.hardCap, references, r.budgetTolerance))
+    throw Error(
+      budgetStatus(r.budget, references) === 'above_high_reference'
+        ? `预算高于目录上限，只能交付目录最高参考 ¥${references.high}`
+        : '配置总价不符合预算规则',
+    );
+  if (!r.preferExpensive || budgetStatus(r.budget, references) !== 'standard')
+    return;
+  const range = budgetRange(r.budget, r.hardCap, references, r.budgetTolerance);
+  const maximum =
+    diy?.minimum === undefined ? undefined : search({ goal: 'maximum', range });
+  if (maximum && !maximum.searchComplete)
+    throw Error('搜索达到计算上限，尚未确认当前约束内的最高价方案');
+  const highest = Math.max(
+    maximum?.solutions[0]?.total ?? -Infinity,
+    ...eligiblePcs
+      .filter(({ pc }) => pc.price >= range.min && pc.price <= range.max)
+      .map(({ pc }) => pc.price),
+  );
+  if (total !== highest)
+    throw Error(`当前要求约束内最高价方案，应为 ¥${highest}，当前为 ¥${total}`);
+}
+// 工具消费同一次搜索的方案与诊断，空结果不再重新搜索或猜测原因。
+export function recommendDetailed(
+  r: Requirements,
+  parts: Part[],
+  pcs: Prebuilt[],
+): { plans: Plan[]; failure?: RecommendationFailure } {
+  const range = budgetRange(r.budget, r.hardCap, undefined, r.budgetTolerance);
+  const prepared = prepareCatalog(r, parts, pcs);
+  if ('failure' in prepared) return { plans: [], failure: prepared.failure };
+  const { search, diy, eligiblePcs, lowPc, highPc, references, highBasis } =
+    prepared;
+  const { minimum, high } = references;
+  const status = budgetStatus(r.budget, references);
+  const fail = (kind: FailureKind, reason: string, searchComplete = true) => ({
+    plans: [] as Plan[],
+    failure: { kind, reason, searchComplete },
+  });
   const cats = Object.keys(labels);
   const w = weights[r.purpose] || weights.游戏;
   const priority = (part: Part) => {
@@ -244,6 +275,9 @@ export function recommendDetailed(
   ): Plan => ({
     id,
     kind,
+    demo:
+      ps.some((part) => part.demo) ||
+      (kind === 'prebuilt' && pcs.some((pc) => pc.id === id && pc.demo)),
     name,
     parts: ps,
     total,
@@ -445,20 +479,12 @@ export function selectPrebuilt(
   )
     throw Error('整机必须包含数据库中八类完整且不重复的商品');
   const validation = { status: 'not_applicable' as const, issues: [] };
-  const result = recommendDetailed(r, parts, pcs);
-  const reference = result.plans[0]?.budget;
-  if (!reference) throw Error(result.failure?.reason ?? '无法确认预算边界');
-  const references = {
-    minimum: reference.minimumReference,
-    high: reference.highReference,
-  };
-  if (
-    !withinBudget(pc.price, r.budget, r.hardCap, references, r.budgetTolerance)
-  )
-    throw Error('该整机售价不符合预算规则');
+  const reference = requireCatalog(r, parts, pcs);
+  assertPlanBudget(pc.price, r, reference);
   return {
     id: pc.id,
     kind: 'prebuilt',
+    demo: pc.demo || selected.some((part) => part.demo),
     name: pc.name,
     parts: selected,
     total: pc.price,
@@ -466,13 +492,19 @@ export function selectPrebuilt(
     score: 0,
     reason:
       '模型查询并选择数据库整机，服务端已核对最新整机售价、八类构成及用户约束；商家整机不执行DIY配件兼容性审核。',
-    budget: assessBudget(pc.price, r, references, reference.highReferenceBasis),
+    budget: assessBudget(
+      pc.price,
+      r,
+      reference.references,
+      reference.highBasis,
+    ),
   };
 }
 export function assembleBuild(
   ids: string[],
   r: Requirements,
   catalog: Part[],
+  pcs: Prebuilt[] = [],
 ): Plan {
   if (r.mode === 'prebuilt')
     throw Error('整机模式只能选择数据库中的现有整机；修改配件请先切换为 DIY');
@@ -498,9 +530,12 @@ export function assembleBuild(
     if (brand && !p.brand.toLowerCase().includes(brand.toLowerCase()))
       throw Error(`${labels[p.category]}不符合品牌偏好`);
   }
-  for (const p of parts)
-    if (!matchesSeries(p.name, r.seriesPreferences?.[p.category]))
+  for (const p of parts) {
+    if (!matchesExclusions(p, r))
+      throw Error(`${p.name}属于用户明确排除的型号或品牌`);
+    if (!matchesModel(p.name, r.seriesPreferences?.[p.category], p.category))
       throw Error(`${labels[p.category]}不符合指定系列`);
+  }
   const wrongColors = parts.filter(
     (part) => !matchesRequirementColor(part, r, catalog),
   );
@@ -509,7 +544,7 @@ export function assembleBuild(
       wrongColors
         .map(
           (part) =>
-            `${labels[part.category]}颜色不符合${requiredPartColor(part, r)}要求`,
+            `${labels[part.category]}颜色不符合${requiredPartColor(part, r)}要求${r.excludedColors?.length ? `，禁止颜色：${r.excludedColors.join('、')}` : ''}`,
         )
         .join('；'),
     );
@@ -519,34 +554,19 @@ export function assembleBuild(
   );
   const validation = validateBuild(parts);
   if (validation.status === 'fail') throw Error(validation.issues.join('；'));
-  const referenceResult = findDiyBudgetReferences(r, catalog);
-  if (
-    referenceResult.minimum === undefined ||
-    referenceResult.high === undefined
-  )
-    throw Error(
-      referenceResult.kind === 'missing_products'
-        ? '当前约束缺少完整八类商品'
-        : referenceResult.kind === 'known_conflict'
-          ? '当前约束下商品存在已知兼容冲突'
-          : '搜索达到计算上限，无法确认最低或最高完整配置',
-    );
-  const references = {
-    minimum: referenceResult.minimum,
-    high: referenceResult.high,
-  };
-  if (!withinBudget(total, r.budget, r.hardCap, references, r.budgetTolerance))
-    throw Error('自主搭配总价不符合预算规则');
+  const reference = requireCatalog(r, catalog, pcs);
+  assertPlanBudget(total, r, reference);
   return {
     id: `assembled-${parts.map((p) => p.id).join('-')}`,
     kind: 'diy',
+    demo: parts.some((part) => part.demo),
     name: '自主搭配方案',
     parts,
     total,
     score: 0,
     validation,
     reason: `模型选择具体型号，服务端已从数据库重新读取八类商品并计算总价。价格为商家目录价；${validation.status === 'unknown' ? '存在待确认项。' : '已录入规格未发现冲突。'}`,
-    budget: assessBudget(total, r, references, referenceResult.highBasis!),
+    budget: assessBudget(total, r, reference.references, reference.highBasis),
   };
 }
 export function replacePart(
@@ -555,6 +575,7 @@ export function replacePart(
   newId: string,
   r: Requirements,
   catalog: Part[],
+  pcs: Prebuilt[] = [],
 ): Plan {
   if (plan.kind !== 'diy') throw Error('整机请重新筛选，不能自由替换配件');
   const freshParts = plan.parts.map((part) =>
@@ -569,7 +590,7 @@ export function replacePart(
   const ids = (freshParts as Part[]).map((part) =>
     part.id === oldId ? newId : part.id,
   );
-  const verified = assembleBuild(ids, r, catalog);
+  const verified = assembleBuild(ids, r, catalog, pcs);
   return {
     ...verified,
     id: plan.id,

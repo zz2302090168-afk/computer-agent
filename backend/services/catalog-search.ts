@@ -9,13 +9,18 @@ export type CatalogSearch = {
   maxPrice?: number;
 };
 
-// 芯片型号按完整词匹配，5060 不包含 5060 Ti，9600X 不包含其他后缀。
-export function matchesModel(name: string, keyword: string) {
+// 配件按所属类别识别芯片型号，避免纯数字 CPU 型号被当成显卡。
+export function matchesModel(
+  name: string,
+  keyword?: string,
+  category?: Category,
+) {
+  if (!keyword) return true;
   const compact = keyword.trim().replace(/\s+/g, ' ');
   const gpu = compact.match(
     /^(?:geforce\s+)?(?:rtx\s*)?(\d{4})(?:\s*(ti|super|ti super))?$/i,
   );
-  if (gpu) {
+  if (gpu && (category === 'gpu' || category === undefined)) {
     const model = name.match(
       /RTX[\s-]*(\d{4})(?:[\s-]+(Ti(?:[\s-]+SUPER)?|SUPER))?/i,
     );
@@ -26,13 +31,29 @@ export function matchesModel(name: string, keyword: string) {
         (gpu[2] ?? '').toLowerCase()
     );
   }
-  const cpu = compact.match(/^(?:ryzen\s+[579]\s+)?(\d{4}[a-z0-9]*)$/i);
-  if (cpu)
+  const cpu = compact.match(
+    /^(?:(?:amd\s+)?ryzen\s+[3579]\s+|(?:intel\s+)?(?:core\s+)?i[3579][\s-]*)?(\d{4,5}[a-z0-9]*)$/i,
+  );
+  if (cpu && (category === 'cpu' || category === undefined))
     return name
       .toLowerCase()
       .split(/[^a-z0-9]+/)
       .includes(cpu[1].toLowerCase());
-  return name.toLowerCase().includes(compact.toLowerCase());
+  return name
+    .toLowerCase()
+    .replace(/\s+/g, ' ')
+    .includes(compact.toLowerCase());
+}
+
+export function matchesExclusions(part: Part, requirements: Requirements) {
+  return (
+    !requirements.excludedModels?.[part.category]?.some((model) =>
+      matchesModel(part.name, model, part.category),
+    ) &&
+    !requirements.excludedBrands?.[part.category]?.some((brand) =>
+      part.brand.toLowerCase().includes(brand.toLowerCase()),
+    )
+  );
 }
 
 export function searchCatalog(parts: Part[], filter: CatalogSearch) {
@@ -46,7 +67,7 @@ export function searchCatalog(parts: Part[], filter: CatalogSearch) {
     (p) =>
       (!filter.category || p.category === filter.category) &&
       (!brand || p.brand.toLowerCase().includes(brand)) &&
-      (!keyword || matchesModel(`${p.brand} ${p.name}`, keyword)) &&
+      (!keyword || matchesModel(`${p.brand} ${p.name}`, keyword, p.category)) &&
       (!filter.color ||
         filter.color === '不限' ||
         p.color.includes(filter.color)) &&

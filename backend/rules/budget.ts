@@ -1,4 +1,5 @@
-export const BUDGET_TOLERANCE = 1000;
+export const BUDGET_TOLERANCE = 500;
+export const MAX_BUDGET_TOLERANCE = 1000;
 const PLAN_PRICE_STEP = 500;
 export function recommendationTargets(
   budget: number,
@@ -15,7 +16,7 @@ export function validateTolerance(value: unknown = BUDGET_TOLERANCE) {
     typeof value !== 'number' ||
     !Number.isFinite(value) ||
     value < 0 ||
-    value > BUDGET_TOLERANCE ||
+    value > MAX_BUDGET_TOLERANCE ||
     Math.abs(value * 100 - Math.round(value * 100)) > 0.000001
   )
     throw Error('预算误差必须为0到1000元，最多两位小数');
@@ -49,8 +50,8 @@ export function budgetRange(
     };
   if (references && budget > references.high)
     return {
-      min: 0,
-      max: budget,
+      min: references.high,
+      max: references.high,
       reference: true,
     };
   return {

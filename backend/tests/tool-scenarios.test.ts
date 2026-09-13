@@ -222,7 +222,7 @@ void test('S24 只读评估本轮禁止修改，下一轮仅明确接受当前�
   assert.equal(f.runtime.result!.selection, undefined);
 });
 
-void test('S25 同一需求不能通过切换后再切回来重启探索', async (t) => {
+void test('S25 本轮更新预算也不能重启探索并重置候选额度', async (t) => {
   t.mock.method(globalThis, 'fetch', embeddingFetch);
   const f = fixture();
   f.context.modelConfig = undefined;
@@ -261,17 +261,17 @@ void test('配置推荐不调用Embedding，只使用业务规则和商品数据
 void test('S26 主循环最多提交三个不重复候选，参数顺序不能绕过去重', async () => {
   const f = fixture(),
     base = f.runtime.result!.plans[1]!.parts.map((part) => part.id),
-    withGpu = (id: string) => base.map((partId) => (partId === 'gpu' ? id : partId));
-  const first = await call(f, 'assemble_build', { productIds: withGpu('missing-a') });
+    withGpu = (id: string) =>
+      base.map((partId) => (partId === 'gpu' ? id : partId));
+  const first = await call(f, 'assemble_build', {
+    productIds: withGpu('missing-a'),
+  });
   assert.equal(first.operation.failed, true);
   const repeated = await call(f, 'assemble_build', {
     productIds: [...withGpu('missing-a')].reverse(),
   });
   assert.equal(repeated.operation.failed, true);
-  assert.match(
-    'error' in repeated ? (repeated.error ?? '') : '',
-    /已经提交过/,
-  );
+  assert.match('error' in repeated ? (repeated.error ?? '') : '', /已经提交过/);
   for (const id of ['missing-b', 'missing-c'])
     assert.equal(
       (await call(f, 'assemble_build', { productIds: withGpu(id) })).operation
@@ -507,7 +507,7 @@ void test('S08 空过滤结果不等于无商品，且可继续另一轮查询',
   );
 });
 
-void test('S09 选定状态恢复后，可不重传planId解释或查找当前方案替换件', async (t) => {
+void test('S09 本次连续对话保留选定状态，不重传planId也可解释或查询替换件', async (t) => {
   t.mock.method(globalThis, 'fetch', embeddingFetch);
   const f = fixture();
   successful(
@@ -516,15 +516,15 @@ void test('S09 选定状态恢复后，可不重传planId解释或查找当前�
       sourceMessageId: 'current',
     }),
   );
-  const restored = fixture();
-  restored.runtime.task = structuredClone(f.saved[0]);
-  restored.runtime.draft = structuredClone(f.saved[0].draft);
-  restored.runtime.result = structuredClone(f.saved[0].result);
-  const before = state(restored);
-  successful(await call(restored, 'explain_selection', { category: 'gpu' }));
-  successful(await call(restored, 'find_replacements', { category: 'gpu' }));
-  assert.deepEqual(state(restored), before);
-  assert.equal(restored.saved.length, 0);
+  const continued = fixture();
+  continued.runtime.task = structuredClone(f.saved[0]);
+  continued.runtime.draft = structuredClone(f.saved[0].draft);
+  continued.runtime.result = structuredClone(f.saved[0].result);
+  const before = state(continued);
+  successful(await call(continued, 'explain_selection', { category: 'gpu' }));
+  successful(await call(continued, 'find_replacements', { category: 'gpu' }));
+  assert.deepEqual(state(continued), before);
+  assert.equal(continued.saved.length, 0);
 });
 
 void test('S10 替换失败后允许换候选重试，只改一件且清除旧整套确认', async () => {
