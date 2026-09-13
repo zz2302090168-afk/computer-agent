@@ -3,13 +3,6 @@ import { useState } from 'react';
 import { matchesRequirementColor } from '@/backend/rules/color';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from '@/components/ui/select';
 import { readResponse } from './api';
 import { pageSessionHeaders } from './workspace-session';
 import MonitorRecommendation from './monitor-recommendation';
@@ -17,7 +10,6 @@ import type { PlanActionResponse } from '@/backend/api/plan-actions';
 import type {
   Part,
   Plan,
-  Catalog,
   RecommendationResult,
 } from '@/backend/domain/types';
 export default function Results({
@@ -33,9 +25,7 @@ export default function Results({
   taskVersion?: number;
   disabled?: boolean;
 }) {
-  const [catalog, setCatalog] = useState<Part[]>([]),
-    [edit, setEdit] = useState(''),
-    [viewedPlan, setViewedPlan] = useState(''),
+  const [viewedPlan, setViewedPlan] = useState(''),
     [exporting, setExporting] = useState(''),
     [error, setError] = useState(''),
     [busy, setBusy] = useState(false);
@@ -45,46 +35,6 @@ export default function Results({
     result.plans.find((plan) => plan.id === viewedPlan)?.id ??
     result.plans.find((plan) => plan.id === result.selection?.planId)?.id ??
     result.plans[0]?.id;
-  async function begin(id: string) {
-    setError('');
-    try {
-      if (!catalog.length) {
-        const r = await fetch('/api/catalog');
-        const data = await readResponse<Catalog>(r);
-        setCatalog(data.parts);
-      }
-      setEdit(edit === id ? '' : id);
-    } catch (e) {
-      setError((e as Error).message);
-    }
-  }
-  async function replace(planId: string, oldId: string, newId: string) {
-    setBusy(true);
-    setError('');
-    try {
-      const r = await fetch('/api/replace', {
-        method: 'POST',
-        headers: {
-          ...pageSessionHeaders(),
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          planId,
-          oldId,
-          newId,
-          taskId,
-          expectedVersion: taskVersion,
-        }),
-      });
-      const data = await readResponse<PlanActionResponse>(r);
-      onChange(data);
-      setEdit('');
-    } catch (e) {
-      setError((e as Error).message);
-    } finally {
-      setBusy(false);
-    }
-  }
   async function download(plan: Plan) {
     setExporting(plan.id);
     setError('');
@@ -180,7 +130,6 @@ export default function Results({
         value={activePlan ?? ''}
         onValueChange={(value) => {
           setViewedPlan(String(value));
-          setEdit('');
           setError('');
         }}
         className="plan-tabs"
@@ -278,40 +227,6 @@ export default function Results({
                         {p.color} · {p.demo ? '演示商品' : '真实型号'} ·
                         商家目录价
                       </small>
-                      {plan.kind === 'diy' && (
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => begin(plan.id + p.id)}
-                          disabled={busy || disabled}
-                        >
-                          替换
-                        </Button>
-                      )}
-                      {edit === plan.id + p.id && (
-                        <Select
-                          disabled={busy || disabled}
-                          value={p.id}
-                          onValueChange={(v) => v && replace(plan.id, p.id, v)}
-                        >
-                          <SelectTrigger aria-label={`替换${p.categoryLabel}`}>
-                            <SelectValue>
-                              {p.name} · {p.color} · ¥{p.price} ·{' '}
-                              {p.demo ? '演示商品' : '真实型号'}
-                            </SelectValue>
-                          </SelectTrigger>
-                          <SelectContent>
-                            {catalog
-                              .filter((x) => x.category === p.category)
-                              .map((x) => (
-                                <SelectItem key={x.id} value={x.id}>
-                                  {x.name} · {x.color} · ¥{x.price} ·{' '}
-                                  {x.demo ? '演示商品' : '真实型号'}
-                                </SelectItem>
-                              ))}
-                          </SelectContent>
-                        </Select>
-                      )}
                     </b>
                     <span>¥{p.price}</span>
                   </div>
