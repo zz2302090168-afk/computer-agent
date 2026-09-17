@@ -1,0 +1,52 @@
+{
+  "version": "action-context-screen-v1",
+  "split": "dev",
+  "humanVerified": false,
+  "cases": [
+    {
+      "id": "BRAND-MSI",
+      "initial": "selected",
+      "group": "跨品牌目录查询",
+      "turns": [
+        {
+          "query": "只查商品目录里的微星 GeForce RTX 4060 VENTUS 2X BLACK 8G OC 显卡，返回该商品的品牌、完整型号和目录价。只查这个型号，不考虑当前主机预算，不改方案。",
+          "expect": "catalog_only",
+          "preserve": true,
+          "selectionUnchanged": true,
+          "expectedCatalogIds": [
+            "real-gpu-2"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PRICE05",
+      "group": "严格降价",
+      "initial": "selected",
+      "turns": [
+        {
+          "query": "只查询显卡和硬盘一起换的候选，其他六件不动，要求两件合计比原来的合计便宜；单件可以涨价，只看整套降价，先不执行。",
+          "expect": "find_replacements",
+          "preserve": true,
+          "strictCheaper": true,
+          "minReplacementCandidates": 1,
+          "selectionUnchanged": true
+        }
+      ]
+    },
+    {
+      "id": "QUEUE01",
+      "group": "自由问答边界",
+      "initial": "unselected",
+      "turns": [
+        {
+          "query": "先选第二套继续讨论，不确认购买。再告诉我刷新页面以后还能找回今天的对话和方案吗？",
+          "expect": "select",
+          "expectedPlanIndex": 1,
+          "preserve": true,
+          "semanticReview": true
+        }
+      ]
+    }
+  ]
+}

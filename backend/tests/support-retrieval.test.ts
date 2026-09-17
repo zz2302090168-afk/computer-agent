@@ -20,6 +20,35 @@ type RetrievalResult = {
   knowledgeNotice: string;
 };
 
+void test('售前检索保留知识正文及来源元数据，返回证据边界且不生成售后状态', async (t) => {
+  t.mock.method(globalThis, 'fetch', embeddingFetch);
+  const f = fixture();
+  const output = (await retrieveKnowledgeTool.execute(
+    { query: '显卡厂商和型号的区别', category: 'sales' },
+    f.context,
+    f.runtime,
+  )) as Awaited<ReturnType<typeof retrieveEvidence>> & {
+    knowledgeSource: string;
+    evidenceScope: string;
+  };
+  assert.ok(output && !Array.isArray(output));
+  assert.equal(typeof output.evidenceScope, 'string');
+  assert.equal(output.knowledgeStatus, 'available');
+  assert.equal(output.knowledgeSource, 'embedding');
+  assert.equal(output.knowledgeFailure, undefined);
+  assert.ok(output.evidence.length);
+  for (const hit of output.evidence) {
+    const original = knowledge.find((item) => item.id === hit.id)!;
+    assert.notEqual(hit.category, 'support');
+    assert.equal(hit.content, original.content);
+    assert.equal(hit.source, original.source);
+    assert.equal(hit.checkedAt, original.checkedAt);
+  }
+  assert.equal(f.runtime.supportRetrieval, undefined);
+  assert.equal(f.runtime.supportEvidence, undefined);
+  assert.equal(f.saved.length, 0);
+});
+
 void test('售后文档标题提供可核对的步骤类型，正文和来源属性保持原样', () => {
   assert.equal(supportTopicIds.length, 9);
   assert.equal(new Set(supportTopicIds).size, supportTopicIds.length);

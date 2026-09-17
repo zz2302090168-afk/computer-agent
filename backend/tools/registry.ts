@@ -15,6 +15,7 @@ import {
 import { searchCatalogTool } from './catalog';
 import { recommendMonitorTool } from './monitor';
 import { retrieveKnowledgeTool } from './knowledge';
+import { answerKnowledgeTool } from './knowledge/answer';
 import { isSelfServiceStopped, updateSupportTool } from './support';
 import {
   authorizeSelectionTool,
@@ -42,6 +43,7 @@ export const registeredTools = [
   selectPrebuiltTool,
   finishExplorationTool,
   retrieveKnowledgeTool,
+  answerKnowledgeTool,
   evaluatePlanTool,
   applySuggestionTool,
 ] as const;
@@ -104,8 +106,11 @@ export function restrictedToolNames(
     case 'other':
       return [];
     case 'search_catalog':
-    case 'retrieve_knowledge':
       return catalogReadTools;
+    case 'retrieve_knowledge':
+      return runtime.knowledgeOnly
+        ? ['retrieve_knowledge', 'answer_knowledge']
+        : catalogReadTools;
     case 'explain_selection':
     case 'find_replacements':
       return [runtime.requestAction, ...catalogReadTools];
@@ -266,6 +271,18 @@ async function executeTool(
       plan.parts.map((part) => part.id),
     ]),
     context.catalog,
+    name === 'answer_knowledge'
+      ? [
+          context.currentMessageId,
+          runtime.knowledgeEvidence
+            ? [
+                runtime.knowledgeEvidence.taskId,
+                runtime.knowledgeEvidence.messageId,
+                ...runtime.knowledgeEvidence.blocks.keys(),
+              ]
+            : null,
+        ]
+      : undefined,
   ]);
   // 售后调用的可用知识会随检索改变，失败不参与配机候选去重或自动探索。
   const previous =

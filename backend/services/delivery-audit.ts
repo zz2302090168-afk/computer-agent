@@ -1,3 +1,4 @@
+import { traceSync } from '../diagnostics/chat-trace';
 import {
   labels,
   type Catalog,
@@ -10,7 +11,7 @@ import { ToolExecutionError } from '../domain/errors';
 
 // 交付审核只接受商品ID，以当前需求和数据库重新验证，忽略候选自带的合格标签。
 // DIY 复用完整硬规则；商家整机只核对商品、八类构成、价格、预算、配色和用户约束。
-export function auditDelivery(
+function auditDeliveryImpl(
   plans: Plan[],
   requirements: Requirements,
   catalog: Catalog,
@@ -94,3 +95,6 @@ export function auditDelivery(
     );
   return audited;
 }
+
+export const auditDelivery = (...args: Parameters<typeof auditDeliveryImpl>) =>
+  traceSync('build.delivery_audit', {}, () => auditDeliveryImpl(...args));

@@ -88,6 +88,11 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
+  const requestStart = performance.now();
+  const trace = createChatTrace({
+    route: '/api/chat',
+    requestId: crypto.randomUUID(),
+  });
   try {
     const input = await readJson(request);
     if (
@@ -108,7 +113,7 @@ export async function POST(request: Request) {
       messageId = crypto.randomUUID();
     if (input.taskId !== workspace.task.id)
       throw Error('当前对话已结束，请使用新的对话');
-    const trace = createChatTrace({
+    trace.record('request.validated', {
       messageId,
       taskId: workspace.task.id,
       message,
@@ -131,10 +136,32 @@ export async function POST(request: Request) {
     const stream = new ReadableStream<Uint8Array>({
       start(controller) {
         return trace.run(async () => {
+          let firstEvent = true,
+            firstText = true;
+          let status = 'success';
           const emit = (event: ChatStreamEvent) => {
             trace.record('stream', event);
-            if (!cancellation.signal.aborted)
+            if (!cancellation.signal.aborted) {
               controller.enqueue(encoder.encode(JSON.stringify(event) + '\n'));
+              const hasAnswer =
+                (event.type === 'text' && !!event.text) ||
+                (event.type === 'complete' &&
+                  event.state.messages.at(-1)?.role === 'assistant' &&
+                  !!event.state.messages.at(-1)?.content);
+              if (firstEvent || (hasAnswer && firstText)) {
+                trace.record(
+                  firstEvent
+                    ? 'request.first_event_sent'
+                    : 'request.first_text_sent',
+                  {
+                    durationMs: performance.now() - requestStart,
+                    eventType: event.type,
+                  },
+                );
+                if (hasAnswer) firstText = false;
+                firstEvent = false;
+              }
+            }
           };
           try {
             emit({
@@ -224,6 +251,11 @@ export async function POST(request: Request) {
               ),
             });
           } catch (cause) {
+            status = signal.aborted
+              ? signal.reason?.name === 'TimeoutError'
+                ? 'timeout'
+                : 'cancelled'
+              : 'failed';
             trace.record('error', cause);
             emit({
               type: 'error',
@@ -234,7 +266,11 @@ export async function POST(request: Request) {
                   : '对话暂时失败',
             });
           } finally {
-            trace.record('end', { aborted: signal.aborted });
+            trace.record('end', {
+              aborted: signal.aborted,
+              status,
+              durationMs: performance.now() - requestStart,
+            });
             if (!cancellation.signal.aborted) controller.close();
           }
         });
@@ -247,12 +283,20 @@ export async function POST(request: Request) {
     const headers = json(null).headers;
     headers.set('Content-Type', 'application/x-ndjson; charset=utf-8');
     headers.set('X-Accel-Buffering', 'no');
+    headers.set('X-Chat-Trace-Id', trace.traceId);
     return new Response(stream, { headers });
   } catch (cause) {
-    return json(
+    trace.record('end', {
+      status: request.signal.aborted ? 'cancelled' : 'failed',
+      durationMs: performance.now() - requestStart,
+      error: cause,
+    });
+    const response = json(
       { error: cause instanceof Error ? cause.message : '对话暂时失败' },
       400,
     );
+    response.headers.set('X-Chat-Trace-Id', trace.traceId);
+    return response;
   }
 }
 

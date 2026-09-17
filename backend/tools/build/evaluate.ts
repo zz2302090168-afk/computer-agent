@@ -1,6 +1,7 @@
 import { evaluatePlan } from '../../services/evaluate';
 import { resolvePlan } from '../../services/resolve-plan';
 import { completeRequirements } from '../../agent/conversation-state';
+import { evaluationReply } from '../../agent/sales-reply';
 import {
   objectSchema,
   parseObject,
@@ -56,6 +57,6 @@ export const evaluatePlanTool: RegisteredTool = {
       evaluation.knowledgeStatus === 'unavailable';
     runtime.pendingEvaluation = undefined;
     runtime.toolsUsed.push('评估方案');
-    return evaluation;
+    return { ...evaluation, displayReply: evaluationReply(evaluation) };
   },
 };

@@ -48,27 +48,48 @@ export function createChatTrace(
   initial: unknown,
   directory = join(process.cwd(), 'logs', 'chat'),
 ) {
-  const file = join(directory, `${Date.now()}-${crypto.randomUUID()}.jsonl`);
+  const traceId = crypto.randomUUID();
+  const origin = performance.now();
+  const file = join(directory, `${Date.now()}-${traceId}.jsonl`);
   let bytes = 0;
   let truncated = false;
   let disabled = false;
+  const maxBytes = 8 * 1024 * 1024;
   const record = (event: string, data: unknown) => {
     if (disabled || (truncated && event !== 'end')) return;
     try {
       let line =
-        serialize({ time: new Date().toISOString(), event, data }) + '\n';
+        serialize({
+          time: new Date().toISOString(),
+          traceId,
+          elapsedMs: performance.now() - origin,
+          event,
+          data,
+        }) + '\n';
       if (
-        bytes + Buffer.byteLength(line) > 8 * 1024 * 1024 &&
+        bytes + Buffer.byteLength(line) > maxBytes - 1024 &&
         event !== 'end'
       ) {
         truncated = true;
         line =
           serialize({
             time: new Date().toISOString(),
+            traceId,
+            elapsedMs: performance.now() - origin,
             event: 'truncated',
             data: '记录达到 8 MiB 上限',
           }) + '\n';
       }
+      if (event === 'end' && bytes + Buffer.byteLength(line) > maxBytes) {
+        line =
+          serialize({
+            time: new Date().toISOString(),
+            traceId,
+            event: 'end',
+            data: { truncated: true },
+          }) + '\n';
+      }
+      if (bytes + Buffer.byteLength(line) > maxBytes) return;
       appendFileSync(file, line, { mode: 0o600 });
       bytes += Buffer.byteLength(line);
     } catch {
@@ -90,6 +111,7 @@ export function createChatTrace(
   record('start', initial);
   return {
     file,
+    traceId,
     record,
     run: <T>(work: () => T): T => context.run({ record }, work),
   };
@@ -99,11 +121,12 @@ export async function traceOperation<T>(
   kind: string,
   input: unknown,
   work: () => Promise<T>,
+  recordResult = true,
 ): Promise<T> {
   const current = context.getStore();
   if (!current) return work();
   const callId = crypto.randomUUID();
-  const start = Date.now();
+  const start = performance.now();
   current.record(`${kind}.start`, {
     callId,
     parentId: current.parentId,
@@ -114,14 +137,61 @@ export async function traceOperation<T>(
       const result = await work();
       current.record(`${kind}.result`, {
         callId,
-        durationMs: Date.now() - start,
-        result,
+        durationMs: performance.now() - start,
+        status: 'success',
+        ...(recordResult ? { result } : {}),
       });
       return result;
     } catch (error) {
       current.record(`${kind}.error`, {
         callId,
-        durationMs: Date.now() - start,
+        durationMs: performance.now() - start,
+        status: operationStatus(error),
+        error,
+      });
+      throw error;
+    }
+  });
+}
+
+function operationStatus(error: unknown) {
+  return error instanceof Error && error.name === 'AbortError'
+    ? 'cancelled'
+    : error instanceof Error && error.name === 'TimeoutError'
+      ? 'timeout'
+      : 'failed';
+}
+
+export function traceEvent(event: string, data: unknown) {
+  const current = context.getStore();
+  current?.record(event, { parentId: current.parentId, data });
+}
+
+// 同步审核/排序保持同步调用约定，不增加调度或重试。
+export function traceSync<T>(kind: string, input: unknown, work: () => T): T {
+  const current = context.getStore();
+  if (!current) return work();
+  const callId = crypto.randomUUID(),
+    start = performance.now();
+  current.record(`${kind}.start`, {
+    callId,
+    parentId: current.parentId,
+    input,
+  });
+  return context.run({ record: current.record, parentId: callId }, () => {
+    try {
+      const result = work();
+      current.record(`${kind}.result`, {
+        callId,
+        durationMs: performance.now() - start,
+        status: 'success',
+      });
+      return result;
+    } catch (error) {
+      current.record(`${kind}.error`, {
+        callId,
+        durationMs: performance.now() - start,
+        status: operationStatus(error),
         error,
       });
       throw error;

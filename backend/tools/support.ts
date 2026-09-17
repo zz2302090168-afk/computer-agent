@@ -62,11 +62,14 @@ export const updateSupportTool: RegisteredTool = {
       !request ||
       request.sourceMessageId !== context.currentMessageId ||
       request.taskId !== context.taskId ||
-      request.taskId !== runtime.task.id ||
-      request.action !== input.action
+      request.taskId !== runtime.task.id
     )
       throw Error(
         '售后操作必须匹配当前消息和任务已记录的supportAction，不能临时改为转人工、已恢复或其他售后动作',
+      );
+    if (request.action !== input.action)
+      throw Error(
+        `售后操作不一致：本轮已声明supportAction=${request.action}，本次提交action=${String(input.action)}。保持本轮已声明动作，修正update_support参数；不得重新声明意图或转为其他动作。`,
       );
     const previous =
       input.action === 'new_issue' ? undefined : runtime.draft.support;

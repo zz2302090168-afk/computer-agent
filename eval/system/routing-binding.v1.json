@@ -1,0 +1,56 @@
+{
+  "version": "routing-binding-v1",
+  "split": "dev",
+  "humanVerified": false,
+  "cases": [
+    {
+      "id": "GPU-KNOW01",
+      "group": "显卡命名知识",
+      "initial": "unselected",
+      "turns": [
+        {
+          "query": "只问知识，不选配置：Intel、AMD和RTX是不是三个显卡厂家？Arc、Radeon RX、GeForce RTX分别是什么，跟华擎这种板卡品牌有什么区别？",
+          "expect": "retrieve_knowledge",
+          "preserve": true,
+          "semanticReview": true,
+          "requiredTools": [
+            "retrieve_knowledge",
+            "answer_knowledge"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "GPU-KNOW02",
+      "group": "显卡命名知识",
+      "initial": "unselected",
+      "turns": [
+        {
+          "query": "只解释名称，不查商品不换件：Intel Arc B570 Challenger 10GB OC这张华擎显卡，芯片厂商和板卡品牌分别是什么？能不能看见型号开头Intel就认定板卡品牌是Intel？",
+          "expect": "retrieve_knowledge",
+          "preserve": true,
+          "semanticReview": true,
+          "requiredTools": [
+            "retrieve_knowledge",
+            "answer_knowledge"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PRICE07",
+      "group": "联动严格降价",
+      "initial": "selected",
+      "turns": [
+        {
+          "query": "只查联动换件：显卡指定Intel Arc B570 Challenger 10GB OC，硬盘指定Samsung 990 PRO 1TB，其他六件不动。允许硬盘涨价，但两件合计必须比原来的合计便宜。只给通过审核的预览，不要实际替换。",
+          "expect": "find_replacements",
+          "preserve": true,
+          "strictCheaper": true,
+          "minReplacementCandidates": 1,
+          "expectedReplacementIds": {"gpu":"demo-20260912-gpu-intel-b570","storage":"real-storage-11"}
+        }
+      ]
+    }
+  ]
+}

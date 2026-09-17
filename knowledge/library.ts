@@ -1,7 +1,86 @@
+import { BUDGET_TOLERANCE } from '../backend/rules/budget';
 import { supportKnowledge } from './support';
 
 export const knowledge = [
   ...supportKnowledge,
+  {
+    id: 'gpu-naming-intel-arc',
+    title: 'Intel Arc 显卡：芯片厂商与板卡品牌分开识别',
+    category: 'recommendation',
+    tags: [
+      '显卡',
+      'GPU',
+      'Intel',
+      '英特尔',
+      'Arc',
+      '锐炫',
+      'B570',
+      'ASRock',
+      '华擎',
+      '品牌',
+      '型号',
+    ],
+    content:
+      'Intel Arc 是 Intel 的显卡产品系列。ASRock 官方的 Intel Arc B570 Challenger 10GB OC 是区分芯片与板卡品牌的实例：图形芯片为 Intel Arc B570，板卡产品由 ASRock 华擎提供。完整型号中的 Intel 不能单凭词序当成板卡品牌；也不能据此将所有 Intel Arc 显卡都认作华擎产品。',
+    source:
+      'https://www.asrock.com/Graphics-Card/Intel/Intel%20Arc%20B570%20Challenger%2010GB%20OC/',
+    checkedAt: '2026-09-16',
+    kind: 'manufacturer',
+  },
+  {
+    id: 'gpu-naming-nvidia-geforce',
+    title: 'NVIDIA GeForce RTX：厂商与显卡产品系列的区别',
+    category: 'recommendation',
+    tags: [
+      '显卡',
+      'GPU',
+      'NVIDIA',
+      '英伟达',
+      'GeForce',
+      'RTX',
+      '品牌',
+      '型号',
+      '系列',
+    ],
+    content:
+      'GeForce RTX 属于 NVIDIA 的显卡产品系列。RTX 不是与 Intel、AMD 并列的芯片厂商名称；讨论这三家的游戏显卡时，应区分 Intel Arc、AMD Radeon RX 与 NVIDIA GeForce RTX。型号中的 GeForce RTX 标识不能单独确定具体板卡品牌。不同完整型号的规格应分别核对，不能仅凭系列名推断性能相同。',
+    source: 'https://www.nvidia.com/en-us/geforce/graphics-cards/',
+    checkedAt: '2026-09-16',
+    kind: 'manufacturer',
+  },
+  {
+    id: 'gpu-naming-amd-radeon',
+    title: 'AMD Radeon RX：显卡系列与具体板卡型号分开识别',
+    category: 'recommendation',
+    tags: ['显卡', 'GPU', 'AMD', 'Radeon', 'RX', '品牌', '型号', '系列'],
+    content:
+      'Radeon RX 是 AMD 的显卡产品系列。AMD 表示这一图形芯片所属厂商，Radeon RX 表示显卡系列；完整商品名称还可能包含板卡品牌及该厂商的产品名称。用户说要 AMD 显卡时，需要区分芯片厂商偏好与指定某家板卡品牌，不能只凭 AMD 或 RX 字样确定具体板卡商品。',
+    source: 'https://www.amd.com/en/products/graphics/desktops/radeon.html',
+    checkedAt: '2026-09-16',
+    kind: 'manufacturer',
+  },
+  {
+    id: 'gpu-naming-catalog-boundary',
+    title: '显卡名称识别与商品目录字段的边界',
+    category: 'recommendation',
+    tags: [
+      '显卡',
+      '芯片厂商',
+      '板卡品牌',
+      '完整型号',
+      '商品查询',
+      '品牌',
+      '型号',
+      'Intel',
+      'AMD',
+      'RTX',
+    ],
+    content:
+      '芯片厂商、产品系列、板卡品牌和完整商品型号需要分开理解。确认具体商品时，应核对商品资料中的品牌、完整型号及已记录的规格，不能把型号首词直接当成板卡品牌，也不能忽略用户明确指定的品牌。知识中的型号实例仅用于解释名称，不表示本店已经收录该商品，也不能证明其价格或兼容性；这些信息需要另外核对当前商品资料和具体配置。',
+    source: null,
+    checkedAt: '2026-09-16',
+    kind: 'project_policy',
+  },
   {
     id: 'compat-memory',
     title: '内存代际与平台选择',
@@ -239,8 +318,7 @@ export const knowledge = [
     title: '预算硬边界与无解处理',
     category: 'recommendation',
     tags: ['预算', '价格', '便宜', '总价', '推荐'],
-    content:
-      'L 是满足当前型号、系列、品牌、颜色和购买方式约束的数据库最低完整兼容配置；H 是目录内满足约束的实际最高完整兼容配置（DIY 取完整兼容组合中的最高总价，整机取最贵合格整机售价），并不代表实测性能最强。预算低于 L 时仅展示八类完整的超预算参考，明确总价减预算，不能称符合预算或直接确认；预算高于 H 时展示目录最高参考并允许节省，但不得超过预算上界。L 到 H 之间差额绝对值不超过 1000 元，明确硬上限时收紧上界。DIY 总价按数据库八类配件现价相加，整机使用数据库整机售价；调价、替换后必须重算。显示器不计入主机预算。缺商品、已知兼容冲突、完整搜索确认的预算区间无解和搜索达到计算上限应分开说明，未知规格可作为待确认参考，不能当成已知冲突。',
+    content: `L 是满足当前型号、系列、品牌、颜色和购买方式约束的数据库最低完整兼容配置；H 是目录内满足约束的实际最高完整兼容配置（DIY 取完整兼容组合中的最高总价，整机取最贵合格整机售价），并不代表实测性能最强。预算低于 L 时仅展示八类完整的超预算参考，明确总价减预算，不能称符合预算或直接确认；预算高于 H 时展示目录最高参考并允许节省，但不得超过预算上界。L 到 H 之间差额绝对值默认不超过 ${BUDGET_TOLERANCE} 元，用户明确指定误差时按指定值执行，明确硬上限时收紧上界。DIY 总价按数据库八类配件现价相加，整机使用数据库整机售价；调价、替换后必须重算。显示器不计入主机预算。缺商品、已知兼容冲突、完整搜索确认的预算区间无解和搜索达到计算上限应分开说明，未知规格可作为待确认参考，不能当成已知冲突。`,
     source: null,
     checkedAt: '2026-09-07',
     kind: 'project_policy',

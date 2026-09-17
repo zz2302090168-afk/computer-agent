@@ -15,6 +15,7 @@ import { searchCatalogTool } from '../catalog';
 import { recordPlanSelections } from './selection';
 import { assembleBuildTool } from './assemble';
 import { selectPrebuiltTool } from './select-prebuilt';
+import { recommendationReply } from '../../agent/sales-reply';
 export const recommendPcTool: RegisteredTool = {
   definition: {
     type: 'function',
@@ -104,6 +105,7 @@ export const recommendPcTool: RegisteredTool = {
       '校验预算',
     );
     return {
+      displayReply: recommendationReply(result),
       plans: plans.map((plan) => ({
         id: plan.id,
         tier: plan.tier,

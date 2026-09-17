@@ -22,6 +22,7 @@ import { labels, type Catalog, type Category } from '@/backend/domain/types';
 import type { ChatState } from '@/backend/agent/conversation';
 import type { ChatStreamEvent, Progress } from '@/backend/agent/progress';
 import { readLines } from '@/lib/stream';
+import { beginChatTiming } from './chat-timing';
 import { catalogMessageParts } from './catalog-links';
 
 const emptyState: ChatState = { draft: {}, messages: [], result: null };
@@ -64,6 +65,18 @@ export default function Chat({
     currentTask = useRef(''),
     requestVersion = useRef(0);
   const activeRequest = useRef<AbortController | null>(null);
+  const timing = useRef<ReturnType<typeof beginChatTiming> | null>(null);
+  const chatColumn = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const commit = () =>
+      timing.current?.commit(
+        visible && !!chatColumn.current?.getClientRects().length,
+        !busy,
+      );
+    commit();
+    document.addEventListener('visibilitychange', commit);
+    return () => document.removeEventListener('visibilitychange', commit);
+  }, [state, progress, busy, error, visible, mobileView]);
   const followMessages = useRef(true);
   useEffect(() => () => activeRequest.current?.abort(), []);
   useEffect(() => {
@@ -144,6 +157,8 @@ export default function Chat({
   async function send(text = input) {
     // 发起请求时绑定本轮状态；新会话后的迟到响应不得覆盖当前右栏。
     if (!text.trim() || busy || loading || consultPrebuiltId) return;
+    const requestTiming = beginChatTiming();
+    timing.current = requestTiming;
     followMessages.current = true;
     const requestTask = currentTask.current,
       version = ++requestVersion.current,
@@ -183,6 +198,7 @@ export default function Chat({
           ...(requestInquiry ? { consultPrebuiltId: requestInquiry.id } : {}),
         }),
       });
+      requestTiming.connect(r.headers.get('X-Chat-Trace-Id'));
       if (!r.ok) await readResponse<ChatState>(r);
       if (!r.body) throw Error('没有收到处理进度，请重试');
       let data: ChatState | undefined;
@@ -190,6 +206,13 @@ export default function Chat({
         if (version !== requestVersion.current) return;
         if (!line.trim()) continue;
         const event = JSON.parse(line) as ChatStreamEvent;
+        requestTiming.receive(
+          event.type,
+          (event.type === 'text' && !!event.text) ||
+            (event.type === 'complete' &&
+              event.state.messages.at(-1)?.role === 'assistant' &&
+              !!event.state.messages.at(-1)?.content),
+        );
         if (event.type === 'error') throw Error(event.error);
         if (event.type === 'text') {
           setState((previous) => ({
@@ -257,6 +280,7 @@ export default function Chat({
           messages: data.messages,
         }));
     } catch (e) {
+      requestTiming.fail(controller.signal.aborted);
       if (version === requestVersion.current)
         setState((previous) => ({
           ...previous,
@@ -310,6 +334,9 @@ export default function Chat({
     }
   }
   async function reset() {
+    timing.current?.dispose();
+    timing.current = null;
+    performance.clearMeasures('chat.request');
     const version = ++requestVersion.current,
       previousSession = pageSessionHeaders()['x-page-session'];
     activeRequest.current?.abort();
@@ -397,7 +424,7 @@ export default function Chat({
         </button>
       </nav>
       <main className="chat-main">
-        <section className="chat-column">
+        <section className="chat-column" ref={chatColumn}>
           <div className="chat-heading">
             <div>
               <span className="eyebrow">电脑选购与故障排查</span>

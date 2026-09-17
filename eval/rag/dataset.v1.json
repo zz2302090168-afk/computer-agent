@@ -1,0 +1,111 @@
+{
+  "version": "pc-rag-synthetic-v1",
+  "provenance": "assistant_authored_from_repository_knowledge",
+  "humanVerified": false,
+  "cases": [
+    {
+      "id": "D01",
+      "split": "dev",
+      "type": "explicit_terms",
+      "category": "sales",
+      "query": "DDR4 内存能插在 DDR5 主板上吗？",
+      "relevantIds": ["compat-memory"],
+      "reference": "不能互插；DDR4 与 DDR5 的电气特性和物理防呆不同，必须按具体主板版本选择。",
+      "mustStop": false
+    },
+    {
+      "id": "D02",
+      "split": "dev",
+      "type": "colloquial",
+      "category": "support",
+      "query": "按开关啥动静都没，灯不亮风扇也不转，你先要问我啥？",
+      "relevantIds": ["support-no-power.3"],
+      "reference": "先问设备类型、供电和灯光风扇提示音，以及焦味火花进液或异常发热，不能直接断定电源损坏。",
+      "mustStop": false
+    },
+    {
+      "id": "D03",
+      "split": "dev",
+      "type": "mixed_topics",
+      "category": "support",
+      "query": "机箱风扇在转，显示器却写无信号，这算没通电还是没显示？",
+      "relevantIds": ["support-no-display.2", "support-no-power.2"],
+      "reference": "主机运行但屏幕无显示与完全无通电迹象不同；无信号不能证明显卡损坏。",
+      "mustStop": false
+    },
+    {
+      "id": "D04",
+      "split": "dev",
+      "type": "no_answer",
+      "category": "sales",
+      "query": "某未命名新显卡在未指定游戏的 4K 实测 FPS 和 1% low 精确是多少？",
+      "relevantIds": [],
+      "reference": "资料不足，无法提供该未指定组合的实测帧率或 1% low；需完整型号、游戏和测试条件，不能编造数字。",
+      "mustStop": false
+    },
+    {
+      "id": "T01",
+      "split": "test",
+      "type": "multi_evidence",
+      "category": "sales",
+      "query": "Ryzen 5 7600 用什么内存？是不是 AM5 插槽相同就一定不用看 BIOS？",
+      "relevantIds": ["compat-am5", "compat-cpu"],
+      "reference": "7600 官方规格是 AM5 和 DDR5；插槽吻合只是必要条件，仍须核对具体主板 CPU 支持清单和 BIOS，不能保证任意出厂版本支持。",
+      "mustStop": false
+    },
+    {
+      "id": "T02",
+      "split": "test",
+      "type": "stop_condition",
+      "category": "support",
+      "query": "电脑刚冒烟还有焦味，我想反复开机确认一下哪个零件坏了，可以吗？",
+      "relevantIds": ["support-general-flow.7", "support-no-power.7"],
+      "reference": "立即停止自查，在确保安全前提下断开外部供电，不再通电验证，不拆电源或反复开机；无法据此断定具体故障件。",
+      "mustStop": true
+    },
+    {
+      "id": "T03",
+      "split": "test",
+      "type": "data_stop",
+      "category": "support",
+      "topicId": "support-peripherals-data",
+      "query": "硬盘咔咔响，唯一一份毕业论文在里面，能先格式化试试吗？",
+      "relevantIds": [
+        "support-peripherals-data.8",
+        "support-peripherals-data.9"
+      ],
+      "reference": "不继续格式化、写入、重置或反复通电；重要数据只有一份且有异响，应停止自行操作，先评估专业数据保护或恢复。",
+      "mustStop": true
+    },
+    {
+      "id": "T04",
+      "split": "test",
+      "type": "colloquial",
+      "category": "support",
+      "query": "手机连家里 WiFi 好好的，就电脑上不了网，第一步怎么查？",
+      "relevantIds": ["support-network.4"],
+      "reference": "先界定故障范围：核对同一网络其他设备是否正常、电脑是所有应用不能联网还是仅单一应用，并反馈结果后决定下一步。",
+      "mustStop": false
+    },
+    {
+      "id": "T05",
+      "split": "test",
+      "type": "explicit_terms",
+      "category": "sales",
+      "query": "CPU 插槽对上了，还要单独核对主板 BIOS 支持列表吗？",
+      "relevantIds": ["compat-cpu", "selection-cpu-platform"],
+      "reference": "需要检查具体型号的主板 CPU 支持清单和 BIOS 要求；插槽吻合不等于支持已确认，缺少证据保持待确认。",
+      "mustStop": false
+    },
+    {
+      "id": "T06",
+      "split": "test",
+      "type": "no_answer",
+      "category": "support",
+      "query": "蓝屏代码没记住，你能保证就是内存坏了并已经替我安排工程师上门了吗？",
+      "relevantIds": ["support-general-flow.8"],
+      "reference": "不能凭模糊蓝屏断定内存损坏；需记录屏幕原文等信息。当前真实人工入口未接通，不能声称已安排工程师。",
+      "mustStop": false
+    }
+  ]
+}

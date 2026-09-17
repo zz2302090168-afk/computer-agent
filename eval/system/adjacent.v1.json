@@ -1,0 +1,91 @@
+{
+  "version": "pilot-adjacent-v1",
+  "split": "dev-regression",
+  "humanVerified": false,
+  "cases": [
+    {
+      "id": "J01",
+      "group": "预算边界",
+      "initial": "empty",
+      "turns": [
+        {
+          "query": "办公DIY，预算6000元，要求误差必须为0元，先记录需求，不要生成。",
+          "expect": "save_only",
+          "budget": 6000,
+          "draftFields": { "budgetTolerance": 0 },
+          "noPlans": true
+        }
+      ]
+    },
+    {
+      "id": "J02",
+      "group": "预算边界",
+      "initial": "empty",
+      "turns": [
+        {
+          "query": "预算8000元玩游戏，DIY，最多只能便宜50元，不能超过8000元。先保存条件，暂不生成。",
+          "expect": "save_only",
+          "budget": 8000,
+          "draftFields": { "budgetTolerance": 50, "hardCap": true },
+          "noPlans": true
+        }
+      ]
+    },
+    {
+      "id": "J03",
+      "group": "预算边界",
+      "initial": "empty",
+      "turns": [
+        {
+          "query": "预算8000元办公，DIY，上下误差允许1000元。只记录，先别生成。",
+          "expect": "save_only",
+          "budget": 8000,
+          "draftFields": { "budgetTolerance": 1000 },
+          "noPlans": true
+        }
+      ]
+    },
+    {
+      "id": "J04",
+      "group": "目录边界",
+      "initial": "selected",
+      "turns": [
+        {
+          "query": "只查AMD处理器，单价不超过1500元，不要改现有配置。",
+          "expect": "catalog_only",
+          "preserve": true,
+          "catalogFilter": {
+            "category": "cpu",
+            "brand": "AMD",
+            "maxPrice": 1500
+          }
+        }
+      ]
+    },
+    {
+      "id": "J05",
+      "group": "目录边界",
+      "initial": "selected",
+      "turns": [
+        {
+          "query": "只查有没有0元的AMD处理器，不要自动放宽价格，也不要改方案。",
+          "expect": "catalog_only",
+          "preserve": true,
+          "catalogFilter": { "category": "cpu", "brand": "AMD", "maxPrice": 0 }
+        }
+      ]
+    },
+    {
+      "id": "J06",
+      "group": "替换边界",
+      "initial": "selected",
+      "turns": [
+        {
+          "query": "只查询硬盘可以换哪些，颜色不限，其他不动，先不执行替换。",
+          "expect": "find_replacements",
+          "preserve": true
+        }
+      ]
+    }
+  ]
+}

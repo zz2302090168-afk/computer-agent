@@ -8,6 +8,58 @@ import { requestToolActions } from '../tools/types';
 import { fixture } from './pc-fixture';
 
 type Fixture = ReturnType<typeof fixture>;
+void test('售后已声明动作收窄后续参数，跨会话不串动作且执行端仍拒绝越权', async () => {
+  const first = fixture(),
+    second = fixture();
+  await declareRequest(
+    first,
+    'update_support',
+    '另一个问题是耳机没有声音',
+    'new_issue',
+  );
+  await declareRequest(second, 'update_support', '现在请人工接手', 'handoff');
+  const allowed = (f: Fixture) => {
+    const definition = availableTools(f.runtime).find(
+      (t) => t.function.name === 'update_support',
+    )!;
+    return (
+      definition.function.parameters.properties as Record<
+        string,
+        { enum: string[] }
+      >
+    ).action.enum;
+  };
+  assert.deepEqual(allowed(first), ['new_issue']);
+  assert.deepEqual(allowed(second), ['handoff']);
+  assert.deepEqual(allowed(first), ['new_issue']);
+  const before = structuredClone(first.runtime.draft);
+  const rejected = await executeRegisteredTool(
+    'update_support',
+    {
+      messageId: first.context.currentMessageId,
+      action: 'continue',
+    },
+    first.context,
+    first.runtime,
+  );
+  assert.equal(rejected.operation.failed, true);
+  assert.ok('error' in rejected);
+  assert.match(
+    rejected.error!,
+    /已声明supportAction=new_issue.*提交action=continue/,
+  );
+  assert.deepEqual(first.runtime.draft, before);
+  const corrected = await executeRegisteredTool(
+    'update_support',
+    {
+      messageId: first.context.currentMessageId,
+      action: 'new_issue',
+    },
+    first.context,
+    first.runtime,
+  );
+  assert.equal(corrected.operation.failed, false);
+});
 type ModelRequest = {
   messages: ModelMessage[];
   tools: ToolDefinition[];
@@ -47,6 +99,7 @@ const action = (
       sourceMessageId: 'current',
       ...(supportAction ? { supportAction } : {}),
       ...(value === 'other' ? { otherTopic: 'general' } : {}),
+      ...(value === 'retrieve_knowledge' ? { knowledgeOnly: false } : {}),
     },
   ]);
 
@@ -73,6 +126,9 @@ async function declareRequest(
       sourceMessageId: messageId,
       ...(supportAction ? { supportAction } : {}),
       ...(requestAction === 'other' ? { otherTopic: 'general' } : {}),
+      ...(requestAction === 'retrieve_knowledge'
+        ? { knowledgeOnly: false }
+        : {}),
     },
     f.context,
     f.runtime,
@@ -122,6 +178,32 @@ const chat = (f: Fixture, message: string, onText?: (text: string) => void) =>
     undefined,
     onText,
   );
+
+void test('评估答复只交付工具事实，模型编造性能保证不进入正文或流式输出', async (t) => {
+  const f = fixture();
+  let round = 0;
+  const unsupported = '替换后性能完全不变，厂家保证所有游戏流畅。';
+  mockModel(
+    t,
+    () =>
+      [
+        action('evaluate_plan'),
+        calls(['evaluate_plan', { planId: 'plan-1' }]),
+        answer(unsupported),
+      ][round++] ?? answer(unsupported),
+  );
+  const streamed: string[] = [];
+  const result = await chat(f, '只评估方案二，不执行调整。', (text) =>
+    streamed.push(text),
+  );
+  assert.ok(
+    result.facts.some((fact) => fact.tool === 'evaluate_plan' && !fact.failed),
+  );
+  assert.ok(!result.messages.at(-1)!.content.includes(unsupported));
+  assert.match(result.messages.at(-1)!.content, /已评估当前指定方案/);
+  assert.ok(streamed.every((text) => !text.includes(unsupported)));
+  assert.equal(result.result?.selection, undefined);
+});
 
 void test('配机追问流式输出，未执行需求操作的文字不提前显示', async (t) => {
   const f = emptyFixture();
@@ -593,7 +675,13 @@ void test('已有方案重配必须重新生成，不能以选定旧方案冒充
   );
   assert.equal(result.result.selection, undefined);
   assert.ok(f.saved.some((task) => task.result?.plans.length));
-  assert.equal(result.messages.at(-1)?.content, '新方案已重新生成并通过审核。');
+  // 推荐正文现在来自实际工具事实，不再复述模型笼统的“通过审核”。
+  const delivered = result.messages.at(-1)!.content;
+  assert.notEqual(delivered, '新方案已重新生成并通过审核。');
+  for (const plan of result.result.plans)
+    assert.ok(delivered.includes(`¥${plan.total}`));
+  assert.match(delivered, /演示商品/);
+  assert.match(delivered, /兼容资料仍待核对/);
 });
 
 void test('本次对话可临时记录需求，但不注册或开放任务与撤回工具', async () => {

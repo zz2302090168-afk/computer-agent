@@ -33,7 +33,7 @@ export const requirementPatchProperties = {
     type: 'number',
     minimum: 0,
     maximum: MAX_BUDGET_TOLERANCE,
-    description: `默认误差为${BUDGET_TOLERANCE}元。用户未指定误差时必须省略此字段，不能填0；用户明确指定0时保留0，提示总价必须恰好等于预算、可能找不到匹配配置；不得擅自放宽误差。用户明确指定时才填写，例如误差不超过50元填50。`,
+    description: `默认误差为${BUDGET_TOLERANCE}元。此字段是预算上下偏差，不是超支许可。用户只说“不超过预算”“预算以内”“不能加钱”时，设置hardCap=true并省略budgetTolerance，不能填0；这允许比预算便宜。只有明确要求“误差为0”“必须恰好等于预算”才填0，并按零误差流程提示和确认。明确指定误差不超过50元填50；同时不许超预算则另设hardCap=true。不得擅自放宽误差。`,
   },
   partColors: {
     ...objectSchema(
@@ -45,7 +45,11 @@ export const requirementPatchProperties = {
       '仅显卡、内存、主板、电源、机箱、散热参与配色；CPU和硬盘没有配色约束。指定单件颜色时填写对应类别，如白色机箱、黑色散热填case=白色,cooler=黑色。空字符串删除该类别覆盖。',
   },
   budget: { type: 'number', exclusiveMinimum: 0, maximum: 1000000 },
-  hardCap: { type: 'boolean' },
+  hardCap: {
+    type: 'boolean',
+    description:
+      '用户明确要求总价不能超过预算时为true，只收紧价格上界，不表示必须花满预算，也不表示budgetTolerance=0。例如预算6000元、绝对不超过6000元：budget=6000、hardCap=true，未指定误差时省略budgetTolerance，预算用途齐全即继续推荐。',
+  },
   purpose: {
     type: 'string',
     enum: ['游戏', '办公', '剪辑设计', '编程', '本地 AI'],

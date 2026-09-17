@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RagEvaluationOutputV1",
+  "type": "object",
+  "required": [
+    "runId",
+    "traceId",
+    "caseId",
+    "split",
+    "variant",
+    "scope",
+    "business",
+    "ragasFaithfulness"
+  ],
+  "properties": {
+    "runId": { "type": "string" },
+    "traceId": { "type": "string" },
+    "caseId": { "type": "string" },
+    "split": { "enum": ["dev", "test"] },
+    "variant": { "type": "string" },
+    "scope": { "type": "string" },
+    "business": { "$ref": "#/$defs/evaluation" },
+    "ragasFaithfulness": { "$ref": "#/$defs/evaluation" }
+  },
+  "$defs": {
+    "evaluation": {
+      "type": "object",
+      "required": ["status"],
+      "properties": {
+        "status": { "enum": ["success", "failed", "timeout", "unscorable"] },
+        "durationMs": { "type": "number", "minimum": 0 },
+        "result": { "type": ["object", "null"] },
+        "reason": { "type": ["string", "null"] },
+        "errorType": { "type": "string" },
+        "validationReason": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

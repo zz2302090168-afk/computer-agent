@@ -35,6 +35,7 @@ export const toolProgress: Record<string, string> = {
   select_prebuilt: '审核整机配置与报价',
   confirm_selections: '重新审核待确认方案',
   retrieve_knowledge: '查询RAG知识库',
+  answer_knowledge: '核对知识依据并整理答复',
   evaluate_plan: '评估当前方案',
   apply_suggestion: '应用建议并重新审核',
   finish_exploration: '整理当前阻碍',

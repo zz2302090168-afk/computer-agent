@@ -287,10 +287,10 @@ void test('咨询首查询不能用另一台同名整机或配件冒充，未查
     assert.equal(catalogReads, 2);
     assert.deepEqual({ draft: next.draft, result: next.result }, before);
     assert.equal(f.saved.length, 0);
-    assert.equal(
-      next.messages.at(-1)!.content,
-      '已读取指定整机及另一台用于比较的整机，未改动当前方案。',
-    );
+    // 本轮只交付工具证据正文，不再采用模型自写的总结。
+    assert.match(next.messages.at(-1)!.content, /整机目录价¥6100/);
+    assert.match(next.messages.at(-1)!.content, /整机目录价¥6200/);
+    assert.match(next.messages.at(-1)!.content, /未选定或确认/);
   }
 });
 

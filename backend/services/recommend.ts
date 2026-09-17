@@ -1,3 +1,4 @@
+import { traceSync } from '../diagnostics/chat-trace';
 import {
   labels,
   type Part,
@@ -244,7 +245,7 @@ function assertPlanBudget(
     throw Error(`当前要求约束内最高价方案，应为 ¥${highest}，当前为 ¥${total}`);
 }
 // 工具消费同一次搜索的方案与诊断，空结果不再重新搜索或猜测原因。
-export function recommendDetailed(
+function recommendDetailedImpl(
   r: Requirements,
   parts: Part[],
   pcs: Prebuilt[],
@@ -597,3 +598,7 @@ export function replacePart(
     name: '已调整的 DIY 方案',
   };
 }
+
+export const recommendDetailed = (
+  ...args: Parameters<typeof recommendDetailedImpl>
+) => traceSync('build.candidates', {}, () => recommendDetailedImpl(...args));

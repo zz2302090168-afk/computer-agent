@@ -4,6 +4,7 @@ import { auditDelivery } from '../../services/delivery-audit';
 import { purposeBudgetWeights } from '../../services/selection-policy';
 import { retrieveEvidence } from '../../rag/evidence';
 import { resolvePlan } from '../../services/resolve-plan';
+import { explanationReply } from '../../agent/sales-reply';
 import {
   categorySchema,
   objectSchema,
@@ -18,7 +19,7 @@ export const explainSelectionTool: RegisteredTool = {
     function: {
       name: 'explain_selection',
       description:
-        '只读提供当前方案或某件配件的选择依据：目录已记录的规格、用途约束、业务预算分配权重及知识库。省略planId时使用已选定或唯一方案。用于为什么选这款，不修改需求、方案或历史。',
+        '只读提供已有方案或其中某件配件的选择依据：目录已记录的规格、用途约束、业务预算分配权重及知识库。省略planId时使用已选定或唯一方案。仅用于为什么在这个方案选这款；硬件概念、型号名称含义、品牌与系列关系属于retrieve_knowledge，不需要指定方案。不修改需求、方案或历史。',
       parameters: objectSchema(
         { planId: { type: 'string' }, category: categorySchema },
         [],
@@ -45,6 +46,13 @@ export const explainSelectionTool: RegisteredTool = {
     const weights =
       purposeBudgetWeights[requirements.purpose] ?? purposeBudgetWeights.游戏;
     const output = {
+      displayReply: explanationReply(
+        plan,
+        plan.parts.filter(
+          (part) => !input.category || part.category === input.category,
+        ),
+        requirements.budget,
+      ),
       planId: plan.id,
       demo: plan.demo,
       requirements,

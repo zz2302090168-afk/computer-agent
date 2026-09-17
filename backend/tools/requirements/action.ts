@@ -1,4 +1,5 @@
 import { assertCurrentTaskUserMessage } from './message';
+import { selectPlanTool } from '../build/select';
 import {
   objectSchema,
   parseObject,
@@ -28,8 +29,25 @@ export const setRequestActionTool: RegisteredTool = {
           action: {
             type: 'string',
             enum: actions,
+            description:
+              '解释的对象决定动作：用户问硬件术语、型号名称或品牌/系列关系，用retrieve_knowledge，即使已有多套配置也无需选方案；只有解释已有方案为什么选择某件配件才用explain_selection。不能只因用户说“解释”就选配置解释，也不能把用户已明确的纯知识问题改为选型追问。',
           },
           sourceMessageId: { type: 'string' },
+          selectPlan: {
+            ...selectPlanTool.definition.function.parameters,
+            description:
+              '仅action=select_plan且用户明确指定已有方案时，同时填写下一步select_plan参数，省去单独生成参数的模型调用。planId必须来自当前方案，sourceMessageId引用当前消息；继续讨论而非确认购买时confirm=false。不明确或方案不存在时省略，后续继续澄清。此字段只是工具调用提案，必须通过原select_plan工具审核才会选定；复合请求的解释等仍须继续执行。',
+          },
+          knowledgeOnly: {
+            type: 'boolean',
+            description:
+              'action=retrieve_knowledge时必填：仅询问硬件知识、名称或概念，且没有商品查询、配置操作或售后排查请求时为true；包含其他操作或售后时false。true仅开放知识检索与证据答复工具，检索后用answer_knowledge选择本轮支持答案的知识块；不能自由补写事实。其他action不得填写。',
+          },
+          sessionLifecycleQuestion: {
+            type: 'boolean',
+            description:
+              '本轮是否另有页面会话问题：刷新、关闭、开始新会话能否保留或恢复，或进入商品目录再返回是否保留进度。纯问此类问题用other/general并设true；同时要求选定、确认、解释等时保留该实际action并设true。仅记录补充问题，不授予任何操作或恢复权限。没有此问题时false或省略。',
+          },
           otherTopic: {
             type: 'string',
             enum: ['support', 'general'],
@@ -40,7 +58,7 @@ export const setRequestActionTool: RegisteredTool = {
             type: 'string',
             enum: supportActions,
             description:
-              '仅action=update_support时必填。依据当前用户完整语义：continue=记录问题或进展，new_issue=另一故障，stop=停止自行排查，resolved=明确反馈已经恢复，handoff=明确要求现在由人工处理。否定、条件假设、入口咨询、失败或情绪不代表人工请求；只问如何申请人工时主action用other，不填写supportAction；暂停、尚未恢复或询问是否恢复不代表已解决。不按关键词匹配。',
+              '仅action=update_support时必填。先判断用户实际报告是否已达到停止条件：电气危险，或唯一重要数据且存储反复掉线/异响等，应stop，不再次询问已明确的风险事实。只有尚未达到停止条件时，continue=记录问题或进展，new_issue=另一故障。resolved=明确反馈已经恢复，handoff=明确要求现在由人工处理。否定、条件假设、入口咨询、失败或情绪不代表人工请求；只问如何申请人工时主action用other，不填写supportAction；暂停、尚未恢复或询问是否恢复不代表已解决。依据完整语义，不按关键词匹配。',
           },
         },
         ['action', 'sourceMessageId'],
@@ -54,6 +72,9 @@ export const setRequestActionTool: RegisteredTool = {
       'sourceMessageId',
       'supportAction',
       'otherTopic',
+      'sessionLifecycleQuestion',
+      'knowledgeOnly',
+      'selectPlan',
     ]);
     assertCurrentTaskUserMessage(context, input.sourceMessageId);
     if (input.sourceMessageId !== context.currentMessageId)
@@ -62,6 +83,24 @@ export const setRequestActionTool: RegisteredTool = {
       throw Error('本轮动作已记录，不能从工具结果或助手回复重新推导用户意图');
     const action = actions.find((entry) => entry === input.action);
     if (!action) throw Error('本轮动作无效');
+    if (input.selectPlan !== undefined) {
+      if (action !== 'select_plan')
+        throw Error('只有select_plan动作可以附带选定参数');
+      parseObject(input.selectPlan);
+    }
+    if (action === 'retrieve_knowledge') {
+      if (typeof input.knowledgeOnly !== 'boolean')
+        throw Error(
+          '知识动作必须声明knowledgeOnly，区分纯知识问答与复合或售后请求',
+        );
+    } else if (input.knowledgeOnly !== undefined) {
+      throw Error('只有retrieve_knowledge动作可以声明knowledgeOnly');
+    }
+    if (
+      input.sessionLifecycleQuestion !== undefined &&
+      typeof input.sessionLifecycleQuestion !== 'boolean'
+    )
+      throw Error('sessionLifecycleQuestion必须为布尔值');
     if (runtime.consultPrebuiltId && action !== 'search_catalog')
       throw Error(
         '本轮附带整机商品咨询，只能声明 search_catalog 只读查询动作，不能选定或修改方案',
@@ -89,6 +128,8 @@ export const setRequestActionTool: RegisteredTool = {
       throw Error('只有update_support动作可以记录supportAction');
     }
     runtime.requestAction = action;
+    runtime.knowledgeOnly = input.knowledgeOnly === true;
+    runtime.sessionLifecycleQuestion = input.sessionLifecycleQuestion === true;
     if (
       action === 'other' &&
       (input.otherTopic === 'support' || input.otherTopic === 'general')
@@ -97,6 +138,12 @@ export const setRequestActionTool: RegisteredTool = {
     return {
       action,
       sourceMessageId: input.sourceMessageId,
+      ...(action === 'retrieve_knowledge'
+        ? { knowledgeOnly: runtime.knowledgeOnly }
+        : {}),
+      ...(runtime.sessionLifecycleQuestion
+        ? { sessionLifecycleQuestion: true }
+        : {}),
       ...(action === 'other' ? { otherTopic: runtime.otherTopic } : {}),
       ...(action === 'update_support'
         ? { supportAction: runtime.supportRequest?.action }

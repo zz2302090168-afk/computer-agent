@@ -1,4 +1,9 @@
 import { selectPlan } from '../../services/select-plan';
+import { selectionReply } from '../../agent/sales-reply';
+import {
+  assertSelectionReference,
+  rejectSelectionReference,
+} from './selection-reference';
 import { assertCurrentTaskUserMessage } from '../requirements';
 import {
   objectSchema,
@@ -33,9 +38,15 @@ export const selectPlanTool: RegisteredTool = {
       (input.confirm !== undefined && typeof input.confirm !== 'boolean')
     )
       throw Error('选择方案参数无效');
-    assertCurrentTaskUserMessage(context, input.sourceMessageId);
+    const message = assertCurrentTaskUserMessage(
+      context,
+      input.sourceMessageId,
+    );
     if (input.sourceMessageId !== context.currentMessageId)
       throw Error('选择方案必须依据当前用户消息');
+    assertSelectionReference(message.content, input.planId, runtime.result);
+    if (!runtime.result?.plans.some((plan) => plan.id === input.planId))
+      rejectSelectionReference('指定的方案不存在，无法选定或确认。');
     context.catalog = await context.reloadCatalog();
     const next = selectPlan(
       { ...runtime.task, draft: runtime.draft, result: runtime.result },
@@ -51,6 +62,7 @@ export const selectPlanTool: RegisteredTool = {
     return {
       selection: next.result!.selection,
       summary: next.result!.summary,
+      displayReply: selectionReply(next.result!),
       version,
     };
   },

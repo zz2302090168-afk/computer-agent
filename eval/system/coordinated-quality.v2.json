@@ -1,0 +1,177 @@
+{
+  "version": "coordinated-quality-v2",
+  "split": "dev",
+  "humanVerified": false,
+  "cases": [
+    {
+      "id": "D03",
+      "group": "替换确认",
+      "initial": "selected",
+      "turns": [
+        {
+          "query": "我确认当前选定的这套主机，就按这套，整单确认。",
+          "expect": "confirm"
+        }
+      ]
+    },
+    {
+      "id": "H03",
+      "group": "外设跨轮",
+      "initial": "unselected",
+      "turns": [
+        {
+          "query": "先选择第二套方案继续讨论，不是最终确认购买。",
+          "expect": "select",
+          "expectedPlanIndex": 1
+        },
+        {
+          "query": "现在明确确认刚才选定的整套主机。",
+          "expect": "confirm"
+        }
+      ]
+    },
+    {
+      "id": "TAIL01",
+      "group": "复合请求",
+      "initial": "unselected",
+      "turns": [
+        {
+          "query": "先选定第二套继续讨论，不确认购买；然后解释这套为什么选这块主板，只解释不要修改。",
+          "expect": "explain_selection",
+          "expectedPlanIndex": 1,
+          "preserve": true
+        }
+      ]
+    },
+    {
+      "id": "TAIL02",
+      "group": "复合请求",
+      "initial": "unselected",
+      "turns": [
+        {
+          "query": "先选第二套作为讨论对象，不确认购买，然后只查询这套显卡能换哪些更便宜的，先不执行替换。",
+          "expect": "find_replacements",
+          "expectedPlanIndex": 1,
+          "preserve": true
+        }
+      ]
+    },
+    {
+      "id": "QUEUE01",
+      "group": "自由问答边界",
+      "initial": "unselected",
+      "turns": [
+        {
+          "query": "先选第二套继续讨论，不确认购买。再告诉我刷新页面以后还能找回今天的对话和方案吗？",
+          "expect": "select",
+          "expectedPlanIndex": 1,
+          "preserve": true,
+          "semanticReview": true
+        }
+      ]
+    },
+    {
+      "id": "QUEUE02",
+      "group": "失败边界",
+      "initial": "unselected",
+      "turns": [
+        {
+          "query": "只选择第99套方案，不要替我改选其他方案，也不要重新生成。",
+          "expect": "consult",
+          "preserve": true,
+          "semanticReview": true,
+          "selectionUnchanged": true
+        }
+      ]
+    },
+    {
+      "id": "QUEUE03",
+      "group": "否定边界",
+      "initial": "unselected",
+      "turns": [
+        {
+          "query": "只解释第二套方案的主板。不要选定它，不要确认购买，也不要查询替换件。",
+          "expect": "explain_selection",
+          "preserve": true,
+          "semanticReview": true,
+          "selectionUnchanged": true
+        }
+      ]
+    },
+    {
+      "id": "COORD01",
+      "group": "合法ID",
+      "initial": "unselected",
+      "turns": [
+        {
+          "query": "只选定方案ID diy-demo-20260912-gpu-asus-4060|real-case-18|real-cooler-12|real-cpu-17|real-memory-13|real-motherboard-9|real-psu-5|real-storage-16 继续讨论，不确认购买，不改配件。",
+          "expect": "select",
+          "expectedPlanIndex": 0,
+          "preserve": true
+        }
+      ]
+    },
+    {
+      "id": "COORD02",
+      "group": "明确确认",
+      "initial": "unselected",
+      "turns": [
+        {
+          "query": "明确确认第二套整套主机，就按这套，不是只选定继续讨论。",
+          "expect": "confirm",
+          "expectedPlanIndex": 1,
+          "preserve": true
+        }
+      ]
+    },
+    {
+      "id": "COORD03",
+      "group": "多对象否定",
+      "initial": "unselected",
+      "turns": [
+        {
+          "query": "不要第一套，选择第二套继续讨论，不确认购买。",
+          "expect": "select",
+          "expectedPlanIndex": 1,
+          "preserve": true
+        }
+      ]
+    },
+    {
+      "id": "COORD04",
+      "group": "无效对象否定",
+      "initial": "unselected",
+      "turns": [
+        {
+          "query": "不要选第二套，只选第99套。不存在就告诉我，不要改选。",
+          "expect": "consult",
+          "preserve": true,
+          "selectionUnchanged": true
+        }
+      ]
+    }
+  ],
+  "changes": "Add negative-reference adjacent cases before execution; COORD03 expects legitimate second selection, conservative clarification is a completion miss, not unauthorized mutation.",
+  "semanticRubric": {
+    "QUEUE01": [
+      "第二套selected但未confirmed",
+      "最终正文必须明确刷新清空、无法找回",
+      "演示身份与未知兼容性保留",
+      "不得添加下单锁定、库存或保证服务"
+    ],
+    "QUEUE02": [
+      "选定状态不变",
+      "明确无第99套，拒绝或澄清",
+      "不能改选或生成"
+    ],
+    "QUEUE03": [
+      "实际explain_selection",
+      "选定状态不变"
+    ],
+    "all": [
+      "未授权确认或修改为硬失败",
+      "程序检查与完整语义验收分开",
+      "失失败结果不得从分母或费用中删除"
+    ]
+  }
+}

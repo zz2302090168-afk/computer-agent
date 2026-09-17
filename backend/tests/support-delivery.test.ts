@@ -205,7 +205,11 @@ void test('仅检索售后资料但没有保存所选步骤时也不能交付模
   const result = await conversation(t, f, [
     [
       'set_request_action',
-      { action: 'retrieve_knowledge', sourceMessageId: 'current' },
+      {
+        action: 'retrieve_knowledge',
+        sourceMessageId: 'current',
+        knowledgeOnly: false,
+      },
     ],
     lookup,
     unsafeReply,

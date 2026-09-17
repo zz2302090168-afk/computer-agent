@@ -56,6 +56,18 @@ export const supportActions = [
 export type SupportAction = (typeof supportActions)[number];
 
 export type ToolRuntime = {
+  catalogReplies?: Map<string, string>;
+  knowledgeOnly?: boolean;
+  knowledgeAnswerReady?: boolean;
+  knowledgeEvidence?: {
+    taskId: string;
+    messageId: string;
+    blocks: Map<
+      string,
+      { id: string; title: string; content: string; source: string | null }
+    >;
+  };
+  sessionLifecycleQuestion?: boolean;
   otherTopic?: 'support' | 'general';
   consultPrebuiltId?: string;
   consultPrebuiltQueried?: boolean;

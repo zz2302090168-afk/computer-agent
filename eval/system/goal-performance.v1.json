@@ -1,0 +1,83 @@
+{
+  "version": "goal-performance-v1",
+  "split": "dev",
+  "humanVerified": false,
+  "cases": [
+    {
+      "id": "D03",
+      "group": "替换确认",
+      "initial": "selected",
+      "turns": [
+        {
+          "query": "我确认当前选定的这套主机，就按这套，整单确认。",
+          "expect": "confirm"
+        }
+      ]
+    },
+    {
+      "id": "H03",
+      "group": "外设跨轮",
+      "initial": "unselected",
+      "turns": [
+        {
+          "query": "先选择第二套方案继续讨论，不是最终确认购买。",
+          "expect": "select",
+          "expectedPlanIndex": 1
+        },
+        {
+          "query": "现在明确确认刚才选定的整套主机。",
+          "expect": "confirm"
+        }
+      ]
+    },
+    {
+      "id": "QUEUE01",
+      "group": "自由问答边界",
+      "initial": "unselected",
+      "turns": [
+        {
+          "query": "先选第二套继续讨论，不确认购买。再告诉我刷新页面以后还能找回今天的对话和方案吗？",
+          "expect": "select",
+          "expectedPlanIndex": 1,
+          "preserve": true,
+          "semanticReview": true
+        }
+      ]
+    },
+    {
+      "id": "PRICE01",
+      "group": "严格降价",
+      "initial": "selected",
+      "turns": [
+        {
+          "query": "只看看当前方案显卡能换什么更便宜的，必须比现在的显卡单价低，同价或更贵都不要，先不要换。",
+          "expect": "find_replacements",
+          "preserve": true,
+          "strictCheaper": true,
+          "minReplacementCandidates": 1
+        }
+      ]
+    },
+    {
+      "id": "TAIL01",
+      "group": "复合请求",
+      "initial": "unselected",
+      "turns": [
+        {
+          "query": "先选定第二套继续讨论，不确认购买；然后解释这套为什么选这块主板，只解释不要修改。",
+          "expect": "explain_selection",
+          "expectedPlanIndex": 1,
+          "preserve": true
+        }
+      ]
+    }
+  ],
+  "adoption": {
+    "quality": "No task omissions, state errors, false facts; full answer review in addition to program checks",
+    "latencyTarget": 0.2,
+    "tokenTarget": 0.15,
+    "compare": "Current corrected version control, same frozen catalog, failed costs retained, initial screen once per candidate; repeat candidate/control before adopting any apparent winner",
+    "maxCandidates": 2,
+    "amounts": "Unknown; report model/embedding separately"
+  }
+}

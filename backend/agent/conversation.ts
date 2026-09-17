@@ -1,3 +1,4 @@
+import { traceSync } from '../diagnostics/chat-trace';
 import type {
   Catalog,
   PcTask,
@@ -12,6 +13,7 @@ import {
 import type { ToolContext, ToolRuntime } from '../tools/types';
 import { requestToolActions } from '../tools/types';
 import type { EmbeddingConfig } from '../rag/retrieve';
+import { catalogModelContext } from '../rag/catalog-models';
 import {
   chatCompletion,
   type ModelConfig,
@@ -21,6 +23,12 @@ import { buildConversationPrompt } from './prompts';
 import type { Draft } from './conversation-state';
 import { toolProgress } from './progress';
 import { renderSupportReply } from '../support/reply';
+import { completedSalesReply, selectionRefusalReply } from './sales-reply';
+import {
+  updateReplacementContinuations,
+  replacementLimitReply,
+  type ReplacementContinuation,
+} from './replacement-continuation';
 
 export type { Draft } from './conversation-state';
 export type ChatMessage = {
@@ -67,7 +75,7 @@ export function conversationToolChoice(
   return exploration?.status === 'continue' ? 'required' : 'auto';
 }
 
-export function availableTools(runtime: ToolRuntime, _taskCount?: number) {
+function availableToolDefinitions(runtime: ToolRuntime) {
   if (runtime.requestAction === 'pending')
     return toolDefinitions.filter(
       (tool) => tool.function.name === 'set_request_action',
@@ -164,8 +172,28 @@ export function availableTools(runtime: ToolRuntime, _taskCount?: number) {
   return toolDefinitions.filter((tool) => names.has(tool.function.name));
 }
 
+export function availableTools(runtime: ToolRuntime, _taskCount?: number) {
+  return availableToolDefinitions(runtime).map((tool) => {
+    const request = runtime.supportRequest;
+    if (
+      tool.function.name !== 'update_support' ||
+      !request ||
+      runtime.requestAction !== 'update_support' ||
+      request.taskId !== runtime.task.id
+    )
+      return tool;
+    // 本轮动作已经声明，只收窄模型可提交的参数；执行端仍独立核验授权。
+    const definition = structuredClone(tool);
+    const parameters = definition.function.parameters;
+    const properties = parameters.properties as Record<string, unknown>;
+    properties.action = { type: 'string', enum: [request.action] };
+    return definition;
+  });
+}
+
 function requestedToolPending(runtime: ToolRuntime) {
   return (
+    (runtime.knowledgeOnly === true && !runtime.knowledgeAnswerReady) ||
     (runtime.consultPrebuiltId !== undefined &&
       !runtime.consultPrebuiltQueried) ||
     (requestToolActions.some((name) => name === runtime.requestAction) &&
@@ -203,6 +231,10 @@ function modelContext(
           exploration: runtime.exploration,
         }) +
         `\n本轮结构化动作：${runtime.requestAction ?? '未记录'}。recommend 必须先保存用户当前及历史明确需求，齐全后同轮推荐；clarify 保存已有字段并追问缺失预算用途；save_requirements 必须记录需求，不生成；具体工具动作必须实际调用同名工具，失败时依据返回问题解释或修正，不可用口头答应代替执行；other 仅无需工具的回答或澄清。不得从已有预算或自己的回复推导生成授权。` +
+        (runtime.knowledgeOnly
+          ? `\n本轮是纯知识问答：先retrieve_knowledge，再answer_knowledge选取本轮证据；资料不足时coverage=unsupported和空ID数组。如已完成证据答复仅简短收尾，不必重复正文。证据答复完成=${runtime.knowledgeAnswerReady === true}。`
+          : '') +
+        `\n本轮已声明售后动作：${JSON.stringify(runtime.supportRequest ?? null)}。update_support.action必须与已声明action一致。` +
         '\n当前数据库分类数量（全目录，不带型号或颜色过滤）：' +
         JSON.stringify(
           context.catalog.parts.reduce<Record<string, number>>(
@@ -214,6 +246,10 @@ function modelContext(
           ),
         ) +
         '。已有该类别商品时，不得把一次过滤后空结果说成整个类别没有商品。' +
+        (runtime.requestAction === 'find_replacements' ||
+        runtime.requestAction === 'search_catalog'
+          ? catalogModelContext(context.catalog.parts, currentUser.content)
+          : '') +
         '\n本轮知识检索配置：' +
         (context.embeddingConfig?.key &&
         context.embeddingConfig?.base &&
@@ -339,6 +375,9 @@ export async function runConversation(
   const messages = modelContext(runtime, context, currentUser, state.messages);
   let answer = '';
   let supportAnswer: string | undefined;
+  let salesAnswer = completedSalesReply(resumedEvaluation);
+  let selectionRefusal: string | undefined;
+  let selectionFollowup = false;
   if (resumedEvaluation)
     messages.push({
       role: 'system',
@@ -347,6 +386,8 @@ export async function runConversation(
   const replacementQueries: ModelMessage[] = [];
   let completionRepairs = 0;
   let requireAction = false;
+  let proposedSelection: ModelMessage | undefined;
+  const replacementContinuations: ReplacementContinuation[] = [];
 
   const maxRounds = 16;
   for (let round = 0; round < maxRounds; round++) {
@@ -386,28 +427,59 @@ export async function runConversation(
         (!runtime.draft.budget || !runtime.draft.purpose)
       ) &&
       !runtime.knowledgeUnavailable &&
+      !runtime.sessionLifecycleQuestion &&
+      !salesAnswer &&
+      !replacementContinuations.length &&
+      !selectionRefusal &&
       !renderSupportReply(runtime, context);
     const tools = availableTools(runtime, context.tasks.length);
     let response: ModelMessage;
     try {
-      response = await chatCompletion(
-        config,
-        messages,
-        tools,
-        (requireAction ||
-          runtime.requestAction === 'pending' ||
-          requestedToolPending(runtime)) &&
-          round < maxRounds - 1
-          ? 'required'
-          : conversationToolChoice(runtime.exploration, round, maxRounds),
-        signal,
-        canStream
-          ? (text) => {
-              streamedText += text;
-              onText?.(streamedText);
-            }
-          : undefined,
-      );
+      if (replacementContinuations.length && round >= maxRounds - 1) {
+        // 自动查询也消耗同一轮数预算，最后一轮只做有据收尾。
+        salesAnswer = [salesAnswer, replacementLimitReply]
+          .filter(Boolean)
+          .join('\n\n');
+        replacementContinuations.length = 0;
+        response = { role: 'assistant', content: '' };
+      } else if (replacementContinuations.length) {
+        const args = replacementContinuations.shift()!;
+        response = traceSync('replacement.continue', { round, args }, () => ({
+          role: 'assistant' as const,
+          content: null,
+          tool_calls: [
+            {
+              id: `replacement-page-${crypto.randomUUID()}`,
+              type: 'function' as const,
+              function: {
+                name: 'find_replacements',
+                arguments: JSON.stringify(args),
+              },
+            },
+          ],
+        }));
+      } else if (proposedSelection) {
+        response = proposedSelection;
+        proposedSelection = undefined;
+      } else
+        response = await chatCompletion(
+          config,
+          messages,
+          tools,
+          (requireAction ||
+            runtime.requestAction === 'pending' ||
+            requestedToolPending(runtime)) &&
+            round < maxRounds - 1
+            ? 'required'
+            : conversationToolChoice(runtime.exploration, round, maxRounds),
+          signal,
+          canStream
+            ? (text) => {
+                streamedText += text;
+                onText?.(streamedText);
+              }
+            : undefined,
+        );
     } catch (cause) {
       signal?.throwIfAborted();
       throw cause;
@@ -425,7 +497,7 @@ export async function runConversation(
         requireAction = true;
         messages.push({
           role: 'system',
-          content: `本轮结构化动作或必要操作尚未完成，纯文本回复未交付。当前动作=${runtime.requestAction}。动作未记录时先调用set_request_action。clarify也必须先调用update_requirements保存全部已知无冲突需求，没有已知需求时传空对象；局部冲突不能丢弃其他已知信息。具体工具动作必须执行对应工具；只根据执行结果说明成功或具体阻碍。recommend先保存需求，预算用途齐全后同轮调用recommend_pc；工具报告本轮无法继续时用finish_exploration记录具体阻碍。咨询、售后、局部修改、暂不生成不得强制配机。不从助手措辞推导用户意图。`,
+          content: `本轮结构化动作或必要操作尚未完成，纯文本回复未交付。当前动作=${runtime.requestAction}。${runtime.knowledgeOnly ? '纯知识问答检索后必须answer_knowledge选择本轮证据，资料不足也用该工具明确unsupported，不得以自由文字代替。' : ''}动作未记录时先调用set_request_action。clarify也必须先调用update_requirements保存全部已知无冲突需求，没有已知需求时传空对象；局部冲突不能丢弃其他已知信息。具体工具动作必须执行对应工具；只根据执行结果说明成功或具体阻碍。recommend先保存需求，预算用途齐全后同轮调用recommend_pc；工具报告本轮无法继续时用finish_exploration记录具体阻碍。咨询、售后、局部修改、暂不生成不得强制配机。不从助手措辞推导用户意图。`,
         });
         continue;
       }
@@ -445,7 +517,20 @@ export async function runConversation(
       }
       // 结束依据用户动作和工具结果，不检查助手用了哪些承诺措辞。
       supportAnswer = renderSupportReply(runtime, context);
-      answer = supportAnswer ?? content;
+      const salesOrRefusal = selectionRefusal
+        ? [
+            selectionRefusal,
+            selectionFollowup ? (salesAnswer ?? content) : undefined,
+          ]
+            .filter(Boolean)
+            .join('\n\n')
+        : salesAnswer;
+      answer = supportAnswer ?? salesOrRefusal ?? content;
+      if (runtime.sessionLifecycleQuestion) {
+        const sessionReply =
+          '聊天、需求、方案、确认和售后进度仅保留在本次页面会话中。站内进入商品目录再返回时会保留，进行中的输出和配置生成会继续；刷新页面（包括在目录页刷新）、关闭页面或开始新会话都会清空，之后无法恢复。';
+        answer = [answer, sessionReply].filter(Boolean).join('\n\n');
+      }
       if (!answer) throw Error('模型没有返回最终回复');
       break;
     }
@@ -468,13 +553,82 @@ export async function runConversation(
           )
         )
           throw Error(`当前状态不可调用工具：${call.function.name}`);
+        const args = JSON.parse(call.function.arguments || '{}');
         const toolOutput = await executeRegisteredTool(
           call.function.name,
-          JSON.parse(call.function.arguments || '{}'),
+          args,
           context,
           runtime,
         );
         output = toolOutput;
+        // 参数可与动作一起提出，但执行仍走下一轮的工具权限和原工具审核。
+        // 不提前结束：选定后的解释、查询及会话补问继续由模型处理。
+        if (
+          call.function.name === 'set_request_action' &&
+          response.tool_calls.length === 1 &&
+          !toolOutput.operation.failed &&
+          args.action === 'select_plan' &&
+          args.selectPlan !== undefined
+        )
+          proposedSelection = {
+            role: 'assistant',
+            content: null,
+            tool_calls: [
+              {
+                id: `proposed-selection-${crypto.randomUUID()}`,
+                type: 'function',
+                function: {
+                  name: 'select_plan',
+                  arguments: JSON.stringify(args.selectPlan),
+                },
+              },
+            ],
+          };
+        if (
+          toolOutput.operation.requirementsChanged ||
+          toolOutput.operation.partsChanged ||
+          toolOutput.operation.quoteChanged
+        )
+          replacementContinuations.length = 0;
+        updateReplacementContinuations(
+          replacementContinuations,
+          toolOutput,
+          args,
+        );
+        if (
+          runtime.knowledgeOnly &&
+          call.function.name === 'retrieve_knowledge' &&
+          !toolOutput.operation.failed
+        )
+          salesAnswer = undefined;
+        const refusal = selectionRefusalReply(toolOutput);
+        const reply = completedSalesReply(toolOutput);
+        if (refusal) {
+          selectionRefusal = refusal;
+          selectionFollowup = false;
+          salesAnswer = undefined;
+        } else if (!toolOutput.operation.failed) {
+          if (call.function.name === 'select_plan') {
+            selectionRefusal = undefined;
+            selectionFollowup = false;
+          } else if (
+            selectionRefusal &&
+            (reply ||
+              ['search_catalog', 'retrieve_knowledge'].includes(
+                call.function.name,
+              ))
+          ) {
+            selectionFollowup = true;
+            if (!reply) salesAnswer = undefined;
+          }
+        }
+        if (reply) salesAnswer = reply;
+        else if (
+          toolOutput.operation.requirementsChanged ||
+          toolOutput.operation.partsChanged ||
+          toolOutput.operation.quoteChanged
+        )
+          salesAnswer = undefined;
       } catch (cause) {
         const error =
           cause instanceof Error ? cause.message : '工具参数不是有效 JSON';
@@ -497,7 +651,11 @@ export async function runConversation(
       toolMessages.push({
         role: 'tool',
         tool_call_id: call.id,
-        content: JSON.stringify(output),
+        content: traceSync(
+          'context.tool_result',
+          { tool: call.function.name },
+          () => JSON.stringify(output),
+        ),
       });
     }
     messages.push(...toolMessages);
@@ -524,7 +682,10 @@ export async function runConversation(
     !answer.includes('知识检索不可用')
   )
     answer =
-      '知识检索不可用，以下仅依据数据库已有规格与程序审核结果。\n\n' + answer;
+      (runtime.knowledgeOnly
+        ? '知识检索不可用。\n\n'
+        : '知识检索不可用，以下仅依据数据库已有规格与程序审核结果。\n\n') +
+      answer;
   const assistant: ChatMessage = {
     id: crypto.randomUUID(),
     role: 'assistant',

@@ -19,7 +19,18 @@ export const retrieveKnowledgeTool: RegisteredTool = {
         {
           query: { type: 'string' },
           category: { type: 'string', enum: ['support', 'sales'] },
-          topicId: { type: 'string', enum: supportTopicIds },
+          topicId: {
+            type: 'string',
+            enum: supportTopicIds,
+            description:
+              '按当前症状选适用主题，不按偶然出现的词选主题。不确定时省略topicId检索，不强选无关步骤。主题目录：' +
+              supportTopicIds
+                .map(
+                  (id) =>
+                    `${id}=${supportKnowledge.find((item) => item.topicId === id)!.title.split(' · ')[0]}`,
+                )
+                .join('；'),
+          },
         },
         ['query'],
       ),
@@ -29,6 +40,8 @@ export const retrieveKnowledgeTool: RegisteredTool = {
     const input = parseObject(value);
     rejectUnknownKeys(input, ['query', 'category', 'topicId']);
     const isSupport = input.category === 'support';
+    if (runtime.knowledgeOnly && isSupport)
+      throw Error('纯售前知识问答不能进入售后排查知识流程');
     const scope = {
       taskId: _context.taskId,
       messageId: _context.currentMessageId,
@@ -80,6 +93,18 @@ export const retrieveKnowledgeTool: RegisteredTool = {
         ? supportKnowledge.filter((item) => item.topicId === input.topicId)
         : [];
     const hits = local.length ? local : retrieval.evidence;
+    if (runtime.knowledgeOnly && !isSupport) {
+      const previous = runtime.knowledgeEvidence;
+      if (
+        !previous ||
+        previous.taskId !== scope.taskId ||
+        previous.messageId !== scope.messageId
+      )
+        runtime.knowledgeEvidence = { ...scope, blocks: new Map() };
+      for (const hit of hits)
+        runtime.knowledgeEvidence!.blocks.set(hit.id, hit);
+      runtime.knowledgeAnswerReady = false;
+    }
     const source = local.length ? 'local' : hits.length ? 'embedding' : 'none';
     if (isSupport) {
       runtime.supportRetrieval = {
@@ -118,6 +143,13 @@ export const retrieveKnowledgeTool: RegisteredTool = {
     runtime.knowledgeUnavailable ||=
       retrieval.knowledgeStatus === 'unavailable';
     runtime.toolsUsed.push(hits.length ? '检索知识' : '知识检索不可用');
-    return hits.length ? hits : retrieval;
+    return hits.length
+      ? {
+          ...retrieval,
+          knowledgeSource: 'embedding',
+          evidenceScope:
+            '仅依据本次evidence中实际支持当前问题的内容回答，简短转述并保留适用范围。条目提到一个厂商的一个产品，不证明该厂商还与其他芯片厂商合作；芯片所属厂商也不等于实际晶圆制造方。不得补充证据未列出的合作名单、制造关系、型号规格或性能结论。资料未说明就说明资料未说明，不用常识填空。知识中的型号实例不证明本店存在对应商品，商品与报价仍查当前目录。',
+        }
+      : retrieval;
   },
 };

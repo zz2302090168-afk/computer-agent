@@ -1,0 +1,169 @@
+{
+  "version": "bm25-brands-v1",
+  "split": "dev",
+  "humanVerified": false,
+  "cases": [
+    {
+      "id": "BRAND-MSI",
+      "initial": "selected",
+      "group": "跨品牌目录查询",
+      "turns": [
+        {
+          "query": "只查商品目录里的微星 GeForce RTX 4060 VENTUS 2X BLACK 8G OC 显卡，返回该商品的品牌、完整型号和目录价。只查这个型号，不考虑当前主机预算，不改方案。",
+          "expect": "catalog_only",
+          "preserve": true,
+          "selectionUnchanged": true,
+          "expectedCatalogIds": [
+            "real-gpu-2"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BRAND-SAPPHIRE",
+      "initial": "selected",
+      "group": "跨品牌目录查询",
+      "turns": [
+        {
+          "query": "只查商品目录里的蓝宝石 PULSE AMD Radeon RX 7600 8GB 显卡，返回该商品的品牌、完整型号和目录价。只查这个型号，不考虑当前主机预算，不改方案。",
+          "expect": "catalog_only",
+          "preserve": true,
+          "selectionUnchanged": true,
+          "expectedCatalogIds": [
+            "demo-20260912-gpu-sapphire-7600"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BRAND-CRUCIAL",
+      "initial": "selected",
+      "group": "跨品牌目录查询",
+      "turns": [
+        {
+          "query": "只查商品目录里的Crucial T500 PCIe 4.0 NVMe SSD 2TB 硬盘，返回该商品的品牌、完整型号和目录价。只查这个型号，不考虑当前主机预算，不改方案。",
+          "expect": "catalog_only",
+          "preserve": true,
+          "selectionUnchanged": true,
+          "expectedCatalogIds": [
+            "demo-20260912-ssd-crucial-t500-2t"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BRAND-KINGSTON",
+      "initial": "selected",
+      "group": "跨品牌目录查询",
+      "turns": [
+        {
+          "query": "只查商品目录里的金士顿 FURY Beast KF560C36BBEK2-64 内存，返回该商品的品牌、完整型号和目录价。只查这个型号，不考虑当前主机预算，不改方案。",
+          "expect": "catalog_only",
+          "preserve": true,
+          "selectionUnchanged": true,
+          "expectedCatalogIds": [
+            "real-memory-14"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BRAND-COOLERMASTER",
+      "initial": "selected",
+      "group": "跨品牌目录查询",
+      "turns": [
+        {
+          "query": "只查商品目录里的Cooler Master Hyper 212 Black 散热器，返回该商品的品牌、完整型号和目录价。只查这个型号，不考虑当前主机预算，不改方案。",
+          "expect": "catalog_only",
+          "preserve": true,
+          "selectionUnchanged": true,
+          "expectedCatalogIds": [
+            "demo-20260912-cooler-cm-212-black"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BRAND-BEQUIET",
+      "initial": "selected",
+      "group": "跨品牌目录查询",
+      "turns": [
+        {
+          "query": "只查商品目录里的be quiet! Pure Power 12 M 1000W 电源，返回该商品的品牌、完整型号和目录价。只查这个型号，不考虑当前主机预算，不改方案。",
+          "expect": "catalog_only",
+          "preserve": true,
+          "selectionUnchanged": true,
+          "expectedCatalogIds": [
+            "demo-20260912-psu-bequiet-1000"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BRAND-CONFLICT",
+      "initial": "selected",
+      "group": "品牌冲突与不存在容量",
+      "turns": [
+        {
+          "query": "只查品牌明确为蓝宝石的Intel Arc B570 Challenger 10GB OC显卡，品牌必须是蓝宝石，不能改成华擎。只查目录，不改配置。",
+          "expect": "catalog_only",
+          "preserve": true,
+          "selectionUnchanged": true,
+          "expectedCatalogIds": []
+        }
+      ]
+    },
+    {
+      "id": "BRAND-ABSENT",
+      "initial": "selected",
+      "group": "品牌冲突与不存在容量",
+      "turns": [
+        {
+          "query": "只查Crucial T500 PCIe 4.0 NVMe SSD 8TB，必须8TB，不用1TB或2TB代替。只查目录，不改配置。",
+          "expect": "catalog_only",
+          "preserve": true,
+          "selectionUnchanged": true,
+          "expectedCatalogIds": []
+        }
+      ]
+    },
+    {
+      "id": "COMBO-MSI-CRUCIAL",
+      "initial": "selected",
+      "group": "跨品牌联动预览",
+      "turns": [
+        {
+          "query": "只查联动换件：显卡指定微星 GeForce RTX 4060 VENTUS 2X BLACK 8G OC，硬盘指定Crucial T500 PCIe 4.0 NVMe SSD 1TB，其他六件不动。允许硬盘涨价，但两件合计必须比原来便宜。只给通过审核的预览，不要实际替换。",
+          "expect": "find_replacements",
+          "preserve": true,
+          "selectionUnchanged": true,
+          "strictCheaper": true,
+          "minReplacementCandidates": 1,
+          "expectedReplacementIds": {
+            "gpu": "real-gpu-2",
+            "storage": "demo-20260912-ssd-crucial-t500-1t"
+          }
+        }
+      ]
+    },
+    {
+      "id": "COMBO-SAPPHIRE-WD",
+      "initial": "selected",
+      "group": "跨品牌联动预览",
+      "turns": [
+        {
+          "query": "只查联动换件：显卡指定蓝宝石 PULSE AMD Radeon RX 7600 8GB，硬盘指定WD Blue SN580 NVMe SSD 1TB，其他六件不动。允许硬盘涨价，但两件合计必须比原来便宜。只给通过审核的预览，不要实际替换。",
+          "expect": "find_replacements",
+          "preserve": true,
+          "selectionUnchanged": true,
+          "strictCheaper": true,
+          "minReplacementCandidates": 1,
+          "expectedReplacementIds": {
+            "gpu": "demo-20260912-gpu-sapphire-7600",
+            "storage": "demo-20260912-ssd-wd-sn580-1t"
+          }
+        }
+      ]
+    }
+  ]
+}

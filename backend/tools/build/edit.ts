@@ -1,4 +1,5 @@
 import { editPlan } from '../../services/edit-plan';
+import { replacementReply } from '../../agent/sales-reply';
 import { resolvePlan } from '../../services/resolve-plan';
 import { assertCurrentTaskUserMessage } from '../requirements';
 import {
@@ -96,6 +97,7 @@ export const replacePartsTool: RegisteredTool = {
     runtime.result = edited.result;
     runtime.task = { ...edited, version: version ?? edited.version };
     return {
+      displayReply: replacementReply(plan, edited.result.plans[0]),
       plan: edited.result.plans[0],
       summary: edited.result.summary,
       version,

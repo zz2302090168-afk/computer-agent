@@ -2,12 +2,15 @@ import type { Catalog, Category, PcTask } from '../domain/types';
 import { searchCatalog } from './catalog-search';
 import { editPlan } from './edit-plan';
 import { resolvePlan } from './resolve-plan';
+import { isColorCategory } from '../rules/color';
 
 export type ReplacementFilter = {
   category: Category;
+  productId?: string;
   brand?: string;
   modelKeyword?: string;
   color?: string;
+  priceRelation?: 'cheaper' | 'any';
 };
 export type ReplacementQuery = {
   planId?: string;
@@ -15,6 +18,7 @@ export type ReplacementQuery = {
   sort?: 'price_asc' | 'price_desc';
   offset?: number;
   limit?: number;
+  totalPriceRelation?: 'cheaper' | 'any';
 };
 
 // 单件与多件都通过同一次整体编辑审核；查询不写任务。
@@ -29,10 +33,18 @@ export function findReplacements(
   const groups = query.items.map((filter) => {
     const old = plan.parts.find((part) => part.category === filter.category);
     if (!old) throw Error('当前配置缺少待替换类别，请重新审核');
-    const parts = searchCatalog(catalog.parts, filter)
+    const product = filter.productId
+      ? catalog.parts.find((part) => part.id === filter.productId)
+      : undefined;
+    if (filter.productId && !product)
+      throw Error('指定的替换商品ID不在当前目录中，请先重新查询商品目录');
+    if (product && product.category !== filter.category)
+      throw Error('指定的替换商品ID与待替换类别不一致');
+    const parts = searchCatalog(product ? [product] : catalog.parts, filter)
       .filter(
         (part) =>
           part.id !== old.id &&
+          (filter.priceRelation !== 'cheaper' || part.price < old.price) &&
           (!filter.color ||
             filter.color === '不限' ||
             part.color === filter.color),
@@ -55,7 +67,7 @@ export function findReplacements(
     limit = query.limit ?? 10;
   const proposedPartColors = Object.fromEntries(
     query.items
-      .filter((item) => item.color)
+      .filter((item) => item.color && isColorCategory(item.category))
       .map((item) => [item.category, item.color!]),
   ) as Partial<Record<Category, string>>;
   const candidates = [],
@@ -85,6 +97,8 @@ export function findReplacements(
         proposedPartColors,
       );
       const updated = edited.result.plans[0]!;
+      if (query.totalPriceRelation === 'cheaper' && updated.total >= plan.total)
+        throw Error('该组合总价没有严格低于当前方案，不满足整体更便宜的条件');
       if (updated.deliveryAudit?.status !== 'passed')
         throw Error('该候选仅能形成超预算参考，不能作为预算合格替换');
       candidates.push({
@@ -97,12 +111,13 @@ export function findReplacements(
             }
           : {}),
         replacements,
-        parts: parts.map(({ id, category, name, color, price }) => ({
+        parts: parts.map(({ id, category, name, color, price, demo }) => ({
           id,
           category,
           name,
           color,
           price,
+          demo,
         })),
         total: updated.total,
         difference: updated.total - plan.total,
@@ -118,6 +133,8 @@ export function findReplacements(
   }
   return {
     planId: plan.id,
+    oldTotal: plan.total,
+    totalPriceRelation: query.totalPriceRelation ?? 'any',
     query: query.items,
     ...(groups.length === 1
       ? {
@@ -131,6 +148,8 @@ export function findReplacements(
     categories: groups.map(({ filter, old, parts }) => ({
       category: filter.category,
       oldProductId: old.id,
+      oldPrice: old.price,
+      priceRelation: filter.priceRelation ?? 'any',
       matchCount: parts.length,
       categoryTotal: catalog.parts.filter(
         (part) => part.category === filter.category,

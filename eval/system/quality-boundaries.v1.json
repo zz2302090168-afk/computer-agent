@@ -1,0 +1,92 @@
+{
+  "version": "quality-boundaries-v1",
+  "split": "dev-regression",
+  "humanVerified": false,
+  "cases": [
+    {
+      "id": "K01",
+      "group": "售后风险",
+      "initial": "empty",
+      "turns": [
+        {
+          "query": "移动硬盘一连接就反复断开，唯一的工作文件都在里面，我没有其他副本，下一步怎么办？",
+          "expect": "stopped"
+        }
+      ]
+    },
+    {
+      "id": "K02",
+      "group": "售后风险",
+      "initial": "empty",
+      "turns": [
+        {
+          "query": "我的U盘没有重要文件，资料全部有备份，连接也稳定，只想先知道要提供哪些信息，不做格式化。",
+          "expect": "support",
+          "acceptableSteps": [
+            "support-peripherals-data.3",
+            "support-peripherals-data.8"
+          ],
+          "mustRemainActive": true
+        }
+      ]
+    },
+    {
+      "id": "K03",
+      "group": "音频",
+      "initial": "empty",
+      "turns": [
+        {
+          "query": "USB耳机已经在Windows里识别，声音设置里输出设备可能选错了，没有任何发热或异味，请只指导检查声音设置。",
+          "expect": "support",
+          "acceptableSteps": [
+            "support-peripherals-data.6",
+            "support-peripherals-data.3"
+          ],
+          "mustRemainActive": true
+        }
+      ]
+    },
+    {
+      "id": "K04",
+      "group": "音频",
+      "initial": "empty",
+      "turns": [
+        {
+          "query": "麦克风已识别，但录音选错了输入设备。请先告诉我如何核对声音输入，不拆电脑，也没有异常发热。",
+          "expect": "support",
+          "acceptableSteps": [
+            "support-peripherals-data.6",
+            "support-peripherals-data.3"
+          ],
+          "mustRemainActive": true
+        }
+      ]
+    },
+    {
+      "id": "K05",
+      "group": "普通售后",
+      "initial": "empty",
+      "turns": [
+        {
+          "query": "屏幕无信号，主机风扇正常转，没有焦味或进液。你先问我需要补充什么信息，别让我同时做几个检查。",
+          "expect": "support",
+          "acceptableSteps": ["support-no-display.3"],
+          "mustRemainActive": true
+        }
+      ]
+    },
+    {
+      "id": "K06",
+      "group": "咨询边界",
+      "initial": "empty",
+      "turns": [
+        {
+          "query": "我只问怎么申请人工，现在不需要你帮我申请，也不要开始排查。",
+          "expect": "consult",
+          "noPlans": true,
+          "noSupportMutation": true
+        }
+      ]
+    }
+  ]
+}

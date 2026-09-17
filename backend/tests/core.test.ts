@@ -168,6 +168,27 @@ void test('CPU和硬盘不接受颜色约束或颜色查询', async () => {
     /不参与配色/,
   );
 });
+void test('目录价格null表示未限制，显式零元与数值上界仍严格生效', async () => {
+  const f = fixture();
+  const query = (filter: Record<string, unknown>) =>
+    searchCatalogTool.execute(
+      { kind: 'part', category: 'gpu', ...filter },
+      f.context,
+      f.runtime,
+    );
+  const unlimited = await query({ minPrice: null, maxPrice: null });
+  assert.deepEqual(unlimited, await query({}));
+  const zero = await query({ maxPrice: 0 });
+  assert.equal((zero as { matchCount: number }).matchCount, 0);
+  const capped = await query({ maxPrice: 950 });
+  assert.equal((capped as { matchCount: number }).matchCount, 2);
+  assert.deepEqual(await query({ maxPrice: '950' }), capped);
+  assert.deepEqual(await query({ maxPrice: '0' }), zero);
+  for (const invalid of ['', '不限', '1500元', '1e3', 'Infinity'])
+    await assert.rejects(query({ maxPrice: invalid }), /有效数字/);
+  await assert.rejects(query({ maxPrice: -1 }), /价格区间/);
+  await assert.rejects(query({ offset: null }), /有效数字/);
+});
 void test('预算默认正负500边界，显式误差与明确上限保持有效', () => {
   assert.ok(withinBudget(5500, 6000));
   assert.ok(withinBudget(6500, 6000));

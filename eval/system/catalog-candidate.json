@@ -1,0 +1,4 @@
+{
+  "decision": "rejected; B03 still used maxPrice=0; J04 wrong tool",
+  "schemaFragment": "        minPrice: {\n          type: 'number',\n          minimum: 0,\n          description: '单件商品最低价，仅用户指定时填写；未限制价格时省略。',\n        },\n        maxPrice: {\n          type: 'number',\n          minimum: 0,\n          description:\n            '单件商品最高价，仅用户指定时填写；未限制价格时省略，0表示只查零元商品，绝不表示不限价。不要将整套主机预算填入单件价格过滤。',\n        },"
+}

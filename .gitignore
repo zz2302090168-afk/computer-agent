@@ -53,8 +53,10 @@ __pycache__/
 
 # backend diagnostic traces
 /logs/
+/.venv-ragas*/
+/eval/results/
 
 # private interview materials and Office lock files
-/docs/*面试*
+/docs/*闈㈣瘯*
 /docs/~$*
 /scripts/build_resume_pdf.py

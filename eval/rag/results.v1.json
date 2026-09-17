@@ -1,0 +1,1436 @@
+{
+  "version": "results-v1",
+  "humanVerified": false,
+  "runs": [
+    {
+      "runId": "2026-09-15T06-32-46.541Z-4df442c2",
+      "humanVerified": false,
+      "groups": {
+        "baseline/dev": {
+          "n": 4,
+          "applicationFailures": 0,
+          "applicationFailureRate": 0.0,
+          "recallAt4": {
+            "n": 3,
+            "mean": 0.8333333333333334
+          },
+          "mrrAt4": {
+            "n": 3,
+            "mean": 0.8333333333333334
+          },
+          "faithfulness": {
+            "n": 3,
+            "mean": 0.7905982905982907
+          },
+          "businessStatus": {
+            "success": 2,
+            "failed": 2
+          },
+          "ragasStatus": {
+            "success": 3,
+            "failed": 1
+          },
+          "businessScores": {
+            "relevance": {
+              "n": 2,
+              "mean": 2
+            },
+            "correctness": {
+              "n": 2,
+              "mean": 2
+            },
+            "business_safety": {
+              "n": 2,
+              "mean": 2
+            }
+          },
+          "criticalFailures": [],
+          "criticalUnassessed": 2,
+          "applicationMs": {
+            "n": 4,
+            "min": 19432.4663,
+            "median": 26853.75965,
+            "max": 55074.187300000005,
+            "p95": null,
+            "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+          },
+          "firstTextMs": {
+            "n": 4,
+            "min": 16828.747399999993,
+            "median": 24276.60665,
+            "max": 52092.2276,
+            "p95": null,
+            "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+          },
+          "retrievalMsByCache": {
+            "cold": {
+              "n": 1,
+              "min": 3524.7137,
+              "median": 3524.7137,
+              "max": 3524.7137,
+              "p95": null,
+              "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+            },
+            "hit": {
+              "n": 3,
+              "min": 218.21749999999884,
+              "median": 218.3365000000049,
+              "max": 237.3617000000013,
+              "p95": null,
+              "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+            },
+            "wait": {
+              "n": 0,
+              "min": null,
+              "median": null,
+              "max": null,
+              "p95": null,
+              "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+            }
+          },
+          "businessJudgeMs": {
+            "n": 4,
+            "min": 4122.597200002929,
+            "median": 4817.71414999821,
+            "max": 6912.296700000297,
+            "p95": null,
+            "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+          },
+          "ragasJudgeMs": {
+            "n": 4,
+            "min": 10337.955499999225,
+            "median": 13990.424900002836,
+            "max": 50707.29050000227,
+            "p95": null,
+            "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+          },
+          "applicationUsage": {
+            "models": {
+              "qwen3.7-text-embedding-flash": {
+                "observedCalls": 102,
+                "usageMissingCalls": 0,
+                "observedInputTokens": 10411,
+                "observedOutputTokens": 0,
+                "cost": null,
+                "costStatus": "unknown_price_or_usage"
+              },
+              "qwen3.5-flash": {
+                "observedCalls": 4,
+                "usageMissingCalls": 0,
+                "observedInputTokens": 2575,
+                "observedOutputTokens": 10272,
+                "cost": null,
+                "costStatus": "unknown_price_or_usage"
+              }
+            },
+            "currency": null,
+            "source": null,
+            "totalCost": null,
+            "caveat": "observed token subtotal; provider billing discounts, missing usage and failed call charges are unknown"
+          }
+        },
+        "baseline/test": {
+          "n": 6,
+          "applicationFailures": 0,
+          "applicationFailureRate": 0.0,
+          "recallAt4": {
+            "n": 6,
+            "mean": 0.75
+          },
+          "mrrAt4": {
+            "n": 6,
+            "mean": 0.8333333333333334
+          },
+          "faithfulness": {
+            "n": 6,
+            "mean": 0.6903302987861811
+          },
+          "businessStatus": {
+            "failed": 4,
+            "success": 2
+          },
+          "ragasStatus": {
+            "success": 6
+          },
+          "businessScores": {
+            "relevance": {
+              "n": 2,
+              "mean": 2
+            },
+            "correctness": {
+              "n": 2,
+              "mean": 2
+            },
+            "business_safety": {
+              "n": 2,
+              "mean": 2
+            }
+          },
+          "criticalFailures": [],
+          "criticalUnassessed": 4,
+          "applicationMs": {
+            "n": 6,
+            "min": 19476.749899999995,
+            "median": 26914.095050000004,
+            "max": 41005.27689999994,
+            "p95": null,
+            "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+          },
+          "firstTextMs": {
+            "n": 6,
+            "min": 16160.03389999998,
+            "median": 22810.92690000002,
+            "max": 38851.656499999925,
+            "p95": null,
+            "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+          },
+          "retrievalMsByCache": {
+            "cold": {
+              "n": 0,
+              "min": null,
+              "median": null,
+              "max": null,
+              "p95": null,
+              "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+            },
+            "hit": {
+              "n": 6,
+              "min": 211.34210000000894,
+              "median": 239.0242500000022,
+              "max": 504.2011000000639,
+              "p95": null,
+              "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+            },
+            "wait": {
+              "n": 0,
+              "min": null,
+              "median": null,
+              "max": null,
+              "p95": null,
+              "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+            }
+          },
+          "businessJudgeMs": {
+            "n": 6,
+            "min": 4928.129200001422,
+            "median": 5619.932100002188,
+            "max": 6896.809300000314,
+            "p95": null,
+            "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+          },
+          "ragasJudgeMs": {
+            "n": 6,
+            "min": 7596.680099995865,
+            "median": 14120.336900003167,
+            "max": 18437.807800000883,
+            "p95": null,
+            "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+          },
+          "applicationUsage": {
+            "models": {
+              "qwen3.7-text-embedding-flash": {
+                "observedCalls": 6,
+                "usageMissingCalls": 0,
+                "observedInputTokens": 208,
+                "observedOutputTokens": 0,
+                "cost": null,
+                "costStatus": "unknown_price_or_usage"
+              },
+              "qwen3.5-flash": {
+                "observedCalls": 6,
+                "usageMissingCalls": 0,
+                "observedInputTokens": 3768,
+                "observedOutputTokens": 15086,
+                "cost": null,
+                "costStatus": "unknown_price_or_usage"
+              }
+            },
+            "currency": null,
+            "source": null,
+            "totalCost": null,
+            "caveat": "observed token subtotal; provider billing discounts, missing usage and failed call charges are unknown"
+          }
+        },
+        "body_only/dev": {
+          "n": 4,
+          "applicationFailures": 0,
+          "applicationFailureRate": 0.0,
+          "recallAt4": {
+            "n": 3,
+            "mean": 0.6666666666666666
+          },
+          "mrrAt4": {
+            "n": 3,
+            "mean": 0.6666666666666666
+          },
+          "faithfulness": {
+            "n": 4,
+            "mean": 0.7967032967032968
+          },
+          "businessStatus": {
+            "success": 2,
+            "failed": 2
+          },
+          "ragasStatus": {
+            "success": 4
+          },
+          "businessScores": {
+            "relevance": {
+              "n": 2,
+              "mean": 2
+            },
+            "correctness": {
+              "n": 2,
+              "mean": 2
+            },
+            "business_safety": {
+              "n": 2,
+              "mean": 2
+            }
+          },
+          "criticalFailures": [],
+          "criticalUnassessed": 2,
+          "applicationMs": {
+            "n": 4,
+            "min": 16737.800300000003,
+            "median": 22352.109050000014,
+            "max": 40270.90669999999,
+            "p95": null,
+            "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+          },
+          "firstTextMs": {
+            "n": 4,
+            "min": 15600.5936,
+            "median": 20443.280600000006,
+            "max": 36130.34599999999,
+            "p95": null,
+            "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+          },
+          "retrievalMsByCache": {
+            "cold": {
+              "n": 1,
+              "min": 3580.295399999999,
+              "median": 3580.295399999999,
+              "max": 3580.295399999999,
+              "p95": null,
+              "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+            },
+            "hit": {
+              "n": 3,
+              "min": 227.20690000000468,
+              "median": 244.2262000000046,
+              "max": 257.2186999999976,
+              "p95": null,
+              "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+            },
+            "wait": {
+              "n": 0,
+              "min": null,
+              "median": null,
+              "max": null,
+              "p95": null,
+              "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+            }
+          },
+          "businessJudgeMs": {
+            "n": 4,
+            "min": 3719.3303000021842,
+            "median": 4840.330499999254,
+            "max": 6108.678700002201,
+            "p95": null,
+            "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+          },
+          "ragasJudgeMs": {
+            "n": 4,
+            "min": 7781.330700003309,
+            "median": 11167.15275000388,
+            "max": 14850.94210000534,
+            "p95": null,
+            "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+          },
+          "applicationUsage": {
+            "models": {
+              "qwen3.7-text-embedding-flash": {
+                "observedCalls": 102,
+                "usageMissingCalls": 0,
+                "observedInputTokens": 7879,
+                "observedOutputTokens": 0,
+                "cost": null,
+                "costStatus": "unknown_price_or_usage"
+              },
+              "qwen3.5-flash": {
+                "observedCalls": 4,
+                "usageMissingCalls": 0,
+                "observedInputTokens": 2559,
+                "observedOutputTokens": 8339,
+                "cost": null,
+                "costStatus": "unknown_price_or_usage"
+              }
+            },
+            "currency": null,
+            "source": null,
+            "totalCost": null,
+            "caveat": "observed token subtotal; provider billing discounts, missing usage and failed call charges are unknown"
+          }
+        },
+        "body_only/test": {
+          "n": 6,
+          "applicationFailures": 0,
+          "applicationFailureRate": 0.0,
+          "recallAt4": {
+            "n": 6,
+            "mean": 0.75
+          },
+          "mrrAt4": {
+            "n": 6,
+            "mean": 0.5972222222222222
+          },
+          "faithfulness": {
+            "n": 6,
+            "mean": 0.662857967887245
+          },
+          "businessStatus": {
+            "success": 4,
+            "failed": 2
+          },
+          "ragasStatus": {
+            "success": 6
+          },
+          "businessScores": {
+            "relevance": {
+              "n": 4,
+              "mean": 2
+            },
+            "correctness": {
+              "n": 4,
+              "mean": 2
+            },
+            "business_safety": {
+              "n": 4,
+              "mean": 2
+            }
+          },
+          "criticalFailures": [],
+          "criticalUnassessed": 2,
+          "applicationMs": {
+            "n": 6,
+            "min": 22716.7463,
+            "median": 28148.612599999964,
+            "max": 41027.77549999999,
+            "p95": null,
+            "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+          },
+          "firstTextMs": {
+            "n": 6,
+            "min": 18320.339800000016,
+            "median": 24866.928399999975,
+            "max": 38309.295599999954,
+            "p95": null,
+            "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+          },
+          "retrievalMsByCache": {
+            "cold": {
+              "n": 0,
+              "min": null,
+              "median": null,
+              "max": null,
+              "p95": null,
+              "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+            },
+            "hit": {
+              "n": 6,
+              "min": 202.20429999998305,
+              "median": 217.53589999998803,
+              "max": 249.49259999999776,
+              "p95": null,
+              "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+            },
+            "wait": {
+              "n": 0,
+              "min": null,
+              "median": null,
+              "max": null,
+              "p95": null,
+              "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+            }
+          },
+          "businessJudgeMs": {
+            "n": 6,
+            "min": 4326.736400005757,
+            "median": 6364.978649999102,
+            "max": 7894.473500004096,
+            "p95": null,
+            "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+          },
+          "ragasJudgeMs": {
+            "n": 6,
+            "min": 7499.134400000912,
+            "median": 18199.275499999203,
+            "max": 21866.082099993946,
+            "p95": null,
+            "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+          },
+          "applicationUsage": {
+            "models": {
+              "qwen3.7-text-embedding-flash": {
+                "observedCalls": 6,
+                "usageMissingCalls": 0,
+                "observedInputTokens": 208,
+                "observedOutputTokens": 0,
+                "cost": null,
+                "costStatus": "unknown_price_or_usage"
+              },
+              "qwen3.5-flash": {
+                "observedCalls": 6,
+                "usageMissingCalls": 0,
+                "observedInputTokens": 3727,
+                "observedOutputTokens": 14232,
+                "cost": null,
+                "costStatus": "unknown_price_or_usage"
+              }
+            },
+            "currency": null,
+            "source": null,
+            "totalCost": null,
+            "caveat": "observed token subtotal; provider billing discounts, missing usage and failed call charges are unknown"
+          }
+        }
+      },
+      "pairedComparisons": {
+        "dev": {
+          "faithfulnessPairs": [
+            {
+              "id": "D01",
+              "baseline": 0.8333333333333334,
+              "body_only": 1.0
+            },
+            {
+              "id": "D02",
+              "baseline": 0.7692307692307693,
+              "body_only": 0.8461538461538461
+            },
+            {
+              "id": "D04",
+              "baseline": 0.7692307692307693,
+              "body_only": 0.7692307692307693
+            }
+          ],
+          "baseline": {
+            "n": 3,
+            "mean": 0.7905982905982907
+          },
+          "body_only": {
+            "n": 3,
+            "mean": 0.8717948717948718
+          },
+          "baselineMinusBody": {
+            "n": 3,
+            "mean": -0.08119658119658117
+          }
+        },
+        "test": {
+          "faithfulnessPairs": [
+            {
+              "id": "T01",
+              "baseline": 0.8571428571428571,
+              "body_only": 0.8181818181818182
+            },
+            {
+              "id": "T02",
+              "baseline": 0.5238095238095238,
+              "body_only": 0.30434782608695654
+            },
+            {
+              "id": "T03",
+              "baseline": 0.5625,
+              "body_only": 0.7083333333333334
+            },
+            {
+              "id": "T04",
+              "baseline": 0.5,
+              "body_only": 0.75
+            },
+            {
+              "id": "T05",
+              "baseline": 0.8235294117647058,
+              "body_only": 0.7647058823529411
+            },
+            {
+              "id": "T06",
+              "baseline": 0.875,
+              "body_only": 0.631578947368421
+            }
+          ],
+          "baseline": {
+            "n": 6,
+            "mean": 0.6903302987861811
+          },
+          "body_only": {
+            "n": 6,
+            "mean": 0.662857967887245
+          },
+          "baselineMinusBody": {
+            "n": 6,
+            "mean": 0.02747233089893608
+          }
+        }
+      },
+      "cases": [
+        {
+          "id": "D01",
+          "variant": "baseline",
+          "split": "dev",
+          "missingAnnotatedIds": [],
+          "program": {
+            "recallAtK": 1,
+            "reciprocalRank": 1,
+            "hitAtK": 1,
+            "annotation": "synthetic_provisional_positive_ids_not_exhaustive_human_labels",
+            "citationIdValidity": 1,
+            "citedIds": [
+              "compat-memory",
+              "compat-am5",
+              "selection-memory-capacity-clearance"
+            ]
+          },
+          "judgeStatus": "success",
+          "correctness": 2,
+          "attribution": "no_detected_failure",
+          "retrievalSources": null
+        },
+        {
+          "id": "D01",
+          "variant": "body_only",
+          "split": "dev",
+          "missingAnnotatedIds": [],
+          "program": {
+            "recallAtK": 1,
+            "reciprocalRank": 1,
+            "hitAtK": 1,
+            "annotation": "synthetic_provisional_positive_ids_not_exhaustive_human_labels",
+            "citationIdValidity": 1,
+            "citedIds": ["compat-memory", "compat-memory"]
+          },
+          "judgeStatus": "success",
+          "correctness": 2,
+          "attribution": "no_detected_failure",
+          "retrievalSources": null
+        },
+        {
+          "id": "D02",
+          "variant": "body_only",
+          "split": "dev",
+          "missingAnnotatedIds": ["support-no-power.3"],
+          "program": {
+            "recallAtK": 0,
+            "reciprocalRank": 0,
+            "hitAtK": 0,
+            "annotation": "synthetic_provisional_positive_ids_not_exhaustive_human_labels",
+            "citationIdValidity": null,
+            "citedIds": []
+          },
+          "judgeStatus": "success",
+          "correctness": 2,
+          "attribution": "retrieval_or_alternative_evidence_needs_review",
+          "retrievalSources": null
+        },
+        {
+          "id": "D02",
+          "variant": "baseline",
+          "split": "dev",
+          "missingAnnotatedIds": [],
+          "program": {
+            "recallAtK": 1,
+            "reciprocalRank": 0.5,
+            "hitAtK": 1,
+            "annotation": "synthetic_provisional_positive_ids_not_exhaustive_human_labels",
+            "citationIdValidity": 1,
+            "citedIds": ["support-no-power.3"]
+          },
+          "judgeStatus": "success",
+          "correctness": 2,
+          "attribution": "no_detected_failure",
+          "retrievalSources": null
+        },
+        {
+          "id": "D03",
+          "variant": "baseline",
+          "split": "dev",
+          "missingAnnotatedIds": ["support-no-power.2"],
+          "program": {
+            "recallAtK": 0.5,
+            "reciprocalRank": 1,
+            "hitAtK": 1,
+            "annotation": "synthetic_provisional_positive_ids_not_exhaustive_human_labels",
+            "citationIdValidity": 1,
+            "citedIds": [
+              "support-no-display.2",
+              "support-no-display.1",
+              "support-no-display.8"
+            ]
+          },
+          "judgeStatus": "failed",
+          "correctness": null,
+          "attribution": "judge_unavailable",
+          "retrievalSources": null
+        },
+        {
+          "id": "D03",
+          "variant": "body_only",
+          "split": "dev",
+          "missingAnnotatedIds": [],
+          "program": {
+            "recallAtK": 1,
+            "reciprocalRank": 1,
+            "hitAtK": 1,
+            "annotation": "synthetic_provisional_positive_ids_not_exhaustive_human_labels",
+            "citationIdValidity": 1,
+            "citedIds": [
+              "support-no-power.2",
+              "support-no-display.2",
+              "support-no-display.1"
+            ]
+          },
+          "judgeStatus": "failed",
+          "correctness": null,
+          "attribution": "judge_unavailable",
+          "retrievalSources": null
+        },
+        {
+          "id": "D04",
+          "variant": "body_only",
+          "split": "dev",
+          "missingAnnotatedIds": [],
+          "program": {
+            "recallAtK": null,
+            "reciprocalRank": null,
+            "hitAtK": null,
+            "annotation": "synthetic_provisional_positive_ids_not_exhaustive_human_labels",
+            "citationIdValidity": 1,
+            "citedIds": ["recommend-game"]
+          },
+          "judgeStatus": "failed",
+          "correctness": null,
+          "attribution": "judge_unavailable",
+          "retrievalSources": null
+        },
+        {
+          "id": "D04",
+          "variant": "baseline",
+          "split": "dev",
+          "missingAnnotatedIds": [],
+          "program": {
+            "recallAtK": null,
+            "reciprocalRank": null,
+            "hitAtK": null,
+            "annotation": "synthetic_provisional_positive_ids_not_exhaustive_human_labels",
+            "citationIdValidity": 1,
+            "citedIds": [
+              "recommend-game",
+              "recommend-budget",
+              "compat-preassembly-gate",
+              "recommend-game",
+              "recommend-budget",
+              "compat-preassembly-gate",
+              "recommend-game"
+            ]
+          },
+          "judgeStatus": "failed",
+          "correctness": null,
+          "attribution": "judge_unavailable",
+          "retrievalSources": null
+        },
+        {
+          "id": "T01",
+          "variant": "baseline",
+          "split": "test",
+          "missingAnnotatedIds": ["compat-cpu"],
+          "program": {
+            "recallAtK": 0.5,
+            "reciprocalRank": 1,
+            "hitAtK": 1,
+            "annotation": "synthetic_provisional_positive_ids_not_exhaustive_human_labels",
+            "citationIdValidity": 1,
+            "citedIds": [
+              "compat-am5",
+              "compat-memory",
+              "compat-am5",
+              "selection-cpu-platform"
+            ]
+          },
+          "judgeStatus": "failed",
+          "correctness": null,
+          "attribution": "judge_unavailable",
+          "retrievalSources": null
+        },
+        {
+          "id": "T01",
+          "variant": "body_only",
+          "split": "test",
+          "missingAnnotatedIds": ["compat-cpu"],
+          "program": {
+            "recallAtK": 0.5,
+            "reciprocalRank": 1,
+            "hitAtK": 1,
+            "annotation": "synthetic_provisional_positive_ids_not_exhaustive_human_labels",
+            "citationIdValidity": 1,
+            "citedIds": [
+              "compat-am5",
+              "compat-memory",
+              "compat-am5",
+              "selection-cpu-platform"
+            ]
+          },
+          "judgeStatus": "success",
+          "correctness": 2,
+          "attribution": "retrieval_or_alternative_evidence_needs_review",
+          "retrievalSources": null
+        },
+        {
+          "id": "T02",
+          "variant": "body_only",
+          "split": "test",
+          "missingAnnotatedIds": [],
+          "program": {
+            "recallAtK": 1,
+            "reciprocalRank": 0.3333333333333333,
+            "hitAtK": 1,
+            "annotation": "synthetic_provisional_positive_ids_not_exhaustive_human_labels",
+            "citationIdValidity": 1,
+            "citedIds": [
+              "support-no-display.8",
+              "support-general-flow.7",
+              "support-no-power.7"
+            ]
+          },
+          "judgeStatus": "success",
+          "correctness": 2,
+          "attribution": "no_detected_failure",
+          "retrievalSources": null
+        },
+        {
+          "id": "T02",
+          "variant": "baseline",
+          "split": "test",
+          "missingAnnotatedIds": [],
+          "program": {
+            "recallAtK": 1,
+            "reciprocalRank": 1,
+            "hitAtK": 1,
+            "annotation": "synthetic_provisional_positive_ids_not_exhaustive_human_labels",
+            "citationIdValidity": 1,
+            "citedIds": [
+              "support-general-flow.7",
+              "support-no-power.7",
+              "support-no-power.7"
+            ]
+          },
+          "judgeStatus": "failed",
+          "correctness": null,
+          "attribution": "judge_unavailable",
+          "retrievalSources": null
+        },
+        {
+          "id": "T03",
+          "variant": "baseline",
+          "split": "test",
+          "missingAnnotatedIds": [],
+          "program": {
+            "recallAtK": 1,
+            "reciprocalRank": 1,
+            "hitAtK": 1,
+            "annotation": "synthetic_provisional_positive_ids_not_exhaustive_human_labels",
+            "citationIdValidity": 1,
+            "citedIds": [
+              "support-peripherals-data.9",
+              "support-peripherals-data.8"
+            ]
+          },
+          "judgeStatus": "failed",
+          "correctness": null,
+          "attribution": "judge_unavailable",
+          "retrievalSources": null
+        },
+        {
+          "id": "T03",
+          "variant": "body_only",
+          "split": "test",
+          "missingAnnotatedIds": [],
+          "program": {
+            "recallAtK": 1,
+            "reciprocalRank": 1,
+            "hitAtK": 1,
+            "annotation": "synthetic_provisional_positive_ids_not_exhaustive_human_labels",
+            "citationIdValidity": 1,
+            "citedIds": [
+              "support-peripherals-data.9",
+              "support-peripherals-data.8"
+            ]
+          },
+          "judgeStatus": "failed",
+          "correctness": null,
+          "attribution": "judge_unavailable",
+          "retrievalSources": null
+        },
+        {
+          "id": "T04",
+          "variant": "body_only",
+          "split": "test",
+          "missingAnnotatedIds": [],
+          "program": {
+            "recallAtK": 1,
+            "reciprocalRank": 0.25,
+            "hitAtK": 1,
+            "annotation": "synthetic_provisional_positive_ids_not_exhaustive_human_labels",
+            "citationIdValidity": 1,
+            "citedIds": ["support-network.4"]
+          },
+          "judgeStatus": "success",
+          "correctness": 2,
+          "attribution": "no_detected_failure",
+          "retrievalSources": null
+        },
+        {
+          "id": "T04",
+          "variant": "baseline",
+          "split": "test",
+          "missingAnnotatedIds": [],
+          "program": {
+            "recallAtK": 1,
+            "reciprocalRank": 1,
+            "hitAtK": 1,
+            "annotation": "synthetic_provisional_positive_ids_not_exhaustive_human_labels",
+            "citationIdValidity": null,
+            "citedIds": []
+          },
+          "judgeStatus": "success",
+          "correctness": 2,
+          "attribution": "no_detected_failure",
+          "retrievalSources": null
+        },
+        {
+          "id": "T05",
+          "variant": "baseline",
+          "split": "test",
+          "missingAnnotatedIds": [],
+          "program": {
+            "recallAtK": 1,
+            "reciprocalRank": 1,
+            "hitAtK": 1,
+            "annotation": "synthetic_provisional_positive_ids_not_exhaustive_human_labels",
+            "citationIdValidity": 1,
+            "citedIds": [
+              "selection-cpu-platform",
+              "compat-cpu",
+              "selection-cpu-platform",
+              "compat-preassembly-gate",
+              "compat-preassembly-gate"
+            ]
+          },
+          "judgeStatus": "failed",
+          "correctness": null,
+          "attribution": "judge_unavailable",
+          "retrievalSources": null
+        },
+        {
+          "id": "T05",
+          "variant": "body_only",
+          "split": "test",
+          "missingAnnotatedIds": [],
+          "program": {
+            "recallAtK": 1,
+            "reciprocalRank": 1,
+            "hitAtK": 1,
+            "annotation": "synthetic_provisional_positive_ids_not_exhaustive_human_labels",
+            "citationIdValidity": 1,
+            "citedIds": [
+              "selection-cpu-platform",
+              "compat-preassembly-gate",
+              "compat-cpu"
+            ]
+          },
+          "judgeStatus": "failed",
+          "correctness": null,
+          "attribution": "judge_unavailable",
+          "retrievalSources": null
+        },
+        {
+          "id": "T06",
+          "variant": "body_only",
+          "split": "test",
+          "missingAnnotatedIds": ["support-general-flow.8"],
+          "program": {
+            "recallAtK": 0,
+            "reciprocalRank": 0,
+            "hitAtK": 0,
+            "annotation": "synthetic_provisional_positive_ids_not_exhaustive_human_labels",
+            "citationIdValidity": 1,
+            "citedIds": [
+              "support-bsod-restart.1",
+              "support-bsod-restart.4",
+              "support-bsod-restart.8"
+            ]
+          },
+          "judgeStatus": "success",
+          "correctness": 2,
+          "attribution": "retrieval_or_alternative_evidence_needs_review",
+          "retrievalSources": null
+        },
+        {
+          "id": "T06",
+          "variant": "baseline",
+          "split": "test",
+          "missingAnnotatedIds": ["support-general-flow.8"],
+          "program": {
+            "recallAtK": 0,
+            "reciprocalRank": 0,
+            "hitAtK": 0,
+            "annotation": "synthetic_provisional_positive_ids_not_exhaustive_human_labels",
+            "citationIdValidity": 1,
+            "citedIds": [
+              "support-bsod-restart.9",
+              "support-bsod-restart.9",
+              "support-bsod-restart.3"
+            ]
+          },
+          "judgeStatus": "success",
+          "correctness": 2,
+          "attribution": "retrieval_or_alternative_evidence_needs_review",
+          "retrievalSources": null
+        }
+      ],
+      "judgeCalls": {
+        "count": 63,
+        "failedHttpOrTransport": 0,
+        "usage": {
+          "models": {
+            "qwen3.5-flash": {
+              "observedCalls": 63,
+              "usageMissingCalls": 0,
+              "observedInputTokens": 95542,
+              "observedOutputTokens": 41024,
+              "cost": null,
+              "costStatus": "unknown_price_or_usage"
+            }
+          },
+          "currency": null,
+          "source": null,
+          "totalCost": null,
+          "caveat": "observed token subtotal; provider billing discounts, missing usage and failed call charges are unknown"
+        },
+        "durationMs": {
+          "n": 63,
+          "min": 1396.340400002373,
+          "median": 5455.057699997269,
+          "max": 48221.45759999694,
+          "p95": null,
+          "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+        },
+        "scoringAndCalibrationSeparate": {
+          "calibration": 3,
+          "business": 20,
+          "ragasFaithfulness": 40
+        }
+      },
+      "calibration": [
+        {
+          "id": "C01",
+          "matched": true,
+          "status": "success"
+        },
+        {
+          "id": "C02",
+          "matched": true,
+          "status": "success"
+        },
+        {
+          "id": "C03",
+          "matched": true,
+          "status": "success"
+        }
+      ],
+      "retrievalLatencyRepeats": {
+        "baseline/cold": {
+          "n": 2,
+          "min": 3239.2807999999986,
+          "median": 3432.2470999999996,
+          "max": 3625.2134,
+          "p95": null,
+          "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+        },
+        "baseline/hot": {
+          "n": 2,
+          "min": 143.83439999999973,
+          "median": 145.00860000000011,
+          "max": 146.1828000000005,
+          "p95": null,
+          "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+        },
+        "body_only/cold": {
+          "n": 2,
+          "min": 3208.1362999999997,
+          "median": 3267.8566,
+          "max": 3327.576900000001,
+          "p95": null,
+          "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+        },
+        "body_only/hot": {
+          "n": 2,
+          "min": 134.04629999999997,
+          "median": 138.79225000000042,
+          "max": 143.53820000000087,
+          "p95": null,
+          "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+        }
+      },
+      "latencyRepeatUsage": {
+        "models": {
+          "qwen3.7-text-embedding-flash": {
+            "observedCalls": 400,
+            "usageMissingCalls": 0,
+            "observedInputTokens": 36260,
+            "observedOutputTokens": 0,
+            "cost": null,
+            "costStatus": "unknown_price_or_usage"
+          }
+        },
+        "currency": null,
+        "source": null,
+        "totalCost": null,
+        "caveat": "observed token subtotal; provider billing discounts, missing usage and failed call charges are unknown"
+      }
+    },
+    {
+      "runId": "support-2026-09-15T06-37-05.329Z",
+      "humanVerified": false,
+      "groups": {
+        "production_support/test": {
+          "n": 4,
+          "applicationFailures": 0,
+          "applicationFailureRate": 0.0,
+          "recallAt4": {
+            "n": 0,
+            "mean": null
+          },
+          "mrrAt4": {
+            "n": 0,
+            "mean": null
+          },
+          "faithfulness": {
+            "n": 2,
+            "mean": 0.9583333333333333
+          },
+          "businessStatus": {
+            "success": 2,
+            "failed": 2
+          },
+          "ragasStatus": {
+            "success": 2,
+            "unscorable": 2
+          },
+          "businessScores": {
+            "relevance": {
+              "n": 2,
+              "mean": 2
+            },
+            "correctness": {
+              "n": 2,
+              "mean": 2
+            },
+            "business_safety": {
+              "n": 2,
+              "mean": 2
+            }
+          },
+          "criticalFailures": [],
+          "criticalUnassessed": 2,
+          "applicationMs": {
+            "n": 4,
+            "min": 8771.620200000001,
+            "median": 13075.398799999999,
+            "max": 13837.109199999999,
+            "p95": null,
+            "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+          },
+          "firstTextMs": {
+            "n": 0,
+            "min": null,
+            "median": null,
+            "max": null,
+            "p95": null,
+            "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+          },
+          "retrievalMsByCache": {
+            "cold": {
+              "n": 0,
+              "min": null,
+              "median": null,
+              "max": null,
+              "p95": null,
+              "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+            },
+            "hit": {
+              "n": 0,
+              "min": null,
+              "median": null,
+              "max": null,
+              "p95": null,
+              "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+            },
+            "wait": {
+              "n": 0,
+              "min": null,
+              "median": null,
+              "max": null,
+              "p95": null,
+              "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+            }
+          },
+          "businessJudgeMs": {
+            "n": 4,
+            "min": 5137.424300002749,
+            "median": 5443.222300000343,
+            "max": 6176.123100005498,
+            "p95": null,
+            "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+          },
+          "ragasJudgeMs": {
+            "n": 2,
+            "min": 9217.844999999215,
+            "median": 11629.349150000053,
+            "max": 14040.85330000089,
+            "p95": null,
+            "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+          },
+          "applicationUsage": {
+            "models": {
+              "qwen3.5-flash": {
+                "observedCalls": 14,
+                "usageMissingCalls": 0,
+                "observedInputTokens": 105268,
+                "observedOutputTokens": 2620,
+                "cost": null,
+                "costStatus": "unknown_price_or_usage"
+              },
+              "qwen3.7-text-embedding-flash": {
+                "observedCalls": 4,
+                "usageMissingCalls": 2,
+                "observedInputTokens": 51,
+                "observedOutputTokens": 0,
+                "cost": null,
+                "costStatus": "unknown_price_or_usage"
+              }
+            },
+            "currency": null,
+            "source": null,
+            "totalCost": null,
+            "caveat": "observed token subtotal; provider billing discounts, missing usage and failed call charges are unknown"
+          }
+        }
+      },
+      "pairedComparisons": {
+        "dev": {
+          "faithfulnessPairs": [],
+          "baseline": {
+            "n": 0,
+            "mean": null
+          },
+          "body_only": {
+            "n": 0,
+            "mean": null
+          },
+          "baselineMinusBody": {
+            "n": 0,
+            "mean": null
+          }
+        },
+        "test": {
+          "faithfulnessPairs": [],
+          "baseline": {
+            "n": 0,
+            "mean": null
+          },
+          "body_only": {
+            "n": 0,
+            "mean": null
+          },
+          "baselineMinusBody": {
+            "n": 0,
+            "mean": null
+          }
+        }
+      },
+      "cases": [
+        {
+          "id": "S01",
+          "variant": "production_support",
+          "split": "test",
+          "missingAnnotatedIds": [],
+          "program": {
+            "stopped": false,
+            "stopStateMatches": null,
+            "selectedStepMatchesProvisionalLabel": true,
+            "verbatimSelectedStep": true,
+            "newStepAfterStop": null
+          },
+          "judgeStatus": "success",
+          "correctness": 2,
+          "attribution": "no_detected_failure",
+          "retrievalSources": [
+            {
+              "source": "local",
+              "failure": "service_error"
+            }
+          ]
+        },
+        {
+          "id": "S02",
+          "variant": "production_support",
+          "split": "test",
+          "missingAnnotatedIds": [],
+          "program": {
+            "stopped": true,
+            "stopStateMatches": true,
+            "selectedStepMatchesProvisionalLabel": null,
+            "verbatimSelectedStep": null,
+            "newStepAfterStop": false
+          },
+          "judgeStatus": "failed",
+          "correctness": null,
+          "attribution": "judge_unavailable",
+          "retrievalSources": []
+        },
+        {
+          "id": "S03",
+          "variant": "production_support",
+          "split": "test",
+          "missingAnnotatedIds": [],
+          "program": {
+            "stopped": true,
+            "stopStateMatches": true,
+            "selectedStepMatchesProvisionalLabel": null,
+            "verbatimSelectedStep": null,
+            "newStepAfterStop": false
+          },
+          "judgeStatus": "failed",
+          "correctness": null,
+          "attribution": "judge_unavailable",
+          "retrievalSources": []
+        },
+        {
+          "id": "S04",
+          "variant": "production_support",
+          "split": "test",
+          "missingAnnotatedIds": [],
+          "program": {
+            "stopped": false,
+            "stopStateMatches": null,
+            "selectedStepMatchesProvisionalLabel": true,
+            "verbatimSelectedStep": true,
+            "newStepAfterStop": null
+          },
+          "judgeStatus": "success",
+          "correctness": 2,
+          "attribution": "no_detected_failure",
+          "retrievalSources": [
+            {
+              "source": "local",
+              "failure": "service_error"
+            }
+          ]
+        }
+      ],
+      "judgeCalls": {
+        "count": 11,
+        "failedHttpOrTransport": 0,
+        "usage": {
+          "models": {
+            "qwen3.5-flash": {
+              "observedCalls": 11,
+              "usageMissingCalls": 0,
+              "observedInputTokens": 14993,
+              "observedOutputTokens": 4764,
+              "cost": null,
+              "costStatus": "unknown_price_or_usage"
+            }
+          },
+          "currency": null,
+          "source": null,
+          "totalCost": null,
+          "caveat": "observed token subtotal; provider billing discounts, missing usage and failed call charges are unknown"
+        },
+        "durationMs": {
+          "n": 11,
+          "min": 1570.165699995414,
+          "median": 5132.407100005366,
+          "max": 12135.792900000524,
+          "p95": null,
+          "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+        },
+        "scoringAndCalibrationSeparate": {
+          "calibration": 3,
+          "business": 4,
+          "ragasFaithfulness": 4
+        }
+      },
+      "calibration": [
+        {
+          "id": "C01",
+          "matched": true,
+          "status": "success"
+        },
+        {
+          "id": "C02",
+          "matched": true,
+          "status": "success"
+        },
+        {
+          "id": "C03",
+          "matched": true,
+          "status": "success"
+        }
+      ],
+      "retrievalLatencyRepeats": {
+        "baseline/cold": {
+          "n": 0,
+          "min": null,
+          "median": null,
+          "max": null,
+          "p95": null,
+          "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+        },
+        "baseline/hot": {
+          "n": 0,
+          "min": null,
+          "median": null,
+          "max": null,
+          "p95": null,
+          "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+        },
+        "body_only/cold": {
+          "n": 0,
+          "min": null,
+          "median": null,
+          "max": null,
+          "p95": null,
+          "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+        },
+        "body_only/hot": {
+          "n": 0,
+          "min": null,
+          "median": null,
+          "max": null,
+          "p95": null,
+          "p95Note": "n<100不解释尾延迟；此处报告中位数及范围"
+        }
+      },
+      "latencyRepeatUsage": {
+        "models": {},
+        "currency": null,
+        "source": null,
+        "totalCost": null,
+        "caveat": "observed token subtotal; provider billing discounts, missing usage and failed call charges are unknown"
+      }
+    }
+  ]
+}

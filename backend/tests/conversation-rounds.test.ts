@@ -50,6 +50,58 @@ const requestAction = (
     ...(action === 'other' ? { otherTopic } : {}),
   });
 
+for (const confirm of [false, true])
+  void test(`选定完成正文采用工具事实且不流出模型性能断言：confirm=${confirm}`, async (t) => {
+    const f = fixture();
+    let calls = 0;
+    const streamed: string[] = [];
+    t.mock.method(globalThis, 'fetch', async () => {
+      calls++;
+      if (calls === 1) return requestAction('select_plan');
+      if (calls === 2)
+        return toolCall('select', 'select_plan', {
+          planId: 'plan-2',
+          sourceMessageId: 'current',
+          confirm,
+        });
+      return text('散热压制CPU没问题，留意库存，兼容性已全部验证。');
+    });
+    const result = await runConversation(
+      { key: 'test', base: 'https://model.test', model: 'test' },
+      {
+        draft: f.runtime.draft,
+        result: f.runtime.result,
+        task: f.runtime.task,
+        currentTaskId: 'task',
+        messages: [],
+      },
+      confirm ? '明确确认第三套主机' : '选第三套继续讨论，不确认购买',
+      'current',
+      f.catalog,
+      f.context.reloadCatalog,
+      f.context.onUpdate!,
+      'session',
+      f.context.onTaskChange,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      (value) => streamed.push(value),
+    );
+    assert.equal(calls, 3);
+    assert.equal(
+      result.result?.selection?.status,
+      confirm ? 'confirmed' : 'selected',
+    );
+    const answer = result.messages.at(-1)!.content;
+    assert.match(answer, /总价¥8050/);
+    assert.match(answer, /gpu-upper（演示商品）/);
+    assert.match(answer, /兼容资料仍待核对/);
+    assert.ok(!answer.includes('留意库存'));
+    assert.ok(!answer.includes('压制CPU没问题'));
+    assert.ok(streamed.every((value) => !value.includes('压制CPU没问题')));
+  });
+
 void test('缺少Embedding时解释保留数据库规格，评估降级且不确认方案', async () => {
   const f = fixture();
   f.context.embeddingConfig = {};
@@ -306,10 +358,12 @@ void test('历史需求未保存时按结构化配机动作继续执行，与助
     ),
   );
   assert.ok(f.saved.some((task) => task.result?.plans.length));
-  assert.equal(
-    result.messages.at(-1)?.content,
-    '方案已生成，请查看右侧配置与报价。',
-  );
+  // 交付改为实际报价摘要；仍核对同轮生成、保存和审核，而非模型的固定套话。
+  const delivered = result.messages.at(-1)!.content;
+  for (const plan of result.result.plans)
+    assert.ok(delivered.includes(`¥${plan.total}`));
+  assert.match(delivered, /配置工作区/);
+  assert.match(delivered, /兼容资料仍待核对/);
 });
 
 void test('模型反复只承诺生成时有界失败，不把承诺保存成最终答复', async (t) => {

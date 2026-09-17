@@ -5,8 +5,78 @@ import { recommend } from '../services/recommend';
 import { executeRegisteredTool } from '../tools/registry';
 import { fixture } from './pc-fixture';
 import { embeddingFetch } from './embedding-fixture';
+import { completedSalesReply } from '../agent/sales-reply';
 
 type Fixture = ReturnType<typeof fixture>;
+void test('换件预览和交付保留未知兼容项，价差与演示标记来自工具事实', async () => {
+  const f = fixture();
+  delete f.context.catalog.parts.find((part) => part.id === 'motherboard')!
+    .specs.biosVerified;
+  const preview = await call(f, 'find_replacements', {
+    planId: 'plan-2',
+    category: 'storage',
+  });
+  successful(preview);
+  const previewText = completedSalesReply(preview)!;
+  assert.match(previewText, /尚未修改/);
+  assert.match(previewText, /整套¥7950，比原方案减少¥100/);
+  assert.match(previewText, /演示商品/);
+  assert.match(previewText, /兼容资料仍待核对/);
+  const edited = await call(f, 'replace_parts', {
+    planId: 'plan-2',
+    sourceMessageId: 'current',
+    replacements: [{ oldId: 'storage', newId: 'storage-cheaper' }],
+  });
+  successful(edited);
+  const reply = completedSalesReply(edited)!;
+  assert.match(reply, /总价从¥8050变为¥7950/);
+  assert.match(reply, /不能宣称兼容性已全部验证/);
+  assert.match(reply, /演示商品/);
+});
+void test('硬盘查询的颜色不限不产生配色覆盖，替换仍保留其他七类', async () => {
+  const f = fixture();
+  const before = state(f);
+  const preview = await call(f, 'find_replacements', {
+    planId: 'plan-2',
+    category: 'storage',
+    color: '不限',
+  });
+  successful(preview);
+  assert.ok('data' in preview);
+  const data = preview.data as {
+    candidates: { productId: string; total: number }[];
+    proposedPartColors: Record<string, string>;
+    preservedProductIds: string[];
+  };
+  assert.deepEqual(data.proposedPartColors, {});
+  assert.deepEqual(
+    data.candidates.map((p) => [p.productId, p.total]),
+    [['storage-cheaper', 7950]],
+  );
+  assert.equal(data.preservedProductIds.length, 7);
+  assert.deepEqual(state(f), before);
+  successful(
+    await call(f, 'replace_parts', {
+      planId: 'plan-2',
+      sourceMessageId: 'current',
+      replacements: [{ oldId: 'storage', newId: 'storage-cheaper' }],
+    }),
+  );
+  assert.equal(f.runtime.result!.plans[0].total, 7950);
+  assert.ok(
+    data.preservedProductIds.every((id) =>
+      f.runtime.result!.plans[0].parts.some((p) => p.id === id),
+    ),
+  );
+  for (const category of ['cpu', 'storage']) {
+    const rejected = await call(f, 'find_replacements', {
+      category,
+      color: '白色',
+    });
+    assert.equal(rejected.operation.failed, true);
+    assert.ok('error' in rejected && rejected.error?.includes('不参与配色'));
+  }
+});
 void test('S23 查询参数修正成功后，不再沿用上次失败的阻塞状态', async () => {
   const f = fixture();
   assert.equal(
@@ -338,12 +408,16 @@ void test('S01 选定均衡方案会保存实际选择，且不会把选择当�
   const original = f.runtime.result!.plans.map((plan) =>
     plan.parts.map((part) => part.id),
   );
-  successful(
-    await call(f, 'select_plan', {
-      planId: 'plan-1',
-      sourceMessageId: 'current',
-    }),
-  );
+  const selected = await call(f, 'select_plan', {
+    planId: 'plan-1',
+    sourceMessageId: 'current',
+  });
+  successful(selected);
+  const reply = completedSalesReply(selected)!;
+  assert.match(reply, /尚未确认购买/);
+  assert.match(reply, /总价¥8000/);
+  assert.match(reply, /演示商品/);
+  assert.ok(!reply.includes('gpu-upper'));
   assert.equal(f.saved.length, 1);
   assert.equal(f.runtime.result!.selection?.planId, 'plan-1');
   assert.equal(f.runtime.result!.selection?.status, 'selected');
@@ -362,13 +436,19 @@ void test('S01 选定均衡方案会保存实际选择，且不会把选择当�
 
 void test('S02 明确确认指定方案才记录整套确认，仍保留未知兼容项', async () => {
   const f = fixture();
-  successful(
-    await call(f, 'select_plan', {
-      planId: 'plan-2',
-      confirm: true,
-      sourceMessageId: 'current',
-    }),
-  );
+  const confirmed = await call(f, 'select_plan', {
+    planId: 'plan-2',
+    confirm: true,
+    sourceMessageId: 'current',
+  });
+  successful(confirmed);
+  const reply = completedSalesReply(confirmed)!;
+  assert.match(reply, /已确认当前主机方案，总价¥8050/);
+  assert.match(reply, /gpu-upper（演示商品）/);
+  assert.match(reply, /不能视为兼容性已全部验证/);
+  for (const issue of f.runtime.result!.plans.find((p) => p.id === 'plan-2')!
+    .validation.issues)
+    assert.ok(reply.includes(issue));
   assert.equal(f.saved[0].result?.selection?.status, 'confirmed');
   assert.equal(f.runtime.draft.partSelections?.gpu, 'gpu-upper');
   assert.equal(
@@ -407,6 +487,7 @@ void test('S04 数据库报价已变化时拒绝确认，保留原状态供继�
     sourceMessageId: 'current',
   });
   assert.equal(result.operation.failed, true);
+  assert.equal(completedSalesReply(result), undefined);
   assert.deepEqual(state(f), before);
   assert.equal(f.saved.length, 0);
 });
