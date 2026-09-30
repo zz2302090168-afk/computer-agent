@@ -1,4 +1,21 @@
 import { labels, type Part, type Validation } from '../domain/types';
+import { createHash } from 'node:crypto';
+
+// 绑定完整配置及规格；报价不影响散热核验，规格/配件变化则旧证据失效。
+export function thermalEvidenceKey(parts: Part[]) {
+  return createHash('sha256')
+    .update(
+      JSON.stringify(
+        parts
+          .map((part) => {
+            const { thermalAssessments: _assessments, ...specs } = part.specs;
+            return { id: part.id, specs };
+          })
+          .sort((a, b) => a.id.localeCompare(b.id)),
+      ),
+    )
+    .digest('hex');
+}
 export function validateBuild(parts: Part[], partial = false): Validation {
   const issues: string[] = [],
     unknown: string[] = [];
@@ -85,7 +102,24 @@ export function validateBuild(parts: Part[], partial = false): Validation {
     [p.memory, 'height'],
     [p.cooler, 'ramClearance'],
   ]);
-  unknown.push('散热满载能力与风道待确认；CPU TDP 不等于实际整机功耗');
+  const thermal = Array.isArray(box.thermalAssessments)
+    ? (box.thermalAssessments.find((entry: unknown) => {
+        if (!entry || typeof entry !== 'object') return false;
+        const item = entry as Record<string, unknown>;
+        return (
+          item.configurationKey === thermalEvidenceKey(parts) &&
+          typeof item.source === 'string' &&
+          item.source.trim() &&
+          item.verified === true
+        );
+      }) as Record<string, unknown> | undefined)
+    : undefined;
+  if (thermal?.status === 'fail') issues.push('完整配置的散热与风道核验未通过');
+  else if (
+    thermal?.status !== 'pass' ||
+    isInferred(p.case, 'thermalAssessments')
+  )
+    unknown.push('散热满载能力与风道待确认；CPU TDP 不等于实际整机功耗');
   check(le(gpu.recommendedPsu, psu.watts), '电源未满足显卡厂家建议功率');
   if (gpu.connector !== 'none') {
     const counts = psu.connectorCounts as Record<string, number> | undefined;

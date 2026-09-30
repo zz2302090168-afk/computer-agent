@@ -1,0 +1,208 @@
+{
+  "version": "goal-quality-v1",
+  "split": "dev",
+  "humanVerified": false,
+  "cases": [
+    {
+      "id": "D03",
+      "group": "替换确认",
+      "initial": "selected",
+      "turns": [
+        {
+          "query": "我确认当前选定的这套主机，就按这套，整单确认。",
+          "expect": "confirm"
+        }
+      ]
+    },
+    {
+      "id": "H03",
+      "group": "外设跨轮",
+      "initial": "unselected",
+      "turns": [
+        {
+          "query": "先选择第二套方案继续讨论，不是最终确认购买。",
+          "expect": "select",
+          "expectedPlanIndex": 1
+        },
+        {
+          "query": "现在明确确认刚才选定的整套主机。",
+          "expect": "confirm"
+        }
+      ]
+    },
+    {
+      "id": "QUEUE01",
+      "group": "自由问答边界",
+      "initial": "unselected",
+      "turns": [
+        {
+          "query": "先选第二套继续讨论，不确认购买。再告诉我刷新页面以后还能找回今天的对话和方案吗？",
+          "expect": "select",
+          "expectedPlanIndex": 1,
+          "preserve": true,
+          "semanticReview": true
+        }
+      ]
+    },
+    {
+      "id": "QUEUE02",
+      "group": "失败边界",
+      "initial": "unselected",
+      "turns": [
+        {
+          "query": "只选择第99套方案，不要替我改选其他方案，也不要重新生成。",
+          "expect": "consult",
+          "preserve": true,
+          "semanticReview": true,
+          "selectionUnchanged": true
+        }
+      ]
+    },
+    {
+      "id": "QUEUE03",
+      "group": "否定边界",
+      "initial": "unselected",
+      "turns": [
+        {
+          "query": "只解释第二套方案的主板。不要选定它，不要确认购买，也不要查询替换件。",
+          "expect": "explain_selection",
+          "preserve": true,
+          "semanticReview": true,
+          "selectionUnchanged": true
+        }
+      ]
+    },
+    {
+      "id": "COORD03",
+      "group": "多对象否定",
+      "initial": "unselected",
+      "turns": [
+        {
+          "query": "不要第一套，选择第二套继续讨论，不确认购买。",
+          "expect": "select",
+          "expectedPlanIndex": 1,
+          "preserve": true
+        }
+      ]
+    },
+    {
+      "id": "COORD04",
+      "group": "无效对象否定",
+      "initial": "unselected",
+      "turns": [
+        {
+          "query": "不要选第二套，只选第99套。不存在就告诉我，不要改选。",
+          "expect": "consult",
+          "preserve": true,
+          "selectionUnchanged": true
+        }
+      ]
+    },
+    {
+      "id": "PRICE01",
+      "group": "严格降价",
+      "initial": "selected",
+      "turns": [
+        {
+          "query": "只看看当前方案显卡能换什么更便宜的，必须比现在的显卡单价低，同价或更贵都不要，先不要换。",
+          "expect": "find_replacements",
+          "preserve": true,
+          "strictCheaper": true,
+          "minReplacementCandidates": 1
+        }
+      ]
+    },
+    {
+      "id": "PRICE02",
+      "group": "严格降价",
+      "initial": "unselected",
+      "turns": [
+        {
+          "query": "先选第二套作为讨论对象，不确认购买，然后只查询这套显卡能换哪些更便宜的，先不执行替换。",
+          "expect": "find_replacements",
+          "preserve": true,
+          "strictCheaper": true,
+          "minReplacementCandidates": 1,
+          "expectedPlanIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "PRICE03",
+      "group": "严格降价",
+      "initial": "selected",
+      "turns": [
+        {
+          "query": "只查当前显卡严格更便宜的替换候选，每页最多2个，先展示第一页，不替换。",
+          "expect": "find_replacements",
+          "preserve": true,
+          "strictCheaper": true,
+          "minReplacementCandidates": 1,
+          "maxReplacementCandidates": 2
+        },
+        {
+          "query": "继续查下一页，仍只要比原显卡便宜的，不替换。",
+          "expect": "find_replacements",
+          "preserve": true,
+          "strictCheaper": true,
+          "nextReplacementPage": true,
+          "maxReplacementCandidates": 2
+        }
+      ]
+    },
+    {
+      "id": "PRICE04",
+      "group": "严格降价",
+      "initial": "selected",
+      "turns": [
+        {
+          "query": "只查比当前显卡便宜的替换候选，不执行替换。",
+          "expect": "find_replacements",
+          "preserve": true,
+          "strictCheaper": true,
+          "minReplacementCandidates": 1
+        },
+        {
+          "query": "取消刚才的价格限制，同价和更贵的也可以看；保留其余限制，重新从第一页查询，不替换。",
+          "expect": "find_replacements",
+          "preserve": true,
+          "minReplacementCandidates": 1,
+          "requireNonCheaperCandidate": true
+        }
+      ]
+    },
+    {
+      "id": "PRICE05",
+      "group": "严格降价",
+      "initial": "selected",
+      "turns": [
+        {
+          "query": "只查询显卡和硬盘一起换的候选，其他六件不动，要求两件合计比原来的合计便宜；单件可以涨价，只看整套降价，先不执行。",
+          "expect": "find_replacements",
+          "preserve": true,
+          "strictCheaper": true,
+          "minReplacementCandidates": 1
+        }
+      ]
+    },
+    {
+      "id": "PRICE06",
+      "group": "严格降价",
+      "initial": "selected",
+      "turns": [
+        {
+          "query": "只查当前CPU能否换成更便宜的AMD Ryzen 7 9700X，必须完全是这个型号，没有就如实说没有，不要换其他型号或实际替换。",
+          "expect": "find_replacements",
+          "preserve": true,
+          "strictCheaper": true,
+          "noReplacementCandidates": true
+        }
+      ]
+    }
+  ],
+  "reviewRules": {
+    "invalidSelection": "Reject nonexistent ordinal without listing unlabeled demo products; preserve full selection state",
+    "cheaper": "Strictly lower combined replacement catalog cost; no equal/higher candidates; all IDs and differences independently checked",
+    "scope": "Program oracle separate from full-answer semantic review; retain failures"
+  }
+}

@@ -1,0 +1,170 @@
+{
+  "all": {
+    "off": {
+      "n": 18,
+      "passed": 18,
+      "meanLlmCalls": 3,
+      "meanJevCalls": 0,
+      "tokenSamples": 18,
+      "meanLlmTokens": 31175.5,
+      "meanJevTokens": 0,
+      "medianMs": 11024,
+      "p95Ms": 19793
+    },
+    "on": {
+      "n": 18,
+      "passed": 18,
+      "meanLlmCalls": 3,
+      "meanJevCalls": 1,
+      "tokenSamples": 18,
+      "meanLlmTokens": 31185.777777777777,
+      "meanJevTokens": 789.1666666666666,
+      "medianMs": 12727,
+      "p95Ms": 27321
+    }
+  },
+  "browse": {
+    "off": {
+      "n": 3,
+      "passed": 3,
+      "meanLlmCalls": 2,
+      "meanJevCalls": 0,
+      "tokenSamples": 3,
+      "meanLlmTokens": 21272.333333333332,
+      "meanJevTokens": 0,
+      "medianMs": 10471,
+      "p95Ms": 10830
+    },
+    "on": {
+      "n": 3,
+      "passed": 3,
+      "meanLlmCalls": 2,
+      "meanJevCalls": 1,
+      "tokenSamples": 3,
+      "meanLlmTokens": 21270.333333333332,
+      "meanJevTokens": 771,
+      "medianMs": 9115,
+      "p95Ms": 10653
+    }
+  },
+  "multi": {
+    "off": {
+      "n": 3,
+      "passed": 3,
+      "meanLlmCalls": 2,
+      "meanJevCalls": 0,
+      "tokenSamples": 3,
+      "meanLlmTokens": 21445.333333333332,
+      "meanJevTokens": 0,
+      "medianMs": 13457,
+      "p95Ms": 15319
+    },
+    "on": {
+      "n": 3,
+      "passed": 3,
+      "meanLlmCalls": 2,
+      "meanJevCalls": 1,
+      "tokenSamples": 3,
+      "meanLlmTokens": 21435.666666666668,
+      "meanJevTokens": 793,
+      "medianMs": 14939,
+      "p95Ms": 16135
+    }
+  },
+  "simple": {
+    "off": {
+      "n": 3,
+      "passed": 3,
+      "meanLlmCalls": 2,
+      "meanJevCalls": 0,
+      "tokenSamples": 3,
+      "meanLlmTokens": 20839.333333333332,
+      "meanJevTokens": 0,
+      "medianMs": 9632,
+      "p95Ms": 9798
+    },
+    "on": {
+      "n": 3,
+      "passed": 3,
+      "meanLlmCalls": 2,
+      "meanJevCalls": 1,
+      "tokenSamples": 3,
+      "meanLlmTokens": 20784,
+      "meanJevTokens": 778,
+      "medianMs": 8192,
+      "p95Ms": 8497
+    }
+  },
+  "dependency": {
+    "off": {
+      "n": 3,
+      "passed": 3,
+      "meanLlmCalls": 5,
+      "meanJevCalls": 0,
+      "tokenSamples": 3,
+      "meanLlmTokens": 49585.333333333336,
+      "meanJevTokens": 0,
+      "medianMs": 18791,
+      "p95Ms": 19793
+    },
+    "on": {
+      "n": 3,
+      "passed": 3,
+      "meanLlmCalls": 5,
+      "meanJevCalls": 1,
+      "tokenSamples": 3,
+      "meanLlmTokens": 49918.666666666664,
+      "meanJevTokens": 795,
+      "medianMs": 25091,
+      "p95Ms": 27321
+    }
+  },
+  "pagination": {
+    "off": {
+      "n": 3,
+      "passed": 3,
+      "meanLlmCalls": 5,
+      "meanJevCalls": 0,
+      "tokenSamples": 3,
+      "meanLlmTokens": 52263,
+      "meanJevTokens": 0,
+      "medianMs": 16300,
+      "p95Ms": 17207
+    },
+    "on": {
+      "n": 3,
+      "passed": 3,
+      "meanLlmCalls": 5,
+      "meanJevCalls": 1,
+      "tokenSamples": 3,
+      "meanLlmTokens": 52049.333333333336,
+      "meanJevTokens": 793,
+      "medianMs": 16117,
+      "p95Ms": 16627
+    }
+  },
+  "failure": {
+    "off": {
+      "n": 3,
+      "passed": 3,
+      "meanLlmCalls": 2,
+      "meanJevCalls": 0,
+      "tokenSamples": 3,
+      "meanLlmTokens": 21647.666666666668,
+      "meanJevTokens": 0,
+      "medianMs": 10125,
+      "p95Ms": 11024
+    },
+    "on": {
+      "n": 3,
+      "passed": 3,
+      "meanLlmCalls": 2,
+      "meanJevCalls": 1,
+      "tokenSamples": 3,
+      "meanLlmTokens": 21656.666666666668,
+      "meanJevTokens": 805,
+      "medianMs": 11889,
+      "p95Ms": 12897
+    }
+  }
+}

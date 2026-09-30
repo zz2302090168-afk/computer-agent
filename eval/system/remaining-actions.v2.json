@@ -1,0 +1,103 @@
+{
+  "version": "remaining-actions-v2",
+  "split": "dev",
+  "humanVerified": false,
+  "cases": [
+    {
+      "id": "D03",
+      "group": "替换确认",
+      "initial": "selected",
+      "turns": [
+        {
+          "query": "我确认当前选定的这套主机，就按这套，整单确认。",
+          "expect": "confirm"
+        }
+      ]
+    },
+    {
+      "id": "H03",
+      "group": "外设跨轮",
+      "initial": "unselected",
+      "turns": [
+        {
+          "query": "先选择第二套方案继续讨论，不是最终确认购买。",
+          "expect": "select",
+          "expectedPlanIndex": 1
+        },
+        {
+          "query": "现在明确确认刚才选定的整套主机。",
+          "expect": "confirm"
+        }
+      ]
+    },
+    {
+      "id": "TAIL01",
+      "group": "复合请求",
+      "initial": "unselected",
+      "turns": [
+        {
+          "query": "先选定第二套继续讨论，不确认购买；然后解释这套为什么选这块主板，只解释不要修改。",
+          "expect": "explain_selection",
+          "expectedPlanIndex": 1,
+          "preserve": true
+        }
+      ]
+    },
+    {
+      "id": "TAIL02",
+      "group": "复合请求",
+      "initial": "unselected",
+      "turns": [
+        {
+          "query": "先选第二套作为讨论对象，不确认购买，然后只查询这套显卡能换哪些更便宜的，先不执行替换。",
+          "expect": "find_replacements",
+          "expectedPlanIndex": 1,
+          "preserve": true
+        }
+      ]
+    },
+    {
+      "id": "QUEUE01",
+      "group": "自由问答边界",
+      "initial": "unselected",
+      "turns": [
+        {
+          "query": "先选第二套继续讨论，不确认购买。再告诉我刷新页面以后还能找回今天的对话和方案吗？",
+          "expect": "select",
+          "expectedPlanIndex": 1,
+          "preserve": true,
+          "semanticReview": true
+        }
+      ]
+    },
+    {
+      "id": "QUEUE02",
+      "group": "失败边界",
+      "initial": "unselected",
+      "turns": [
+        {
+          "query": "只选择第99套方案，不要替我改选其他方案，也不要重新生成。",
+          "expect": "consult",
+          "preserve": true,
+          "semanticReview": true,
+          "selectionUnchanged": true
+        }
+      ]
+    },
+    {
+      "id": "QUEUE03",
+      "group": "否定边界",
+      "initial": "unselected",
+      "turns": [
+        {
+          "query": "只解释第二套方案的主板。不要选定它，不要确认购买，也不要查询替换件。",
+          "expect": "explain_selection",
+          "preserve": true,
+          "semanticReview": true,
+          "selectionUnchanged": true
+        }
+      ]
+    }
+  ],
+  "changes": "Add missing selection-unchanged oracle for explicit invalid ordinal and read-only explanation; no business expectations relaxed"
+}

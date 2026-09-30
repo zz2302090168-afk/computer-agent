@@ -1,4 +1,6 @@
-import { editPlan } from '../../services/edit-plan';
+import { editPlanAsync } from '../../services/edit-plan';
+import { applyDraft } from '../../agent/conversation-state';
+import { requirementPatchProperties } from '../requirements/schema';
 import { resolvePlan } from '../../services/resolve-plan';
 import { assertCurrentTaskUserMessage } from '../requirements';
 import {
@@ -20,6 +22,7 @@ export const replacePartsTool: RegisteredTool = {
         {
           planId: { type: 'string' },
           sourceMessageId: { type: 'string' },
+          requirementItems: requirementPatchProperties.requirementItems,
           replacements: {
             type: 'array',
             minItems: 1,
@@ -55,6 +58,7 @@ export const replacePartsTool: RegisteredTool = {
       'sourceMessageId',
       'replacements',
       'partColors',
+      'requirementItems',
     ]);
     assertCurrentTaskUserMessage(context, input.sourceMessageId);
     if (input.sourceMessageId !== context.currentMessageId)
@@ -80,12 +84,74 @@ export const replacePartsTool: RegisteredTool = {
     if (Object.values(colors).some((color) => typeof color !== 'string'))
       throw Error('配件颜色无效');
     context.catalog = await context.reloadCatalog();
-    const edited = editPlan(
-      { ...runtime.task, draft: runtime.draft, result: runtime.result },
-      plan.id,
-      replacements,
-      context.catalog,
-      colors as Partial<Record<Category, string>>,
+    let draft = runtime.draft;
+    if (input.requirementItems !== undefined) {
+      draft = applyDraft(draft, { requirementItems: input.requirementItems });
+      const source = assertCurrentTaskUserMessage(
+        context,
+        input.sourceMessageId,
+      );
+      for (const item of Array.isArray(input.requirementItems)
+        ? input.requirementItems
+        : []) {
+        if (
+          item.sourceMessageId !== context.currentMessageId ||
+          !source.content.includes(item.text)
+        )
+          throw Error('需求必须引用当前用户原文');
+      }
+    }
+    const existing = runtime.localEditRequest;
+    const requirementPatch = JSON.stringify(input.requirementItems ?? []);
+    const colorPatch = JSON.stringify(colors);
+    if (
+      existing?.messageId === context.currentMessageId &&
+      existing.planId === plan.id
+    ) {
+      if (
+        input.requirementItems !== undefined &&
+        existing.requirementPatch !== requirementPatch
+      )
+        throw Error('修复期间不能修改或删除已经生效的需求；保留原约束继续修正');
+      if (colorPatch !== existing.colorPatch)
+        throw Error('修复期间不能放宽或修改已生效的配色约束');
+      if (
+        replacements.some(
+          (entry) =>
+            !existing.categories.includes(
+              plan.parts.find((part) => part.id === entry.oldId)?.category ??
+                '',
+            ),
+        )
+      )
+        throw Error('修复期间不能扩大替换范围，其余部件必须保持不变');
+      draft = existing.draft;
+    } else if (
+      replacements.every((entry) =>
+        plan.parts.some((part) => part.id === entry.oldId),
+      )
+    ) {
+      runtime.localEditRequest = {
+        messageId: context.currentMessageId,
+        planId: plan.id,
+        draft: structuredClone(draft),
+        requirementPatch,
+        colorPatch,
+        categories: replacements.map(
+          (entry) =>
+            plan.parts.find((part) => part.id === entry.oldId)?.category ?? '',
+        ),
+      };
+    }
+    const edited = await editPlanAsync(
+      [
+        { ...runtime.task, draft, result: runtime.result },
+        plan.id,
+        replacements,
+        context.catalog,
+        colors as Partial<Record<Category, string>>,
+      ],
+      { signal: context.signal },
     );
     const version = await context.onUpdate?.(
       'plan',

@@ -34,6 +34,21 @@ export const updateRequirementsTool: RegisteredTool = {
     if (rebuild !== undefined && typeof rebuild !== 'boolean')
       throw Error('rebuild必须为布尔值');
     const patch = validateRequirementPatch(values);
+    if (runtime.candidateSubmissionKeys?.size && Object.keys(patch).length)
+      throw Error('候选修复中不得改写用户需求；请在当前约束内修正或报告冲突');
+    if (Array.isArray(patch.requirementItems)) {
+      for (const item of patch.requirementItems) {
+        const source = assertCurrentTaskUserMessage(
+          context,
+          item.sourceMessageId,
+        );
+        if (
+          item.sourceMessageId !== context.currentMessageId ||
+          !source.content.includes(item.text)
+        )
+          throw Error('需求条目必须逐字引用当前用户消息，不得从助手文案生成');
+      }
+    }
     if (
       runtime.result?.plans.length &&
       !rebuild &&
@@ -67,6 +82,20 @@ export const updateRequirementsTool: RegisteredTool = {
       }
     const previous = runtime.draft,
       next = applyDraft(previous, patch);
+    const source = context.messages.find(
+      (message) =>
+        message.id === context.currentMessageId && message.role === 'user',
+    );
+    if (source && Object.keys(patch).length)
+      next.requirementOrigins = {
+        ...previous.requirementOrigins,
+        ...Object.fromEntries(
+          Object.keys(patch).map((key) => [
+            key,
+            { text: source.content, sourceMessageId: context.currentMessageId },
+          ]),
+        ),
+      };
     // 仅纠正结构化字段中与目录CPU品牌完全相同的值，不解析用户意图或放宽具体型号。
     const series = next.seriesPreferences?.cpu?.trim().toLowerCase();
     const cpuBrand =

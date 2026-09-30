@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import { addSyntheticThermalEvidence } from './thermal-fixture';
 import type { Catalog, Prebuilt, Requirements } from '../domain/types';
 import { budgetRange } from '../rules/budget';
 import { auditDelivery } from '../services/delivery-audit';
@@ -159,6 +160,7 @@ void test('混合目录自主组装在审核前也使用整机边界，允许区
   const ids = parts.map((part) =>
     part.category === 'gpu' ? 'gpu-1500' : part.id,
   );
+  addSyntheticThermalEvidence(catalog.parts);
   const plan = assembleBuild(
     ids,
     requirements,
@@ -340,6 +342,7 @@ void test('明确局部替换按新指定型号计算最高参考，不沿用旧
     prebuilts: [],
   };
   const above = { ...requirements, mode: 'diy' as const, budget: 10000 };
+  addSyntheticThermalEvidence(catalog.parts);
   const highest = recommend(above, catalog.parts, []);
   const task = {
     ...source.runtime.task,

@@ -1,0 +1,23 @@
+{
+  "before": false,
+  "selector": true,
+  "repetitions": 3,
+  "scenarios": [
+    "multi",
+    "dependency",
+    "pagination",
+    "failure"
+  ],
+  "model": "qwen3.5-flash",
+  "jevModel": "jev-latest",
+  "hashes": {
+    "backend/agent/conversation.ts": "0f40e9ee6838d332f2ddc380841f13078198ba5f85e03e37181c7dc48eaf550e",
+    "backend/agent/prompts.ts": "85e58211cfebf374b7db814c0ef8d14d289450b01b838eccce9bcaba43462c5b",
+    "backend/agent/execution-plan.ts": "1672c53d3d26347a4c5c5bdecfc041d02341b4877df6ad7bb4f710d9439907a4",
+    "backend/tests/performance-sample.ts": "89907a5fd124fe5b658342e632ba48e2b90d8618296af1e6763061ae30ce4ba9",
+    "scripts/jev-comparison.mjs": "a4445ef034166e14acfdd6810e64d7f4bffd867e2157aef2886986799f19b11b",
+    "backend/agent/jev-router.ts": "2253e3b814bdcb73266d568865e09b02ef38be21f553e55301dfb68a0b8fbbda",
+    "backend/agent/jev-tool-selector.ts": "160ca13b8322efd36a7bc557d5647248737d5110b07531a7478eb44089e048f6"
+  },
+  "design": "仅切换JEV_TOOL_SELECTOR_ENABLED，入口Jev关闭；独立进程；无预热；交替AB/BA；固定夹具；失败保留；等权非线上流量权重"
+}

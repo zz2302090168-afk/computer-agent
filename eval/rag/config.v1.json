@@ -1,0 +1,34 @@
+{
+  "version": "rag-ablation-v1",
+  "rubricVersion": "pc-rag-rubric-v1",
+  "topK": 4,
+  "contextBudget": {
+    "unit": "unicode_codepoints",
+    "limit": 6000
+  },
+  "variants": ["baseline", "body_only"],
+  "order": "alternating_by_case",
+  "generation": {
+    "temperature": 0.2,
+    "maxTokens": 1600,
+    "retries": 0
+  },
+  "judge": {
+    "temperature": 0,
+    "timeoutSeconds": 120,
+    "sdkRetries": 0,
+    "structuredAttempts": 1
+  },
+  "prices": {
+    "currency": null,
+    "source": null,
+    "checkedAt": null,
+    "models": {}
+  },
+  "embeddingTransport": {
+    "scope": "offline_only",
+    "documentBatchSize": 1,
+    "concurrency": 4,
+    "reason": "observed_provider_duplicate_indices_for_multi_input"
+  }
+}

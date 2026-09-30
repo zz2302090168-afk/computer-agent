@@ -65,10 +65,10 @@ void test('CPU品牌误填型号时按目录归位，旧错误需求也能恢复
     const requirements = completeRequirements(f.runtime.draft);
     const plans = recommend(requirements, parts, prebuilts);
     assert.ok(plans.length > 0);
-    assert.ok(
-      auditDelivery(plans, requirements, { parts, prebuilts }).every(
-        (plan) => plan.deliveryAudit?.status === 'passed',
-      ),
+    // 目录的推定规格仍可用于候选搜索，但用户要求 unknown 不得最终交付。
+    assert.throws(
+      () => auditDelivery(plans, requirements, { parts, prebuilts }),
+      /适配性无法确认/,
     );
   }
 });
@@ -285,7 +285,7 @@ void test('全部商家整机均引用数据库中八类完整商品', () => {
     assert.ok(ps.every(Boolean), pc.id);
   }
 });
-void test('原六类配色商品各半，扩充后白色完整配置通过统一交付审核', () => {
+void test('原六类配色商品各半，白色候选完整但资料不足不得交付', () => {
   const coloredCategories = [
     'gpu',
     'memory',
@@ -317,9 +317,13 @@ void test('原六类配色商品各半，扩充后白色完整配置通过统一
   };
   const plans = recommend(requirements, parts, prebuilts);
   assert.ok(plans.length > 0);
-  for (const plan of auditDelivery(plans, requirements, { parts, prebuilts })) {
+  assert.throws(
+    () => auditDelivery(plans, requirements, { parts, prebuilts }),
+    /适配性无法确认/,
+  );
+  for (const plan of plans) {
     assert.equal(plan.parts.length, 8);
-    assert.equal(plan.deliveryAudit?.status, 'passed');
+    assert.equal(plan.deliveryAudit, undefined);
     assert.ok(
       plan.parts
         .filter((part) => coloredCategories.includes(part.category))
@@ -348,12 +352,13 @@ void test('扩充目录支持Intel两代平台、DDR4与白色配置，保留AMD
     };
     const plans = recommend(requirements, parts, prebuilts);
     assert.ok(plans.length > 0, JSON.stringify(patch));
-    for (const plan of auditDelivery(plans, requirements, {
-      parts,
-      prebuilts,
-    })) {
+    assert.throws(
+      () => auditDelivery(plans, requirements, { parts, prebuilts }),
+      /适配性无法确认/,
+    );
+    for (const plan of plans) {
       assert.equal(plan.parts.length, 8);
-      assert.equal(plan.deliveryAudit?.status, 'passed');
+      assert.equal(plan.deliveryAudit, undefined);
       assert.ok(withinBudget(plan.total, requirements.budget));
       assert.notEqual(plan.validation.status, 'fail');
       if (patch.brandPreferences)
@@ -866,7 +871,8 @@ void test('低预算参考不能通过确认工具写成已确认', async () => 
     toolContext(),
     runtime,
   )) as { error?: string };
-  assert.match(result.error ?? '', /超预算参考/);
+  assert.match(result.error ?? '', /适配性无法确认/);
+  assert.equal(plan.budget.confirmable, false);
   assert.notEqual(runtime.draft.selectionSources?.cpu, 'confirmed');
 });
 
@@ -1018,7 +1024,7 @@ void test('普通推荐相邻目标相差500，保留硬上限与极值请求', 
   );
 });
 
-void test('两轮需求保留型号和颜色排除，AMD万元配置可生成并通过交付审核', () => {
+void test('两轮需求保留型号和颜色排除，AMD万元候选仍须补齐资料才能交付', () => {
   const first = applyDraft(
     {},
     {
@@ -1037,8 +1043,12 @@ void test('两轮需求保留型号和颜色排除，AMD万元配置可生成并
   const requirements = completeRequirements(second);
   const plans = recommend(requirements, parts, prebuilts);
   assert.ok(plans.length > 0);
-  for (const plan of auditDelivery(plans, requirements, { parts, prebuilts })) {
-    assert.equal(plan.deliveryAudit?.status, 'passed');
+  assert.throws(
+    () => auditDelivery(plans, requirements, { parts, prebuilts }),
+    /适配性无法确认/,
+  );
+  for (const plan of plans) {
+    assert.equal(plan.deliveryAudit, undefined);
     assert.ok(Math.abs(plan.total - 10000) <= 500);
     const cpu = plan.parts.find((p) => p.category === 'cpu')!;
     assert.ok(cpu.brand.includes('AMD'));

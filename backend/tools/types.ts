@@ -56,6 +56,7 @@ export const supportActions = [
 export type SupportAction = (typeof supportActions)[number];
 
 export type ToolRuntime = {
+  executionPlan?: import('../agent/execution-plan').ExecutionPlan;
   otherTopic?: 'support' | 'general';
   consultPrebuiltId?: string;
   consultPrebuiltQueried?: boolean;
@@ -93,6 +94,14 @@ export type ToolRuntime = {
     questionId?: import('../support/reply').SupportQuestionId;
   };
   localEdit?: boolean;
+  localEditRequest?: {
+    messageId: string;
+    planId: string;
+    draft: Draft;
+    categories: string[];
+    requirementPatch: string;
+    colorPatch: string;
+  };
   draft: Draft;
   result: RecommendationResult | null;
   approvedPartIds: Set<string>;
@@ -123,6 +132,9 @@ export type ToolMessage = {
 };
 export type OperationFacts = {
   tool: string;
+  arguments?: unknown;
+  nodeId?: string;
+  rejected?: boolean;
   requirementsChanged: boolean;
   partsChanged: boolean;
   quoteChanged: boolean;
@@ -159,6 +171,7 @@ export type ToolContext = {
 };
 
 export type RegisteredTool = {
+  metadata?: import('./metadata').ToolMetadata;
   definition: ToolDefinition;
   execute: (
     argumentsValue: unknown,

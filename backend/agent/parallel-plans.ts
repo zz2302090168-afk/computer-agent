@@ -3,7 +3,7 @@ import { budgetRange, recommendationTargets } from '../rules/budget';
 import { completeRequirements } from './conversation-state';
 import { chatCompletion, type ModelMessage } from './chat-model';
 import { toolProgress } from './progress';
-import { auditDelivery } from '../services/delivery-audit';
+import { auditDeliveryAsync } from '../services/delivery-audit';
 import type { Progress } from './progress';
 import {
   ToolExecutionError,
@@ -112,11 +112,12 @@ export async function exploreParallelPlans(
         const catalog = await context.reloadCatalog();
         context.signal?.throwIfAborted();
         const selected = used.has(signature(candidate)) ? seed : candidate;
-        const audited = auditDelivery(
+        const audited = (await auditDeliveryAsync(
           [{ ...selected, tier }],
           requirements,
           catalog,
-        )[0]!;
+          { signal: selectionSignal },
+        ))[0]!;
         used.add(signature(audited));
         progress(
           candidate.kind === 'prebuilt'
@@ -169,6 +170,7 @@ export async function exploreParallelPlans(
       const submitted = new Set<string>();
       let candidateAttempts = 0,
         correctionLimitReached = false;
+      let lastRejection: ToolExecutionError | undefined;
       progress('开始选型');
       try {
         if (!context.modelConfig) {
@@ -239,6 +241,7 @@ export async function exploreParallelPlans(
               }
             } catch (cause) {
               selectionSignal.throwIfAborted();
+              if (cause instanceof ToolExecutionError) lastRejection = cause;
               output = {
                 error: cause instanceof Error ? cause.message : '候选执行失败',
                 observation:
@@ -269,6 +272,7 @@ export async function exploreParallelPlans(
       }
       if (submitted.has(signature(seed))) {
         progress('原始候选已提交失败，不再重复审核', 'error', 'audit');
+        if (lastRejection) throw lastRejection;
         throw Error('本分支没有在修正上限内找到新的合格组合');
       }
       try {

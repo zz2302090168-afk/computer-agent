@@ -4,8 +4,13 @@ import {
   type Plan,
   type Requirements,
 } from '../domain/types';
-import { matchesRequirementColor, requiredPartColor } from '../rules/color';
-import { assembleBuild, selectPrebuilt } from './recommend';
+
+import {
+  assembleBuild,
+  selectPrebuilt,
+  prepareRequirementAcceptance,
+} from './recommend';
+import type { RequirementJudgeOptions } from '../agent/jev-requirements';
 import { ToolExecutionError } from '../domain/errors';
 
 // 交付审核只接受商品ID，以当前需求和数据库重新验证，忽略候选自带的合格标签。
@@ -14,6 +19,7 @@ export function auditDelivery(
   plans: Plan[],
   requirements: Requirements,
   catalog: Catalog,
+  purpose: 'delivery' | 'analysis' = 'delivery',
 ): Plan[] {
   const issues: { planId: string; productIds: string[]; reason: string }[] = [];
   const audited = plans.map((plan) => {
@@ -32,27 +38,21 @@ export function auditDelivery(
           Object.keys(labels).length
       )
         throw Error('必须包含数据库中八类完整且不重复的商品');
-      const colorIssues = items.flatMap((part) =>
-        part && !matchesRequirementColor(part, requirements, catalog.parts)
-          ? [
-              labels[part.category] +
-                '实际为' +
-                part.color +
-                '，不符合' +
-                requiredPartColor(part, requirements) +
-                '要求',
-            ]
-          : [],
-      );
-      if (colorIssues.length) throw Error(colorIssues.join('；'));
       const fresh =
         plan.kind === 'diy'
-          ? assembleBuild(ids, requirements, catalog.parts, catalog.prebuilts)
+          ? assembleBuild(
+              ids,
+              requirements,
+              catalog.parts,
+              catalog.prebuilts,
+              plan.requirementAcceptance,
+            )
           : selectPrebuilt(
               plan.id,
               requirements,
               catalog.parts,
               catalog.prebuilts,
+              plan.requirementAcceptance,
             );
       if (fresh.total !== plan.total)
         throw Error('数据库报价已变化，请重新报价后交付');
@@ -61,18 +61,42 @@ export function auditDelivery(
         fresh.parts.some((part) => !ids.includes(part.id))
       )
         throw Error('数据库整机配件构成已变化，请重新选择');
+      if (
+        purpose === 'delivery' &&
+        fresh.kind === 'diy' &&
+        fresh.validation.status !== 'pass'
+      )
+        throw new ToolExecutionError(
+          '适配性无法确认，不能最终交付：' + fresh.validation.issues.join('；'),
+          {
+            code: 'compatibility_unconfirmed',
+            stage: 'compatibility',
+            candidateVersion: fresh.requirementAcceptance?.candidateVersion,
+            productIds: ids,
+            status: fresh.validation.status,
+            issues: fresh.validation.issues,
+            preserveConstraints: requirements,
+            retryable: true,
+            guidance:
+              '优先补查可信商品资料，不得把资料不足当成零件不合格。保留全部硬约束与未获授权的部件；修改后重新需求验收。',
+          },
+        );
       return {
         ...fresh,
         id: plan.id,
         tier: plan.tier,
-        deliveryAudit: {
-          status: fresh.budget.confirmable
-            ? ('passed' as const)
-            : ('reference' as const),
-          checkedAt: new Date().toISOString(),
-        },
+        deliveryAudit:
+          purpose === 'analysis'
+            ? undefined
+            : {
+                status: fresh.budget.confirmable
+                  ? ('passed' as const)
+                  : ('reference' as const),
+                checkedAt: new Date().toISOString(),
+              },
       };
     } catch (cause) {
+      if (cause instanceof ToolExecutionError) throw cause;
       issues.push({
         planId: plan.id,
         productIds: ids,
@@ -93,4 +117,26 @@ export function auditDelivery(
       },
     );
   return audited;
+}
+
+export async function auditDeliveryAsync(
+  plans: Plan[],
+  requirements: Requirements,
+  catalog: Catalog,
+  options: RequirementJudgeOptions = {},
+) {
+  const accepted: Plan[] = [];
+  for (const plan of plans) {
+    const receipt = await prepareRequirementAcceptance(
+      plan.parts.map((part) => part.id),
+      requirements,
+      catalog.parts,
+      catalog.prebuilts,
+      plan.kind === 'prebuilt' ? plan.id : undefined,
+      options,
+      plan.requirementAcceptance,
+    );
+    accepted.push({ ...plan, requirementAcceptance: receipt });
+  }
+  return auditDelivery(accepted, requirements, catalog);
 }

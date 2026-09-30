@@ -79,6 +79,7 @@ export async function saveSelectedPlan(
       validation: plan.validation,
       budget: plan.budget,
       deliveryAudit: plan.deliveryAudit,
+      requirementChecks: plan.requirementAcceptance?.checks,
     },
     version,
   };

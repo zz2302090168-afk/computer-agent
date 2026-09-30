@@ -65,6 +65,8 @@ export type MonitorRecommendation = {
   note: string;
 };
 export type Requirements = {
+  requirementItems?: import('./requirement-acceptance').RequirementItem[];
+  requirementOrigins?: Record<string, { text: string; sourceMessageId: string }>;
   budgetTolerance?: number;
   partColors?: Partial<Record<Category, string>>;
   budget: number;
@@ -110,6 +112,7 @@ export type BudgetAssessment = {
   highReferenceBasis: string;
 };
 export type Plan = {
+  requirementAcceptance?: import('./requirement-acceptance').RequirementAcceptance;
   tier?: '方案一' | '方案二' | '方案三' | '低价方案' | '均衡方案' | '高价方案';
   id: string;
   kind: 'diy' | 'prebuilt';

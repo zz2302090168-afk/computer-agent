@@ -1,0 +1,348 @@
+{
+  "code": "requirement_acceptance_failed",
+  "stage": "requirements",
+  "passed": false,
+  "candidateVersion": "dcaecd46b167cec3548e7ac9664b114cc6e4bd065c9d7950b917403fd24c72aa",
+  "checks": [
+    {
+      "requirementId": "builtin:budget",
+      "text": "总价满足当前预算规则",
+      "strength": "hard",
+      "status": "pass",
+      "expected": {
+        "min": 7950,
+        "max": 8050,
+        "reference": false
+      },
+      "actual": 8000,
+      "evidence": [
+        {
+          "id": "cpu",
+          "price": 1000
+        },
+        {
+          "id": "gpu",
+          "price": 1000
+        },
+        {
+          "id": "memory",
+          "price": 1000
+        },
+        {
+          "id": "motherboard",
+          "price": 1000
+        },
+        {
+          "id": "psu",
+          "price": 1000
+        },
+        {
+          "id": "case",
+          "price": 1000
+        },
+        {
+          "id": "storage",
+          "price": 1000
+        },
+        {
+          "id": "cooler",
+          "price": 1000
+        }
+      ],
+      "missingInformation": []
+    },
+    {
+      "requirementId": "builtin:complete:cpu",
+      "text": "CPU完整性",
+      "strength": "hard",
+      "status": "pass",
+      "expected": "一个真实商品",
+      "actual": [
+        "cpu"
+      ],
+      "evidence": [],
+      "missingInformation": []
+    },
+    {
+      "requirementId": "builtin:complete:gpu",
+      "text": "GPU完整性",
+      "strength": "hard",
+      "status": "pass",
+      "expected": "一个真实商品",
+      "actual": [
+        "gpu"
+      ],
+      "evidence": [],
+      "missingInformation": []
+    },
+    {
+      "requirementId": "builtin:color:gpu",
+      "text": "GPU颜色要求",
+      "strength": "hard",
+      "status": "pass",
+      "expected": {
+        "color": "黑色",
+        "excluded": []
+      },
+      "actual": "黑色",
+      "evidence": [
+        {
+          "id": "gpu",
+          "brand": "测试品牌",
+          "name": "测试GPU",
+          "color": "黑色"
+        }
+      ],
+      "missingInformation": []
+    },
+    {
+      "requirementId": "builtin:complete:memory",
+      "text": "内存完整性",
+      "strength": "hard",
+      "status": "pass",
+      "expected": "一个真实商品",
+      "actual": [
+        "memory"
+      ],
+      "evidence": [],
+      "missingInformation": []
+    },
+    {
+      "requirementId": "builtin:color:memory",
+      "text": "内存颜色要求",
+      "strength": "hard",
+      "status": "pass",
+      "expected": {
+        "color": "黑色",
+        "excluded": []
+      },
+      "actual": "黑色",
+      "evidence": [
+        {
+          "id": "memory",
+          "brand": "测试品牌",
+          "name": "测试内存",
+          "color": "黑色"
+        }
+      ],
+      "missingInformation": []
+    },
+    {
+      "requirementId": "builtin:complete:motherboard",
+      "text": "主板完整性",
+      "strength": "hard",
+      "status": "pass",
+      "expected": "一个真实商品",
+      "actual": [
+        "motherboard"
+      ],
+      "evidence": [],
+      "missingInformation": []
+    },
+    {
+      "requirementId": "builtin:color:motherboard",
+      "text": "主板颜色要求",
+      "strength": "hard",
+      "status": "pass",
+      "expected": {
+        "color": "黑色",
+        "excluded": []
+      },
+      "actual": "黑色",
+      "evidence": [
+        {
+          "id": "motherboard",
+          "brand": "测试品牌",
+          "name": "测试主板",
+          "color": "黑色"
+        }
+      ],
+      "missingInformation": []
+    },
+    {
+      "requirementId": "builtin:complete:psu",
+      "text": "电源完整性",
+      "strength": "hard",
+      "status": "pass",
+      "expected": "一个真实商品",
+      "actual": [
+        "psu"
+      ],
+      "evidence": [],
+      "missingInformation": []
+    },
+    {
+      "requirementId": "builtin:color:psu",
+      "text": "电源颜色要求",
+      "strength": "hard",
+      "status": "pass",
+      "expected": {
+        "color": "黑色",
+        "excluded": []
+      },
+      "actual": "黑色",
+      "evidence": [
+        {
+          "id": "psu",
+          "brand": "测试品牌",
+          "name": "测试电源",
+          "color": "黑色"
+        }
+      ],
+      "missingInformation": []
+    },
+    {
+      "requirementId": "builtin:complete:case",
+      "text": "机箱完整性",
+      "strength": "hard",
+      "status": "pass",
+      "expected": "一个真实商品",
+      "actual": [
+        "case"
+      ],
+      "evidence": [],
+      "missingInformation": []
+    },
+    {
+      "requirementId": "builtin:color:case",
+      "text": "机箱颜色要求",
+      "strength": "hard",
+      "status": "pass",
+      "expected": {
+        "color": "黑色",
+        "excluded": []
+      },
+      "actual": "黑色",
+      "evidence": [
+        {
+          "id": "case",
+          "brand": "测试品牌",
+          "name": "测试机箱",
+          "color": "黑色"
+        }
+      ],
+      "missingInformation": []
+    },
+    {
+      "requirementId": "builtin:complete:storage",
+      "text": "硬盘完整性",
+      "strength": "hard",
+      "status": "pass",
+      "expected": "一个真实商品",
+      "actual": [
+        "storage"
+      ],
+      "evidence": [],
+      "missingInformation": []
+    },
+    {
+      "requirementId": "builtin:complete:cooler",
+      "text": "散热完整性",
+      "strength": "hard",
+      "status": "pass",
+      "expected": "一个真实商品",
+      "actual": [
+        "cooler"
+      ],
+      "evidence": [],
+      "missingInformation": []
+    },
+    {
+      "requirementId": "builtin:color:cooler",
+      "text": "散热颜色要求",
+      "strength": "hard",
+      "status": "pass",
+      "expected": {
+        "color": "黑色",
+        "excluded": []
+      },
+      "actual": "黑色",
+      "evidence": [
+        {
+          "id": "cooler",
+          "brand": "测试品牌",
+          "name": "测试散热",
+          "color": "黑色"
+        }
+      ],
+      "missingInformation": []
+    },
+    {
+      "requirementId": "ram",
+      "text": "内存至少32GB",
+      "strength": "hard",
+      "status": "fail",
+      "expected": 32,
+      "actual": 16,
+      "evidence": [
+        {
+          "productId": "memory",
+          "field": "capacity",
+          "value": 16
+        }
+      ],
+      "missingInformation": []
+    }
+  ],
+  "issues": [
+    {
+      "requirementId": "ram",
+      "text": "内存至少32GB",
+      "strength": "hard",
+      "status": "fail",
+      "expected": 32,
+      "actual": 16,
+      "evidence": [
+        {
+          "productId": "memory",
+          "field": "capacity",
+          "value": 16
+        }
+      ],
+      "missingInformation": [],
+      "action": "在授权范围内修改对应配置"
+    }
+  ],
+  "preserveConstraints": {
+    "budget": 8000,
+    "requirementItems": [
+      {
+        "id": "ram",
+        "text": "内存至少32GB",
+        "sourceMessageId": "synthetic-user-message",
+        "strength": "hard",
+        "active": true,
+        "version": 1,
+        "rule": "min",
+        "category": "memory",
+        "field": "capacity",
+        "expected": 32
+      }
+    ],
+    "requirementOrigins": {},
+    "budgetTolerance": 50,
+    "partColors": {},
+    "purpose": "游戏",
+    "hardCap": false,
+    "mode": "diy",
+    "color": "黑色",
+    "message": "",
+    "brand": "",
+    "game": "",
+    "brandPreferences": {},
+    "partPreferences": {},
+    "seriesPreferences": {},
+    "excludedModels": {},
+    "excludedBrands": {},
+    "excludedColors": [],
+    "selectionAuthorizations": {},
+    "selectionAuthorizationMessageIds": {},
+    "selectionSources": {},
+    "selectionConfirmationMessageIds": {},
+    "partSelections": {},
+    "preferCheaper": false,
+    "preferExpensive": false
+  },
+  "retryable": true,
+  "guidance": "不得放宽预算、删除硬约束或更换未获授权的部件；所有修改后重新验收。无法完成则保留原方案并报告具体冲突。"
+}

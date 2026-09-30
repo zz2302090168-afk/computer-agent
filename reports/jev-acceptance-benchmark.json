@@ -1,0 +1,252 @@
+{
+  "createdAt": "2026-09-23T05:47:43.790Z",
+  "scope": "Jev requirement acceptance only; synthetic ablation, not historical release comparison or whole-agent benchmark",
+  "rounds": 3,
+  "cases": [
+    [
+      "机箱外观简洁，不要明显灯光装饰",
+      "纯黑封闭面板，无灯带、无RGB灯扇",
+      "pass"
+    ],
+    [
+      "机箱外观简洁，不要明显灯光装饰",
+      "正面三条RGB灯带，四把发光风扇",
+      "fail"
+    ],
+    [
+      "机箱外观简洁，不要明显灯光装饰",
+      "只有型号，没有外观说明或图片",
+      "unknown"
+    ],
+    [
+      "机箱不要花哨，但可以有一个普通电源指示灯",
+      "无装饰灯光，只有单个普通电源指示灯，纯色面板",
+      "pass"
+    ],
+    [
+      "不要明显的游戏风格装饰",
+      "红黑撞色、尖锐线条、巨大电竞龙形标志",
+      "fail"
+    ]
+  ],
+  "samples": [
+    {
+      "round": 1,
+      "mode": "sequential",
+      "calls": 5,
+      "requestBytes": 3679,
+      "elapsedMs": 1790,
+      "errors": 0,
+      "results": {
+        "synthetic-0": "pass",
+        "synthetic-1": "fail",
+        "synthetic-2": "unknown",
+        "synthetic-3": "pass",
+        "synthetic-4": "fail"
+      },
+      "correct": 5
+    },
+    {
+      "round": 1,
+      "mode": "parallel",
+      "calls": 5,
+      "requestBytes": 3679,
+      "elapsedMs": 699,
+      "errors": 0,
+      "results": {
+        "synthetic-0": "pass",
+        "synthetic-1": "fail",
+        "synthetic-2": "unknown",
+        "synthetic-3": "pass",
+        "synthetic-4": "fail"
+      },
+      "correct": 5
+    },
+    {
+      "round": 1,
+      "mode": "batch",
+      "calls": 1,
+      "requestBytes": 3495,
+      "elapsedMs": 319,
+      "errors": 0,
+      "results": {
+        "synthetic-0": "pass",
+        "synthetic-1": "fail",
+        "synthetic-2": "unknown",
+        "synthetic-3": "pass",
+        "synthetic-4": "fail"
+      },
+      "correct": 5
+    },
+    {
+      "round": 2,
+      "mode": "parallel",
+      "calls": 5,
+      "requestBytes": 3679,
+      "elapsedMs": 333,
+      "errors": 0,
+      "results": {
+        "synthetic-0": "pass",
+        "synthetic-1": "fail",
+        "synthetic-2": "unknown",
+        "synthetic-3": "pass",
+        "synthetic-4": "fail"
+      },
+      "correct": 5
+    },
+    {
+      "round": 2,
+      "mode": "batch",
+      "calls": 1,
+      "requestBytes": 3495,
+      "elapsedMs": 269,
+      "errors": 0,
+      "results": {
+        "synthetic-0": "pass",
+        "synthetic-1": "fail",
+        "synthetic-2": "unknown",
+        "synthetic-3": "pass",
+        "synthetic-4": "fail"
+      },
+      "correct": 5
+    },
+    {
+      "round": 2,
+      "mode": "sequential",
+      "calls": 5,
+      "requestBytes": 3679,
+      "elapsedMs": 1446,
+      "errors": 0,
+      "results": {
+        "synthetic-0": "pass",
+        "synthetic-1": "fail",
+        "synthetic-2": "unknown",
+        "synthetic-3": "pass",
+        "synthetic-4": "fail"
+      },
+      "correct": 5
+    },
+    {
+      "round": 3,
+      "mode": "batch",
+      "calls": 1,
+      "requestBytes": 3495,
+      "elapsedMs": 247,
+      "errors": 0,
+      "results": {
+        "synthetic-0": "pass",
+        "synthetic-1": "fail",
+        "synthetic-2": "unknown",
+        "synthetic-3": "pass",
+        "synthetic-4": "fail"
+      },
+      "correct": 5
+    },
+    {
+      "round": 3,
+      "mode": "sequential",
+      "calls": 5,
+      "requestBytes": 3679,
+      "elapsedMs": 1357,
+      "errors": 0,
+      "results": {
+        "synthetic-0": "pass",
+        "synthetic-1": "fail",
+        "synthetic-2": "unknown",
+        "synthetic-3": "pass",
+        "synthetic-4": "fail"
+      },
+      "correct": 5
+    },
+    {
+      "round": 3,
+      "mode": "parallel",
+      "calls": 5,
+      "requestBytes": 3679,
+      "elapsedMs": 321,
+      "errors": 0,
+      "results": {
+        "synthetic-0": "pass",
+        "synthetic-1": "fail",
+        "synthetic-2": "unknown",
+        "synthetic-3": "pass",
+        "synthetic-4": "fail"
+      },
+      "correct": 5
+    }
+  ],
+  "summary": [
+    {
+      "mode": "sequential",
+      "medianMs": 1446,
+      "calls": 15,
+      "correct": 15,
+      "judgments": 15,
+      "requestBytes": 11037,
+      "errors": 0
+    },
+    {
+      "mode": "parallel",
+      "medianMs": 333,
+      "calls": 15,
+      "correct": 15,
+      "judgments": 15,
+      "requestBytes": 11037,
+      "errors": 0
+    },
+    {
+      "mode": "batch",
+      "medianMs": 269,
+      "calls": 3,
+      "correct": 15,
+      "judgments": 15,
+      "requestBytes": 10485,
+      "errors": 0
+    }
+  ],
+  "gateSamples": [
+    {
+      "scenario": "rule_only",
+      "calls": 0,
+      "elapsedMs": 0.43,
+      "result": "assertions passed"
+    },
+    {
+      "scenario": "rule_failure_before_semantic",
+      "calls": 0,
+      "elapsedMs": 0.54,
+      "result": "assertions passed"
+    },
+    {
+      "scenario": "missing_evidence_before_semantic",
+      "calls": 0,
+      "elapsedMs": 0.29,
+      "result": "assertions passed"
+    },
+    {
+      "scenario": "first_semantic_acceptance",
+      "calls": 1,
+      "elapsedMs": 259.55,
+      "result": "assertions passed"
+    },
+    {
+      "scenario": "unchanged_5_rechecks",
+      "calls": 0,
+      "elapsedMs": 1.7,
+      "result": "assertions passed"
+    },
+    {
+      "scenario": "changed_requirement_invalidates_receipt",
+      "calls": 1,
+      "elapsedMs": 289.51,
+      "result": "assertions passed"
+    }
+  ],
+  "totalCalls": 35,
+  "httpErrors": 0,
+  "tokenUsage": "not measured; request bytes are not tokens or billed cost",
+  "thresholds": {
+    "confidence": "0.8",
+    "probability": "0.9"
+  }
+}

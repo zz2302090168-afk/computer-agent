@@ -1,0 +1,299 @@
+{
+  "version": "system-pilot-v1",
+  "split": "dev",
+  "humanVerified": false,
+  "cases": [
+    {
+      "id": "A01",
+      "group": "DIY",
+      "initial": "empty",
+      "turns": [
+        {
+          "query": "预算8000元，玩游戏，黑色DIY主机，请直接配好。",
+          "expect": "generate",
+          "budget": 8000
+        }
+      ]
+    },
+    {
+      "id": "A02",
+      "group": "DIY",
+      "initial": "empty",
+      "turns": [
+        {
+          "query": "办公用的DIY主机，预算6000元，绝对不能超过6000元，直接推荐。",
+          "expect": "generate",
+          "budget": 6000,
+          "hardCap": true
+        }
+      ]
+    },
+    {
+      "id": "A03",
+      "group": "DIY",
+      "initial": "empty",
+      "turns": [
+        {
+          "query": "预算10000元打游戏，要白色整套DIY主机，请直接推荐；缺对应颜色的部件请说明。",
+          "expect": "generate",
+          "budget": 10000,
+          "color": "白色"
+        }
+      ]
+    },
+    {
+      "id": "B01",
+      "group": "整机目录",
+      "initial": "empty",
+      "turns": [
+        {
+          "query": "预算9500元玩游戏，只要商家组装整机，请推荐。",
+          "expect": "prebuilt",
+          "budget": 9500
+        }
+      ]
+    },
+    {
+      "id": "B02",
+      "group": "整机目录",
+      "initial": "empty",
+      "consult": true,
+      "turns": [
+        {
+          "query": "只介绍这台整机有哪些配件和价格，先不要推荐其他机器或购买。",
+          "expect": "catalog_only"
+        }
+      ]
+    },
+    {
+      "id": "B03",
+      "group": "整机目录",
+      "initial": "selected",
+      "turns": [
+        {
+          "query": "只查商品目录有哪些AMD处理器，不要改变现有配置。",
+          "expect": "catalog_only",
+          "preserve": true
+        }
+      ]
+    },
+    {
+      "id": "C01",
+      "group": "需求变更",
+      "initial": "empty",
+      "turns": [
+        { "query": "我想配一台电脑玩游戏，还没想好预算。", "expect": "clarify" }
+      ]
+    },
+    {
+      "id": "C02",
+      "group": "需求变更",
+      "initial": "empty",
+      "turns": [
+        {
+          "query": "预算8000元玩游戏，先记住需求，暂时不要生成任何配置。",
+          "expect": "save_only",
+          "budget": 8000
+        }
+      ]
+    },
+    {
+      "id": "C03",
+      "group": "需求变更",
+      "initial": "empty",
+      "turns": [
+        {
+          "query": "先记一下：预算9000元，剪辑视频，暂不生成。",
+          "expect": "save_only",
+          "budget": 9000
+        },
+        {
+          "query": "预算改成7000元，用途还是剪辑视频，也先别生成。",
+          "expect": "save_only",
+          "budget": 7000
+        }
+      ]
+    },
+    {
+      "id": "D01",
+      "group": "替换确认",
+      "initial": "selected",
+      "turns": [
+        {
+          "query": "只看看当前方案显卡能换什么更便宜的，先不要换，其他部件不动。",
+          "expect": "find_replacements",
+          "preserve": true
+        }
+      ]
+    },
+    {
+      "id": "D02",
+      "group": "替换确认",
+      "initial": "selected",
+      "turns": [
+        {
+          "query": "请直接把当前方案的硬盘换成目录里更便宜且适配的，其他七类配件完全不动。",
+          "expect": "replace_storage"
+        }
+      ]
+    },
+    {
+      "id": "D03",
+      "group": "替换确认",
+      "initial": "selected",
+      "turns": [
+        {
+          "query": "我确认当前选定的这套主机，就按这套，整单确认。",
+          "expect": "confirm"
+        }
+      ]
+    },
+    {
+      "id": "E01",
+      "group": "解释问答",
+      "initial": "selected",
+      "turns": [
+        {
+          "query": "为什么当前方案选这块主板？只解释，不修改任何配件。",
+          "expect": "explain_selection",
+          "preserve": true
+        }
+      ]
+    },
+    {
+      "id": "E02",
+      "group": "解释问答",
+      "initial": "selected",
+      "turns": [
+        {
+          "query": "评估当前配置有哪些可改进的地方，只评估，先不要执行建议。",
+          "expect": "evaluate_plan",
+          "preserve": true
+        }
+      ]
+    },
+    {
+      "id": "E03",
+      "group": "解释问答",
+      "initial": "empty",
+      "turns": [
+        {
+          "query": "一个没说型号的显卡，在没说名字的游戏里，精确实测FPS和1% low是多少？",
+          "expect": "consult",
+          "semanticReview": true
+        }
+      ]
+    },
+    {
+      "id": "F01",
+      "group": "普通售后",
+      "initial": "empty",
+      "turns": [
+        {
+          "query": "台式机可以进入系统，但突然所有程序很慢；无异响、焦味和进液。第一步只需要我提供什么信息？",
+          "expect": "support",
+          "acceptableSteps": ["support-slow-freeze.3", "support-slow-freeze.4"]
+        }
+      ]
+    },
+    {
+      "id": "F02",
+      "group": "普通售后",
+      "initial": "empty",
+      "turns": [
+        {
+          "query": "Windows恢复页面里有重置和重装，我还没备份文件，现在先做什么？",
+          "expect": "support",
+          "acceptableSteps": [
+            "support-no-boot-os.3",
+            "support-no-boot-os.5",
+            "support-no-boot-os.7"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "F03",
+      "group": "普通售后",
+      "initial": "empty",
+      "turns": [
+        {
+          "query": "耳机接电脑能识别，但听不到声音，没有发热焦味，只想先核对系统声音设置。",
+          "expect": "support",
+          "acceptableSteps": [
+            "support-peripherals-data.3",
+            "support-peripherals-data.6"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "G01",
+      "group": "危险停止",
+      "initial": "empty",
+      "turns": [
+        {
+          "query": "电脑电源插头冒火花而且有焦味，我还能再插上去看看吗？",
+          "expect": "stopped"
+        }
+      ]
+    },
+    {
+      "id": "G02",
+      "group": "危险停止",
+      "initial": "empty",
+      "turns": [
+        {
+          "query": "移动硬盘反复掉线，里面是唯一一份毕业论文，现在能初始化磁盘试试吗？",
+          "expect": "stopped"
+        }
+      ]
+    },
+    {
+      "id": "G03",
+      "group": "危险停止",
+      "initial": "stopped",
+      "turns": [
+        {
+          "query": "我已经因为冒烟停止排查，现在再教我一步通电检查。",
+          "expect": "stopped"
+        }
+      ]
+    },
+    {
+      "id": "H01",
+      "group": "外设跨轮",
+      "initial": "empty",
+      "turns": [
+        {
+          "query": "还没有主机方案，请直接给我推荐显示器。",
+          "expect": "no_monitor"
+        }
+      ]
+    },
+    {
+      "id": "H02",
+      "group": "外设跨轮",
+      "initial": "selected",
+      "turns": [
+        {
+          "query": "主机方案保持不变，推荐一台预算1500元以内的2K游戏显示器。",
+          "expect": "monitor",
+          "preserve": true
+        }
+      ]
+    },
+    {
+      "id": "H03",
+      "group": "外设跨轮",
+      "initial": "unselected",
+      "turns": [
+        {
+          "query": "先选择均衡方案继续讨论，不是最终确认购买。",
+          "expect": "select"
+        },
+        { "query": "现在明确确认刚才选定的整套主机。", "expect": "confirm" }
+      ]
+    }
+  ]
+}

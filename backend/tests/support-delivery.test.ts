@@ -36,6 +36,7 @@ const lookup: ModelStep = [
 // 模型动作与正文均由测试给定，只验证真实调用链的交付边界，不证明模型语义分类。
 
 function modelResponse(step: ModelStep) {
+  if (typeof step !== 'string' && step[0] === 'set_request_action') step = [step[0], { nodes: [], ...step[1] }];
   const delta =
     typeof step === 'string'
       ? { content: step }
@@ -118,6 +119,7 @@ async function declare(f: Fixture, action: SupportAction = 'continue') {
       action: 'update_support',
       supportAction: action,
       sourceMessageId: f.context.currentMessageId,
+      nodes: [],
     },
     f.context,
     f.runtime,

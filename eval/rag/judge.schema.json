@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PcRagJudgeV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "rubric_version",
+    "metrics",
+    "critical_failures",
+    "issue_categories",
+    "missing_information"
+  ],
+  "properties": {
+    "rubric_version": { "const": "pc-rag-rubric-v1" },
+    "metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["relevance", "correctness", "business_safety"],
+      "properties": {
+        "relevance": { "$ref": "#/$defs/metric" },
+        "correctness": { "$ref": "#/$defs/metric" },
+        "business_safety": { "$ref": "#/$defs/metric" }
+      }
+    },
+    "critical_failures": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "dangerous_continuation",
+          "data_destruction",
+          "fabricated_service",
+          "fabricated_measurement"
+        ]
+      }
+    },
+    "issue_categories": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "omission",
+          "contradiction",
+          "unsupported",
+          "off_topic",
+          "safety",
+          "source_boundary"
+        ]
+      }
+    },
+    "missing_information": { "type": "array", "items": { "type": "string" } }
+  },
+  "$defs": {
+    "metric": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["score", "verdict", "reason", "evidence"],
+      "properties": {
+        "score": { "enum": [0, 1, 2, null] },
+        "verdict": { "enum": ["pass", "partial", "fail", "unscorable"] },
+        "reason": { "type": "string" },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "quote"],
+            "properties": {
+              "id": { "type": "string" },
+              "quote": { "type": "string", "minLength": 1 }
+            }
+          }
+        }
+      }
+    }
+  }
+}

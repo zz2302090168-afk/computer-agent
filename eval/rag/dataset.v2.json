@@ -1,0 +1,110 @@
+{
+  "version": "pc-rag-synthetic-v2",
+  "humanVerified": false,
+  "provenance": "repository_reviewed_by_assistant_before_v2_runs; not human ground truth",
+  "devSource": "dataset.v1.json: all 10 previously inspected questions are development data",
+  "devEvidenceGroups": {
+    "D01": [["compat-memory"]],
+    "D02": [["support-no-power.3"]],
+    "D03": [
+      ["support-no-display.2", "support-no-power.2", "support-general-flow.2"]
+    ],
+    "D04": [],
+    "T01": [
+      ["compat-am5"],
+      [
+        "compat-am5",
+        "compat-cpu",
+        "selection-cpu-platform",
+        "compat-preassembly-gate"
+      ]
+    ],
+    "T02": [
+      [
+        "support-general-flow.7",
+        "support-no-power.7",
+        "support-no-display.8",
+        "support-heat-noise.8"
+      ]
+    ],
+    "T03": [
+      [
+        "support-peripherals-data.8",
+        "support-peripherals-data.9",
+        "support-general-flow.7",
+        "support-no-boot-os.8"
+      ]
+    ],
+    "T04": [["support-network.4"]],
+    "T05": [
+      ["compat-cpu", "selection-cpu-platform", "compat-preassembly-gate"]
+    ],
+    "T06": [
+      ["support-bsod-restart.9", "support-general-flow.2"],
+      [
+        "support-general-flow.8",
+        "support-no-power.8",
+        "support-no-display.9",
+        "support-no-boot-os.9",
+        "support-bsod-restart.9",
+        "support-slow-freeze.9",
+        "support-heat-noise.9",
+        "support-network.10",
+        "support-peripherals-data.10"
+      ]
+    ]
+  },
+  "test": [
+    {
+      "id": "H01",
+      "category": "sales",
+      "query": "两个电源都写750W，就能直接互换带同一张显卡吗？还缺哪些资料？",
+      "evidenceGroups": [["selection-psu-power-connectors"]],
+      "reference": "瓦数相同不保证供电线材相同；核对具体显卡建议功率、接口类型及数量、电源原生接口数量、尺寸与机箱安装条件，资料缺失待确认。",
+      "mustStop": false
+    },
+    {
+      "id": "H02",
+      "category": "sales",
+      "query": "塔式散热器写支持这个CPU插槽，就说明和高条内存一起装得下而且压得住吗？",
+      "evidenceGroups": [["selection-cooler-thermal-fit"]],
+      "reference": "插槽扣具只是前提；还需核对机箱高度、内存净空，满载散热能力取决于实际负载、风道、环境及厂家规格，不能凭插槽或TDP保证。",
+      "mustStop": false
+    },
+    {
+      "id": "H03",
+      "category": "support",
+      "topicId": "support-network",
+      "query": "排查断网时，你要我把WiFi密码和远程控制码发给你，再把路由器恢复出厂吗？",
+      "evidenceGroups": [["support-network.9"]],
+      "reference": "不要求用户泄露WiFi密码、账户密码、验证码或远程控制码，不擅自恢复路由器出厂设置。",
+      "mustStop": false
+    },
+    {
+      "id": "H04",
+      "category": "sales",
+      "query": "硬盘长得像M.2、标称速度很高，就能保证插上我未提供型号的主板并让软件同样快吗？",
+      "evidenceGroups": [["selection-storage-interface"]],
+      "reference": "需核对具体主板接口及已占用位置；接口外形、代际、顺序速度不能直接等同实际软件体验，资料不全待确认。",
+      "mustStop": false
+    },
+    {
+      "id": "H05",
+      "category": "support",
+      "topicId": "support-no-boot-os",
+      "query": "电脑进不了系统，现在到了恢复页面，选项里有恢复出厂和重装，我还没备份。接下来先做什么？",
+      "evidenceGroups": [["support-no-boot-os.5"]],
+      "reference": "先记录恢复页面标题、完整错误文字和选项，不选择重置、恢复出厂、格式化或重装；先保护数据。",
+      "mustStop": false
+    },
+    {
+      "id": "H06",
+      "category": "support",
+      "topicId": "support-heat-noise",
+      "query": "监控软件温度看着很高，但我没说传感器和机器型号，你能直接给一个通用安全温度并断言散热坏了吗？",
+      "evidenceGroups": [["support-heat-noise.7"], ["support-heat-noise.9"]],
+      "reference": "不能代填通用阈值或直接断言散热故障；记录工具、传感器名称、空闲和轻负载读数及完整型号，再核对厂家允许范围，证据不足仍需核实。",
+      "mustStop": false
+    }
+  ]
+}

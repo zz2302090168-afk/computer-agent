@@ -1,4 +1,5 @@
 import type { Category, Part } from '../../domain/types';
+import { assertCatalogPageRequest } from '../../agent/catalog-pagination';
 import { isColorCategory } from '../../rules/color';
 import { searchCatalog, matchesModel } from '../../services/catalog-search';
 import {
@@ -47,6 +48,7 @@ export const searchCatalogTool: RegisteredTool = {
         'maxPrice',
       ] as const;
     rejectUnknownKeys(input, allowed);
+    assertCatalogPageRequest(runtime, input);
     const text = (key: string) =>
       input[key] === undefined
         ? undefined

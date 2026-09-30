@@ -2,7 +2,10 @@ import {
   completeRequirements,
   applyDraft,
 } from '../../agent/conversation-state';
-import { replacePart } from '../../services/recommend';
+import {
+  replacePart,
+  prepareRequirementAcceptance,
+} from '../../services/recommend';
 import {
   objectSchema,
   parseObject,
@@ -47,14 +50,27 @@ export const applySuggestionTool: RegisteredTool = {
       (item) => item.id === suggestion.planId,
     );
     if (!plan) throw Error('建议对应方案已失效');
-    const requirements = completeRequirements(runtime.draft),
-      candidate = replacePart(
+    const requirements = completeRequirements(runtime.draft);
+    const acceptance = await prepareRequirementAcceptance(
+      plan.parts.map((part) =>
+        part.id === suggestion.oldProductId
+          ? suggestion.candidateProductId
+          : part.id,
+      ),
+      requirements,
+      context.catalog.parts,
+      context.catalog.prebuilts,
+      undefined,
+      { signal: context.signal },
+    );
+    const candidate = replacePart(
         plan,
         suggestion.oldProductId,
         suggestion.candidateProductId,
         requirements,
         context.catalog.parts,
         context.catalog.prebuilts,
+        acceptance,
       ),
       updated = auditDelivery([candidate], requirements, context.catalog)[0]!,
       category = suggestion.category;

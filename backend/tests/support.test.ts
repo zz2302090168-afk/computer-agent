@@ -33,6 +33,7 @@ async function beginTurn(
     'set_request_action',
     {
       action: supportAction ? 'update_support' : 'other',
+      nodes: [],
       sourceMessageId: messageId,
       ...(supportAction ? { supportAction } : {}),
       ...(!supportAction ? { otherTopic: 'support' } : {}),
@@ -394,7 +395,7 @@ void test('给定模型售后子动作后，无预算对话执行知识检索和
       const request = JSON.parse(options.body as string);
       if (request.tools[0]?.function.name === 'set_request_action')
         return new Response(
-          `data: ${JSON.stringify({ choices: [{ index: 0, delta: { tool_calls: [{ index: 0, id: 'request-action', type: 'function', function: { name: 'set_request_action', arguments: JSON.stringify({ action: 'update_support', supportAction: 'continue', sourceMessageId: 'current' }) } }] }, finish_reason: 'tool_calls' }] })}\n\ndata: [DONE]\n\n`,
+          `data: ${JSON.stringify({ choices: [{ index: 0, delta: { tool_calls: [{ index: 0, id: 'request-action', type: 'function', function: { name: 'set_request_action', arguments: JSON.stringify({ action: 'update_support', supportAction: 'continue', sourceMessageId: 'current', nodes: [] }) } }] }, finish_reason: 'tool_calls' }] })}\n\ndata: [DONE]\n\n`,
           { headers: { 'Content-Type': 'text/event-stream' } },
         );
       assert.ok(

@@ -1,5 +1,7 @@
 import './register-typescript.mjs';
 await import('../backend/tests/core.test.ts');
+await import('../backend/tests/catalog-models.test.ts');
+await import('../backend/tests/catalog-brand-alias.test.ts');
 await import('../backend/tests/tool-scenarios.test.ts');
 await import('../backend/tests/progress.test.ts');
 await import('../backend/tests/workspace-session.test.ts');
@@ -24,3 +26,10 @@ await import('../backend/tests/catalog-links.test.ts');
 await import('../backend/tests/prebuilt-catalog.test.ts');
 await import('../backend/tests/prebuilt-consultation.test.ts');
 await import('../backend/tests/chat-trace.test.ts');
+await import('../backend/tests/rag-timing.test.ts');
+await import('../backend/tests/execution-plan.test.ts');
+await import('../backend/tests/parallel-reads.test.ts');
+await import('../backend/tests/evaluation-policy.test.ts');
+await import('../backend/tests/jev-router.test.ts');
+await import('../backend/tests/jev-tool-selector.test.ts');
+await import('../backend/tests/requirement-acceptance.test.ts');

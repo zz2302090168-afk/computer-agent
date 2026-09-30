@@ -360,7 +360,7 @@ void test('S01 选定均衡方案会保存实际选择，且不会把选择当�
   );
 });
 
-void test('S02 明确确认指定方案才记录整套确认，仍保留未知兼容项', async () => {
+void test('S02 明确确认且完整兼容性通过才记录整套确认', async () => {
   const f = fixture();
   successful(
     await call(f, 'select_plan', {
@@ -380,7 +380,7 @@ void test('S02 明确确认指定方案才记录整套确认，仍保留未知�
   assert.equal(
     f.runtime.result!.plans.find((plan) => plan.id === 'plan-2')!.validation
       .status,
-    'unknown',
+    'pass',
   );
 });
 

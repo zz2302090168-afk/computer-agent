@@ -1,0 +1,22 @@
+{
+  "version": "goal-combination-v1",
+  "split": "dev",
+  "humanVerified": false,
+  "cases": [
+    {
+      "id": "PRICE07",
+      "group": "联动严格降价",
+      "initial": "selected",
+      "turns": [
+        {
+          "query": "只查联动换件：显卡指定Intel Arc B570 Challenger 10GB OC，硬盘指定Samsung 990 PRO 1TB，其他六件不动。允许硬盘涨价，但两件合计必须比原来的合计便宜。只给通过审核的预览，不要实际替换。",
+          "expect": "find_replacements",
+          "preserve": true,
+          "strictCheaper": true,
+          "minReplacementCandidates": 1,
+          "expectedReplacementIds": {"gpu":"demo-20260912-gpu-intel-b570","storage":"real-storage-11"}
+        }
+      ]
+    }
+  ]
+}

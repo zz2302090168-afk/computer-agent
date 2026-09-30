@@ -44,6 +44,7 @@ const action = (
     'set_request_action',
     {
       action: value,
+      nodes: [],
       sourceMessageId: 'current',
       ...(supportAction ? { supportAction } : {}),
       ...(value === 'other' ? { otherTopic: 'general' } : {}),
@@ -70,6 +71,7 @@ async function declareRequest(
     'set_request_action',
     {
       action: requestAction,
+      nodes: [],
       sourceMessageId: messageId,
       ...(supportAction ? { supportAction } : {}),
       ...(requestAction === 'other' ? { otherTopic: 'general' } : {}),
@@ -467,7 +469,7 @@ void test('售后动作必须声明有效子动作，其他主动作不能夹带
     f.runtime.requestAction = 'pending';
     const rejected = await executeRegisteredTool(
       'set_request_action',
-      { ...input, sourceMessageId: 'current' },
+      { ...input, sourceMessageId: 'current', nodes: [] },
       f.context,
       f.runtime,
     );
@@ -494,7 +496,7 @@ void test('无需工具的回答必须明确售后或普通主题，其他动作
     f.runtime.requestAction = 'pending';
     const rejected = await executeRegisteredTool(
       'set_request_action',
-      { ...input, sourceMessageId: 'current' },
+      { ...input, sourceMessageId: 'current', nodes: [] },
       f.context,
       f.runtime,
     );

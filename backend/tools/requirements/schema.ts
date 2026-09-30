@@ -10,6 +10,7 @@ import {
 } from '../types';
 
 export const requirementPatchKeys = [
+  'requirementItems',
   'budget',
   'budgetTolerance',
   'partColors',
@@ -29,6 +30,44 @@ export const requirementPatchKeys = [
 ] as const;
 
 export const requirementPatchProperties = {
+  requirementItems: {
+    type: 'array',
+    maxItems: 32,
+    description:
+      '补充固定字段未覆盖的全部有效需求，按ID合并，未提交的旧条目保留。容量/尺寸/功率用min或max与数据库数值字段，单位沿目录（容量GB、尺寸mm）；不要水冷用cooler.coolingType not_equals 水冷；尽量小为soft，明确尺寸上限为hard。只换显卡、其他不变时为其余七类记录preserve与原商品ID。语义规则仅用于不能精确计算的表达，field须对应可信目录资料；不能把容量、预算或型号伪装semantic。text逐字引用用户原文，sourceMessageId引用当前用户消息；变更沿用ID，明确取消才active=false，不得漏掉旧需求或在修复时放宽硬约束。',
+    items: objectSchema(
+      {
+        id: { type: 'string' },
+        text: { type: 'string' },
+        sourceMessageId: { type: 'string' },
+        strength: {
+          type: 'string',
+          enum: ['hard', 'soft'],
+          description:
+            '必须/不要/上限为hard；尽量/最好/优先且可妥协为soft。软性品牌或型号用requirementItems的brand/model字段，不写入强制筛选的brandPreferences/seriesPreferences。',
+        },
+        active: { type: 'boolean' },
+        rule: {
+          type: 'string',
+          enum: ['min', 'max', 'equals', 'not_equals', 'preserve', 'semantic'],
+        },
+        category: { type: 'string', enum: [...categories] },
+        field: { type: 'string' },
+        expected: { anyOf: [{ type: 'string' }, { type: 'number' }] },
+      },
+      [
+        'id',
+        'text',
+        'sourceMessageId',
+        'strength',
+        'active',
+        'rule',
+        'category',
+        'field',
+        'expected',
+      ],
+    ),
+  },
   budgetTolerance: {
     type: 'number',
     minimum: 0,
@@ -45,7 +84,11 @@ export const requirementPatchProperties = {
       '仅显卡、内存、主板、电源、机箱、散热参与配色；CPU和硬盘没有配色约束。指定单件颜色时填写对应类别，如白色机箱、黑色散热填case=白色,cooler=黑色。空字符串删除该类别覆盖。',
   },
   budget: { type: 'number', exclusiveMinimum: 0, maximum: 1000000 },
-  hardCap: { type: 'boolean' },
+  hardCap: {
+    type: 'boolean',
+    description:
+      '用户明确别超预算、不要超过、最高或上限时为true；不得在修复时改为false。',
+  },
   purpose: {
     type: 'string',
     enum: ['游戏', '办公', '剪辑设计', '编程', '本地 AI'],

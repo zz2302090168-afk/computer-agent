@@ -1,0 +1,41 @@
+{
+  "version": "react-empty-page-v1",
+  "split": "dev",
+  "humanVerified": false,
+  "cases": [
+    {
+      "id": "PRICE05",
+      "group": "严格降价",
+      "initial": "selected",
+      "turns": [
+        {
+          "query": "只查询显卡和硬盘一起换的候选，其他六件不动，要求两件合计比原来的合计便宜；单件可以涨价，只看整套降价，先不执行。",
+          "expect": "find_replacements",
+          "preserve": true,
+          "strictCheaper": true,
+          "minReplacementCandidates": 1,
+          "selectionUnchanged": true
+        }
+      ]
+    },
+    {
+      "id": "PAGE-ONLY",
+      "group": "明确仅一页",
+      "initial": "selected",
+      "turns": [
+        {
+          "query": "只查询显卡和硬盘一起换的候选，其他六件不动，两件合计必须更便宜。只看第一页的前1个组合，即使没有合格候选也停止，不继续翻页，不实际替换。",
+          "expect": "find_replacements",
+          "preserve": true,
+          "selectionUnchanged": true,
+          "strictCheaper": true,
+          "maxReplacementCandidates": 1,
+          "expectedReplacementPage": {
+            "offset": 0,
+            "limit": 1
+          }
+        }
+      ]
+    }
+  ]
+}

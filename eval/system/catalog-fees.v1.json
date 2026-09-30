@@ -1,0 +1,48 @@
+{
+  "version": "catalog-fees-v1",
+  "split": "dev",
+  "humanVerified": false,
+  "rubric": {
+    "fees": "未记录是否包含，不能断言包含、不包含、免费或必须另付",
+    "identity": "保留演示身份",
+    "state": "只读咨询不生成、不选定、不确认"
+  },
+  "cases": [
+    {
+      "id": "B02",
+      "group": "整机目录",
+      "initial": "empty",
+      "consult": true,
+      "turns": [
+        {
+          "query": "只介绍这台整机有哪些配件和价格，先不要推荐其他机器或购买。",
+          "expect": "catalog_only"
+        }
+      ]
+    },
+    {
+      "id": "FEE01",
+      "group": "整机费用边界",
+      "initial": "empty",
+      "consult": true,
+      "turns": [
+        {
+          "query": "只介绍这台整机的价格，报价包含组装费和运费吗？先不要购买。",
+          "expect": "catalog_only"
+        }
+      ]
+    },
+    {
+      "id": "FEE02",
+      "group": "整机费用边界",
+      "initial": "empty",
+      "consult": true,
+      "turns": [
+        {
+          "query": "这台整机是不是不包运费、必须另外付组装费？只核对目录里写明的信息，不要推荐。",
+          "expect": "catalog_only"
+        }
+      ]
+    }
+  ]
+}

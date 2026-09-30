@@ -13,7 +13,7 @@ import {
   recommendationTargets,
 } from '../rules/budget';
 import { validateBuild } from '../rules/compatibility';
-import { matchesRequirementColor, requiredPartColor } from '../rules/color';
+import { matchesRequirementColor } from '../rules/color';
 import { createBuildSearch } from './build-search';
 import {
   calculateQuote,
@@ -22,6 +22,12 @@ import {
   searchPrebuiltCatalog,
 } from './catalog-search';
 import { purposeBudgetWeights as weights } from './selection-policy';
+import {
+  assertRequirements,
+  acceptRequirements,
+} from './requirement-acceptance';
+import type { RequirementAcceptance } from '../domain/requirement-acceptance';
+import type { RequirementJudgeOptions } from '../agent/jev-requirements';
 function candidatesByCategory(r: Requirements, parts: Part[]) {
   return Object.keys(labels).map((category) =>
     parts
@@ -214,6 +220,23 @@ function requireCatalog(r: Requirements, parts: Part[], pcs: Prebuilt[]) {
   const prepared = prepareCatalog(r, parts, pcs);
   if ('failure' in prepared) throw Error(prepared.failure.reason);
   return prepared;
+}
+function candidateCatalog(
+  r: Requirements,
+  catalog: Part[],
+  pcs: Prebuilt[],
+  parts: Part[],
+  total: number,
+) {
+  try {
+    return requireCatalog(r, catalog, pcs);
+  } catch (cause) {
+    // 边界搜索无解不能掩盖当前组合的具体问题；需求先验收再解释兼容冲突。
+    assertRequirements(parts, r, total, catalog);
+    const validation = validateBuild(parts);
+    if (validation.status === 'fail') throw Error(validation.issues.join('；'));
+    throw cause;
+  }
 }
 function assertPlanBudget(
   total: number,
@@ -455,6 +478,7 @@ export function selectPrebuilt(
   r: Requirements,
   parts: Part[],
   pcs: Prebuilt[],
+  acceptance?: RequirementAcceptance,
 ): Plan {
   if (r.mode === 'diy') throw Error('当前要求DIY，不能改选商家整机');
   const pc = searchPrebuiltCatalog(pcs, r).find((item) => item.id === id);
@@ -480,8 +504,17 @@ export function selectPrebuilt(
     throw Error('整机必须包含数据库中八类完整且不重复的商品');
   const validation = { status: 'not_applicable' as const, issues: [] };
   const reference = requireCatalog(r, parts, pcs);
+  const requirementAcceptance = assertRequirements(
+    selected,
+    r,
+    pc.price,
+    parts,
+    reference.references,
+    acceptance,
+  );
   assertPlanBudget(pc.price, r, reference);
   return {
+    requirementAcceptance,
     id: pc.id,
     kind: 'prebuilt',
     demo: pc.demo || selected.some((part) => part.demo),
@@ -505,6 +538,7 @@ export function assembleBuild(
   r: Requirements,
   catalog: Part[],
   pcs: Prebuilt[] = [],
+  acceptance?: RequirementAcceptance,
 ): Plan {
   if (r.mode === 'prebuilt')
     throw Error('整机模式只能选择数据库中的现有整机；修改配件请先切换为 DIY');
@@ -522,41 +556,24 @@ export function assembleBuild(
     Object.keys(labels).some((c) => !categories.has(c as Category))
   )
     throw Error('配置类别不完整或存在重复类别');
-  for (const p of parts) {
-    const selected = r.partPreferences?.[p.category];
-    if (selected && selected !== p.id)
-      throw Error(`${labels[p.category]}未使用用户指定型号`);
-    const brand = r.brandPreferences?.[p.category];
-    if (brand && !p.brand.toLowerCase().includes(brand.toLowerCase()))
-      throw Error(`${labels[p.category]}不符合品牌偏好`);
-  }
-  for (const p of parts) {
-    if (!matchesExclusions(p, r))
-      throw Error(`${p.name}属于用户明确排除的型号或品牌`);
-    if (!matchesModel(p.name, r.seriesPreferences?.[p.category], p.category))
-      throw Error(`${labels[p.category]}不符合指定系列`);
-  }
-  const wrongColors = parts.filter(
-    (part) => !matchesRequirementColor(part, r, catalog),
-  );
-  if (wrongColors.length)
-    throw Error(
-      wrongColors
-        .map(
-          (part) =>
-            `${labels[part.category]}颜色不符合${requiredPartColor(part, r)}要求${r.excludedColors?.length ? `，禁止颜色：${r.excludedColors.join('、')}` : ''}`,
-        )
-        .join('；'),
-    );
   const total = calculateQuote(
     parts.map((p) => p.id),
     catalog,
   );
+  const reference = candidateCatalog(r, catalog, pcs, parts, total);
+  const requirementAcceptance = assertRequirements(
+    parts,
+    r,
+    total,
+    catalog,
+    reference.references,
+    acceptance,
+  );
+  assertPlanBudget(total, r, reference);
   const validation = validateBuild(parts);
   if (validation.status === 'fail') throw Error(validation.issues.join('；'));
-  const reference = requireCatalog(r, catalog, pcs);
-  assertPlanBudget(total, r, reference);
   return {
+    requirementAcceptance,
     id: `assembled-${parts.map((p) => p.id).join('-')}`,
     kind: 'diy',
     demo: parts.some((part) => part.demo),
@@ -569,6 +586,42 @@ export function assembleBuild(
     budget: assessBudget(total, r, reference.references, reference.highBasis),
   };
 }
+export async function prepareRequirementAcceptance(
+  ids: string[],
+  r: Requirements,
+  catalog: Part[],
+  pcs: Prebuilt[],
+  prebuiltId?: string,
+  options: RequirementJudgeOptions = {},
+  receipt?: RequirementAcceptance,
+) {
+  const selected = ids.map((id) => catalog.find((part) => part.id === id));
+  if (selected.some((part) => !part)) throw Error('指定商品不存在');
+  const parts = selected.filter((part): part is Part => !!part);
+  const pc = prebuiltId
+    ? pcs.find((item) => item.id === prebuiltId)
+    : undefined;
+  if (
+    prebuiltId &&
+    (!pc ||
+      pc.partIds.length !== ids.length ||
+      pc.partIds.some((id) => !ids.includes(id)))
+  )
+    throw Error('整机配件构成已变化');
+  const total = pc?.price ?? calculateQuote(ids, catalog);
+  const reference = pc
+    ? requireCatalog(r, catalog, pcs)
+    : candidateCatalog(r, catalog, pcs, parts, total);
+  return acceptRequirements(
+    parts,
+    r,
+    total,
+    catalog,
+    reference.references,
+    options,
+    receipt,
+  );
+}
 export function replacePart(
   plan: Plan,
   oldId: string,
@@ -576,6 +629,7 @@ export function replacePart(
   r: Requirements,
   catalog: Part[],
   pcs: Prebuilt[] = [],
+  acceptance?: RequirementAcceptance,
 ): Plan {
   if (plan.kind !== 'diy') throw Error('整机请重新筛选，不能自由替换配件');
   const freshParts = plan.parts.map((part) =>
@@ -590,7 +644,7 @@ export function replacePart(
   const ids = (freshParts as Part[]).map((part) =>
     part.id === oldId ? newId : part.id,
   );
-  const verified = assembleBuild(ids, r, catalog, pcs);
+  const verified = assembleBuild(ids, r, catalog, pcs, acceptance);
   return {
     ...verified,
     id: plan.id,

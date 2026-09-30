@@ -46,9 +46,80 @@ const requestAction = (
 ) =>
   toolCall('request-action', 'set_request_action', {
     action,
+    nodes: [],
     sourceMessageId: 'current',
     ...(action === 'other' ? { otherTopic } : {}),
   });
+
+void test('目录查询节点收到BM25商品身份，入口不注入，查询不改配置', async (t) => {
+  const f = fixture();
+  const gpu = f.catalog.parts.find((part) => part.id === 'gpu')!;
+  gpu.brand = 'ASRock 华擎';
+  gpu.name = 'Intel Arc B570 Challenger 10GB OC';
+  const original = structuredClone(f.runtime.result);
+  let calls = 0;
+  t.mock.method(
+    globalThis,
+    'fetch',
+    async (_url: unknown, options: RequestInit) => {
+      assert.equal(typeof options.body, 'string');
+      if (typeof options.body !== 'string') throw Error('预期JSON请求体');
+      const request = JSON.parse(options.body);
+      const prompt = request.messages[0].content as string;
+      calls++;
+      if (calls === 1) {
+        assert.ok(!prompt.includes('BM25相关性排序'));
+        return toolCall('plan', 'set_request_action', {
+          sourceMessageId: 'current',
+          nodes: [
+            {
+              id: 'task1',
+              action: 'search_catalog',
+              goal: '查询显卡',
+              sourceQuote: '查询华擎 Intel Arc B570',
+              dependsOn: [],
+            },
+          ],
+        });
+      }
+      assert.match(prompt, /BM25相关性排序/);
+      assert.ok(prompt.includes('ASRock 华擎'));
+      assert.ok(prompt.includes('Intel Arc B570 Challenger 10GB OC'));
+      if (calls === 2)
+        return toolCall('query', 'search_catalog', {
+          category: 'gpu',
+          brand: 'ASRock',
+          modelKeyword: '华擎 Intel Arc B570',
+        });
+      return text('查询到华擎显卡，未修改配置。');
+    },
+  );
+  const state = {
+    draft: f.runtime.draft,
+    result: f.runtime.result,
+    task: f.runtime.task,
+    currentTaskId: 'task',
+    messages: [],
+  };
+  const result = await runConversation(
+    { key: 'test', base: 'https://model.test', model: 'test' },
+    state,
+    '查询华擎 Intel Arc B570',
+    'current',
+    f.catalog,
+    f.context.reloadCatalog,
+    f.context.onUpdate!,
+    'session',
+    f.context.onTaskChange,
+  );
+  assert.equal(calls, 3);
+  assert.deepEqual(result.result, original);
+  assert.ok(
+    result.facts?.some(
+      (fact) => fact.tool === 'search_catalog' && !fact.failed,
+    ),
+  );
+});
 
 void test('缺少Embedding时解释保留数据库规格，评估降级且不确认方案', async () => {
   const f = fixture();
@@ -127,6 +198,7 @@ void test('评估追问跨轮编号只评估，不允许模型误确认或修改
       if (request.tools[0]?.function.name === 'set_request_action')
         return toolCall('request-action', 'set_request_action', {
           action: 'evaluate_plan',
+          nodes: [],
           sourceMessageId: 'first',
         });
       if (phase++ === 0) return toolCall('eval', 'evaluate_plan', {});
@@ -447,11 +519,11 @@ void test('轮次耗尽但没有执行推荐时，不得把模型自称无解当
     /尚未执行完配置操作/,
   );
 
-  assert.equal(calls, 16, '应跑满全部轮次');
-  assert.equal(choices[15], 'none', '最后一轮必须放开工具调用');
+  assert.equal(calls, 8, '按用户约定最多8轮，修复不增加额度');
+  assert.equal(choices[7], 'none', '最后一轮必须放开工具调用');
   assert.equal(
     choices.filter((choice) => choice === 'required').length,
-    14,
+    6,
     '探索未完成时中间轮仍应强制继续',
   );
   assert.ok(f.saved.every((task) => !task.result?.plans.length));

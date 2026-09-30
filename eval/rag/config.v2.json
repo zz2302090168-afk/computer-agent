@@ -1,0 +1,22 @@
+{
+  "version": "rag-baseline-v2",
+  "contextBudget": { "unit": "unicode_codepoints", "limit": 6000 },
+  "variants": [
+    { "id": "baseline", "text": "full", "topK": 4 },
+    { "id": "k2", "text": "full", "topK": 2 },
+    { "id": "k6", "text": "full", "topK": 6 },
+    { "id": "without_title", "text": "tags_body", "topK": 4 },
+    { "id": "without_tags", "text": "title_body", "topK": 4 },
+    { "id": "body_only", "text": "body", "topK": 4 }
+  ],
+  "selection": "dev claim-group coverage descending, labelled precision descending, MRR descending, mean context codepoints ascending; baseline wins exact ties; no test-driven reselection",
+  "transport": "production_embed; flash singleton, concurrency <=4, whole operation deadline 90s, no retries",
+  "generation": { "temperature": 0.2, "maxTokens": 1600, "retries": 0 },
+  "judge": { "timeoutSeconds": 120, "sdkRetries": 0, "structuredAttempts": 1 },
+  "prices": {
+    "currency": null,
+    "source": null,
+    "checkedAt": null,
+    "models": {}
+  }
+}

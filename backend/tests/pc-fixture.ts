@@ -9,6 +9,7 @@ import { completeRequirements } from '../agent/conversation-state';
 import { assembleBuild } from '../services/recommend';
 import type { ToolContext, ToolRuntime } from '../tools/types';
 import { embeddingConfig } from './embedding-fixture';
+import { addSyntheticThermalEvidence } from './thermal-fixture';
 // 仅用于可重复验证的演示夹具，不进入商品数据库或生产推荐。
 export function fixture() {
   const specs: Record<Category, Record<string, unknown>> = {
@@ -89,6 +90,7 @@ export function fixture() {
     mode: 'diy',
     color: '黑色',
   });
+  addSyntheticThermalEvidence(catalog.parts);
   const plans = ['gpu-cheaper', 'gpu', 'gpu-upper'].map((gpuId, index) => ({
     ...assembleBuild(
       base.map((part) => (part.category === 'gpu' ? gpuId : part.id)),

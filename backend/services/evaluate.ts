@@ -22,6 +22,7 @@ export async function evaluatePlan(
     [resolvePlan(result, options.planId)],
     requirements,
     catalog,
+    'analysis',
   )[0]!;
   const issues = [...plan.validation.issues],
     directions: string[] = [],

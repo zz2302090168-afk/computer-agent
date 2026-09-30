@@ -53,6 +53,7 @@ function modelResponse(message: Omit<ModelMessage, 'role'>) {
 }
 
 function call(id: string, name: string, args: unknown) {
+  if (name === 'set_request_action' && args && typeof args === 'object') args = { nodes: [], ...args };
   return {
     id,
     type: 'function' as const,

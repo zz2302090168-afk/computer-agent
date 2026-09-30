@@ -1,0 +1,122 @@
+{
+  "all": {
+    "baseline": {
+      "n": 25,
+      "success": 19,
+      "usageComplete": 23,
+      "meanCalls": 3.6,
+      "meanTotalTokens": 38892.52173913043,
+      "medianMs": 15504,
+      "p95Ms": 45960
+    },
+    "optimized": {
+      "n": 25,
+      "success": 23,
+      "usageComplete": 25,
+      "meanCalls": 2.96,
+      "meanTotalTokens": 30372.2,
+      "medianMs": 12278,
+      "p95Ms": 19443
+    }
+  },
+  "simple": {
+    "baseline": {
+      "n": 5,
+      "success": 4,
+      "usageComplete": 4,
+      "meanCalls": 2,
+      "meanTotalTokens": 22958.25,
+      "medianMs": 7573,
+      "p95Ms": 23023
+    },
+    "optimized": {
+      "n": 5,
+      "success": 5,
+      "usageComplete": 5,
+      "meanCalls": 2,
+      "meanTotalTokens": 20398,
+      "medianMs": 7368,
+      "p95Ms": 10274
+    }
+  },
+  "multi": {
+    "baseline": {
+      "n": 5,
+      "success": 5,
+      "usageComplete": 5,
+      "meanCalls": 5,
+      "meanTotalTokens": 54436.6,
+      "medianMs": 24086,
+      "p95Ms": 29887
+    },
+    "optimized": {
+      "n": 5,
+      "success": 5,
+      "usageComplete": 5,
+      "meanCalls": 2,
+      "meanTotalTokens": 21214.2,
+      "medianMs": 12849,
+      "p95Ms": 16060
+    }
+  },
+  "dependency": {
+    "baseline": {
+      "n": 5,
+      "success": 5,
+      "usageComplete": 5,
+      "meanCalls": 5,
+      "meanTotalTokens": 50460.4,
+      "medianMs": 17111,
+      "p95Ms": 20581
+    },
+    "optimized": {
+      "n": 5,
+      "success": 5,
+      "usageComplete": 5,
+      "meanCalls": 5,
+      "meanTotalTokens": 49552.4,
+      "medianMs": 17585,
+      "p95Ms": 20449
+    }
+  },
+  "pagination": {
+    "baseline": {
+      "n": 5,
+      "success": 1,
+      "usageComplete": 4,
+      "meanCalls": 3.2,
+      "meanTotalTokens": 31376.25,
+      "medianMs": 9268,
+      "p95Ms": 45960
+    },
+    "optimized": {
+      "n": 5,
+      "success": 3,
+      "usageComplete": 5,
+      "meanCalls": 3.8,
+      "meanTotalTokens": 39371.8,
+      "medianMs": 15657,
+      "p95Ms": 19443
+    }
+  },
+  "failure": {
+    "baseline": {
+      "n": 5,
+      "success": 4,
+      "usageComplete": 5,
+      "meanCalls": 2.8,
+      "meanTotalTokens": 30541,
+      "medianMs": 11723,
+      "p95Ms": 47256
+    },
+    "optimized": {
+      "n": 5,
+      "success": 5,
+      "usageComplete": 5,
+      "meanCalls": 2,
+      "meanTotalTokens": 21324.6,
+      "medianMs": 9540,
+      "p95Ms": 10127
+    }
+  }
+}

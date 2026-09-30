@@ -1,0 +1,4 @@
+{
+  "description": "按当前实际故障选主题：support-general-flow=症状未明确；support-no-power=不通电无反应；support-no-display=屏幕黑屏或无信号；support-no-boot-os=无法进入系统；support-bsod-restart=蓝屏或异常重启；support-slow-freeze=卡顿卡死；support-heat-noise=过热或风扇噪声；support-network=网络异常；support-peripherals-data=USB、键鼠、耳机无声、麦克风或存储数据风险。声音输入输出异常属于peripherals-data，不能因包含“系统声音”而选no-display。无法确定时省略主题检索，不能强行选择不相关步骤。",
+  "decision": "not_promoted; pilot adjacent failure and insufficient paired evidence"
+}

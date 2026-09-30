@@ -9,7 +9,7 @@ import {
   rejectUnknownKeys,
   type RegisteredTool,
 } from '../types';
-import { auditDelivery } from '../../services/delivery-audit';
+import { auditDeliveryAsync } from '../../services/delivery-audit';
 import { exploreParallelPlans } from '../../agent/parallel-plans';
 import { searchCatalogTool } from '../catalog';
 import { recordPlanSelections } from './selection';
@@ -57,7 +57,12 @@ export const recommendPcTool: RegisteredTool = {
       status: 'running',
     });
     context.catalog = await context.reloadCatalog();
-    const plans = auditDelivery(explored, requirements, context.catalog);
+    const plans = await auditDeliveryAsync(
+      explored,
+      requirements,
+      context.catalog,
+      { signal: context.signal },
+    );
     if (plans[0]) {
       const nextDraft = applyDraft(
         runtime.draft,
@@ -117,6 +122,7 @@ export const recommendPcTool: RegisteredTool = {
         validation: plan.validation,
         budget: plan.budget,
         deliveryAudit: plan.deliveryAudit,
+        requirementChecks: plan.requirementAcceptance?.checks,
       })),
       summary: runtime.result.summary,
       budgetDiagnostic: runtime.result.budgetDiagnostic,

@@ -1,9 +1,11 @@
 import type { Category, Requirements, TaskDraft } from '../domain/types';
 import { budgetRange, validateTolerance } from '../rules/budget';
 import { isColorCategory } from '../rules/color';
+import { mergeRequirementItems } from '../services/requirement-state';
 
 export type Draft = TaskDraft;
 const recommendationFields: (keyof Requirements)[] = [
+  'requirementItems',
   'budget',
   'budgetTolerance',
   'partColors',
@@ -30,6 +32,11 @@ export function applyDraft(
 ): Draft {
   // 重新声明整套配色时清除旧的单件例外；同次提交的partColors可明确设定新例外。
   const next = { ...draft, ...('color' in patch ? { partColors: {} } : {}) };
+  if ('requirementItems' in patch)
+    next.requirementItems = mergeRequirementItems(
+      draft.requirementItems,
+      patch.requirementItems,
+    );
   if ('budgetTolerance' in patch)
     next.budgetTolerance = validateTolerance(patch.budgetTolerance);
   if ('partColors' in patch) {
@@ -272,6 +279,8 @@ export function completeRequirements(draft: Draft): Requirements {
     throw Error('还需要主机预算和主要用途，请先询问用户。');
   return {
     budget: draft.budget,
+    requirementItems: draft.requirementItems ?? [],
+    requirementOrigins: draft.requirementOrigins ?? {},
     budgetTolerance:
       draft.budgetTolerance === undefined
         ? undefined

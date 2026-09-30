@@ -50,6 +50,8 @@ next-env.d.ts
 # Python generated caches
 __pycache__/
 *.py[cod]
+/.venv*/
+/eval/results/
 
 # backend diagnostic traces
 /logs/

@@ -1,5 +1,8 @@
 import { completeRequirements } from '../../agent/conversation-state';
-import { selectPrebuilt } from '../../services/recommend';
+import {
+  selectPrebuilt,
+  prepareRequirementAcceptance,
+} from '../../services/recommend';
 import {
   objectSchema,
   parseObject,
@@ -25,11 +28,24 @@ export const selectPrebuiltTool: RegisteredTool = {
     if (typeof input.prebuiltId !== 'string') throw Error('整机ID无效');
     context.catalog = await context.reloadCatalog();
     const requirements = completeRequirements(runtime.draft);
+    const pc = context.catalog.prebuilts.find(
+      (item) => item.id === input.prebuiltId,
+    );
+    if (!pc) throw Error('整机不存在');
+    const acceptance = await prepareRequirementAcceptance(
+      pc.partIds,
+      requirements,
+      context.catalog.parts,
+      context.catalog.prebuilts,
+      pc.id,
+      { signal: context.signal },
+    );
     const plan = selectPrebuilt(
       input.prebuiltId,
       requirements,
       context.catalog.parts,
       context.catalog.prebuilts,
+      acceptance,
     );
     return saveSelectedPlan(plan, requirements, context, runtime);
   },

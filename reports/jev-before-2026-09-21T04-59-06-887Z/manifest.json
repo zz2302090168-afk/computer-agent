@@ -1,0 +1,22 @@
+{
+  "before": true,
+  "repetitions": 1,
+  "scenarios": [
+    "browse",
+    "multi",
+    "simple",
+    "dependency",
+    "pagination",
+    "failure"
+  ],
+  "model": "qwen3.5-flash",
+  "jevModel": "jev-latest",
+  "hashes": {
+    "backend/agent/conversation.ts": "a54dcda0b14622003b205673b122dadf143ccb21b42e92eb9fe1dfe725cd56ae",
+    "backend/agent/prompts.ts": "85e58211cfebf374b7db814c0ef8d14d289450b01b838eccce9bcaba43462c5b",
+    "backend/agent/execution-plan.ts": "1672c53d3d26347a4c5c5bdecfc041d02341b4877df6ad7bb4f710d9439907a4",
+    "backend/tests/performance-sample.ts": "2354c2c3e6003c5c012cb1dee4f04f892c49a4a263fdfcdf8cab416da182d4ed",
+    "scripts/jev-comparison.mjs": "af232e7f7a8d2131035fd395bde48a8ca701173610d7851bc8f0d658a7230bfc"
+  },
+  "design": "当前修复后版本；仅切换JEV_ROUTER_ENABLED；独立进程；无预热；正式比较交替AB/BA；固定夹具而非真实数据库；失败保留；整体等权非线上流量权重"
+}

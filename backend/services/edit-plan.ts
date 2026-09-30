@@ -1,11 +1,13 @@
 import type { Catalog, Category, PcTask } from '../domain/types';
 import { completeRequirements } from '../agent/conversation-state';
-import { assembleBuild } from './recommend';
+import { assembleBuild, prepareRequirementAcceptance } from './recommend';
+import type { RequirementAcceptance } from '../domain/requirement-acceptance';
+import type { RequirementJudgeOptions } from '../agent/jev-requirements';
 import { auditDelivery } from './delivery-audit';
 import { isColorCategory } from '../rules/color';
 
 // 只替换明确给出的ID；未涉及的配件不进入重新搜索。
-export function editPlan(
+function prepareEdit(
   task: PcTask,
   planId: string,
   replacements: { oldId: string; newId: string }[],
@@ -51,11 +53,19 @@ export function editPlan(
     draft.partColors[category as Category] = color;
   }
   const requirements = completeRequirements(draft);
+  return { task, plan, changed, draft, ids, requirements, catalog };
+}
+function finishEdit(
+  prepared: ReturnType<typeof prepareEdit>,
+  acceptance?: RequirementAcceptance,
+) {
+  const { task, plan, changed, draft, ids, requirements, catalog } = prepared;
   const candidate = assembleBuild(
     ids,
     requirements,
     catalog.parts,
     catalog.prebuilts,
+    acceptance,
   );
   const updated = auditDelivery(
     [{ ...candidate, id: plan.id }],
@@ -95,4 +105,24 @@ export function editPlan(
       },
     },
   } satisfies PcTask;
+}
+
+export function editPlan(...args: Parameters<typeof prepareEdit>) {
+  return finishEdit(prepareEdit(...args));
+}
+export async function editPlanAsync(
+  args: Parameters<typeof prepareEdit>,
+  options: RequirementJudgeOptions = {},
+) {
+  const prepared = prepareEdit(...args);
+  const { ids, requirements, catalog } = prepared;
+  const acceptance = await prepareRequirementAcceptance(
+    ids,
+    requirements,
+    catalog.parts,
+    catalog.prebuilts,
+    undefined,
+    options,
+  );
+  return finishEdit(prepared, acceptance);
 }

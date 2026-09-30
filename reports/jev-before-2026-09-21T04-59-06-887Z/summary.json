@@ -1,0 +1,93 @@
+{
+  "all": {
+    "off": {
+      "n": 6,
+      "passed": 6,
+      "meanLlmCalls": 3.1666666666666665,
+      "meanJevCalls": 0,
+      "tokenSamples": 6,
+      "meanLlmTokens": 32790.333333333336,
+      "meanJevTokens": 0,
+      "medianMs": 12255,
+      "p95Ms": 16429
+    }
+  },
+  "browse": {
+    "off": {
+      "n": 1,
+      "passed": 1,
+      "meanLlmCalls": 2,
+      "meanJevCalls": 0,
+      "tokenSamples": 1,
+      "meanLlmTokens": 21286,
+      "meanJevTokens": 0,
+      "medianMs": 7912,
+      "p95Ms": 7912
+    }
+  },
+  "multi": {
+    "off": {
+      "n": 1,
+      "passed": 1,
+      "meanLlmCalls": 2,
+      "meanJevCalls": 0,
+      "tokenSamples": 1,
+      "meanLlmTokens": 21470,
+      "meanJevTokens": 0,
+      "medianMs": 12255,
+      "p95Ms": 12255
+    }
+  },
+  "simple": {
+    "off": {
+      "n": 1,
+      "passed": 1,
+      "meanLlmCalls": 2,
+      "meanJevCalls": 0,
+      "tokenSamples": 1,
+      "meanLlmTokens": 20779,
+      "meanJevTokens": 0,
+      "medianMs": 8433,
+      "p95Ms": 8433
+    }
+  },
+  "dependency": {
+    "off": {
+      "n": 1,
+      "passed": 1,
+      "meanLlmCalls": 5,
+      "meanJevCalls": 0,
+      "tokenSamples": 1,
+      "meanLlmTokens": 49453,
+      "meanJevTokens": 0,
+      "medianMs": 14994,
+      "p95Ms": 14994
+    }
+  },
+  "pagination": {
+    "off": {
+      "n": 1,
+      "passed": 1,
+      "meanLlmCalls": 5,
+      "meanJevCalls": 0,
+      "tokenSamples": 1,
+      "meanLlmTokens": 52045,
+      "meanJevTokens": 0,
+      "medianMs": 16429,
+      "p95Ms": 16429
+    }
+  },
+  "failure": {
+    "off": {
+      "n": 1,
+      "passed": 1,
+      "meanLlmCalls": 3,
+      "meanJevCalls": 0,
+      "tokenSamples": 1,
+      "meanLlmTokens": 31709,
+      "meanJevTokens": 0,
+      "medianMs": 13949,
+      "p95Ms": 13949
+    }
+  }
+}

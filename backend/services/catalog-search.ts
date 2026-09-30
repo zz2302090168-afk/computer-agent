@@ -56,6 +56,30 @@ export function matchesExclusions(part: Part, requirements: Requirements) {
   );
 }
 
+function matchesCatalogKeyword(part: Part, keyword: string) {
+  if (
+    matchesModel(`${part.brand} ${part.name}`, keyword, part.category) ||
+    matchesModel(part.name, keyword, part.category)
+  )
+    return true;
+  const query = keyword.trim().replace(/\s+/gu, ' ').toLowerCase();
+  const brand = part.brand.trim().replace(/\s+/gu, ' ').toLowerCase();
+  // 双语目录按中文/非中文整段区分名称，保留 Cooler Master 等英文词组，
+  // 不把每个空格词猜成独立别名，也不引入芯片平台或外部品牌表。
+  const aliases = (
+    brand.match(/\p{Script=Han}+|[^\p{Script=Han}]+/gu) ?? []
+  ).map((alias) => alias.trim());
+  const prefixes = [...new Set([brand, ...aliases])]
+    .filter(Boolean)
+    .sort((a, b) => b.length - a.length);
+  for (const prefix of prefixes) {
+    if (!query.startsWith(`${prefix} `)) continue;
+    const model = query.slice(prefix.length).trim();
+    if (model && matchesModel(part.name, model, part.category)) return true;
+  }
+  return false;
+}
+
 export function searchCatalog(parts: Part[], filter: CatalogSearch) {
   const brand = filter.brand?.toLowerCase() ?? '',
     keyword = filter.modelKeyword?.toLowerCase() ?? '',
@@ -67,7 +91,7 @@ export function searchCatalog(parts: Part[], filter: CatalogSearch) {
     (p) =>
       (!filter.category || p.category === filter.category) &&
       (!brand || p.brand.toLowerCase().includes(brand)) &&
-      (!keyword || matchesModel(`${p.brand} ${p.name}`, keyword, p.category)) &&
+      (!keyword || matchesCatalogKeyword(p, keyword)) &&
       (!filter.color ||
         filter.color === '不限' ||
         p.color.includes(filter.color)) &&

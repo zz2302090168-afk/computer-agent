@@ -1,7 +1,11 @@
 import { completeRequirements } from '../../agent/conversation-state';
-import { assembleBuild } from '../../services/recommend';
+import {
+  assembleBuild,
+  prepareRequirementAcceptance,
+} from '../../services/recommend';
 import { validateBuild } from '../../rules/compatibility';
 import type { Plan } from '../../domain/types';
+import type { RequirementAcceptance } from '../../domain/requirement-acceptance';
 import {
   objectSchema,
   parseObject,
@@ -43,14 +47,25 @@ export const assembleBuildTool: RegisteredTool = {
     // 模型只提交 ID；价格、规格与总价都从最新数据库记录重新计算。
     context.catalog = await context.reloadCatalog();
     let plan: Plan;
+    let acceptance: RequirementAcceptance | undefined;
     try {
+      acceptance = await prepareRequirementAcceptance(
+        input.productIds,
+        requirements,
+        context.catalog.parts,
+        context.catalog.prebuilts,
+        undefined,
+        { signal: context.signal },
+      );
       plan = assembleBuild(
         input.productIds,
         requirements,
         context.catalog.parts,
         context.catalog.prebuilts,
+        acceptance,
       );
     } catch (cause) {
+      if (cause instanceof ToolExecutionError) throw cause;
       const ids = input.productIds as string[];
       const selected = context.catalog.parts.filter((part) =>
         ids.includes(part.id),
@@ -72,6 +87,9 @@ export const assembleBuildTool: RegisteredTool = {
       throw new ToolExecutionError(
         cause instanceof Error ? cause.message : '组装未通过校验',
         {
+          stage: 'compatibility',
+          candidateVersion: acceptance?.candidateVersion,
+          preserveConstraints: requirements,
           code: conflicts.length
             ? 'compatibility_conflict'
             : 'constraint_rejected',

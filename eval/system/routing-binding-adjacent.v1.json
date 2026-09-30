@@ -1,0 +1,74 @@
+{
+  "version": "routing-binding-adjacent-v1",
+  "split": "dev",
+  "humanVerified": false,
+  "cases": [
+    {
+      "id": "QUEUE03",
+      "group": "否定边界",
+      "initial": "unselected",
+      "turns": [
+        {
+          "query": "只解释第二套方案的主板。不要选定它，不要确认购买，也不要查询替换件。",
+          "expect": "explain_selection",
+          "preserve": true,
+          "semanticReview": true,
+          "selectionUnchanged": true
+        }
+      ]
+    },
+    {
+      "id": "PRICE01",
+      "group": "严格降价",
+      "initial": "selected",
+      "turns": [
+        {
+          "query": "只看看当前方案显卡能换什么更便宜的，必须比现在的显卡单价低，同价或更贵都不要，先不要换。",
+          "expect": "find_replacements",
+          "preserve": true,
+          "strictCheaper": true,
+          "minReplacementCandidates": 1
+        }
+      ]
+    },
+    {
+      "id": "BIND02",
+      "group": "精确商品定位",
+      "initial": "selected",
+      "turns": [
+        {
+          "query": "先只查商品目录：找到Intel Arc B570 Challenger 10GB OC显卡和Samsung 990 PRO 1TB硬盘，告诉我它们各自的完整型号和商品ID，不修改方案。",
+          "expect": "catalog_only",
+          "preserve": true,
+          "semanticReview": true
+        },
+        {
+          "query": "现在用刚才查询到的这两个商品ID做联动替换预览，其他六件不动，允许硬盘涨价但两件合计必须比原来便宜。只预览，不实际替换。",
+          "expectedReplacementIds": {"gpu":"demo-20260912-gpu-intel-b570","storage":"real-storage-11"},
+          "expect": "find_replacements",
+          "preserve": true,
+          "strictCheaper": true,
+          "minReplacementCandidates": 1,
+          "semanticReview": true
+        }
+      ]
+    },
+    {
+      "id": "KNOW-MISSING",
+      "group": "知识缺口",
+      "initial": "unselected",
+      "turns": [
+        {
+          "query": "只问知识：华擎是否与NVIDIA合作生产GeForce显卡？只按实际检索资料回答，没有合作关系证据就说明无法确定，不要猜。",
+          "expect": "retrieve_knowledge",
+          "requiredTools": [
+            "retrieve_knowledge",
+            "answer_knowledge"
+          ],
+          "preserve": true,
+          "semanticReview": true
+        }
+      ]
+    }
+  ]
+}

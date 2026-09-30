@@ -24,9 +24,14 @@ import {
 import type { RegisteredTool, ToolContext, ToolRuntime } from './types';
 import { MAX_CANDIDATE_ATTEMPTS, ToolExecutionError } from './types';
 import { setRequestActionTool } from './requirements/action';
+import { toolMetadata } from './metadata';
+import { validateToolArguments } from './schema-validation';
+import { activeExecutionNode, matchesExpected } from '../agent/execution-plan';
+import { canReplan, reviseExecutionPlanTool } from './replan';
 
 export const registeredTools = [
   setRequestActionTool,
+  reviseExecutionPlanTool,
   updateSupportTool,
   selectPlanTool,
   findReplacementsTool,
@@ -44,7 +49,12 @@ export const registeredTools = [
   retrieveKnowledgeTool,
   evaluatePlanTool,
   applySuggestionTool,
-] as const;
+].map((tool) => {
+  const metadata = toolMetadata[tool.definition.function.name];
+  if (!metadata)
+    throw Error(`工具缺少元数据：${tool.definition.function.name}`);
+  return { ...tool, metadata };
+});
 
 // 注册表是工具名称到执行入口的唯一映射，启动和测试时都能发现重名。
 export function createToolRegistry(tools: readonly RegisteredTool[]) {
@@ -57,28 +67,16 @@ export function createToolRegistry(tools: readonly RegisteredTool[]) {
 }
 
 const registry = createToolRegistry(registeredTools);
-const stateChangingTools = new Set([
-  'recommend_monitor',
-  'apply_suggestion',
-  'assemble_build',
-  'authorize_selection',
-  'confirm_selections',
-  'recommend_pc',
-  'replace_parts',
-  'select_plan',
-  'select_prebuilt',
-  'update_requirements',
-  'update_support',
-]);
-const preservesConfigurationOnFailure = new Set([
-  'confirm_selections',
-  'apply_suggestion',
-  'replace_parts',
-  'explain_selection',
-  'evaluate_plan',
-  'select_plan',
-  'find_replacements',
-]);
+const stateChangingTools = new Set(
+  registeredTools
+    .filter((t) => t.metadata.effect === 'write')
+    .map((t) => t.definition.function.name),
+);
+const preservesConfigurationOnFailure = new Set(
+  registeredTools
+    .filter((t) => t.metadata.preservesConfigurationOnFailure)
+    .map((t) => t.definition.function.name),
+);
 
 const catalogReadTools = ['search_catalog', 'retrieve_knowledge'];
 const evaluationReadTools = [
@@ -89,7 +87,7 @@ const evaluationReadTools = [
 ];
 
 // 工具展示和执行入口共用动作边界，错误调用也不能取得额外权限。
-export function restrictedToolNames(
+function restrictedBusinessToolNames(
   runtime: ToolRuntime,
 ): readonly string[] | undefined {
   if (runtime.requestAction === 'pending') return undefined;
@@ -112,12 +110,85 @@ export function restrictedToolNames(
     case 'evaluate_plan':
       return evaluationReadTools;
     default:
+      if (runtime.executionPlan) {
+        const action = runtime.requestAction;
+        return registeredTools
+          .filter((tool) => action && tool.metadata.taskTypes.includes(action))
+          .map((tool) => tool.definition.function.name);
+      }
       return undefined;
   }
+}
+export function restrictedToolNames(
+  runtime: ToolRuntime,
+): readonly string[] | undefined {
+  const names = restrictedBusinessToolNames(runtime);
+  return names && canReplan(runtime)
+    ? [...names, 'revise_execution_plan']
+    : names;
 }
 export const toolDefinitions: ToolDefinition[] = registeredTools.map(
   (tool) => tool.definition,
 );
+
+export function planningToolContracts() {
+  return registeredTools
+    .filter((tool) => tool.metadata.primaryFor.length)
+    .map((tool) => ({
+      tool: tool.definition.function.name,
+      primaryFor: tool.metadata.primaryFor,
+      parameters: tool.definition.function.parameters,
+    }));
+}
+
+export function directTaskInvocation(
+  runtime: ToolRuntime,
+  available: readonly ToolDefinition[],
+) {
+  const node = activeExecutionNode(runtime);
+  if (!node?.invocation || node.directAttempted) return undefined;
+  if (
+    runtime.facts
+      .slice(runtime.executionPlan?.factStart ?? 0)
+      .some(
+        (fact) =>
+          !fact.failed &&
+          fact.tool === node.invocation!.tool &&
+          matchesExpected(fact.arguments, node.invocation!.arguments),
+      )
+  )
+    return undefined;
+  if (
+    node.expected &&
+    (node.invocation.tool !== node.expected.tool ||
+      !matchesExpected(node.invocation.arguments, node.expected.arguments))
+  )
+    return undefined;
+  // 只在当前状态允许且该任务的主工具唯一时跳过选择模型；辅助检索不算主工具。
+  const candidates = registeredTools.filter(
+    (tool) =>
+      tool.metadata.primaryFor.includes(node.action) &&
+      available.some(
+        (definition) =>
+          definition.function.name === tool.definition.function.name,
+      ),
+  );
+  if (
+    candidates.length !== 1 ||
+    candidates[0].definition.function.name !== node.invocation.tool
+  )
+    return undefined;
+  try {
+    validateToolArguments(
+      node.invocation.arguments,
+      candidates[0].definition.function.parameters,
+    );
+    return node.invocation;
+  } catch {
+    // 参数不齐或值域无效时让模型依据同一计划补齐；不直接调用、更不绕过审核。
+    return undefined;
+  }
+}
 
 function snapshot(runtime: ToolRuntime) {
   const requirementState = {
@@ -413,6 +484,9 @@ async function executeTool(
 export const executeRegisteredTool = (
   ...args: Parameters<typeof executeTool>
 ) =>
-  traceOperation('tool', { name: args[0], arguments: args[1] }, () =>
-    executeTool(...args),
-  );
+  traceOperation('tool', { name: args[0], arguments: args[1] }, async () => {
+    const nodeId = args[3].executionPlan?.activeId;
+    const output = await executeTool(...args);
+    Object.assign(output.operation, { arguments: args[1], nodeId });
+    return output;
+  });

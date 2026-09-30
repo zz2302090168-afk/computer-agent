@@ -55,7 +55,9 @@ try {
   first.record('large', 'x'.repeat(8 * 1024 * 1024));
   first.record('ignored', {});
   first.record('end', { aborted: true });
+  first.record('end', 'x'.repeat(8 * 1024 * 1024));
   const capped = readFileSync(first.file, 'utf8');
+  assert.ok(Buffer.byteLength(capped) <= 8 * 1024 * 1024);
   assert.ok(
     capped.includes('truncated') &&
       capped.includes('"end"') &&

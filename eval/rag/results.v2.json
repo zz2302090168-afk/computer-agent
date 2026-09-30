@@ -1,0 +1,623 @@
+{
+  "version": "rag-baseline-v2",
+  "humanVerified": false,
+  "runDirectory": "eval\\results\\v2-2026-09-15T07-35-39.429Z",
+  "supportDirectory": "eval\\results\\support-2026-09-15T07-36-09.077Z",
+  "selection": {
+    "selected": "without_tags",
+    "challenger": "without_tags",
+    "rule": "dev claim-group coverage descending, labelled precision descending, MRR descending, mean context codepoints ascending; baseline wins exact ties; no test-driven reselection",
+    "development": [
+      {
+        "id": "without_tags",
+        "text": "title_body",
+        "topK": 4,
+        "claimCoverage": 1,
+        "labelledPrecision": 0.4444444444444444,
+        "reciprocalRank": 0.8148148148148148,
+        "contextCodepoints": 670.1
+      },
+      {
+        "id": "baseline",
+        "text": "full",
+        "topK": 4,
+        "claimCoverage": 1,
+        "labelledPrecision": 0.3888888888888889,
+        "reciprocalRank": 0.8703703703703703,
+        "contextCodepoints": 682.4
+      },
+      {
+        "id": "k6",
+        "text": "full",
+        "topK": 6,
+        "claimCoverage": 1,
+        "labelledPrecision": 0.31481481481481477,
+        "reciprocalRank": 0.8703703703703703,
+        "contextCodepoints": 1009.1
+      },
+      {
+        "id": "k2",
+        "text": "full",
+        "topK": 2,
+        "claimCoverage": 0.8888888888888888,
+        "labelledPrecision": 0.5,
+        "reciprocalRank": 0.8333333333333334,
+        "contextCodepoints": 330.4
+      },
+      {
+        "id": "without_title",
+        "text": "tags_body",
+        "topK": 4,
+        "claimCoverage": 0.8888888888888888,
+        "labelledPrecision": 0.3888888888888889,
+        "reciprocalRank": 0.6666666666666666,
+        "contextCodepoints": 677.3
+      },
+      {
+        "id": "body_only",
+        "text": "body",
+        "topK": 4,
+        "claimCoverage": 0.7777777777777778,
+        "labelledPrecision": 0.4166666666666667,
+        "reciprocalRank": 0.6944444444444444,
+        "contextCodepoints": 672.4
+      }
+    ],
+    "frozenBeforeTest": "2026-09-15T07:35:56.852Z"
+  },
+  "test": {
+    "baseline": {
+      "n": 6,
+      "applicationFailures": 0,
+      "claimCoverage": {
+        "n": 6,
+        "mean": 1
+      },
+      "mrr": {
+        "n": 6,
+        "mean": 0.8055555555555556
+      },
+      "labelledPrecision": {
+        "n": 6,
+        "mean": 0.2916666666666667
+      },
+      "contextCodepoints": {
+        "n": 6,
+        "mean": 702.5
+      },
+      "applicationMs": {
+        "n": 6,
+        "median": 28002.17185,
+        "min": 15429.678199999995,
+        "max": 30266.073399999994
+      },
+      "firstTextMs": {
+        "n": 6,
+        "median": 24679.870150000002,
+        "min": 13408.804399999994,
+        "max": 28016.233800000045
+      },
+      "judgeStatus": {
+        "success": 6
+      },
+      "businessScores": {
+        "relevance": {
+          "n": 6,
+          "mean": 2
+        },
+        "correctness": {
+          "n": 6,
+          "mean": 2
+        },
+        "business_safety": {
+          "n": 6,
+          "mean": 2
+        }
+      },
+      "criticalFailures": [],
+      "ragasStatus": {
+        "success": 6
+      },
+      "faithfulness": {
+        "n": 6,
+        "mean": 0.9431818181818181
+      },
+      "usage": {
+        "qwen3.7-text-embedding-flash": {
+          "calls": 6,
+          "missingUsage": 0,
+          "inputTokens": 242,
+          "outputTokens": 0,
+          "estimatedCost": null
+        },
+        "qwen3.5-flash": {
+          "calls": 6,
+          "missingUsage": 0,
+          "inputTokens": 3895,
+          "outputTokens": 13027,
+          "estimatedCost": null
+        }
+      }
+    },
+    "without_tags": {
+      "n": 6,
+      "applicationFailures": 0,
+      "claimCoverage": {
+        "n": 6,
+        "mean": 0.9166666666666666
+      },
+      "mrr": {
+        "n": 6,
+        "mean": 0.8888888888888888
+      },
+      "labelledPrecision": {
+        "n": 6,
+        "mean": 0.25
+      },
+      "contextCodepoints": {
+        "n": 6,
+        "mean": 696.8333333333334
+      },
+      "applicationMs": {
+        "n": 6,
+        "median": 27453.052500000013,
+        "min": 14427.850600000005,
+        "max": 45776.0768
+      },
+      "firstTextMs": {
+        "n": 6,
+        "median": 23735.70665,
+        "min": 11862.31640000001,
+        "max": 41466.1444
+      },
+      "judgeStatus": {
+        "success": 6
+      },
+      "businessScores": {
+        "relevance": {
+          "n": 6,
+          "mean": 2
+        },
+        "correctness": {
+          "n": 6,
+          "mean": 2
+        },
+        "business_safety": {
+          "n": 6,
+          "mean": 2
+        }
+      },
+      "criticalFailures": [],
+      "ragasStatus": {
+        "success": 5,
+        "failed": 1
+      },
+      "faithfulness": {
+        "n": 5,
+        "mean": 0.7798999309868875
+      },
+      "usage": {
+        "qwen3.7-text-embedding-flash": {
+          "calls": 6,
+          "missingUsage": 0,
+          "inputTokens": 242,
+          "outputTokens": 0,
+          "estimatedCost": null
+        },
+        "qwen3.5-flash": {
+          "calls": 6,
+          "missingUsage": 0,
+          "inputTokens": 3892,
+          "outputTokens": 14172,
+          "estimatedCost": null
+        }
+      }
+    }
+  },
+  "latency": {
+    "baseline": {
+      "cold": {
+        "n": 2,
+        "median": 3311.7839,
+        "min": 3212.4717,
+        "max": 3411.0960999999998
+      },
+      "hot": {
+        "n": 2,
+        "median": 136.01960000000008,
+        "min": 120.88090000000011,
+        "max": 151.15830000000005
+      }
+    },
+    "without_tags": {
+      "cold": {
+        "n": 2,
+        "median": 3193.1145000000006,
+        "min": 3184.1369000000004,
+        "max": 3202.0921000000008
+      },
+      "hot": {
+        "n": 2,
+        "median": 128.25799999999936,
+        "min": 108.24169999999958,
+        "max": 148.27429999999913
+      }
+    }
+  },
+  "usage": {
+    "developmentEmbedding": {
+      "qwen3.7-text-embedding-flash": {
+        "calls": 432,
+        "missingUsage": 0,
+        "inputTokens": 37452,
+        "outputTokens": 0,
+        "estimatedCost": null
+      }
+    },
+    "latencyEmbedding": {
+      "qwen3.7-text-embedding-flash": {
+        "calls": 400,
+        "missingUsage": 0,
+        "inputTokens": 39162,
+        "outputTokens": 0,
+        "estimatedCost": null
+      }
+    },
+    "productionSupport": {
+      "qwen3.5-flash": {
+        "calls": 13,
+        "missingUsage": 0,
+        "inputTokens": 98817,
+        "outputTokens": 2996,
+        "estimatedCost": null
+      },
+      "qwen3.7-text-embedding-flash": {
+        "calls": 100,
+        "missingUsage": 0,
+        "inputTokens": 10337,
+        "outputTokens": 0,
+        "estimatedCost": null
+      }
+    },
+    "testJudgeAndCalibration": {
+      "qwen3.5-flash": {
+        "calls": 40,
+        "missingUsage": 0,
+        "inputTokens": 76702,
+        "outputTokens": 27726,
+        "estimatedCost": null
+      }
+    },
+    "supportJudgeAndCalibration": {
+      "qwen3.5-flash": {
+        "calls": 13,
+        "missingUsage": 0,
+        "inputTokens": 21383,
+        "outputTokens": 3924,
+        "estimatedCost": null
+      }
+    },
+    "failedV3Calibration": {
+      "qwen3.5-flash": {
+        "calls": 5,
+        "missingUsage": 0,
+        "inputTokens": 6625,
+        "outputTokens": 1631,
+        "estimatedCost": null
+      }
+    }
+  },
+  "limitations": [
+    "small synthetic test set",
+    "no independent human labels",
+    "same application and judge model",
+    "one generation per case/variant; no significance claim",
+    "cost unknown; no contract pricing",
+    "support production path differs from free answer replay"
+  ],
+  "pairedFaithfulness": {
+    "caseIds": [
+      "H01",
+      "H02",
+      "H03",
+      "H05",
+      "H06"
+    ],
+    "byVariant": {
+      "baseline": {
+        "n": 5,
+        "mean": 0.9484848484848485
+      },
+      "without_tags": {
+        "n": 5,
+        "mean": 0.7798999309868875
+      }
+    }
+  },
+  "support": {
+    "n": 4,
+    "applicationFailures": 0,
+    "cases": [
+      {
+        "caseId": "S01",
+        "program": {
+          "stopped": false,
+          "stopStateMatches": null,
+          "selectedStepMatchesProvisionalLabel": true,
+          "verbatimSelectedStep": true,
+          "newStepAfterStop": null
+        },
+        "retrievalSuccessful": true,
+        "retrievalErrors": 0
+      },
+      {
+        "caseId": "S02",
+        "program": {
+          "stopped": true,
+          "stopStateMatches": true,
+          "selectedStepMatchesProvisionalLabel": null,
+          "verbatimSelectedStep": null,
+          "newStepAfterStop": false
+        },
+        "retrievalSuccessful": false,
+        "retrievalErrors": 0
+      },
+      {
+        "caseId": "S03",
+        "program": {
+          "stopped": true,
+          "stopStateMatches": true,
+          "selectedStepMatchesProvisionalLabel": null,
+          "verbatimSelectedStep": null,
+          "newStepAfterStop": false
+        },
+        "retrievalSuccessful": false,
+        "retrievalErrors": 0
+      },
+      {
+        "caseId": "S04",
+        "program": {
+          "stopped": false,
+          "stopStateMatches": null,
+          "selectedStepMatchesProvisionalLabel": true,
+          "verbatimSelectedStep": true,
+          "newStepAfterStop": null
+        },
+        "retrievalSuccessful": true,
+        "retrievalErrors": 0
+      }
+    ],
+    "applicationMs": {
+      "n": 4,
+      "median": 13403.242050000003,
+      "min": 9893.1741,
+      "max": 18444.978199999998
+    },
+    "judgeStatus": {
+      "success": 4
+    },
+    "ragasStatus": {
+      "unscorable": 2,
+      "success": 2
+    }
+  },
+  "cases": [
+    {
+      "caseId": "H01",
+      "variant": "baseline",
+      "retrievedIds": [
+        "compat-space",
+        "selection-gpu-fit-power",
+        "selection-psu-power-connectors",
+        "compat-memory"
+      ],
+      "program": {
+        "claimCoverage": 1,
+        "labelledPrecision": 0.25,
+        "reciprocalRank": 0.3333333333333333,
+        "contextCodepoints": 784
+      },
+      "judgeStatus": "success"
+    },
+    {
+      "caseId": "H01",
+      "variant": "without_tags",
+      "retrievedIds": [
+        "selection-psu-power-connectors",
+        "selection-gpu-fit-power",
+        "compat-space",
+        "compat-memory"
+      ],
+      "program": {
+        "claimCoverage": 1,
+        "labelledPrecision": 0.25,
+        "reciprocalRank": 1,
+        "contextCodepoints": 784
+      },
+      "judgeStatus": "success"
+    },
+    {
+      "caseId": "H02",
+      "variant": "without_tags",
+      "retrievedIds": [
+        "selection-cooler-thermal-fit",
+        "selection-cpu-platform",
+        "compat-memory",
+        "selection-memory-capacity-clearance"
+      ],
+      "program": {
+        "claimCoverage": 1,
+        "labelledPrecision": 0.25,
+        "reciprocalRank": 1,
+        "contextCodepoints": 921
+      },
+      "judgeStatus": "success"
+    },
+    {
+      "caseId": "H02",
+      "variant": "baseline",
+      "retrievedIds": [
+        "selection-cooler-thermal-fit",
+        "selection-cpu-platform",
+        "compat-memory",
+        "selection-memory-capacity-clearance"
+      ],
+      "program": {
+        "claimCoverage": 1,
+        "labelledPrecision": 0.25,
+        "reciprocalRank": 1,
+        "contextCodepoints": 921
+      },
+      "judgeStatus": "success"
+    },
+    {
+      "caseId": "H03",
+      "variant": "baseline",
+      "retrievedIds": [
+        "support-network.9",
+        "support-network.5",
+        "support-network.6",
+        "support-network.7"
+      ],
+      "program": {
+        "claimCoverage": 1,
+        "labelledPrecision": 0.25,
+        "reciprocalRank": 1,
+        "contextCodepoints": 518
+      },
+      "judgeStatus": "success"
+    },
+    {
+      "caseId": "H03",
+      "variant": "without_tags",
+      "retrievedIds": [
+        "support-network.9",
+        "support-network.5",
+        "support-network.6",
+        "support-network.7"
+      ],
+      "program": {
+        "claimCoverage": 1,
+        "labelledPrecision": 0.25,
+        "reciprocalRank": 1,
+        "contextCodepoints": 518
+      },
+      "judgeStatus": "success"
+    },
+    {
+      "caseId": "H04",
+      "variant": "without_tags",
+      "retrievedIds": [
+        "selection-storage-interface",
+        "selection-motherboard-platform",
+        "compat-memory",
+        "selection-cpu-platform"
+      ],
+      "program": {
+        "claimCoverage": 1,
+        "labelledPrecision": 0.25,
+        "reciprocalRank": 1,
+        "contextCodepoints": 901
+      },
+      "judgeStatus": "success"
+    },
+    {
+      "caseId": "H04",
+      "variant": "baseline",
+      "retrievedIds": [
+        "selection-storage-interface",
+        "selection-motherboard-platform",
+        "compat-memory",
+        "selection-cpu-platform"
+      ],
+      "program": {
+        "claimCoverage": 1,
+        "labelledPrecision": 0.25,
+        "reciprocalRank": 1,
+        "contextCodepoints": 901
+      },
+      "judgeStatus": "success"
+    },
+    {
+      "caseId": "H05",
+      "variant": "baseline",
+      "retrievedIds": [
+        "support-no-boot-os.5",
+        "support-no-boot-os.7",
+        "support-no-boot-os.3",
+        "support-no-boot-os.8"
+      ],
+      "program": {
+        "claimCoverage": 1,
+        "labelledPrecision": 0.25,
+        "reciprocalRank": 1,
+        "contextCodepoints": 544
+      },
+      "judgeStatus": "success"
+    },
+    {
+      "caseId": "H05",
+      "variant": "without_tags",
+      "retrievedIds": [
+        "support-no-boot-os.5",
+        "support-no-boot-os.7",
+        "support-no-boot-os.3",
+        "support-no-boot-os.4"
+      ],
+      "program": {
+        "claimCoverage": 1,
+        "labelledPrecision": 0.25,
+        "reciprocalRank": 1,
+        "contextCodepoints": 552
+      },
+      "judgeStatus": "success"
+    },
+    {
+      "caseId": "H06",
+      "variant": "without_tags",
+      "retrievedIds": [
+        "support-heat-noise.1",
+        "support-heat-noise.2",
+        "support-heat-noise.9",
+        "support-heat-noise.8"
+      ],
+      "program": {
+        "claimCoverage": 0.5,
+        "labelledPrecision": 0.25,
+        "reciprocalRank": 0.3333333333333333,
+        "contextCodepoints": 505
+      },
+      "judgeStatus": "success"
+    },
+    {
+      "caseId": "H06",
+      "variant": "baseline",
+      "retrievedIds": [
+        "support-heat-noise.1",
+        "support-heat-noise.9",
+        "support-heat-noise.2",
+        "support-heat-noise.7"
+      ],
+      "program": {
+        "claimCoverage": 1,
+        "labelledPrecision": 0.5,
+        "reciprocalRank": 0.5,
+        "contextCodepoints": 547
+      },
+      "judgeStatus": "success"
+    }
+  ],
+  "finalSourceHashes": {
+    "backend/rag/retrieve.ts": "ad1d27f1c498a15c595f6e74447c6855b7d083dea29c1f55aa5ec6508e5957d6",
+    "backend/agent/chat-model.ts": "318f53067ebcd23fe9e3a6bc990fab817e03cb61c1148f902d08d73b6da0a746",
+    "backend/rules/budget.ts": "82f99fb0e2cf7bad871d0e42728c64cec3ba493adce88687a0a0c420a0a58d37",
+    "knowledge/library.ts": "79197c87ce502505f4f5eb9ed9d8a72fca7a55acacc2ceff458d031a14872920",
+    "knowledge/support.ts": "967c47ead910960877c6cfd23a845787cfc00538fee7c2fd79c9f537dbdddf17",
+    "eval/rag/experiment.mjs": "1d3733ccec745f65bbf3f6e40eaa9e345ea11204b4abb69423be3393adeba3fd",
+    "eval/rag/score.py": "3083f897a0bd718557e109575a3c3750c23174ee8488dd0c642e7b5b87fbbdb2",
+    "eval/rag/config.v2.json": "6c46f143cb7ae7475a256236c304ec73070a0def66ecad41296a28a334b0a832",
+    "eval/rag/dataset.v2.json": "88ea2122bc7bf2c8050ae4aaa7d63e20d3bd81496a6b3f7d93a9d9149b9c342f",
+    "eval/rag/judge-prompt.v4.txt": "16238429a9ee5da6252ed1f88338461ad136f6a5f13fef50d8adc09b6b20cf7a"
+  },
+  "sourceFreezeNote": "运行前manifest已冻结语料、数据、配置和核心代码指纹；运行后源码快照含格式化及评分协议v4。检索算法和生成参数未在测试期间调整。"
+}

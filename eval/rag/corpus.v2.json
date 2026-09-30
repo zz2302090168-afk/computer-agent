@@ -1,0 +1,495 @@
+{
+  "corpusHash": "316cb67d7485aaf2224532f398d6c2ce347dfa7e20666f8371efef5cdae5697d",
+  "evidence": [
+    {
+      "id": "support-general-flow.1",
+      "title": "电脑故障通用排查流程 · 适用范围与来源说明",
+      "sha256": "c2bcc3ee02faafad4bb63b57d43bee8ea1c110bae291aea44d62460c5054b186"
+    },
+    {
+      "id": "support-general-flow.2",
+      "title": "电脑故障通用排查流程 · 症状区分",
+      "sha256": "76e025b0807a136bd8d3c7f8b3cffe45d6ba840fdc8f0c1290af1eb736ce0bfe"
+    },
+    {
+      "id": "support-general-flow.3",
+      "title": "电脑故障通用排查流程 · 先问",
+      "sha256": "79ff77661e103c671b2677ca4884ba9d10ba15ac353380869ee3b0539652a0b0"
+    },
+    {
+      "id": "support-general-flow.4",
+      "title": "电脑故障通用排查流程 · 步骤1：保留现场信息",
+      "sha256": "87697338612cbc676083cad1acb00ea6c4f3f842b6f15c78e2498f8f8b22b9da"
+    },
+    {
+      "id": "support-general-flow.5",
+      "title": "电脑故障通用排查流程 · 步骤2：撤销最近的外部变化",
+      "sha256": "c1f650a2c13d1bbe48e26c3fe7a49aff4c48bcde7a7595222958bf3934707c4d"
+    },
+    {
+      "id": "support-general-flow.6",
+      "title": "电脑故障通用排查流程 · 步骤3：做一次最小范围复现",
+      "sha256": "d810ce2e540277cf08585c29b10a6d6ae692250e21f6fd2918e4e9a76a189978"
+    },
+    {
+      "id": "support-general-flow.7",
+      "title": "电脑故障通用排查流程 · 停止条件",
+      "sha256": "b4d77bd87e587ff17bab7ff5f8a31691cd44042d11663d399f53011da0ef5ba9"
+    },
+    {
+      "id": "support-general-flow.8",
+      "title": "电脑故障通用排查流程 · 结论与人工入口",
+      "sha256": "678e93b115ff674b432813ac680da8f5e53c900678eb505652e5a80c558fd722"
+    },
+    {
+      "id": "support-no-power.1",
+      "title": "按电源键无反应或通电迹象异常 · 适用范围与来源说明",
+      "sha256": "af6e164415a2e4c86c2a583e498251a1f90ee15771bec8a138ee747a8ec1cdd8"
+    },
+    {
+      "id": "support-no-power.2",
+      "title": "按电源键无反应或通电迹象异常 · 症状区分",
+      "sha256": "3253d0a5c1e5feeebb5c311466c9bdd9c53e09e74224f59203be4b2ad2a800d9"
+    },
+    {
+      "id": "support-no-power.3",
+      "title": "按电源键无反应或通电迹象异常 · 先问",
+      "sha256": "c86ba32828186fdf975df8048c02704c6d76f4cdcebd7a14c9960d9e5bcb490e"
+    },
+    {
+      "id": "support-no-power.4",
+      "title": "按电源键无反应或通电迹象异常 · 步骤1：核对外部供电路径",
+      "sha256": "b1c416f7977e576d88fa6a55513b273fbf05614521908e8f26460600321d0b96"
+    },
+    {
+      "id": "support-no-power.5",
+      "title": "按电源键无反应或通电迹象异常 · 步骤2：排除普通外设影响",
+      "sha256": "c9966b4c5cd4c4e99f33bf6f615b5ab3fb526cf33ca237fa547f6d538f1aea9e"
+    },
+    {
+      "id": "support-no-power.6",
+      "title": "按电源键无反应或通电迹象异常 · 步骤3：执行一次标准放电重试",
+      "sha256": "ec60de96558cc29eb2288a3c715a74cb559edcc242328341004d203eddfe199d"
+    },
+    {
+      "id": "support-no-power.7",
+      "title": "按电源键无反应或通电迹象异常 · 停止条件",
+      "sha256": "767614aa8f92ab3b18d0cc8715285131c79be8322e1f86c0ebb153f3fc6d30a1"
+    },
+    {
+      "id": "support-no-power.8",
+      "title": "按电源键无反应或通电迹象异常 · 结论边界",
+      "sha256": "4af80336cfe016bbc32a7d168318c91ca2466cbf1ec3e3a6ab0d1772f20a6e70"
+    },
+    {
+      "id": "support-no-display.1",
+      "title": "主机运行但屏幕无显示 · 适用范围与来源说明",
+      "sha256": "0567bb5b931a0874ac1f75735fa2c8d4d34ccac88fae273f4e831342eb833a81"
+    },
+    {
+      "id": "support-no-display.2",
+      "title": "主机运行但屏幕无显示 · 症状区分",
+      "sha256": "e418f4b93103a322c674938583a323bff726a08f6c1ba4cef0d94e7a23e5b16f"
+    },
+    {
+      "id": "support-no-display.3",
+      "title": "主机运行但屏幕无显示 · 先问",
+      "sha256": "33668d3189fc1b054cb5a517dd2eba39515d7a4f09dbc5689a7798777210d9a8"
+    },
+    {
+      "id": "support-no-display.4",
+      "title": "主机运行但屏幕无显示 · 步骤1：确认显示器自身工作",
+      "sha256": "4ff0a1334c2b803d2e73803a7462364950cf1dc63bf543fa190bcf730f3f6890"
+    },
+    {
+      "id": "support-no-display.5",
+      "title": "主机运行但屏幕无显示 · 步骤2：重新连接视频线",
+      "sha256": "3462cdba217fcf61cb4fa0f75910ca1dd1728e4bc3d88e7d666bcebe830dcf7e"
+    },
+    {
+      "id": "support-no-display.6",
+      "title": "主机运行但屏幕无显示 · 步骤3：单变量替换外部显示链路",
+      "sha256": "01d303549d3ada5eb4d53f5eeebd554125b754d95282eb84ae4e6c049ba45488"
+    },
+    {
+      "id": "support-no-display.7",
+      "title": "主机运行但屏幕无显示 · 步骤4：记录启动阶段",
+      "sha256": "3dbec67bed7624ece759184c5dbc738b865d14cc68e4521ec62275dff6cfae55"
+    },
+    {
+      "id": "support-no-display.8",
+      "title": "主机运行但屏幕无显示 · 停止条件",
+      "sha256": "59895fdf2f150f3b4bde5abadd184a62422aebc63f4626242edf0b60938bab2c"
+    },
+    {
+      "id": "support-no-display.9",
+      "title": "主机运行但屏幕无显示 · 结论边界",
+      "sha256": "d914b6cb9f1075b043f9869656354a44ec4fb11dcf60258edc2289183b118607"
+    },
+    {
+      "id": "support-no-boot-os.1",
+      "title": "能显示但进不了系统 · 适用范围与来源说明",
+      "sha256": "c512ea10c506a4e984cf7cf675c7d06325b89d327198fca5ab3fe1deb2b7ffc3"
+    },
+    {
+      "id": "support-no-boot-os.2",
+      "title": "能显示但进不了系统 · 症状区分",
+      "sha256": "fa45c9e05fd9d50b03f347f40d4f7d45cee58793a43970166c7013326a1c8241"
+    },
+    {
+      "id": "support-no-boot-os.3",
+      "title": "能显示但进不了系统 · 先问",
+      "sha256": "dd9bb6e40fdf4da9c6a8454deefb20528518d68e3bbbaff1334a8ed044763142"
+    },
+    {
+      "id": "support-no-boot-os.4",
+      "title": "能显示但进不了系统 · 步骤1：移除可移动启动介质",
+      "sha256": "92fa912a4ab4ec14687029224dd7b9926afa79e833201565a1402299350bebed"
+    },
+    {
+      "id": "support-no-boot-os.5",
+      "title": "能显示但进不了系统 · 步骤2：记录系统给出的恢复选项",
+      "sha256": "2afd6f3d834da321e0df51b495fafada682fec480dd4440791a603477ddbd9e0"
+    },
+    {
+      "id": "support-no-boot-os.6",
+      "title": "能显示但进不了系统 · 步骤3：尝试系统自带的启动修复",
+      "sha256": "9547d31690d7f4fe3c8e3be8161560c4b6e39e5871f57f4fcf06f1efd7cbe9a8"
+    },
+    {
+      "id": "support-no-boot-os.7",
+      "title": "能显示但进不了系统 · 步骤4：保护数据并界定下一步",
+      "sha256": "3e5964c5aceb2ab1312f00c6be1bcc23695c805af50b9bc1bd5fa863d6a5d31a"
+    },
+    {
+      "id": "support-no-boot-os.8",
+      "title": "能显示但进不了系统 · 停止条件",
+      "sha256": "f523897a946cf8c33effa9f039363013044497be48f7ae6034ce44efa04249d8"
+    },
+    {
+      "id": "support-no-boot-os.9",
+      "title": "能显示但进不了系统 · 结论边界",
+      "sha256": "72fd183a182c17583f1e5876d9805a7c418c4abf9359fc16dce6498101fb6cb8"
+    },
+    {
+      "id": "support-bsod-restart.1",
+      "title": "蓝屏、死机与随机重启 · 适用范围与来源说明",
+      "sha256": "84cfd130bb0014f0b05bd68dc4489e38907f08697cb3c432cc904a494c4f4212"
+    },
+    {
+      "id": "support-bsod-restart.2",
+      "title": "蓝屏、死机与随机重启 · 症状区分",
+      "sha256": "c991d52e090463dda79fe856702e3a9ba4ba05fb7e19802597bc14d8f1238ece"
+    },
+    {
+      "id": "support-bsod-restart.3",
+      "title": "蓝屏、死机与随机重启 · 先问",
+      "sha256": "1e6fb76e38497029e0148bae3103d2b042f6730b0f0ec158d6d2481c380306a0"
+    },
+    {
+      "id": "support-bsod-restart.4",
+      "title": "蓝屏、死机与随机重启 · 步骤1：保存错误与复现条件",
+      "sha256": "f550a7ff44f00040e6f9694ee97bf88ce4d3dfe4529b045ec67ff5889f0fa267"
+    },
+    {
+      "id": "support-bsod-restart.5",
+      "title": "蓝屏、死机与随机重启 · 步骤2：查看系统可靠性记录",
+      "sha256": "8157236c039a25d26cd4901b5bec31e8aa6afb6daf5929716186ff84266ac546"
+    },
+    {
+      "id": "support-bsod-restart.6",
+      "title": "蓝屏、死机与随机重启 · 步骤3：撤销近期软件变量",
+      "sha256": "9fe63578324ceba9d7cd7bc4df0821bb2ab6ec40e6c5102efe5c7385d42d454d"
+    },
+    {
+      "id": "support-bsod-restart.7",
+      "title": "蓝屏、死机与随机重启 · 步骤4：核对负载与温度关联",
+      "sha256": "77f4247c0c010c7cbd1267aea88e17321f6f7852712665b8727ab8cc681a4d9f"
+    },
+    {
+      "id": "support-bsod-restart.8",
+      "title": "蓝屏、死机与随机重启 · 停止条件",
+      "sha256": "45fe2986d893062eb0efcf7212bd576ac2a1c944710295b5d9166c93a3389c98"
+    },
+    {
+      "id": "support-bsod-restart.9",
+      "title": "蓝屏、死机与随机重启 · 结论边界",
+      "sha256": "25697859f8a1019cc18df5fbac55b5cec52142feeb32b27e13cd9374674df9dd"
+    },
+    {
+      "id": "support-slow-freeze.1",
+      "title": "系统卡顿、程序缓慢或短暂无响应 · 适用范围与来源说明",
+      "sha256": "465ce879aafada23d23a69fca34b0bdc650b5448cb82fb7916bb6f3b4786b718"
+    },
+    {
+      "id": "support-slow-freeze.2",
+      "title": "系统卡顿、程序缓慢或短暂无响应 · 症状区分",
+      "sha256": "5a4f1252ec66af91f64e508a9dfd0b82c6bcbe09664bdda93e0a816351e2184f"
+    },
+    {
+      "id": "support-slow-freeze.3",
+      "title": "系统卡顿、程序缓慢或短暂无响应 · 先问",
+      "sha256": "e686e7c984d1f616319b366dba6a085218af93d65c919ade7a35e1000ea799a6"
+    },
+    {
+      "id": "support-slow-freeze.4",
+      "title": "系统卡顿、程序缓慢或短暂无响应 · 步骤1：确认问题范围",
+      "sha256": "0df5ca97351b6385b5f05ed433c1727844eb45f8ec39c2196d21a15b7ac4a4f4"
+    },
+    {
+      "id": "support-slow-freeze.5",
+      "title": "系统卡顿、程序缓慢或短暂无响应 · 步骤2：观察资源占用",
+      "sha256": "ddef86642624400fda35ac8e643fabd865378f2d8bda788c1882a7829e5e831a"
+    },
+    {
+      "id": "support-slow-freeze.6",
+      "title": "系统卡顿、程序缓慢或短暂无响应 · 步骤3：检查系统盘可用空间",
+      "sha256": "9fc9faad717ba79fe3142dedb8de7e0e30bf58100ca8889abaf6a6a796681678"
+    },
+    {
+      "id": "support-slow-freeze.7",
+      "title": "系统卡顿、程序缓慢或短暂无响应 · 步骤4：做一次干净重启复测",
+      "sha256": "695861d0663db8ee8161056759af4bd36f65f3f9ffc1bd31dfaeaa79e2267075"
+    },
+    {
+      "id": "support-slow-freeze.8",
+      "title": "系统卡顿、程序缓慢或短暂无响应 · 停止条件",
+      "sha256": "4950891f2ade865f7e49138991703976ec8b2ddd0af18163ba39639d837390da"
+    },
+    {
+      "id": "support-slow-freeze.9",
+      "title": "系统卡顿、程序缓慢或短暂无响应 · 结论边界",
+      "sha256": "396a7b44e4c728839bd307896c7b42d89ae6fb4ab2f9cc59076471c6150ebeb3"
+    },
+    {
+      "id": "support-heat-noise.1",
+      "title": "过热、风扇噪声与异常机械声 · 适用范围与来源说明",
+      "sha256": "b01ea21095f1869fe84760cc0ecd843a0be263e7ba4c71c4b7c4207791b00060"
+    },
+    {
+      "id": "support-heat-noise.2",
+      "title": "过热、风扇噪声与异常机械声 · 症状区分",
+      "sha256": "a73a763e28b76e88ba2c76c062ce75d41633866af9f8121c786020c68cc69422"
+    },
+    {
+      "id": "support-heat-noise.3",
+      "title": "过热、风扇噪声与异常机械声 · 先问",
+      "sha256": "0d03b8014449419f5a1e4d52e4117ac947f4469999696454d9018e74598614f6"
+    },
+    {
+      "id": "support-heat-noise.4",
+      "title": "过热、风扇噪声与异常机械声 · 步骤1：降低负载并观察",
+      "sha256": "bd3dfa885d343896c95d5314729fb07defc7c0dc99b94c1b45bba16b68d82b41"
+    },
+    {
+      "id": "support-heat-noise.5",
+      "title": "过热、风扇噪声与异常机械声 · 步骤2：检查外部通风条件",
+      "sha256": "1bb4bc3dfbff62e72124563f10bce140c2cbe409ee646151917d9f3f591b3c68"
+    },
+    {
+      "id": "support-heat-noise.6",
+      "title": "过热、风扇噪声与异常机械声 · 步骤3：定位声音类别",
+      "sha256": "b8bc7aca7c84945de3b5f7b70bba3981880801dd1f37b6f3fd1642696305ce64"
+    },
+    {
+      "id": "support-heat-noise.7",
+      "title": "过热、风扇噪声与异常机械声 · 步骤4：核对传感器与厂家范围",
+      "sha256": "20c408748d2ae2a0cb52135cb9299fca847739cc438bc0e274844134c301dfc7"
+    },
+    {
+      "id": "support-heat-noise.8",
+      "title": "过热、风扇噪声与异常机械声 · 停止条件",
+      "sha256": "00d9e5c10cf4ffc8d3d382a0494943f9409b3ee5ee18c9e2fa13102b25f62581"
+    },
+    {
+      "id": "support-heat-noise.9",
+      "title": "过热、风扇噪声与异常机械声 · 结论边界",
+      "sha256": "9fcf7a71d279a70243a1427c6abb4486fd61ddd24163c30d76a5b1d0674b4efd"
+    },
+    {
+      "id": "support-network.1",
+      "title": "有线、无线网络无法连接或速度异常 · 适用范围与来源说明",
+      "sha256": "e5bc19081353d7b48d44797450a084471e90a34ce84bc2c82297b6e3c9cc57b2"
+    },
+    {
+      "id": "support-network.2",
+      "title": "有线、无线网络无法连接或速度异常 · 症状区分",
+      "sha256": "b7996b71d93fa95299310ea33004786fe4a382bb01a42ebe329a542f12a82131"
+    },
+    {
+      "id": "support-network.3",
+      "title": "有线、无线网络无法连接或速度异常 · 先问",
+      "sha256": "3cec7ff3e6676df987b746492b2904de3439451484cb37c5351a76ec562b2296"
+    },
+    {
+      "id": "support-network.4",
+      "title": "有线、无线网络无法连接或速度异常 · 步骤1：界定故障范围",
+      "sha256": "adc976a03c2e3a90256350e8c666eeb777b6f743587dbb4748e2b90fcf2b20d6"
+    },
+    {
+      "id": "support-network.5",
+      "title": "有线、无线网络无法连接或速度异常 · 步骤2：核对连接状态",
+      "sha256": "b6708eed0dfa864ca215492e364cb736ededebcada9ab8ea58cf41ecc661ccc2"
+    },
+    {
+      "id": "support-network.6",
+      "title": "有线、无线网络无法连接或速度异常 · 步骤3：重启本机网络会话",
+      "sha256": "0b4e476c449fa95296225da90a7cb4fc339f77eb9a49e7f1e978a8f336f82752"
+    },
+    {
+      "id": "support-network.7",
+      "title": "有线、无线网络无法连接或速度异常 · 步骤4：对比另一条已授权网络",
+      "sha256": "d15607cffd60d5c9e32db91f1abd9b5bf77361cdd32a1860b5ec2ea0a7e20a4a"
+    },
+    {
+      "id": "support-network.8",
+      "title": "有线、无线网络无法连接或速度异常 · 步骤5：检查代理与VPN状态",
+      "sha256": "d775b9eea7b3ce25690cf1211230c7b880f557a378162143220daa1567f08917"
+    },
+    {
+      "id": "support-network.9",
+      "title": "有线、无线网络无法连接或速度异常 · 停止条件",
+      "sha256": "4d13a182a98a8d510e55e340532ad78f9a07dae675656050dbd6e1e3d0946a1c"
+    },
+    {
+      "id": "support-network.10",
+      "title": "有线、无线网络无法连接或速度异常 · 结论边界",
+      "sha256": "8c9036a1e33fe683ff8a8c4a9e52f0d448e8e7f34d127a81b4b7d56a4ec9d90c"
+    },
+    {
+      "id": "support-peripherals-data.1",
+      "title": "USB、键鼠、音频异常与数据风险 · 适用范围与来源说明",
+      "sha256": "c06c675a15053f3d332813652c35d8e551335986c753a50ad26c9986ff358212"
+    },
+    {
+      "id": "support-peripherals-data.2",
+      "title": "USB、键鼠、音频异常与数据风险 · 症状区分",
+      "sha256": "4a6bce9db6cdbea60387059ca44a7c320020d450052ab1d18353d451249a5a3b"
+    },
+    {
+      "id": "support-peripherals-data.3",
+      "title": "USB、键鼠、音频异常与数据风险 · 先问",
+      "sha256": "6da977c680c041bb212c73321ec8064b53d6082f9e76c29ccc9d9284eb672e4a"
+    },
+    {
+      "id": "support-peripherals-data.4",
+      "title": "USB、键鼠、音频异常与数据风险 · 步骤1：单设备直连复测",
+      "sha256": "08c91a107f3b25f90899b570120529d3a73fdacdc35e6257f566d93d57bb507d"
+    },
+    {
+      "id": "support-peripherals-data.5",
+      "title": "USB、键鼠、音频异常与数据风险 · 步骤2：做已知正常设备交叉验证",
+      "sha256": "e289fe2f12f2f0f0177c04fc41d1ce7cfc00247e039274c9423d557897486014"
+    },
+    {
+      "id": "support-peripherals-data.6",
+      "title": "USB、键鼠、音频异常与数据风险 · 步骤3：核对音频输入输出目标",
+      "sha256": "4c4427451b0bbcc384ef74155a1c47b974b04d3c46dd07d656a53e550a2b8053"
+    },
+    {
+      "id": "support-peripherals-data.7",
+      "title": "USB、键鼠、音频异常与数据风险 · 步骤4：重启后最小化连接",
+      "sha256": "247b490a40140f52d72c459e785eafa6c9e973b0becc34be3d65d1481c670d0c"
+    },
+    {
+      "id": "support-peripherals-data.8",
+      "title": "USB、键鼠、音频异常与数据风险 · 步骤5：先评估数据风险",
+      "sha256": "22ab70e2662fba35e1cc54a6f5fbcee3f8972f5637f8964005b4e325649d51c4"
+    },
+    {
+      "id": "support-peripherals-data.9",
+      "title": "USB、键鼠、音频异常与数据风险 · 停止条件",
+      "sha256": "b49ae3d4a26160a6c28dcd5a93209d1771106091e0da864d8f2dcfb3b3cc4777"
+    },
+    {
+      "id": "support-peripherals-data.10",
+      "title": "USB、键鼠、音频异常与数据风险 · 结论与人工入口",
+      "sha256": "3451992ed7ec58f6cffe1b1634e2e0d5ee40465d2097a7603033438117c22895"
+    },
+    {
+      "id": "compat-memory",
+      "title": "内存代际与平台选择",
+      "sha256": "478952569a6e149f694a6818d4457fb394919f85a44e3ef01a3acbfe84195e7c"
+    },
+    {
+      "id": "compat-cpu",
+      "title": "插槽与 BIOS 支持分开检查",
+      "sha256": "eccae8b8b4d427a5adde91681ed96d84bdfccb13ff988b61145ba5c9f4e01deb"
+    },
+    {
+      "id": "compat-am5",
+      "title": "AM5 平台规格实例",
+      "sha256": "3f373ecb1b89829917643526ff154090d174f6e597d3e737c945e96ce3a8153d"
+    },
+    {
+      "id": "compat-space",
+      "title": "机箱空间与供电审查流程",
+      "sha256": "4ab0ebf75bbdc3cf828adad7187534e5f7383f26a7e2eead101ed1ac8dbc6b2f"
+    },
+    {
+      "id": "compat-preassembly-gate",
+      "title": "装机前兼容性：先阻断，装好后再验证",
+      "sha256": "d5739fe0849e10159b238328150534807c6a480bbadd6f8c6810da977fc2fe1e"
+    },
+    {
+      "id": "selection-cpu-platform",
+      "title": "CPU 选型：先锁定平台，再确认主板支持与 BIOS",
+      "sha256": "88f386d2bdcb74f28b893ba7bcc008b7cdd40515a0a22b669c974a4daa918fa1"
+    },
+    {
+      "id": "selection-motherboard-platform",
+      "title": "主板选型：把平台、扩展与物理约束汇合",
+      "sha256": "300b4d652d7718a9127b59f93eda633622497981321f2e19787c7473f26d163f"
+    },
+    {
+      "id": "selection-memory-capacity-clearance",
+      "title": "内存选型：代际、容量、插槽与散热间隙分开确认",
+      "sha256": "f0bd590cf60b7d73a4215ffc4bc9026e45796a51f9a4ea3cd5cfeff42c03ac84"
+    },
+    {
+      "id": "selection-gpu-fit-power",
+      "title": "显卡选型：用途预算之外，先核对机箱空间和供电",
+      "sha256": "b312ec8d2da82dec110bf3abc7701b00e163dda9c55fd7adc32c0d4475450efb"
+    },
+    {
+      "id": "selection-cooler-thermal-fit",
+      "title": "散热选型：扣具与空间先过关，热能力和风道另核对",
+      "sha256": "281d62fb24223884106af9665774d26b67560f4ee6312c91ce28baf1523cd734"
+    },
+    {
+      "id": "selection-case-clearance",
+      "title": "机箱选型：用完整物理边界收束整套配件",
+      "sha256": "6f0c305327ad39a0e1cd95800a79e48e84b3958b58f9f9a11ff06026d3eb32b5"
+    },
+    {
+      "id": "selection-psu-power-connectors",
+      "title": "电源选型：功率建议与显卡供电线数量缺一不可",
+      "sha256": "3996175229c03d89b46703b66eda4079e38e158d4836c271936b6ced9e21bc69"
+    },
+    {
+      "id": "selection-storage-interface",
+      "title": "硬盘选型：先确认接口可用，再谈容量与速度取舍",
+      "sha256": "11fd0af81bcdd95a171bdf842c3af5cab56469f3f253549a6f12ebe534f29a36"
+    },
+    {
+      "id": "recommend-budget",
+      "title": "预算硬边界与无解处理",
+      "sha256": "cc808c18f6826d1e47d3adcaca4ca572a6af6bc2fa8cb258c0322712dac05abb"
+    },
+    {
+      "id": "recommend-game",
+      "title": "游戏用途如何分配预算",
+      "sha256": "be4ba221d00c60f2fa85a120d90a0cf0125e34790cd1b6961f18627d2e3cfcba"
+    },
+    {
+      "id": "recommend-work",
+      "title": "办公、创作与本地 AI 的追问策略",
+      "sha256": "a8bb38d3b94cc6b9435df8b458ec8a2f2038eea808705330680536ee96b10a7a"
+    },
+    {
+      "id": "recommend-prebuilt",
+      "title": "整机配置透明度",
+      "sha256": "7729237c52b1ddfcf7c31a283341093daa4b849b87900ffe603aacf06074f73c"
+    }
+  ]
+}

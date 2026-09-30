@@ -1,4 +1,4 @@
-import { traceOperation } from '../diagnostics/chat-trace';
+import { traceEvent, traceOperation } from '../diagnostics/chat-trace';
 import { readLines } from '../../lib/stream';
 
 export type ToolCall = {
@@ -53,6 +53,7 @@ async function requestCompletion(
         temperature: 0.2,
         max_tokens: 1600,
         stream: true,
+        stream_options: { include_usage: true },
       }),
     },
   );
@@ -72,6 +73,7 @@ async function requestCompletion(
     if (payload === '[DONE]') return true;
     if (!payload) return false;
     const event = JSON.parse(payload) as {
+      usage?: unknown;
       error?: unknown;
       choices?: {
         index: number;
@@ -86,6 +88,8 @@ async function requestCompletion(
         };
       }[];
     };
+    if (event.usage)
+      traceEvent('model.usage', { model: config.model, usage: event.usage });
     if (event.error) throw Error('模型流返回错误，请重试');
     const choice = event.choices?.find((item) => item.index === 0);
     if (!choice) return false;

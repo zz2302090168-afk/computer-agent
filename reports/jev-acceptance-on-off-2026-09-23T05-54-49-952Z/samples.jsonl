@@ -1,0 +1,2 @@
+{"round":1,"scenario":"rules","variant":"off","passed":false,"failure":"run_error","elapsedMs":56926,"llmCalls":8,"jevCalls":0,"jevElapsedMs":0,"planIds":[],"network":[],"exitCode":0}
+{"round":1,"scenario":"rules","variant":"on","passed":false,"failure":"run_error","elapsedMs":56173,"llmCalls":8,"jevCalls":0,"jevElapsedMs":0,"planIds":[],"network":[],"exitCode":0}

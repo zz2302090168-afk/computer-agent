@@ -1,0 +1,42 @@
+{
+  "executed": true,
+  "calls": 1,
+  "elapsedMs": 766,
+  "thresholds": {
+    "confidence": 0.8,
+    "probability": 0.9,
+    "calibrated": false
+  },
+  "cases": [
+    {
+      "text": "机箱外观要简洁，不要明显灯光装饰",
+      "actual": "纯黑封闭面板，无灯带、无RGB灯扇",
+      "expectedStatus": "pass",
+      "result": "pass"
+    },
+    {
+      "text": "机箱外观要简洁，不要明显灯光装饰",
+      "actual": "正面三条RGB灯带，四把发光风扇",
+      "expectedStatus": "fail",
+      "result": "fail"
+    },
+    {
+      "text": "机箱外观要简洁，不要明显灯光装饰",
+      "actual": "商品资料只写了机箱型号，未提供外观说明或图片",
+      "expectedStatus": "unknown",
+      "result": "unknown"
+    },
+    {
+      "text": "机箱不要花哨，但可以有一个普通电源指示灯",
+      "actual": "无装饰灯光，仅有单个普通电源指示灯，纯色面板",
+      "expectedStatus": "pass",
+      "result": "pass"
+    },
+    {
+      "text": "不要明显的游戏风格装饰",
+      "actual": "红黑撞色、尖锐线条、巨大电竞龙形标志",
+      "expectedStatus": "fail",
+      "result": "fail"
+    }
+  ]
+}

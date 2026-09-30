@@ -1,0 +1,33 @@
+{
+  "version": "gpu-naming-v1",
+  "split": "dev",
+  "humanVerified": false,
+  "cases": [
+    {
+      "id": "GPU-KNOW01",
+      "group": "显卡命名知识",
+      "initial": "unselected",
+      "turns": [
+        {
+          "query": "只问知识，不选配置：Intel、AMD和RTX是不是三个显卡厂家？Arc、Radeon RX、GeForce RTX分别是什么，跟华擎这种板卡品牌有什么区别？",
+          "expect": "retrieve_knowledge",
+          "preserve": true,
+          "semanticReview": true
+        }
+      ]
+    },
+    {
+      "id": "GPU-KNOW02",
+      "group": "显卡命名知识",
+      "initial": "unselected",
+      "turns": [
+        {
+          "query": "只解释名称，不查商品不换件：Intel Arc B570 Challenger 10GB OC这张华擎显卡，芯片厂商和板卡品牌分别是什么？能不能看见型号开头Intel就认定板卡品牌是Intel？",
+          "expect": "retrieve_knowledge",
+          "preserve": true,
+          "semanticReview": true
+        }
+      ]
+    }
+  ]
+}

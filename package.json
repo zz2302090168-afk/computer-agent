@@ -17,6 +17,7 @@
     "test": "node --experimental-strip-types scripts/test.mjs",
     "test:tools": "node --experimental-strip-types --import ./scripts/register-typescript.mjs backend/tests/tool-scenarios.test.ts",
     "test:model": "node --experimental-strip-types --import ./scripts/register-typescript.mjs backend/tests/model-routing.ts",
+    "test:jev": "node scripts/test-jev.mjs",
     "typecheck": "tsc --noEmit",
     "data:export": "node --experimental-strip-types scripts/export-data.mjs"
   },
